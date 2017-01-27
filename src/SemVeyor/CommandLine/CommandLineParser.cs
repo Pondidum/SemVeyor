@@ -6,7 +6,18 @@ namespace SemVeyor.CommandLine
 	{
 		public CommandLineResult<Options> Parse(string[] args)
 		{
-			return new CommandLineResult<Options>(Enumerable.Empty<string>());
+			if (args.Length == 0)
+				return new CommandLineResult<Options>(new[]
+				{
+					"No assembly specified to survey"
+				});
+
+			var options = new Options
+			{
+				AssemblyPath = args.Last()
+			};
+
+			return new CommandLineResult<Options>(options);
 		}
 	}
 }

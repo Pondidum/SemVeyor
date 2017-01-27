@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
+using Xunit;
 using Xunit.Abstractions;
 
 namespace SemVeyor.Tests

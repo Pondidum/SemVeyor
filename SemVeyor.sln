@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemVeyor", "src\SemVeyor\Se
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SemVeyor.Tests", "src\SemVeyor.Tests\SemVeyor.Tests.csproj", "{DC280DF1-66BB-4C69-A0AD-BFB73A214672}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestAssemblies", "TestAssemblies", "{0510C3CE-040D-4206-9566-C4526B70F340}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StandardLibrary", "src\TestAssemblies\StandardLibrary\StandardLibrary.csproj", "{7DAC462B-49F1-4649-BF7B-576F88EE00A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,8 +25,15 @@ Global
 		{DC280DF1-66BB-4C69-A0AD-BFB73A214672}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC280DF1-66BB-4C69-A0AD-BFB73A214672}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC280DF1-66BB-4C69-A0AD-BFB73A214672}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DAC462B-49F1-4649-BF7B-576F88EE00A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DAC462B-49F1-4649-BF7B-576F88EE00A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DAC462B-49F1-4649-BF7B-576F88EE00A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DAC462B-49F1-4649-BF7B-576F88EE00A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7DAC462B-49F1-4649-BF7B-576F88EE00A6} = {0510C3CE-040D-4206-9566-C4526B70F340}
 	EndGlobalSection
 EndGlobal

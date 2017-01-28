@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace SemVeyor.AssemblyScanning
@@ -8,7 +9,7 @@ namespace SemVeyor.AssemblyScanning
 	{
 		public IEnumerable<TypeContent> Scan(Assembly assembly)
 		{
-			throw new NotImplementedException();
+			return assembly.GetExportedTypes().Select(TypeContent.From);
 		}
 	}
 
@@ -22,5 +23,14 @@ namespace SemVeyor.AssemblyScanning
 		public string Name { get; set; }
 		public string Namespace { get; set; }
 		public string FullName => $"{Namespace}.{Name}";
+
+		public static TypeContent From(Type type)
+		{
+			return new TypeContent
+			{
+				Name = type.Name,
+				Namespace = type.Namespace
+			};
+		}
 	}
 }

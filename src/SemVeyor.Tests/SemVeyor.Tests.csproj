@@ -54,6 +54,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyScanning\ScannerTests.cs" />
     <Compile Include="CommandLine\CommandLineParserTests.cs" />
     <Compile Include="CommandLine\CommandLineResultFailureTests.cs" />
     <Compile Include="CommandLine\CommandLineResultSuccessTests.cs" />
@@ -63,6 +64,10 @@
     <ProjectReference Include="..\SemVeyor\SemVeyor.csproj">
       <Project>{366D19EC-698A-45E6-B3BD-7A112786253E}</Project>
       <Name>SemVeyor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestAssemblies\StandardLibrary\StandardLibrary.csproj">
+      <Project>{7DAC462B-49F1-4649-BF7B-576F88EE00A6}</Project>
+      <Name>StandardLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

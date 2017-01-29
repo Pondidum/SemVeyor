@@ -55,7 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyScanning\ScannerTests.cs" />
-    <Compile Include="AssemblyScanning\TypeContentTests.cs" />
+    <Compile Include="AssemblyScanning\TypeContentPropertiesTests.cs" />
+    <Compile Include="AssemblyScanning\TypeContentTest.cs" />
     <Compile Include="CommandLine\CommandLineParserTests.cs" />
     <Compile Include="CommandLine\CommandLineResultFailureTests.cs" />
     <Compile Include="CommandLine\CommandLineResultSuccessTests.cs" />

@@ -31,7 +31,8 @@ namespace SemVeyor.AssemblyScanning
 				Name = type.Name,
 				Namespace = type.Namespace,
 
-				Properties = PropertiesFor(type)
+				Properties = PropertiesFor(type),
+				Methods =  MethodsFor(type)
 			};
 		}
 
@@ -48,6 +49,28 @@ namespace SemVeyor.AssemblyScanning
 
 			return publicProperties
 				.Concat(protectedProperties)
+				.Distinct(StringComparer.OrdinalIgnoreCase);
+		}
+
+		private static IEnumerable<string> MethodsFor(IReflect type)
+		{
+			var protectedMethods = type
+				.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
+				.Where(c => c.IsFamily)
+				.Select(m => m.Name);
+
+			var publicMethods = type
+				.GetMethods(BindingFlags.Public | BindingFlags.Instance)
+				.Select(m => m.Name);
+
+			var objectProtectedMethods = typeof(object)
+				.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
+				.Where(c => c.IsFamily)
+				.Select(m => m.Name);
+
+			return publicMethods
+				.Concat(protectedMethods)
+				.Except(objectProtectedMethods)
 				.Distinct(StringComparer.OrdinalIgnoreCase);
 		}
 	}

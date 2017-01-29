@@ -29,8 +29,26 @@ namespace SemVeyor.AssemblyScanning
 			return new TypeContent
 			{
 				Name = type.Name,
-				Namespace = type.Namespace
+				Namespace = type.Namespace,
+
+				Properties = PropertiesFor(type)
 			};
+		}
+
+		private static IEnumerable<string> PropertiesFor(IReflect type)
+		{
+			var protectedProperties = type
+				.GetProperties(BindingFlags.NonPublic | BindingFlags.Instance)
+				.Where(c => c.GetMethod != null && c.GetMethod.IsFamily || c.SetMethod != null && c.SetMethod.IsFamily)
+				.Select(prop => prop.Name);
+
+			var publicProperties = type
+				.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+				.Select(prop => prop.Name);
+
+			return publicProperties
+				.Concat(protectedProperties)
+				.Distinct(StringComparer.OrdinalIgnoreCase);
 		}
 	}
 }

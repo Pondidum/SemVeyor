@@ -105,27 +105,27 @@ namespace SemVeyor.AssemblyScanning
 		}
 	}
 
-	public class CtorDetails
+	public class MemberDetails
+	{
+		public Visbility Visibility { get; set; }
+		public string Name { get; set; }
+	}
+
+	public class CtorDetails : MemberDetails
 	{
 		public IEnumerable<ArgumentModel> Arguments { get; set; }
-		public Visbility Visibility { get; set; }
 	}
 
-	public class FieldDetails
+	public class FieldDetails: MemberDetails
 	{
-		public Visbility Visibility { get; set; }
 	}
 
-	public class PropertyDetails
+	public class PropertyDetails  : MemberDetails
 	{
-		public Visbility Visibility { get; set; }
-		public string Name { get; set; }
 	}
 
-	public class MethodDetails
+	public class MethodDetails: MemberDetails
 	{
-		public Visbility Visibility { get; set; }
-		public string Name { get; set; }
 	}
 
 	public class ArgumentModel

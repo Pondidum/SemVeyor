@@ -17,7 +17,7 @@ namespace SemVeyor.AssemblyScanning
 	{
 		public IEnumerable<string> Properties { get; set; }
 		public IEnumerable<string> Methods { get; set; }
-		public IEnumerable<string> Fields { get; set; }
+		public IEnumerable<FieldDetails> Fields { get; set; }
 		public IEnumerable<CtorDetails> Constructors { get; set; }
 
 		public string Name { get; set; }
@@ -33,7 +33,8 @@ namespace SemVeyor.AssemblyScanning
 
 				Constructors = ConstructorsFor(type),
 				Properties = PropertiesFor(type),
-				Methods =  MethodsFor(type)
+				Methods =  MethodsFor(type),
+				Fields = FieldsFor(type)
 			};
 		}
 
@@ -89,11 +90,31 @@ namespace SemVeyor.AssemblyScanning
 			return publicCtors
 				.Concat(protectedCtors);
 		}
+
+		private static IEnumerable<FieldDetails> FieldsFor(Type type)
+		{
+			var publicFields = type
+				.GetFields(BindingFlags.Public | BindingFlags.Instance)
+				.Select(ctor => new FieldDetails { Visibility = Visbility.Public});
+
+			var protectedFields = type
+				.GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
+				.Where(c => c.IsFamily)
+				.Select(ctor => new FieldDetails { Visibility = Visbility.Protected});
+
+			return publicFields
+				.Concat(protectedFields);
+		}
 	}
 
 	public class CtorDetails
 	{
 		public IEnumerable<ArgumentModel> Arguments { get; set; }
+		public Visbility Visibility { get; set; }
+	}
+
+	public class FieldDetails
+	{
 		public Visbility Visibility { get; set; }
 	}
 

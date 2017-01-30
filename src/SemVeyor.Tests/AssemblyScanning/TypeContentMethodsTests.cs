@@ -3,36 +3,30 @@ using System.Collections.Generic;
 using Shouldly;
 using System.Linq;
 using System.Reflection;
+using SemVeyor.AssemblyScanning;
 using Xunit;
 
 namespace SemVeyor.Tests.AssemblyScanning
 {
 	public class TypeContentMethodsTests : TypeContentTest<TypeContentMethodsTests.TestType>
 	{
-		private static IEnumerable<string> MethodsOnObject() => typeof(object)
+		private static int MethodsOnObject() => typeof(object)
 			.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
-			.Select(m => m.Name);
+			.Count();
 
 		[Fact]
-		public void There_are_2_methods()
-		{
-			var expectedMethods = MethodsOnObject()
-				.Concat(new[] { nameof(TestType.Method), "ProtectedMethod" });
-
-			Content.Methods.ShouldBe(expectedMethods, ignoreOrder: true);
-		}
+		public void There_are_2_methods() => Content.Methods.Count().ShouldBe(MethodsOnObject() + 2);
+		[Fact]
+		public void The_public_method_is_listed() => Content.Methods.ShouldContain(x => x.Visibility == Visbility.Public);
 
 		[Fact]
-		public void The_public_method_is_listed() => Content.Methods.ShouldContain(nameof(TestType.Method));
+		public void The_protected_method_is_listed() => Content.Methods.ShouldContain(x => x.Visibility == Visbility.Protected);
 
 		[Fact]
-		public void The_protected_method_is_listed() => Content.Methods.ShouldContain("ProtectedMethod");
+		public void The_internal_method_is_not_listed() => Content.Methods.ShouldNotContain(x => x.Visibility == Visbility.Internal);
 
 		[Fact]
-		public void The_internal_method_is_not_listed() => Content.Methods.ShouldNotContain("InternalMethod");
-
-		[Fact]
-		public void The_private_method_is_not_listed() => Content.Methods.ShouldNotContain("PrivateMethod");
+		public void The_private_method_is_not_listed() => Content.Methods.ShouldNotContain(x => x.Visibility == Visbility.Private);
 
 		public class TestType
 		{

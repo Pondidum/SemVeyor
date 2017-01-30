@@ -12,28 +12,28 @@ namespace SemVeyor.Tests.AssemblyScanning
 		public void There_are_6_properties() => Content.Properties.Count().ShouldBe(6);
 
 		[Fact]
-		public void The_public_property_is_listed() => Content.Properties.ShouldContain(nameof(TestType.Property));
+		public void The_public_property_is_listed() => Content.Properties.ShouldContain( x => x.Name == nameof(TestType.Property));
 
 		[Fact]
-		public void The_readonly_property_is_listed() => Content.Properties.ShouldContain(nameof(TestType.ReadonlyProperty));
+		public void The_readonly_property_is_listed() => Content.Properties.ShouldContain(x => x.Name == nameof(TestType.ReadonlyProperty));
 
 		[Fact]
-		public void The_private_setter_property_is_listed() => Content.Properties.ShouldContain(nameof(TestType.PrivateSetProperty));
+		public void The_private_setter_property_is_listed() => Content.Properties.ShouldContain(x => x.Name == nameof(TestType.PrivateSetProperty));
 
 		[Fact]
-		public void The_internal_setter_property_is_listed() => Content.Properties.ShouldContain(nameof(TestType.InternalSetProperty));
+		public void The_internal_setter_property_is_listed() => Content.Properties.ShouldContain(x => x.Name == nameof(TestType.InternalSetProperty));
 
 		[Fact]
-		public void The_protected_setter_property_is_listed() => Content.Properties.ShouldContain(nameof(TestType.ProtectedSetProperty));
+		public void The_protected_setter_property_is_listed() => Content.Properties.ShouldContain(x => x.Name == nameof(TestType.ProtectedSetProperty));
 
 		[Fact]
-		public void The_protected_property_is_listed() => Content.Properties.ShouldContain("ProtectedProperty");
+		public void The_protected_property_is_listed() => Content.Properties.ShouldContain(x => x.Name == "ProtectedProperty");
 
 		[Fact]
-		public void The_internal_property_is_not_listed() => Content.Properties.ShouldNotContain("InternalProperty");
+		public void The_internal_property_is_not_listed() => Content.Properties.ShouldNotContain(x => x.Name == "InternalProperty");
 
 		[Fact]
-		public void The_private_property_is_not_listed() => Content.Properties.ShouldNotContain("PrivateProperty");
+		public void The_private_property_is_not_listed() => Content.Properties.ShouldNotContain(x => x.Name == "PrivateProperty");
 
 		public class TestType
 		{

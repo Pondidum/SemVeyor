@@ -18,7 +18,7 @@ namespace SemVeyor.AssemblyScanning
 		public IEnumerable<string> Properties { get; set; }
 		public IEnumerable<string> Methods { get; set; }
 		public IEnumerable<string> Fields { get; set; }
-		public IEnumerable<string> Constructors { get; set; }
+		public IEnumerable<CtorDetails> Constructors { get; set; }
 
 		public string Name { get; set; }
 		public string Namespace { get; set; }
@@ -31,6 +31,7 @@ namespace SemVeyor.AssemblyScanning
 				Name = type.Name,
 				Namespace = type.Namespace,
 
+				Constructors = ConstructorsFor(type),
 				Properties = PropertiesFor(type),
 				Methods =  MethodsFor(type)
 			};
@@ -73,5 +74,40 @@ namespace SemVeyor.AssemblyScanning
 				.Except(objectProtectedMethods)
 				.Distinct(StringComparer.OrdinalIgnoreCase);
 		}
+
+		private static IEnumerable<CtorDetails> ConstructorsFor(Type type)
+		{
+			var publicCtors = type
+				.GetConstructors(BindingFlags.Public | BindingFlags.Instance)
+				.Select(ctor => new CtorDetails { Visibility = Visbility.Public});
+
+			var protectedCtors = type
+				.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance)
+				.Where(c => c.IsFamily)
+				.Select(ctor => new CtorDetails { Visibility = Visbility.Protected});
+
+			return publicCtors
+				.Concat(protectedCtors);
+		}
+	}
+
+	public class CtorDetails
+	{
+		public IEnumerable<ArgumentModel> Arguments { get; set; }
+		public Visbility Visibility { get; set; }
+	}
+
+	public class ArgumentModel
+	{
+		public Type Type { get; set; }
+		public string Name { get; set; }
+	}
+
+	public enum Visbility
+	{
+		Private,
+		Protected,
+		Internal,
+		Public
 	}
 }

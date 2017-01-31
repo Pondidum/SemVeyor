@@ -33,7 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AssemblyScanning\ArgumentModel.cs" />
+    <Compile Include="AssemblyScanning\CtorDetails.cs" />
+    <Compile Include="AssemblyScanning\FieldDetails.cs" />
+    <Compile Include="AssemblyScanning\MemberDetails.cs" />
+    <Compile Include="AssemblyScanning\MethodDetails.cs" />
+    <Compile Include="AssemblyScanning\PropertyDetails.cs" />
     <Compile Include="AssemblyScanning\Scanner.cs" />
+    <Compile Include="AssemblyScanning\TypeContent.cs" />
+    <Compile Include="AssemblyScanning\Visibility.cs" />
     <Compile Include="CommandLine\CommandLineParser.cs" />
     <Compile Include="CommandLine\CommandLineResult.cs" />
     <Compile Include="CommandLine\Options.cs" />

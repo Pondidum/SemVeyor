@@ -107,7 +107,7 @@ namespace SemVeyor.AssemblyScanning
 
 	public class MemberDetails
 	{
-		public Visibility Visibility => FromType(_info);
+		public Visibility Visibility => VisibilityFromType(_info);
 		public string Name { get; }
 
 		private readonly MemberInfo _info;
@@ -118,20 +118,20 @@ namespace SemVeyor.AssemblyScanning
 			Name = info.Name;
 		}
 
-		protected virtual Visibility FromType(MemberInfo info)
+		protected virtual Visibility VisibilityFromType(MemberInfo info)
 		{
 			var methodInfo = info as MethodBase;
 			if (methodInfo != null)
-				return FromMethod(methodInfo);
+				return VisibilityFromMethod(methodInfo);
 
 			var field = info as FieldInfo;
 			if (field != null)
-				return FromField(field);
+				return VisibilityFromField(field);
 
 			throw new NotSupportedException();
 		}
 
-		private static Visibility FromMethod(MethodBase method)
+		protected virtual Visibility VisibilityFromMethod(MethodBase method)
 		{
 			if (method.IsPublic)
 				return Visibility.Public;
@@ -145,7 +145,7 @@ namespace SemVeyor.AssemblyScanning
 			return Visibility.Private;
 		}
 
-		private static Visibility FromField(FieldInfo field)
+		protected virtual Visibility VisibilityFromField(FieldInfo field)
 		{
 			if (field.IsPublic)
 				return Visibility.Public;
@@ -185,11 +185,11 @@ namespace SemVeyor.AssemblyScanning
 		{
 		}
 
-		protected override Visibility FromType(MemberInfo info)
+		protected override Visibility VisibilityFromType(MemberInfo info)
 		{
 			var prop = info as PropertyInfo;
 
-			return base.FromType(prop?.GetMethod ?? prop?.SetMethod);
+			return base.VisibilityFromType(prop?.GetMethod ?? prop?.SetMethod);
 		}
 	}
 

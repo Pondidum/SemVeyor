@@ -43,11 +43,11 @@ namespace SemVeyor.AssemblyScanning
 			var protectedProperties = type
 				.GetProperties(BindingFlags.NonPublic | BindingFlags.Instance)
 				.Where(c => c.GetMethod != null && c.GetMethod.IsFamily || c.SetMethod != null && c.SetMethod.IsFamily)
-				.Select(prop => new PropertyDetails(Visibility.Protected, prop.Name));
+				.Select(prop => new PropertyDetails(prop));
 
 			var publicProperties = type
 				.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-				.Select(prop => new PropertyDetails(Visibility.Public, prop.Name));
+				.Select(prop => new PropertyDetails(prop));
 
 			return publicProperties
 				.Concat(protectedProperties);
@@ -107,16 +107,18 @@ namespace SemVeyor.AssemblyScanning
 
 	public class MemberDetails
 	{
-		public Visibility Visibility { get; }
+		public Visibility Visibility => FromType(_info);
 		public string Name { get; }
 
-		protected MemberDetails(Visibility visibility, string name)
+		private readonly MemberInfo _info;
+
+		protected MemberDetails(MemberInfo info)
 		{
-			Visibility = visibility;
-			Name = name;
+			_info = info;
+			Name = info.Name;
 		}
 
-		protected static Visibility FromType(MemberInfo info)
+		protected virtual Visibility FromType(MemberInfo info)
 		{
 			var methodInfo = info as MethodBase;
 			if (methodInfo != null)
@@ -163,7 +165,7 @@ namespace SemVeyor.AssemblyScanning
 		//public IEnumerable<ArgumentModel> Arguments { get; set; }
 
 		public CtorDetails(ConstructorInfo ctor)
-			: base(FromType(ctor), ctor.Name)
+			: base(ctor)
 		{
 		}
 	}
@@ -171,23 +173,30 @@ namespace SemVeyor.AssemblyScanning
 	public class FieldDetails : MemberDetails
 	{
 		public FieldDetails(FieldInfo info)
-			: base(FromType(info), info.Name)
+			: base(info)
 		{
 		}
 	}
 
 	public class PropertyDetails : MemberDetails
 	{
-		public PropertyDetails(Visibility visibility, string name)
-			: base(visibility, name)
+		public PropertyDetails(PropertyInfo prop)
+			: base(prop)
 		{
+		}
+
+		protected override Visibility FromType(MemberInfo info)
+		{
+			var prop = info as PropertyInfo;
+
+			return base.FromType(prop?.GetMethod ?? prop?.SetMethod);
 		}
 	}
 
 	public class MethodDetails : MemberDetails
 	{
 		public MethodDetails(MethodBase method)
-			: base(FromType(method), method.Name)
+			: base(method)
 		{
 		}
 	}

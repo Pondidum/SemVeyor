@@ -78,12 +78,12 @@ namespace SemVeyor.AssemblyScanning
 		{
 			var publicCtors = type
 				.GetConstructors(BindingFlags.Public | BindingFlags.Instance)
-				.Select(ctor => new CtorDetails(Visibility.Public, "ctor"));
+				.Select(ctor => new CtorDetails(ctor));
 
 			var protectedCtors = type
 				.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance)
 				.Where(c => c.IsFamily)
-				.Select(ctor => new CtorDetails(Visibility.Protected, "ctor"));
+				.Select(ctor => new CtorDetails(ctor));
 
 			return publicCtors
 				.Concat(protectedCtors);
@@ -93,12 +93,12 @@ namespace SemVeyor.AssemblyScanning
 		{
 			var publicFields = type
 				.GetFields(BindingFlags.Public | BindingFlags.Instance)
-				.Select(field => new FieldDetails(Visibility.Public, field.Name));
+				.Select(field => new FieldDetails(field));
 
 			var protectedFields = type
 				.GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
 				.Where(c => c.IsFamily)
-				.Select(field => new FieldDetails(Visibility.Protected, field.Name));
+				.Select(field => new FieldDetails(field));
 
 			return publicFields
 				.Concat(protectedFields);
@@ -122,7 +122,11 @@ namespace SemVeyor.AssemblyScanning
 			if (methodInfo != null)
 				return FromMethod(methodInfo);
 
-			throw new NotImplementedException();
+			var field = info as FieldInfo;
+			if (field != null)
+				return FromField(field);
+
+			throw new NotSupportedException();
 		}
 
 		private static Visibility FromMethod(MethodBase method)
@@ -138,22 +142,36 @@ namespace SemVeyor.AssemblyScanning
 
 			return Visibility.Private;
 		}
+
+		private static Visibility FromField(FieldInfo field)
+		{
+			if (field.IsPublic)
+				return Visibility.Public;
+
+			if (field.IsFamily)
+				return Visibility.Protected;
+
+			if (field.IsAssembly)
+				return Visibility.Internal;
+
+			return Visibility.Private;
+		}
 	}
 
 	public class CtorDetails : MemberDetails
 	{
 		//public IEnumerable<ArgumentModel> Arguments { get; set; }
 
-		public CtorDetails(Visibility visibility, string name)
-			: base(visibility, name)
+		public CtorDetails(ConstructorInfo ctor)
+			: base(FromType(ctor), ctor.Name)
 		{
 		}
 	}
 
 	public class FieldDetails : MemberDetails
 	{
-		public FieldDetails(Visibility visibility, string name)
-			: base(visibility, name)
+		public FieldDetails(FieldInfo info)
+			: base(FromType(info), info.Name)
 		{
 		}
 	}

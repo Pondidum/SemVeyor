@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Deployment.Internal;
 using System.Linq;
 using System.Reflection;
 
@@ -7,6 +8,13 @@ namespace SemVeyor.AssemblyScanning
 {
 	public class TypeContent
 	{
+		private static BindingFlags ExternalVisibleFlags;
+
+		static TypeContent()
+		{
+			ExternalVisibleFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
+		}
+
 		public IEnumerable<PropertyDetails> Properties { get; set; }
 		public IEnumerable<MethodDetails> Methods { get; set; }
 		public IEnumerable<FieldDetails> Fields { get; set; }
@@ -32,28 +40,16 @@ namespace SemVeyor.AssemblyScanning
 
 		private static IEnumerable<PropertyDetails> PropertiesFor(IReflect type)
 		{
-			var protectedProperties = type
-				.GetProperties(BindingFlags.NonPublic | BindingFlags.Instance)
-				.Where(c => c.GetMethod != null && c.GetMethod.IsFamily || c.SetMethod != null && c.SetMethod.IsFamily)
-				.Select(prop => new PropertyDetails(prop));
-
-			var publicProperties = type
-				.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-				.Select(prop => new PropertyDetails(prop));
-
-			return publicProperties
-				.Concat(protectedProperties);
+			return type
+				.GetProperties(ExternalVisibleFlags)
+				.Select(prop => new PropertyDetails(prop))
+				.Where(IsExternal);
 		}
 
 		private static IEnumerable<MethodDetails> MethodsFor(IReflect type)
 		{
-			var protectedMethods = type
-				.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
-				.Where(c => c.IsFamily)
-				.Select(met => new MethodDetails(met));
-
-			var publicMethods = type
-				.GetMethods(BindingFlags.Public | BindingFlags.Instance)
+			var methods = type
+				.GetMethods(ExternalVisibleFlags)
 				.Select(met => new MethodDetails(met));
 
 			var objectProtectedMethods = new HashSet<string>(typeof(object)
@@ -61,39 +57,30 @@ namespace SemVeyor.AssemblyScanning
 				.Where(c => c.IsFamily)
 				.Select(met => met.Name));
 
-			return publicMethods
-				.Concat(protectedMethods)
-				.Where(met => objectProtectedMethods.Contains(met.Name) == false);
+			return methods
+				.Where(met => objectProtectedMethods.Contains(met.Name) == false)
+				.Where(IsExternal);
 		}
 
 		private static IEnumerable<CtorDetails> ConstructorsFor(Type type)
 		{
-			var publicCtors = type
-				.GetConstructors(BindingFlags.Public | BindingFlags.Instance)
-				.Select(ctor => new CtorDetails(ctor));
-
-			var protectedCtors = type
-				.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance)
-				.Where(c => c.IsFamily)
-				.Select(ctor => new CtorDetails(ctor));
-
-			return publicCtors
-				.Concat(protectedCtors);
+			return type
+				.GetConstructors(ExternalVisibleFlags)
+				.Select(ctor => new CtorDetails(ctor))
+				.Where(IsExternal);
 		}
 
 		private static IEnumerable<FieldDetails> FieldsFor(Type type)
 		{
-			var publicFields = type
-				.GetFields(BindingFlags.Public | BindingFlags.Instance)
-				.Select(field => new FieldDetails(field));
+			return type
+				.GetFields(ExternalVisibleFlags)
+				.Select(field => new FieldDetails(field))
+				.Where(IsExternal);
+		}
 
-			var protectedFields = type
-				.GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
-				.Where(c => c.IsFamily)
-				.Select(field => new FieldDetails(field));
-
-			return publicFields
-				.Concat(protectedFields);
+		private static bool IsExternal(MemberDetails info)
+		{
+			return info.Visibility > Visibility.Internal;
 		}
 	}
 }

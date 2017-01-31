@@ -17,16 +17,16 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void There_are_2_methods() => Content.Methods.Count().ShouldBe(MethodsOnObject() + 2);
 		[Fact]
-		public void The_public_method_is_listed() => Content.Methods.ShouldContain(x => x.Visibility == Visbility.Public);
+		public void The_public_method_is_listed() => Content.Methods.ShouldContain(x => x.Visibility == Visibility.Public);
 
 		[Fact]
-		public void The_protected_method_is_listed() => Content.Methods.ShouldContain(x => x.Visibility == Visbility.Protected);
+		public void The_protected_method_is_listed() => Content.Methods.ShouldContain(x => x.Visibility == Visibility.Protected);
 
 		[Fact]
-		public void The_internal_method_is_not_listed() => Content.Methods.ShouldNotContain(x => x.Visibility == Visbility.Internal);
+		public void The_internal_method_is_not_listed() => Content.Methods.ShouldNotContain(x => x.Visibility == Visibility.Internal);
 
 		[Fact]
-		public void The_private_method_is_not_listed() => Content.Methods.ShouldNotContain(x => x.Visibility == Visbility.Private);
+		public void The_private_method_is_not_listed() => Content.Methods.ShouldNotContain(x => x.Visibility == Visibility.Private);
 
 		public class TestType
 		{

@@ -43,11 +43,11 @@ namespace SemVeyor.AssemblyScanning
 			var protectedProperties = type
 				.GetProperties(BindingFlags.NonPublic | BindingFlags.Instance)
 				.Where(c => c.GetMethod != null && c.GetMethod.IsFamily || c.SetMethod != null && c.SetMethod.IsFamily)
-				.Select(prop => new PropertyDetails(Visbility.Protected, prop.Name));
+				.Select(prop => new PropertyDetails(Visibility.Protected, prop.Name));
 
 			var publicProperties = type
 				.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-				.Select(prop => new PropertyDetails(Visbility.Public, prop.Name));
+				.Select(prop => new PropertyDetails(Visibility.Public, prop.Name));
 
 			return publicProperties
 				.Concat(protectedProperties);
@@ -78,12 +78,12 @@ namespace SemVeyor.AssemblyScanning
 		{
 			var publicCtors = type
 				.GetConstructors(BindingFlags.Public | BindingFlags.Instance)
-				.Select(ctor => new CtorDetails(Visbility.Public, "ctor"));
+				.Select(ctor => new CtorDetails(Visibility.Public, "ctor"));
 
 			var protectedCtors = type
 				.GetConstructors(BindingFlags.NonPublic | BindingFlags.Instance)
 				.Where(c => c.IsFamily)
-				.Select(ctor => new CtorDetails(Visbility.Protected, "ctor"));
+				.Select(ctor => new CtorDetails(Visibility.Protected, "ctor"));
 
 			return publicCtors
 				.Concat(protectedCtors);
@@ -93,12 +93,12 @@ namespace SemVeyor.AssemblyScanning
 		{
 			var publicFields = type
 				.GetFields(BindingFlags.Public | BindingFlags.Instance)
-				.Select(field => new FieldDetails(Visbility.Public, field.Name));
+				.Select(field => new FieldDetails(Visibility.Public, field.Name));
 
 			var protectedFields = type
 				.GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
 				.Where(c => c.IsFamily)
-				.Select(field => new FieldDetails(Visbility.Protected, field.Name));
+				.Select(field => new FieldDetails(Visibility.Protected, field.Name));
 
 			return publicFields
 				.Concat(protectedFields);
@@ -107,10 +107,10 @@ namespace SemVeyor.AssemblyScanning
 
 	public class MemberDetails
 	{
-		public Visbility Visibility { get; }
+		public Visibility Visibility { get; }
 		public string Name { get; }
 
-		public MemberDetails(Visbility visibility, string name)
+		protected MemberDetails(Visibility visibility, string name)
 		{
 			Visibility = visibility;
 			Name = name;
@@ -119,9 +119,9 @@ namespace SemVeyor.AssemblyScanning
 
 	public class CtorDetails : MemberDetails
 	{
-		public IEnumerable<ArgumentModel> Arguments { get; set; }
+		//public IEnumerable<ArgumentModel> Arguments { get; set; }
 
-		public CtorDetails(Visbility visibility, string name)
+		public CtorDetails(Visibility visibility, string name)
 			: base(visibility, name)
 		{
 		}
@@ -129,7 +129,7 @@ namespace SemVeyor.AssemblyScanning
 
 	public class FieldDetails : MemberDetails
 	{
-		public FieldDetails(Visbility visibility, string name)
+		public FieldDetails(Visibility visibility, string name)
 			: base(visibility, name)
 		{
 		}
@@ -137,7 +137,7 @@ namespace SemVeyor.AssemblyScanning
 
 	public class PropertyDetails : MemberDetails
 	{
-		public PropertyDetails(Visbility visibility, string name)
+		public PropertyDetails(Visibility visibility, string name)
 			: base(visibility, name)
 		{
 		}
@@ -157,7 +157,7 @@ namespace SemVeyor.AssemblyScanning
 		public string Name { get; set; }
 	}
 
-	public enum Visbility
+	public enum Visibility
 	{
 		Private,
 		Internal,

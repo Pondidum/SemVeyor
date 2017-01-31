@@ -12,16 +12,16 @@ namespace SemVeyor.Tests.AssemblyScanning
 		public void There_are_2_constructors() => Content.Constructors.Count().ShouldBe(2);
 
 		[Fact]
-		public void The_public_ctor_is_listed() => Content.Constructors.ShouldContain(x => x.Visibility == Visbility.Public);
+		public void The_public_ctor_is_listed() => Content.Constructors.ShouldContain(x => x.Visibility == Visibility.Public);
 
 		[Fact]
-		public void The_protected_ctor_is_listed() => Content.Constructors.ShouldContain(x => x.Visibility == Visbility.Protected);
+		public void The_protected_ctor_is_listed() => Content.Constructors.ShouldContain(x => x.Visibility == Visibility.Protected);
 
 		[Fact]
-		public void The_internal_ctor_is_not_listed() => Content.Constructors.ShouldNotContain(x => x.Visibility == Visbility.Internal);
+		public void The_internal_ctor_is_not_listed() => Content.Constructors.ShouldNotContain(x => x.Visibility == Visibility.Internal);
 
 		[Fact]
-		public void The_private_ctor_is_not_listed() => Content.Constructors.ShouldNotContain(x => x.Visibility == Visbility.Private);
+		public void The_private_ctor_is_not_listed() => Content.Constructors.ShouldNotContain(x => x.Visibility == Visibility.Private);
 
 		public class TestType
 		{
@@ -38,16 +38,16 @@ namespace SemVeyor.Tests.AssemblyScanning
 		public void There_are_2_fields() => Content.Fields.Count().ShouldBe(2);
 
 		[Fact]
-		public void The_public_field_is_listed() => Content.Fields.ShouldContain(x => x.Visibility == Visbility.Public);
+		public void The_public_field_is_listed() => Content.Fields.ShouldContain(x => x.Visibility == Visibility.Public);
 
 		[Fact]
-		public void The_protected_field_is_listed() => Content.Fields.ShouldContain(x => x.Visibility == Visbility.Protected);
+		public void The_protected_field_is_listed() => Content.Fields.ShouldContain(x => x.Visibility == Visibility.Protected);
 
 		[Fact]
-		public void The_internal_field_is_not_listed() => Content.Fields.ShouldNotContain(x => x.Visibility == Visbility.Internal);
+		public void The_internal_field_is_not_listed() => Content.Fields.ShouldNotContain(x => x.Visibility == Visibility.Internal);
 
 		[Fact]
-		public void The_private_field_is_not_listed() => Content.Fields.ShouldNotContain(x => x.Visibility == Visbility.Private);
+		public void The_private_field_is_not_listed() => Content.Fields.ShouldNotContain(x => x.Visibility == Visibility.Private);
 
 		public class TestType
 		{

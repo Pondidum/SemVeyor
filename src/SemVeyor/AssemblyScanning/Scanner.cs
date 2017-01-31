@@ -58,11 +58,11 @@ namespace SemVeyor.AssemblyScanning
 			var protectedMethods = type
 				.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
 				.Where(c => c.IsFamily)
-				.Select(met => new MethodDetails(Visbility.Protected, met.Name));
+				.Select(met => new MethodDetails(met));
 
 			var publicMethods = type
 				.GetMethods(BindingFlags.Public | BindingFlags.Instance)
-				.Select(met => new MethodDetails(Visbility.Public, met.Name));
+				.Select(met => new MethodDetails(met));
 
 			var objectProtectedMethods = new HashSet<string>(typeof(object)
 				.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
@@ -115,6 +115,29 @@ namespace SemVeyor.AssemblyScanning
 			Visibility = visibility;
 			Name = name;
 		}
+
+		protected static Visibility FromType(MemberInfo info)
+		{
+			var methodInfo = info as MethodBase;
+			if (methodInfo != null)
+				return FromMethod(methodInfo);
+
+			throw new NotImplementedException();
+		}
+
+		private static Visibility FromMethod(MethodBase method)
+		{
+			if (method.IsPublic)
+				return Visibility.Public;
+
+			if (method.IsFamily)
+				return Visibility.Protected;
+
+			if (method.IsAssembly)
+				return Visibility.Internal;
+
+			return Visibility.Private;
+		}
 	}
 
 	public class CtorDetails : MemberDetails
@@ -145,8 +168,8 @@ namespace SemVeyor.AssemblyScanning
 
 	public class MethodDetails : MemberDetails
 	{
-		public MethodDetails(Visbility visibility, string name)
-			: base(visibility, name)
+		public MethodDetails(MethodBase method)
+			: base(FromType(method), method.Name)
 		{
 		}
 	}

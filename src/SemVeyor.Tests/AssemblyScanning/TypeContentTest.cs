@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using SemVeyor.AssemblyScanning;
 using Shouldly;
 using Xunit;
@@ -21,5 +23,14 @@ namespace SemVeyor.Tests.AssemblyScanning
 
 		[Fact]
 		public void The_namespace_is_populated() => Content.Namespace.ShouldBe(InputType.Namespace);
+	}
+
+	public static class MemberDetailsExtensions
+	{
+		public static T ByVisibility<T>(this IEnumerable<T> self, Visibility visibility)
+			where T : MemberDetails
+		{
+			return self.FirstOrDefault(m => m.Visibility == visibility);
+		}
 	}
 }

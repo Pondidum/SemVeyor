@@ -8,9 +8,6 @@ namespace SemVeyor.Tests.AssemblyScanning
 {
 	public class TypeContentCtorTests : TypeContentTest<TypeContentCtorTests.TestType>
 	{
-
-		private CtorDetails CtorBy(Visibility visibility) => Content.Constructors.Single(c => c.Visibility == visibility);
-
 		[Fact]
 		public void There_are_2_constructors() => Content.Constructors.Count().ShouldBe(2);
 
@@ -27,10 +24,10 @@ namespace SemVeyor.Tests.AssemblyScanning
 		public void The_private_ctor_is_not_listed() => Content.Constructors.ShouldNotContain(x => x.Visibility == Visibility.Private);
 
 		[Fact]
-		public void The_ctor_name_is_populated() => CtorBy(Visibility.Protected).Name.ShouldBe(".ctor");
+		public void The_ctor_name_is_populated() => Content.Constructors.ByVisibility(Visibility.Protected).Name.ShouldBe(".ctor");
 
 		[Fact]
-		public void The_arguments_are_populated() => CtorBy(Visibility.Protected).Arguments.Count().ShouldBe(1);
+		public void The_arguments_are_populated() => Content.Constructors.ByVisibility(Visibility.Protected).Arguments.Count().ShouldBe(1);
 
 		public class TestType
 		{

@@ -22,6 +22,14 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void The_private_field_is_not_listed() => Content.Fields.ShouldNotContain(x => x.Visibility == Visibility.Private);
 
+		[Fact]
+		public void The_field_name_is_populated() => PublicField.Name.ShouldBe(nameof(TestType.PublicField));
+
+		[Fact]
+		public void The_field_type_is_populated() => PublicField.Type.ShouldBe(typeof(int));
+
+		private FieldDetails PublicField => Content.Fields.ByVisibility(Visibility.Public);
+
 		public class TestType
 		{
 			public int PublicField;

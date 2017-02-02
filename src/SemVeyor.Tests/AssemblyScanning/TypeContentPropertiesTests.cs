@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
+using SemVeyor.AssemblyScanning;
 using Shouldly;
 using Xunit;
 using Xunit.Abstractions;
@@ -9,7 +11,7 @@ namespace SemVeyor.Tests.AssemblyScanning
 	public class TypeContentPropertiesTests : TypeContentTest<TypeContentPropertiesTests.TestType>
 	{
 		[Fact]
-		public void There_are_6_properties() => Content.Properties.Count().ShouldBe(6);
+		public void There_are_7_properties() => Content.Properties.Count().ShouldBe(7);
 
 		[Fact]
 		public void The_public_property_is_listed() => Content.Properties.ShouldContain( x => x.Name == nameof(TestType.Property));
@@ -35,6 +37,28 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void The_private_property_is_not_listed() => Content.Properties.ShouldNotContain(x => x.Name == "PrivateProperty");
 
+		[Fact]
+		public void The_property_name_is_populated() => Property.Name.ShouldBe(nameof(TestType.InternalSetProperty));
+
+		[Fact]
+		public void The_type_is_populated() => Property.Type.ShouldBe(typeof(int));
+
+		[Fact]
+		public void The_setter_visibility_is_populated() => Property.SetterVisibility.ShouldBe(Visibility.Internal);
+
+		[Fact]
+		public void When_there_is_no_setter_its_visibility_is_null() => ReadOnlyProperty.SetterVisibility.ShouldBeNull();
+
+		[Fact]
+		public void An_indexed_property_argument_is_populated() => IndexedProperty.Arguments.Count().ShouldBe(1);
+
+		[Fact]
+		public void An_indexed_property_name_is_populated() => IndexedProperty.Name.ShouldBe("Item");
+
+		private PropertyDetails Property => Content.Properties.FirstOrDefault(p => p.Name == nameof(TestType.InternalSetProperty));
+		private PropertyDetails ReadOnlyProperty => Content.Properties.FirstOrDefault(p => p.Name == nameof(TestType.ReadonlyProperty));
+		private PropertyDetails IndexedProperty => Content.Properties.FirstOrDefault(p => p.Type== typeof(string));
+
 		public class TestType
 		{
 			public int Property { get; set; }
@@ -47,6 +71,12 @@ namespace SemVeyor.Tests.AssemblyScanning
 			internal int InternalProperty { get; set; }
 			protected int ProtectedProperty { get; set; }
 			private int PrivateProperty { get; set; }
+
+			public string this[int index]
+			{
+				get { throw new Exception(); }
+				set { throw new Exception(); }
+			}
 		}
 	}
 }

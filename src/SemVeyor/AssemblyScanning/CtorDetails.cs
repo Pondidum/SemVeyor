@@ -11,7 +11,7 @@ namespace SemVeyor.AssemblyScanning
 		public CtorDetails(ConstructorInfo ctor)
 			: base(ctor)
 		{
-			Arguments = ctor.GetParameters().Select(a => new ArgumentModel());
+			Arguments = ctor.GetParameters().Select(a => new ArgumentModel()).ToArray();
 		}
 	}
 }

@@ -28,9 +28,20 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void The_private_method_is_not_listed() => Content.Methods.ShouldNotContain(x => x.Visibility == Visibility.Private);
 
+		[Fact]
+		public void The_method_name_is_populated() => PublicMethod.Name.ShouldBe(nameof(TestType.Method));
+
+		[Fact]
+		public void The_return_type_is_populated() => PublicMethod.Type.ShouldBe(typeof(int));
+
+		[Fact]
+		public void The_arguments_are_populated() => PublicMethod.Arguments.Count().ShouldBe(3);
+
+		private MethodDetails PublicMethod => Content.Methods.ByVisibility(Visibility.Public);
+
 		public class TestType
 		{
-			public int Method() { throw new NotSupportedException(); }
+			public int Method(string first, int second, Action<int> third) { throw new NotSupportedException(); }
 			internal int InternalMethod() { throw new NotSupportedException(); }
 			protected int ProtectedMethod() { throw new NotSupportedException(); }
 			private int PrivateMethod() { throw new NotSupportedException(); }

@@ -14,7 +14,11 @@ namespace SemVeyor.AssemblyScanning
 
 		public static ArgumentDetails From(ParameterInfo parameter)
 		{
-			return new ArgumentDetails();
+			return new ArgumentDetails
+			{
+				Name = parameter.Name,
+				Type = parameter.ParameterType
+			};
 		}
 	}
 }

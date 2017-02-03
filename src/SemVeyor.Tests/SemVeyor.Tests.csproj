@@ -54,6 +54,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyScanning\ArgumentDetailsTests.cs" />
     <Compile Include="AssemblyScanning\ScannerTests.cs" />
     <Compile Include="AssemblyScanning\TypeContentCtorTests.cs" />
     <Compile Include="AssemblyScanning\TypeContentFieldTests.cs" />

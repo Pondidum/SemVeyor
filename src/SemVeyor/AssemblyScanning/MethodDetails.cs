@@ -14,7 +14,7 @@ namespace SemVeyor.AssemblyScanning
 			: base(method)
 		{
 			Type = method.ReturnType;
-			Arguments = method.GetParameters().Select(a => new ArgumentDetails()).ToArray();
+			Arguments = method.GetParameters().Select(ArgumentDetails.From).ToArray();
 		}
 	}
 }

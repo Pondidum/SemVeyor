@@ -15,7 +15,7 @@ namespace SemVeyor.AssemblyScanning
 			: base(prop)
 		{
 			Type = prop.PropertyType;
-			Arguments = prop.GetIndexParameters().Select(p => new ArgumentDetails());
+			Arguments = prop.GetIndexParameters().Select(ArgumentDetails.From);
 			SetterVisibility = prop.SetMethod != null
 				? VisibilityFromType(prop?.SetMethod)
 				: (Visibility?)null;

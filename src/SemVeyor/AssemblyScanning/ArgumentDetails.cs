@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 
 namespace SemVeyor.AssemblyScanning
 {
@@ -6,5 +7,14 @@ namespace SemVeyor.AssemblyScanning
 	{
 		public Type Type { get; set; }
 		public string Name { get; set; }
+
+		private ArgumentDetails()
+		{
+		}
+
+		public static ArgumentDetails From(ParameterInfo parameter)
+		{
+			return new ArgumentDetails();
+		}
 	}
 }

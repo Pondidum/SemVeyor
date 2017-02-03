@@ -2,7 +2,7 @@ using System;
 
 namespace SemVeyor.AssemblyScanning
 {
-	public class ArgumentModel
+	public class ArgumentDetails
 	{
 		public Type Type { get; set; }
 		public string Name { get; set; }

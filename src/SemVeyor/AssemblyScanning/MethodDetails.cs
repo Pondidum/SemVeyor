@@ -8,13 +8,13 @@ namespace SemVeyor.AssemblyScanning
 	public class MethodDetails : MemberDetails
 	{
 		public Type Type { get; }
-		public IEnumerable<ArgumentModel> Arguments { get; }
+		public IEnumerable<ArgumentDetails> Arguments { get; }
 
 		public MethodDetails(MethodInfo method)
 			: base(method)
 		{
 			Type = method.ReturnType;
-			Arguments = method.GetParameters().Select(a => new ArgumentModel()).ToArray();
+			Arguments = method.GetParameters().Select(a => new ArgumentDetails()).ToArray();
 		}
 	}
 }

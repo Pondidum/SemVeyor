@@ -9,13 +9,13 @@ namespace SemVeyor.AssemblyScanning
 	{
 		public Type Type { get; }
 		public Visibility? SetterVisibility { get; }
-		public IEnumerable<ArgumentModel> Arguments { get; }
+		public IEnumerable<ArgumentDetails> Arguments { get; }
 
 		public PropertyDetails(PropertyInfo prop)
 			: base(prop)
 		{
 			Type = prop.PropertyType;
-			Arguments = prop.GetIndexParameters().Select(p => new ArgumentModel());
+			Arguments = prop.GetIndexParameters().Select(p => new ArgumentDetails());
 			SetterVisibility = prop.SetMethod != null
 				? VisibilityFromType(prop?.SetMethod)
 				: (Visibility?)null;

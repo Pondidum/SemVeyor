@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
 using SemVeyor.AssemblyScanning;
 using Shouldly;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace SemVeyor.Tests.AssemblyScanning
 {

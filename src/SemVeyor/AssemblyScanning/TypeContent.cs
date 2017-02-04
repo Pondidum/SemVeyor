@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Deployment.Internal;
 using System.Linq;
 using System.Reflection;
 
@@ -8,12 +7,7 @@ namespace SemVeyor.AssemblyScanning
 {
 	public class TypeContent
 	{
-		private static BindingFlags ExternalVisibleFlags;
-
-		static TypeContent()
-		{
-			ExternalVisibleFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
-		}
+		private const BindingFlags ExternalVisibleFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
 
 		public IEnumerable<PropertyDetails> Properties { get; set; }
 		public IEnumerable<MethodDetails> Methods { get; set; }

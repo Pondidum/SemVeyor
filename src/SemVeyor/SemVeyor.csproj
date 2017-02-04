@@ -36,6 +36,7 @@
     <Compile Include="AssemblyScanning\ArgumentDetails.cs" />
     <Compile Include="AssemblyScanning\CtorDetails.cs" />
     <Compile Include="AssemblyScanning\FieldDetails.cs" />
+    <Compile Include="AssemblyScanning\GenericArgumentDetails.cs" />
     <Compile Include="AssemblyScanning\MemberDetails.cs" />
     <Compile Include="AssemblyScanning\MethodDetails.cs" />
     <Compile Include="AssemblyScanning\PropertyDetails.cs" />

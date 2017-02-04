@@ -59,10 +59,12 @@
     <Compile Include="AssemblyScanning\ScannerTests.cs" />
     <Compile Include="AssemblyScanning\TypeContentCtorTests.cs" />
     <Compile Include="AssemblyScanning\TypeContentFieldTests.cs" />
+    <Compile Include="AssemblyScanning\TypeContentGenericsTests.cs" />
     <Compile Include="AssemblyScanning\TypeContentInheritanceTests.cs" />
     <Compile Include="AssemblyScanning\TypeContentMethodsTests.cs" />
     <Compile Include="AssemblyScanning\TypeContentPropertiesTests.cs" />
-    <Compile Include="AssemblyScanning\TypeContentTest.cs" />
+    <Compile Include="AssemblyScanning\MemberDetailsExtensions.cs" />
+    <Compile Include="AssemblyScanning\TypeContentTestBase.cs" />
     <Compile Include="CommandLine\CommandLineParserTests.cs" />
     <Compile Include="CommandLine\CommandLineResultFailureTests.cs" />
     <Compile Include="CommandLine\CommandLineResultSuccessTests.cs" />

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace SemVeyor.Tests.AssemblyScanning
 {
-	public class TypeContentPropertiesTests : TypeContentTest<TypeContentPropertiesTests.TestType>
+	public class TypeContentPropertiesTests : TypeContentTestBase<TypeContentPropertiesTests.TestType>
 	{
 		[Fact]
 		public void There_are_7_properties() => Content.Properties.Count().ShouldBe(7);

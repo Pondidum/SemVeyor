@@ -5,7 +5,7 @@ using Xunit;
 
 namespace SemVeyor.Tests.AssemblyScanning
 {
-	public class TypeContentFieldTests : TypeContentTest<TypeContentFieldTests.TestType>
+	public class TypeContentFieldTests : TypeContentTestBase<TypeContentFieldTests.TestType>
 	{
 		[Fact]
 		public void There_are_2_fields() => Content.Fields.Count().ShouldBe(2);

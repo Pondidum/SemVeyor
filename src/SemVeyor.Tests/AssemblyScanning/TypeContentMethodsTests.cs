@@ -8,14 +8,14 @@ using Xunit;
 
 namespace SemVeyor.Tests.AssemblyScanning
 {
-	public class TypeContentMethodsTests : TypeContentTest<TypeContentMethodsTests.TestType>
+	public class TypeContentMethodsTests : TypeContentTestBase<TypeContentMethodsTests.TestType>
 	{
 		private static int MethodsOnObject() => typeof(object)
 			.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
 			.Count();
 
 		[Fact]
-		public void There_are_2_methods() => Content.Methods.Count().ShouldBe(MethodsOnObject() + 2);
+		public void There_are_3_methods() => Content.Methods.Count().ShouldBe(MethodsOnObject() + 3);
 		[Fact]
 		public void The_public_method_is_listed() => Content.Methods.ShouldContain(x => x.Visibility == Visibility.Public);
 
@@ -37,7 +37,11 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void The_arguments_are_populated() => PublicMethod.Arguments.Count().ShouldBe(3);
 
+		[Fact]
+		public void The_generic_arguments_are_populated() => GenericMethod.GenericArguments.Count().ShouldBe(1);
+
 		private MethodDetails PublicMethod => Content.Methods.ByVisibility(Visibility.Public);
+		private MethodDetails GenericMethod => Content.Methods.Single(m => m.Name == TestType.GenericMethodName);
 
 		public class TestType
 		{
@@ -45,6 +49,10 @@ namespace SemVeyor.Tests.AssemblyScanning
 			internal int InternalMethod() { throw new NotSupportedException(); }
 			protected int ProtectedMethod() { throw new NotSupportedException(); }
 			private int PrivateMethod() { throw new NotSupportedException(); }
+
+			protected T GenericMethod<T>(T test, Action<T> action) { throw new NotSupportedException(); }
+
+			public static string GenericMethodName => nameof(GenericMethod);
 		}
 	}
 }

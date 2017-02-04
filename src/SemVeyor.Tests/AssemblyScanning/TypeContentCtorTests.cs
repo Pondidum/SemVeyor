@@ -6,7 +6,7 @@ using Xunit;
 
 namespace SemVeyor.Tests.AssemblyScanning
 {
-	public class TypeContentCtorTests : TypeContentTest<TypeContentCtorTests.TestType>
+	public class TypeContentCtorTests : TypeContentTestBase<TypeContentCtorTests.TestType>
 	{
 		[Fact]
 		public void There_are_2_constructors() => Content.Constructors.Count().ShouldBe(2);

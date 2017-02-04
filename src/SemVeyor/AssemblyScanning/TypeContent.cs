@@ -9,6 +9,7 @@ namespace SemVeyor.AssemblyScanning
 	{
 		private const BindingFlags ExternalVisibleFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
 
+		public IEnumerable<GenericArgumentDetails> GenericArguments { get; set; }
 		public IEnumerable<PropertyDetails> Properties { get; set; }
 		public IEnumerable<MethodDetails> Methods { get; set; }
 		public IEnumerable<FieldDetails> Fields { get; set; }
@@ -31,11 +32,20 @@ namespace SemVeyor.AssemblyScanning
 				BaseType = type.BaseType?.Name,
 				Interfaces = type.GetInterfaces().Select(i => i.Name),
 
+				GenericArguments = GenericArgumentsFor(type),
 				Constructors = ConstructorsFor(type),
 				Properties = PropertiesFor(type),
 				Methods = MethodsFor(type),
 				Fields = FieldsFor(type)
 			};
+		}
+
+		private static IEnumerable<GenericArgumentDetails> GenericArgumentsFor(Type type)
+		{
+			return type
+				.GetGenericArguments()
+				.Select(GenericArgumentDetails.From)
+				.ToArray();
 		}
 
 		private static IEnumerable<PropertyDetails> PropertiesFor(IReflect type)

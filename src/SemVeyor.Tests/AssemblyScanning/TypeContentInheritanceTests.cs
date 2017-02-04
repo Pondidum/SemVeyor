@@ -3,7 +3,7 @@ using Xunit;
 
 namespace SemVeyor.Tests.AssemblyScanning
 {
-	public class TypeContentInheritanceTests : TypeContentTest<TypeContentInheritanceTests.TestType>
+	public class TypeContentInheritanceTests : TypeContentTestBase<TypeContentInheritanceTests.TestType>
 	{
 		[Fact]
 		public void The_base_type_is_populated() => Content.BaseType.ShouldBe(nameof(ParentType));

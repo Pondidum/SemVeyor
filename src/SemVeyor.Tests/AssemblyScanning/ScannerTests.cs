@@ -9,7 +9,7 @@ namespace SemVeyor.Tests.AssemblyScanning
 {
 	public class ScannerTests
 	{
-		private readonly IEnumerable<TypeContent> _results;
+		private readonly IEnumerable<TypeDetails> _results;
 
 		public ScannerTests()
 		{

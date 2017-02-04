@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace SemVeyor.AssemblyScanning
 {
-	public class TypeContent
+	public class TypeDetails
 	{
 		private const BindingFlags ExternalVisibleFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
 
@@ -22,9 +22,9 @@ namespace SemVeyor.AssemblyScanning
 		public string BaseType { get; set; }
 		public IEnumerable<string> Interfaces { get; set; }
 
-		public static TypeContent From(Type type)
+		public static TypeDetails From(Type type)
 		{
-			return new TypeContent
+			return new TypeDetails
 			{
 				Name = type.Name,
 				Namespace = type.Namespace,

@@ -8,25 +8,25 @@ using Xunit;
 
 namespace SemVeyor.Tests.AssemblyScanning
 {
-	public class TypeContentMethodsTests : TypeContentTestBase<TypeContentMethodsTests.TestType>
+	public class TypeDetailsMethodsTests : TypeDetailsTestBase<TypeDetailsMethodsTests.TestType>
 	{
 		private static int MethodsOnObject() => typeof(object)
 			.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
 			.Count();
 
 		[Fact]
-		public void There_are_3_methods() => Content.Methods.Count().ShouldBe(MethodsOnObject() + 3);
+		public void There_are_3_methods() => Details.Methods.Count().ShouldBe(MethodsOnObject() + 3);
 		[Fact]
-		public void The_public_method_is_listed() => Content.Methods.ShouldContain(x => x.Visibility == Visibility.Public);
+		public void The_public_method_is_listed() => Details.Methods.ShouldContain(x => x.Visibility == Visibility.Public);
 
 		[Fact]
-		public void The_protected_method_is_listed() => Content.Methods.ShouldContain(x => x.Visibility == Visibility.Protected);
+		public void The_protected_method_is_listed() => Details.Methods.ShouldContain(x => x.Visibility == Visibility.Protected);
 
 		[Fact]
-		public void The_internal_method_is_not_listed() => Content.Methods.ShouldNotContain(x => x.Visibility == Visibility.Internal);
+		public void The_internal_method_is_not_listed() => Details.Methods.ShouldNotContain(x => x.Visibility == Visibility.Internal);
 
 		[Fact]
-		public void The_private_method_is_not_listed() => Content.Methods.ShouldNotContain(x => x.Visibility == Visibility.Private);
+		public void The_private_method_is_not_listed() => Details.Methods.ShouldNotContain(x => x.Visibility == Visibility.Private);
 
 		[Fact]
 		public void The_method_name_is_populated() => PublicMethod.Name.ShouldBe(nameof(TestType.Method));
@@ -40,8 +40,8 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void The_generic_arguments_are_populated() => GenericMethod.GenericArguments.Count().ShouldBe(1);
 
-		private MethodDetails PublicMethod => Content.Methods.ByVisibility(Visibility.Public);
-		private MethodDetails GenericMethod => Content.Methods.Single(m => m.Name == TestType.GenericMethodName);
+		private MethodDetails PublicMethod => Details.Methods.ByVisibility(Visibility.Public);
+		private MethodDetails GenericMethod => Details.Methods.Single(m => m.Name == TestType.GenericMethodName);
 
 		public class TestType
 		{

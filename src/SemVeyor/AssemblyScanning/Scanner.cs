@@ -6,9 +6,9 @@ namespace SemVeyor.AssemblyScanning
 {
 	public class Scanner
 	{
-		public IEnumerable<TypeContent> Scan(Assembly assembly)
+		public IEnumerable<TypeDetails> Scan(Assembly assembly)
 		{
-			return assembly.GetExportedTypes().Select(TypeContent.From);
+			return assembly.GetExportedTypes().Select(TypeDetails.From);
 		}
 	}
 }

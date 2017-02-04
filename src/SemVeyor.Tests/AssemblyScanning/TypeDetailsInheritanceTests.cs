@@ -3,13 +3,13 @@ using Xunit;
 
 namespace SemVeyor.Tests.AssemblyScanning
 {
-	public class TypeContentInheritanceTests : TypeContentTestBase<TypeContentInheritanceTests.TestType>
+	public class TypeDetailsInheritanceTests : TypeDetailsTestBase<TypeDetailsInheritanceTests.TestType>
 	{
 		[Fact]
-		public void The_base_type_is_populated() => Content.BaseType.ShouldBe(nameof(ParentType));
+		public void The_base_type_is_populated() => Details.BaseType.ShouldBe(nameof(ParentType));
 
 		[Fact]
-		public void The_interfaces_are_populated() => Content.Interfaces.ShouldBe(new[]
+		public void The_interfaces_are_populated() => Details.Interfaces.ShouldBe(new[]
 		{
 			nameof(ITestInterfaceOne),
 			nameof(ITestInterfaceTwo)

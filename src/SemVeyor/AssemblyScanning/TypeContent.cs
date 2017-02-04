@@ -24,12 +24,18 @@ namespace SemVeyor.AssemblyScanning
 		public string Namespace { get; set; }
 		public string FullName => $"{Namespace}.{Name}";
 
+		public string BaseType { get; set; }
+		public IEnumerable<string> Interfaces { get; set; }
+
 		public static TypeContent From(Type type)
 		{
 			return new TypeContent
 			{
 				Name = type.Name,
 				Namespace = type.Namespace,
+
+				BaseType = type.BaseType?.Name,
+				Interfaces = type.GetInterfaces().Select(i => i.Name),
 
 				Constructors = ConstructorsFor(type),
 				Properties = PropertiesFor(type),

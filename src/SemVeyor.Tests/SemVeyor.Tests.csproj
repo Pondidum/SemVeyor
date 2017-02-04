@@ -58,6 +58,7 @@
     <Compile Include="AssemblyScanning\ScannerTests.cs" />
     <Compile Include="AssemblyScanning\TypeContentCtorTests.cs" />
     <Compile Include="AssemblyScanning\TypeContentFieldTests.cs" />
+    <Compile Include="AssemblyScanning\TypeContentInheritanceTests.cs" />
     <Compile Include="AssemblyScanning\TypeContentMethodsTests.cs" />
     <Compile Include="AssemblyScanning\TypeContentPropertiesTests.cs" />
     <Compile Include="AssemblyScanning\TypeContentTest.cs" />

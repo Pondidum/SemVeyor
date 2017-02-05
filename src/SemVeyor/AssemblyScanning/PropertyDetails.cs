@@ -7,21 +7,24 @@ namespace SemVeyor.AssemblyScanning
 {
 	public class PropertyDetails : IMemberDetails
 	{
-		public string Name { get; }
-		public Visibility Visibility { get; }
-		public Type Type { get; }
-		public Visibility? SetterVisibility { get; }
-		public IEnumerable<ArgumentDetails> Arguments { get; }
+		public string Name { get; set; }
+		public Visibility Visibility { get; set; }
+		public Type Type { get; set; }
+		public Visibility? SetterVisibility { get; set; }
+		public IEnumerable<ArgumentDetails> Arguments { get; set; }
 
-		public PropertyDetails(PropertyInfo prop)
+		public static PropertyDetails From(PropertyInfo prop)
 		{
-			Name = prop.Name;
-			Visibility = prop.GetVisibility();
-			Type = prop.PropertyType;
-			Arguments = prop.GetIndexParameters().Select(ArgumentDetails.From);
-			SetterVisibility = prop.SetMethod != null
-				? prop.SetMethod.GetVisibility()
-				: (Visibility?)null;
+			return new PropertyDetails
+			{
+				Name = prop.Name,
+				Visibility = prop.GetVisibility(),
+				Type = prop.PropertyType,
+				Arguments = prop.GetIndexParameters().Select(ArgumentDetails.From),
+				SetterVisibility = prop.SetMethod != null
+					? prop.SetMethod.GetVisibility()
+					: (Visibility?)null
+			};
 		}
 	}
 }

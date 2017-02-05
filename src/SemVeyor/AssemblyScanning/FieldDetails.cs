@@ -4,15 +4,18 @@ namespace SemVeyor.AssemblyScanning
 {
 	public class FieldDetails : IMemberDetails
 	{
-		public string Name { get; }
-		public Visibility Visibility { get; }
-		public object Type { get; }
+		public string Name { get; set; }
+		public Visibility Visibility { get; set;}
+		public object Type { get; set;}
 
-		public FieldDetails(FieldInfo info)
+		public static FieldDetails From(FieldInfo info)
 		{
-			Name = info.Name;
-			Visibility = info.GetVisibility();
-			Type = info.FieldType;
+			return new FieldDetails
+			{
+				Name = info.Name,
+				Visibility = info.GetVisibility(),
+				Type = info.FieldType
+			};
 		}
 	}
 }

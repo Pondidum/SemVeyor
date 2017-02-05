@@ -52,7 +52,7 @@ namespace SemVeyor.AssemblyScanning
 		{
 			return type
 				.GetProperties(ExternalVisibleFlags)
-				.Select(prop => new PropertyDetails(prop))
+				.Select(PropertyDetails.From)
 				.Where(IsExternal);
 		}
 
@@ -60,7 +60,7 @@ namespace SemVeyor.AssemblyScanning
 		{
 			var methods = type
 				.GetMethods(ExternalVisibleFlags)
-				.Select(met => new MethodDetails(met));
+				.Select(MethodDetails.From);
 
 			var objectProtectedMethods = new HashSet<string>(typeof(object)
 				.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
@@ -76,7 +76,7 @@ namespace SemVeyor.AssemblyScanning
 		{
 			return type
 				.GetConstructors(ExternalVisibleFlags)
-				.Select(ctor => new CtorDetails(ctor))
+				.Select(ctor => CtorDetails.From(ctor))
 				.Where(IsExternal);
 		}
 
@@ -84,7 +84,7 @@ namespace SemVeyor.AssemblyScanning
 		{
 			return type
 				.GetFields(ExternalVisibleFlags)
-				.Select(field => new FieldDetails(field))
+				.Select(FieldDetails.From)
 				.Where(IsExternal);
 		}
 

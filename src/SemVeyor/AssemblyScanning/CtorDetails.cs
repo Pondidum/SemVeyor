@@ -6,15 +6,19 @@ namespace SemVeyor.AssemblyScanning
 {
 	public class CtorDetails : IMemberDetails
 	{
-		public string Name { get; }
-		public Visibility Visibility { get; }
+		public string Name { get; set; }
+		public Visibility Visibility { get; set; }
 		public IEnumerable<ArgumentDetails> Arguments { get; set; }
 
-		public CtorDetails(ConstructorInfo ctor)
+		public static CtorDetails From(ConstructorInfo ctor)
 		{
-			Name = ctor.Name;
-			Visibility = ctor.GetVisibility();
-			Arguments = ctor.GetParameters().Select(ArgumentDetails.From).ToArray();
+			return new CtorDetails
+			{
+				Name = ctor.Name,
+				Visibility = ctor.GetVisibility(),
+				Arguments = ctor.GetParameters().Select(ArgumentDetails.From).ToArray()
+			};
+
 		}
 	}
 }

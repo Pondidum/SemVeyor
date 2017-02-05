@@ -3,21 +3,15 @@ using System.Reflection;
 
 namespace SemVeyor.AssemblyScanning
 {
-	public class MemberDetails
+	public static class Extensions
 	{
-		public Visibility Visibility => VisibilityFromType(_info);
-		public string Name { get; }
-
-		private readonly MemberInfo _info;
-
-		protected MemberDetails(MemberInfo info)
+		public static Visibility GetVisibility(this MemberInfo info)
 		{
-			_info = info;
-			Name = info.Name;
-		}
+			var prop = info as PropertyInfo;
 
-		protected virtual Visibility VisibilityFromType(MemberInfo info)
-		{
+			if (prop != null)
+				info = prop?.GetMethod ?? prop?.SetMethod;
+
 			var methodInfo = info as MethodBase;
 			if (methodInfo != null)
 				return VisibilityFromMethod(methodInfo);
@@ -29,7 +23,7 @@ namespace SemVeyor.AssemblyScanning
 			throw new NotSupportedException();
 		}
 
-		protected virtual Visibility VisibilityFromMethod(MethodBase method)
+		private static Visibility VisibilityFromMethod(MethodBase method)
 		{
 			if (method.IsPublic)
 				return Visibility.Public;
@@ -43,7 +37,7 @@ namespace SemVeyor.AssemblyScanning
 			return Visibility.Private;
 		}
 
-		protected virtual Visibility VisibilityFromField(FieldInfo field)
+		private static Visibility VisibilityFromField(FieldInfo field)
 		{
 			if (field.IsPublic)
 				return Visibility.Public;

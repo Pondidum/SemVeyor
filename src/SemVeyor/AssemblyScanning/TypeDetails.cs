@@ -88,7 +88,7 @@ namespace SemVeyor.AssemblyScanning
 				.Where(IsExternal);
 		}
 
-		private static bool IsExternal(MemberDetails info)
+		private static bool IsExternal(IMemberDetails info)
 		{
 			return info.Visibility > Visibility.Internal;
 		}

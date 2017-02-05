@@ -37,3 +37,24 @@
   * arguments for specifying too perhaps?
   * `-failureCode 1`
   * `-successCode 0`
+
+
+
+## Rules
+
+* Anything added => minor++
+* Anything removed => major++
+* Changed == [added + removed] => major++
+* Do method overloads need to be considered
+
+
+* Type added => minor++
+* Type removed => major++
+* Type became more visible => minor++
+* Type became less visible => major++
+
+
+* Type had a visible ctor added => minor++
+* Type had a visible ctor removed => major++
+* Type had a ctor more visible => minor++
+* Type had a ctor less visible => major++

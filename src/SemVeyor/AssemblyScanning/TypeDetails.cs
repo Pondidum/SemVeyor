@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using SemVeyor.AssemblyScanning.Events;
 
 namespace SemVeyor.AssemblyScanning
 {
@@ -114,10 +115,6 @@ namespace SemVeyor.AssemblyScanning
 					yield return @event;
 		}
 	}
-
-	public class FieldAdded {}
-	public class FieldRemoved {}
-
 
 	public class LambdaComparer<T> : IEqualityComparer<T>
 	{

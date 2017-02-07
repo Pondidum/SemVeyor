@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using SemVeyor.AssemblyScanning.Events;
 
 namespace SemVeyor.AssemblyScanning
 {
@@ -32,8 +33,4 @@ namespace SemVeyor.AssemblyScanning
 				yield return new FieldVisibilityIncreased();
 		}
 	}
-
-	public class FieldVisibilityIncreased { }
-	public class FieldVisibilityDecreased { }
-	public class FieldTypeChanged { }
 }

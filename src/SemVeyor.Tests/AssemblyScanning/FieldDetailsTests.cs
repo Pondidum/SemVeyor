@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using SemVeyor.AssemblyScanning;
+using SemVeyor.AssemblyScanning.Events;
 using Shouldly;
 using Xunit;
 

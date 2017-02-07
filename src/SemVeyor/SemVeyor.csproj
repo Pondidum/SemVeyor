@@ -35,6 +35,7 @@
   <ItemGroup>
     <Compile Include="AssemblyScanning\ArgumentDetails.cs" />
     <Compile Include="AssemblyScanning\CtorDetails.cs" />
+    <Compile Include="AssemblyScanning\Events\Events.cs" />
     <Compile Include="AssemblyScanning\FieldDetails.cs" />
     <Compile Include="AssemblyScanning\GenericArgumentDetails.cs" />
     <Compile Include="AssemblyScanning\IMemberDetails.cs" />

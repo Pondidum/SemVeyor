@@ -9,14 +9,6 @@ namespace SemVeyor.Tests.AssemblyScanning
 {
 	public class FieldDetailsTests
 	{
-		public FieldDetailsTests()
-		{
-			var first = new FieldDetails { };
-			var second = new FieldDetails { };
-
-
-		}
-
 		[Fact]
 		public void When_checking_the_log()
 		{
@@ -38,15 +30,15 @@ namespace SemVeyor.Tests.AssemblyScanning
 
 			changes.Select(c => c.GetType()).ShouldBe(new[]
 			{
-				typeof(TypeChanged),
+				typeof(FieldTypeChanged),
 			});
 		}
 
 		[Theory]
-		[InlineData(Visibility.Public, Visibility.Protected, typeof(VisibilityDecreased))]
-		[InlineData(Visibility.Public, Visibility.Internal, typeof(VisibilityDecreased))]
-		[InlineData(Visibility.Public, Visibility.Private, typeof(VisibilityDecreased))]
-		[InlineData(Visibility.Protected, Visibility.Public, typeof(VisibilityIncreased))]
+		[InlineData(Visibility.Public, Visibility.Protected, typeof(FieldVisibilityDecreased))]
+		[InlineData(Visibility.Public, Visibility.Internal, typeof(FieldVisibilityDecreased))]
+		[InlineData(Visibility.Public, Visibility.Private, typeof(FieldVisibilityDecreased))]
+		[InlineData(Visibility.Protected, Visibility.Public, typeof(FieldVisibilityIncreased))]
 		public void When_the_type_visibility_changes(Visibility older, Visibility newer, Type expectedEvent)
 		{
 			var first = From<int>("first", older);

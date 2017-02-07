@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace SemVeyor.AssemblyScanning
 {
-	public class TypeDetails
+	public class TypeDetails : IMemberDetails
 	{
 		private const BindingFlags ExternalVisibleFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
 
@@ -15,6 +15,7 @@ namespace SemVeyor.AssemblyScanning
 		public IEnumerable<FieldDetails> Fields { get; set; }
 		public IEnumerable<CtorDetails> Constructors { get; set; }
 
+		public Visibility Visibility { get; set; }
 		public string Name { get; set; }
 		public string Namespace { get; set; }
 		public string FullName => $"{Namespace}.{Name}";
@@ -27,6 +28,7 @@ namespace SemVeyor.AssemblyScanning
 			return new TypeDetails
 			{
 				Name = type.Name,
+				Visibility = type.GetVisibility(),
 				Namespace = type.Namespace,
 
 				BaseType = type.BaseType?.Name,
@@ -92,5 +94,41 @@ namespace SemVeyor.AssemblyScanning
 		{
 			return info.Visibility > Visibility.Internal;
 		}
+
+		public IEnumerable<object> UpdatedTo(TypeDetails second)
+		{
+			var nameComparer = new LambdaComparer<FieldDetails>(fd => fd.Name);
+
+			var removedFields = Fields.Except(second.Fields, nameComparer);
+			var addedFields = second.Fields.Except(Fields, nameComparer);
+			var remainingFields = Fields.Concat(second.Fields).GroupBy(fd => fd.Name);
+
+			foreach (var field in removedFields)
+				yield return new FieldRemoved();
+
+			foreach (var field in addedFields)
+				yield return new FieldAdded();
+
+			foreach (var pair in remainingFields)
+				foreach (var @event in pair.First().UpdatedTo(pair.Last()))
+					yield return @event;
+		}
+	}
+
+	public class FieldAdded {}
+	public class FieldRemoved {}
+
+
+	public class LambdaComparer<T> : IEqualityComparer<T>
+	{
+		private readonly Func<T, object> _selector;
+
+		public LambdaComparer(Func<T, object> selector)
+		{
+			_selector = selector;
+		}
+
+		public bool Equals(T x, T y) => _selector(x) == _selector(y);
+		public int GetHashCode(T obj) => _selector(obj).GetHashCode();
 	}
 }

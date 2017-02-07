@@ -23,17 +23,17 @@ namespace SemVeyor.AssemblyScanning
 		public IEnumerable<object> UpdatedTo(FieldDetails second)
 		{
 			if (Type != second.Type)
-				yield return new TypeChanged();
+				yield return new FieldTypeChanged();
 
 			if (Visibility > second.Visibility)
-				yield return new VisibilityDecreased();
+				yield return new FieldVisibilityDecreased();
 
 			if (Visibility < second.Visibility)
-				yield return new VisibilityIncreased();
+				yield return new FieldVisibilityIncreased();
 		}
 	}
 
-	public class VisibilityIncreased { }
-	public class VisibilityDecreased { }
-	public class TypeChanged { }
+	public class FieldVisibilityIncreased { }
+	public class FieldVisibilityDecreased { }
+	public class FieldTypeChanged { }
 }

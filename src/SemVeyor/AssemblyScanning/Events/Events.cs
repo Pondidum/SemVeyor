@@ -11,4 +11,7 @@
 	public class GenericArgumentNameChanged { }
 	public class GenericArgumentConstraintAdded { }
 	public class GenericArgumentConstraintRemoved { }
+
+	public class ArgumentNameChanged { }
+	public class ArgumentTypeChanged { }
 }

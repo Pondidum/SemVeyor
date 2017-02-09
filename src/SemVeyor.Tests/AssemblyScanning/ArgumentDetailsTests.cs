@@ -1,5 +1,5 @@
-﻿using SemVeyor.AssemblyScanning;
-
+using SemVeyor.AssemblyScanning;
+using SemVeyor.AssemblyScanning.Events;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -34,5 +34,53 @@ namespace SemVeyor.Tests.AssemblyScanning
 
 		[Fact]
 		public void Params_types_are_handled() => For(nameof(ParamsArgument)).Type.ShouldBe(typeof(int[]));
+
+		[Fact]
+		public void When_an_argument_has_not_changed()
+		{
+			var older = From<int>("first");
+			var newer = From<int>("first");
+
+			var changes = older.UpdatedTo(newer);
+
+			changes.ShouldBeEmpty();
+		}
+
+		[Fact]
+		public void When_an_argument_has_changed_name()
+		{
+			var older = From<int>("first");
+			var newer = From<int>("second");
+
+			var changes = older.UpdatedTo(newer);
+
+			changes.Select(c => c.GetType()).ShouldBe(new []
+			{
+				typeof(ArgumentNameChanged)
+			});
+		}
+
+		[Fact]
+		public void When_an_argument_has_changed_type()
+		{
+			var older = From<int>("first");
+			var newer = From<string>("first");
+
+			var changes = older.UpdatedTo(newer);
+
+			changes.Select(c => c.GetType()).ShouldBe(new []
+			{
+				typeof(ArgumentTypeChanged)
+			});
+		}
+
+		private static ArgumentDetails From<T>(string name)
+		{
+			return new ArgumentDetails
+			{
+				Name = name,
+				Type = typeof(T)
+			};
+		}
 	}
 }

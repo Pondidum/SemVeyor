@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
+using SemVeyor.AssemblyScanning.Events;
 
 namespace SemVeyor.AssemblyScanning
 {
@@ -8,10 +10,6 @@ namespace SemVeyor.AssemblyScanning
 		public Type Type { get; set; }
 		public string Name { get; set; }
 
-		private ArgumentDetails()
-		{
-		}
-
 		public static ArgumentDetails From(ParameterInfo parameter)
 		{
 			return new ArgumentDetails
@@ -19,6 +17,15 @@ namespace SemVeyor.AssemblyScanning
 				Name = parameter.Name,
 				Type = parameter.ParameterType
 			};
+		}
+
+		public IEnumerable<object> UpdatedTo(ArgumentDetails newer)
+		{
+			if (Name != newer.Name)
+				yield return new ArgumentNameChanged();
+
+			if (Type != newer.Type)
+				yield return new ArgumentTypeChanged();
 		}
 	}
 }

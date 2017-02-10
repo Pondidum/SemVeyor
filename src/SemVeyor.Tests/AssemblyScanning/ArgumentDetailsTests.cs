@@ -13,6 +13,7 @@ namespace SemVeyor.Tests.AssemblyScanning
 		private void OneArgument(string test) {}
 		private void ActionArguments(Action<int> test) {}
 		private void ParamsArgument(int[] test) {}
+		private void TwoArguments(int first, string second) {}
 
 		private static ArgumentDetails For(string methodName)
 		{
@@ -20,8 +21,11 @@ namespace SemVeyor.Tests.AssemblyScanning
 				.GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic)
 				.GetParameters()
 				.Select(ArgumentDetails.From)
-				.First();
+				.Last();
 		}
+
+		[Fact]
+		public void The_position_is_populated() => For(nameof(TwoArguments)).Position.ShouldBe(1);
 
 		[Fact]
 		public void The_name_is_populated() => For(nameof(OneArgument)).Name.ShouldBe("test");
@@ -74,12 +78,27 @@ namespace SemVeyor.Tests.AssemblyScanning
 			});
 		}
 
-		private static ArgumentDetails From<T>(string name)
+		[Fact]
+		public void When_an_argument_has_changed_position()
+		{
+			var older = From<int>("first");
+			var newer = From<int>("first", 1);
+
+			var changes = older.UpdatedTo(newer);
+
+			changes.Select(c => c.GetType()).ShouldBe(new []
+			{
+				typeof(ArgumentMoved)
+			});
+		}
+
+		private static ArgumentDetails From<T>(string name, int position = 0)
 		{
 			return new ArgumentDetails
 			{
 				Name = name,
-				Type = typeof(T)
+				Type = typeof(T),
+				Position = position
 			};
 		}
 	}

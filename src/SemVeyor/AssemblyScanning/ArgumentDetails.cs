@@ -7,6 +7,7 @@ namespace SemVeyor.AssemblyScanning
 {
 	public class ArgumentDetails
 	{
+		public int Position { get; set; }
 		public Type Type { get; set; }
 		public string Name { get; set; }
 
@@ -14,6 +15,7 @@ namespace SemVeyor.AssemblyScanning
 		{
 			return new ArgumentDetails
 			{
+				Position =  parameter.Position,
 				Name = parameter.Name,
 				Type = parameter.ParameterType
 			};
@@ -26,6 +28,9 @@ namespace SemVeyor.AssemblyScanning
 
 			if (Type != newer.Type)
 				yield return new ArgumentTypeChanged();
+
+			if (Position != newer.Position)
+				yield return new ArgumentMoved();
 		}
 	}
 }

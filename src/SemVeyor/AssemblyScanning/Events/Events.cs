@@ -14,4 +14,6 @@
 
 	public class ArgumentNameChanged { }
 	public class ArgumentTypeChanged { }
+	public class ArgumentMoved { }
+
 }

@@ -23,7 +23,7 @@ namespace SemVeyor.Tests.AssemblyScanning
 
 			details.ShouldSatisfyAllConditions(
 				() => details.Name.ShouldBe("TValue"),
-				() => details.Positon.ShouldBe(1),
+				() => details.Position.ShouldBe(1),
 				() => details.Constraints.ShouldBe(new[] { nameof(IEnumerable) })
 			);
 		}
@@ -111,7 +111,7 @@ namespace SemVeyor.Tests.AssemblyScanning
 			return new GenericArgumentDetails
 			{
 				Name = name,
-				Positon = position,
+				Position = position,
 				Constraints = constraints
 			};
 		}

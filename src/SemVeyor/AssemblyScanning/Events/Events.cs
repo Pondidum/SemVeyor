@@ -16,4 +16,11 @@
 	public class ArgumentTypeChanged { }
 	public class ArgumentMoved { }
 
+	public class MethodVisibilityIncreased { }
+	public class MethodVisibilityDecreased { }
+	public class MethodTypeChanged { }
+	public class MethodArgumentAdded { }
+	public class MethodArgumentRemoved { }
+	public class MethodGenericArgumentAdded { }
+	public class MethodGenericArgumentRemoved { }
 }

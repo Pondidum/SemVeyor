@@ -57,6 +57,7 @@
     <Compile Include="AssemblyScanning\ArgumentDetailsTests.cs" />
     <Compile Include="AssemblyScanning\FieldDetailsTests.cs" />
     <Compile Include="AssemblyScanning\GenericArgumentDetailsTests.cs" />
+    <Compile Include="AssemblyScanning\MethodDetailsTests.cs" />
     <Compile Include="AssemblyScanning\ScannerTests.cs" />
     <Compile Include="AssemblyScanning\TypeDetailsCtorTests.cs" />
     <Compile Include="AssemblyScanning\TypeDetailsFieldTests.cs" />

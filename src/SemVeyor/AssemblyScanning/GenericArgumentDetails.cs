@@ -7,7 +7,7 @@ namespace SemVeyor.AssemblyScanning
 {
 	public class GenericArgumentDetails
 	{
-		public int Positon { get; set; }
+		public int Position { get; set; }
 		public string Name { get; set; }
 		public IEnumerable<string> Constraints { get; set; }
 
@@ -16,14 +16,14 @@ namespace SemVeyor.AssemblyScanning
 			return new GenericArgumentDetails
 			{
 				Name = type.Name,
-				Positon = type.GenericParameterPosition,
+				Position = type.GenericParameterPosition,
 				Constraints =  type.GetGenericParameterConstraints().Select(c => c.Name)
 			};
 		}
 
 		public IEnumerable<object> UpdatedTo(GenericArgumentDetails second)
 		{
-			if (Positon != second.Positon)
+			if (Position != second.Position)
 				yield return new GenericArgumentPositionChanged();
 
 			if (Name != second.Name)

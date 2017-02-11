@@ -67,6 +67,7 @@
     <Compile Include="AssemblyScanning\MemberDetailsExtensions.cs" />
     <Compile Include="AssemblyScanning\TypeDetailsTestBase.cs" />
     <Compile Include="AssemblyScanning\TypeDetailsTests.cs" />
+    <Compile Include="AssemblyScanning\VisibilityTests.cs" />
     <Compile Include="CommandLine\CommandLineParserTests.cs" />
     <Compile Include="CommandLine\CommandLineResultFailureTests.cs" />
     <Compile Include="CommandLine\CommandLineResultSuccessTests.cs" />

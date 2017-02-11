@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using System.Text;
 
 namespace SemVeyor.AssemblyScanning
 {
@@ -8,7 +9,6 @@ namespace SemVeyor.AssemblyScanning
 		public static Visibility GetVisibility(this MemberInfo info)
 		{
 			var prop = info as PropertyInfo;
-
 			if (prop != null)
 				info = prop?.GetMethod ?? prop?.SetMethod;
 
@@ -20,7 +20,11 @@ namespace SemVeyor.AssemblyScanning
 			if (field != null)
 				return VisibilityFromField(field);
 
-			throw new NotSupportedException();
+			var type = info as Type;
+			if (type != null)
+				return VisibilityFromType(type);
+
+			throw new NotSupportedException($"{info.GetType().Name}: {info.Name}");
 		}
 
 		private static Visibility VisibilityFromMethod(MethodBase method)
@@ -49,6 +53,34 @@ namespace SemVeyor.AssemblyScanning
 				return Visibility.Internal;
 
 			return Visibility.Private;
+		}
+
+		private static Visibility VisibilityFromType(Type type)
+		{
+			if (type.IsPublic || type.IsNestedPublic)
+				return Visibility.Public;
+
+			if (type.IsNestedPrivate)
+				return Visibility.Private;
+
+			if (type.IsNestedFamily)
+				return Visibility.Protected;
+
+			if (type.IsNestedAssembly || type.IsNotPublic)
+				return Visibility.Internal;
+
+			var sb = new StringBuilder();
+
+			sb.AppendLine(type.Name);
+			sb.AppendLine($"IsPublic: {type.IsPublic}");
+			sb.AppendLine($"IsNotPublic: {type.IsNotPublic}");
+			sb.AppendLine($"IsNestedAsm: {type.IsNestedAssembly}");
+			sb.AppendLine($"IsNestedFam: {type.IsNestedFamily}");
+			sb.AppendLine($"IsNestedPublic: {type.IsNestedPublic}");
+			sb.AppendLine($"IsNestedPrivate: {type.IsNestedPrivate}");
+			sb.AppendLine($"IsVisible: {type.IsVisible}");
+
+			throw new NotImplementedException(sb.ToString());
 		}
 	}
 }

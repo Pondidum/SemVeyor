@@ -48,6 +48,7 @@
     <Compile Include="CommandLine\CommandLineParser.cs" />
     <Compile Include="CommandLine\CommandLineResult.cs" />
     <Compile Include="CommandLine\Options.cs" />
+    <Compile Include="Infrastructure\LambdaComparer.cs" />
     <Compile Include="Program.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using SemVeyor.AssemblyScanning.Events;
+using SemVeyor.Infrastructure;
 
 namespace SemVeyor.AssemblyScanning
 {
@@ -114,18 +115,5 @@ namespace SemVeyor.AssemblyScanning
 				foreach (var @event in pair.First().UpdatedTo(pair.Last()))
 					yield return @event;
 		}
-	}
-
-	public class LambdaComparer<T> : IEqualityComparer<T>
-	{
-		private readonly Func<T, object> _selector;
-
-		public LambdaComparer(Func<T, object> selector)
-		{
-			_selector = selector;
-		}
-
-		public bool Equals(T x, T y) => _selector(x) == _selector(y);
-		public int GetHashCode(T obj) => _selector(obj).GetHashCode();
 	}
 }

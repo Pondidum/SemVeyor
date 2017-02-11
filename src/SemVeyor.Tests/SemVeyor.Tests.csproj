@@ -70,6 +70,7 @@
     <Compile Include="CommandLine\CommandLineParserTests.cs" />
     <Compile Include="CommandLine\CommandLineResultFailureTests.cs" />
     <Compile Include="CommandLine\CommandLineResultSuccessTests.cs" />
+    <Compile Include="Infrastructure\LambdaComparerTests.cs" />
     <Compile Include="Scratchpad.cs" />
   </ItemGroup>
   <ItemGroup>

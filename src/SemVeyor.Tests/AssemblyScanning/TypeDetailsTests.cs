@@ -11,8 +11,13 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_checking_the_log()
 		{
-			var first = TypeWith(FieldFrom<int>("first", Visibility.Public));
-			var second = TypeWith(FieldFrom<int>("first", Visibility.Public));
+			var first = Build.Type("first")
+				.WithField(Build.Field<int>("_first"))
+				.Build();
+
+			var second = Build.Type("first")
+				.WithField(Build.Field<int>("_first"))
+				.Build();
 
 			var change = first.UpdatedTo(second);
 
@@ -22,8 +27,12 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_field_has_been_removed()
 		{
-			var first = TypeWith(FieldFrom<int>("first", Visibility.Public));
-			var second = TypeWith();
+			var first = Build.Type("first")
+				.WithField(Build.Field<int>("_first"))
+				.Build();
+
+			var second = Build.Type("first")
+				.Build();
 
 			var change = first.UpdatedTo(second);
 
@@ -36,8 +45,14 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_field_has_been_added()
 		{
-			var first = TypeWith(FieldFrom<int>("first", Visibility.Public));
-			var second = TypeWith(FieldFrom<int>("first", Visibility.Public), FieldFrom<string>("second", Visibility.Public));
+			var first = Build.Type("first")
+				.WithField(Build.Field<int>("_first"))
+				.Build();
+
+			var second = Build.Type("first")
+				.WithField(Build.Field<int>("_first"))
+				.WithField(Build.Field<int>("_second"))
+				.Build();
 
 			var change = first.UpdatedTo(second);
 
@@ -50,8 +65,13 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_field_has_been_renamed()
 		{
-			var first = TypeWith(FieldFrom<int>("first", Visibility.Public));
-			var second = TypeWith(FieldFrom<int>("second", Visibility.Public));
+			var first = Build.Type("first")
+				.WithField(Build.Field<int>("_first"))
+				.Build();
+
+			var second = Build.Type("first")
+				.WithField(Build.Field<int>("_second"))
+				.Build();
 
 			var change = first.UpdatedTo(second);
 
@@ -65,8 +85,13 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_field_has_becomes_less_visible()
 		{
-			var first = TypeWith(FieldFrom<int>("first", Visibility.Public));
-			var second = TypeWith(FieldFrom<int>("first", Visibility.Private));
+			var first = Build.Type("first")
+				.WithField(Build.Field<int>("_first").WithVisibility(Visibility.Public))
+				.Build();
+
+			var second = Build.Type("first")
+				.WithField(Build.Field<int>("_first"))
+				.Build();
 
 			var change = first.UpdatedTo(second);
 
@@ -79,8 +104,13 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_field_has_becomes_more_visible()
 		{
-			var first = TypeWith(FieldFrom<int>("first", Visibility.Protected));
-			var second = TypeWith(FieldFrom<int>("first", Visibility.Public));
+			var first = Build.Type("first")
+				.WithField(Build.Field<int>("_first"))
+				.Build();
+
+			var second = Build.Type("first")
+				.WithField(Build.Field<int>("_first").WithVisibility(Visibility.Public))
+				.Build();
 
 			var change = first.UpdatedTo(second);
 
@@ -88,26 +118,6 @@ namespace SemVeyor.Tests.AssemblyScanning
 			{
 				typeof(FieldVisibilityIncreased),
 			});
-		}
-
-		private static TypeDetails TypeWith(params FieldDetails[] fields)
-		{
-			return new TypeDetails
-			{
-				Name = "first-type",
-				Visibility = Visibility.Public,
-				Fields = fields
-			};
-		}
-
-		private static FieldDetails FieldFrom<T>(string name, Visibility visibility)
-		{
-			return new FieldDetails
-			{
-				Name = name,
-				Visibility = visibility,
-				Type = typeof(T)
-			};
 		}
 	}
 }

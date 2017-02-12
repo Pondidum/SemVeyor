@@ -42,7 +42,6 @@ namespace SemVeyor.AssemblyScanning
 			var paramComparer = new LambdaComparer<ArgumentDetails>(x => x.Name);
 			var paramAdded = second.Arguments.Except(Arguments, paramComparer);
 			var paramRemoved = Arguments.Except(second.Arguments, paramComparer);
-			//var remaining = Arguments.Intersect(second.Arguments, paramComparer);
 
 			foreach (var arg in paramAdded)
 				yield return new MethodArgumentAdded();

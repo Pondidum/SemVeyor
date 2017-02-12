@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using SemVeyor.AssemblyScanning;
 
 namespace SemVeyor.Tests.AssemblyScanning
@@ -14,6 +16,11 @@ namespace SemVeyor.Tests.AssemblyScanning
 		public static FieldDetailsBuilder Field<T>(string name)
 		{
 			return new FieldDetailsBuilder(name, typeof(T));
+		}
+
+		public static GenericArgumentDetailsBuilder Generic(string name)
+		{
+			return new GenericArgumentDetailsBuilder(name);
 		}
 	}
 
@@ -40,6 +47,17 @@ namespace SemVeyor.Tests.AssemblyScanning
 		public TypeDetailsBuilder WithField(FieldDetails field)
 		{
 			_type.Fields = _type.Fields.Concat(new[] { field }).ToArray();
+			return this;
+		}
+
+		public TypeDetailsBuilder WithGenericArguments(GenericArgumentDetails argument)
+		{
+			var position = 0;
+			var args = _type.GenericArguments.ToList();
+			args.Add(argument);
+			args.ForEach(x => x.Position = position++);
+
+			_type.GenericArguments = args;
 			return this;
 		}
 
@@ -71,6 +89,37 @@ namespace SemVeyor.Tests.AssemblyScanning
 		public FieldDetails Build() => _field;
 
 		public static implicit operator FieldDetails(FieldDetailsBuilder builder) => builder.Build();
+	}
+
+	public class GenericArgumentDetailsBuilder
+	{
+		private readonly GenericArgumentDetails _arg;
+
+		public GenericArgumentDetailsBuilder(string name)
+		{
+			_arg = new GenericArgumentDetails
+			{
+				Name = name,
+				Position = 0,
+				Constraints = Enumerable.Empty<string>()
+			};
+		}
+
+		public GenericArgumentDetailsBuilder WithPosition(int position)
+		{
+			_arg.Position = position;
+			return this;
+		}
+
+		public GenericArgumentDetailsBuilder WithConstraints(params string[] constraints)
+		{
+			_arg.Constraints = _arg.Constraints.Concat(constraints).ToArray();
+			return this;
+		}
+
+		public GenericArgumentDetails Build() => _arg;
+
+		public static implicit operator GenericArgumentDetails(GenericArgumentDetailsBuilder builder) => builder.Build();
 	}
 }
 

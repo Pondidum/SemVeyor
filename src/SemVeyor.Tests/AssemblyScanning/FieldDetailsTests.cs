@@ -13,8 +13,8 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_checking_the_log()
 		{
-			var first = From<int>("first", Visibility.Public);
-			var second = From<int>("first", Visibility.Public);
+			var first = Build.Field<int>("first").Build();
+			var second = Build.Field<int>("first").Build();
 
 			var change = first.UpdatedTo(second);
 
@@ -24,8 +24,8 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_the_types_are_different()
 		{
-			var first = From<int>("first", Visibility.Public);
-			var second = From<string>("first", Visibility.Public);
+			var first = Build.Field<int>("first").Build();
+			var second = Build.Field<string>("first").Build();
 
 			var changes = first.UpdatedTo(second);
 
@@ -42,8 +42,8 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[InlineData(Visibility.Protected, Visibility.Public, typeof(FieldVisibilityIncreased))]
 		public void When_the_type_visibility_changes(Visibility older, Visibility newer, Type expectedEvent)
 		{
-			var first = From<int>("first", older);
-			var second = From<int>("first", newer);
+			var first = Build.Field<int>("first").WithVisibility(older).Build();
+			var second = Build.Field<int>("first").WithVisibility(newer).Build();
 
 			var changes = first.UpdatedTo(second);
 
@@ -51,16 +51,6 @@ namespace SemVeyor.Tests.AssemblyScanning
 			{
 				expectedEvent,
 			});
-		}
-
-		private static FieldDetails From<T>(string name, Visibility visibility)
-		{
-			return new FieldDetails
-			{
-				Name = name,
-				Visibility = visibility,
-				Type = typeof(T)
-			};
 		}
 	}
 }

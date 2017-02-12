@@ -68,7 +68,9 @@ namespace SemVeyor.Tests.AssemblyScanning
 			return this;
 		}
 
-		public static implicit operator FieldDetails(FieldDetailsBuilder builder) => builder._field;
+		public FieldDetails Build() => _field;
+
+		public static implicit operator FieldDetails(FieldDetailsBuilder builder) => builder.Build();
 	}
 }
 

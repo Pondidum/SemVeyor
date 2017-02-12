@@ -13,8 +13,8 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_method_becomes_more_visible()
 		{
-			var first = From<int>(Visibility.Protected);
-			var second = From<int>(Visibility.Public);
+			var first = Build.Method("M1").WithVisibility(Visibility.Protected).Build();
+			var second = Build.Method("M1").WithVisibility(Visibility.Public).Build();
 
 			var changes = first.UpdatedTo(second);
 
@@ -27,8 +27,8 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_method_becomes_less_visible()
 		{
-			var first = From<int>(Visibility.Public);
-			var second = From<int>(Visibility.Protected);
+			var first = Build.Method("M1").WithVisibility(Visibility.Public).Build();
+			var second = Build.Method("M1").WithVisibility(Visibility.Protected).Build();
 
 			var changes = first.UpdatedTo(second);
 
@@ -41,8 +41,8 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_methods_return_type_changes()
 		{
-			var first = From<int>();
-			var second = From<string>();
+			var first = Build.Method("M1").Returning<int>().Build();
+			var second = Build.Method("M1").Returning<string>().Build();
 
 			var changes = first.UpdatedTo(second);
 
@@ -55,8 +55,9 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_methods_has_an_argument_added()
 		{
-			var first = From<int>(customise: x => x.Arguments = Args(Arg<int>("one") ));
-			var second = From<int>(customise: x => x.Arguments = Args(Arg<int>("one"), Arg<string>("two") ));
+
+			var first = Build.Method("").WithArguments(Build.Argument<int>("one")).Build();
+			var second = Build.Method("").WithArguments(Build.Argument<int>("one"), Build.Argument<string>("two")).Build();
 
 			var changes = first.UpdatedTo(second);
 
@@ -69,8 +70,8 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_method_has_two_arguments_added()
 		{
-			var first = From<int>();
-			var second = From<int>(customise: x => x.Arguments = Args(Arg<int>("one"), Arg<string>("two") ));
+			var first = Build.Method("").Build();
+			var second = Build.Method("").WithArguments(Build.Argument<int>("one"), Build.Argument<string>("two")).Build();
 
 			var changes = first.UpdatedTo(second);
 
@@ -84,8 +85,8 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_method_has_an_argument_removed()
 		{
-			var first = From<int>(customise: x => x.Arguments = Args(Arg<int>("one"), Arg<string>("two") ));
-			var second = From<int>(customise: x => x.Arguments = Args(Arg<int>("one") ));
+			var first = Build.Method("").WithArguments(Build.Argument<int>("one"), Build.Argument<string>("two")).Build();
+			var second = Build.Method("").WithArguments(Build.Argument<int>("one")).Build();
 
 			var changes = first.UpdatedTo(second);
 
@@ -98,8 +99,8 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_method_has_two_arguments_removed()
 		{
-			var first = From<int>(customise: x => x.Arguments = Args(Arg<int>("one"), Arg<string>("two") ));
-			var second = From<int>();
+			var first = Build.Method("").WithArguments(Build.Argument<int>("one"), Build.Argument<string>("two")).Build();
+			var second = Build.Method("").Build();
 
 			var changes = first.UpdatedTo(second);
 
@@ -113,8 +114,8 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_methods_arguments_change_order()
 		{
-			var first = From<int>(customise: x => x.Arguments = Args(Arg<int>("one"), Arg<string>("two") ));
-			var second = From<int>(customise: x => x.Arguments = Args(Arg<string>("two"), Arg<int>("one") ));
+			var first = Build.Method("").WithArguments(Build.Argument<int>("one"), Build.Argument<string>("two")).Build();
+			var second = Build.Method("").WithArguments(Build.Argument<string>("two"), Build.Argument<int>("one")).Build();
 
 			var changes = first.UpdatedTo(second);
 
@@ -128,8 +129,8 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_method_has_a_generic_argument_added()
 		{
-			var first = From<int>(customise: x => x.GenericArguments = Generics( Generic("T") ));
-			var second = From<int>(customise: x => x.GenericArguments = Generics( Generic("T"), Generic("TVal") ));
+			var first = Build.Method("").WithGenericArguments(Build.Generic("T")).Build();
+			var second = Build.Method("").WithGenericArguments(Build.Generic("T"), Build.Generic("TVal")).Build();
 
 			var changes = first.UpdatedTo(second);
 
@@ -142,8 +143,8 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_method_has_two_generic_arguments_added()
 		{
-			var first = From<int>();
-			var second = From<int>(customise: x => x.GenericArguments = Generics( Generic("T"), Generic("TVal") ));
+			var first = Build.Method("").Build();
+			var second = Build.Method("").WithGenericArguments(Build.Generic("T"), Build.Generic("TVal")).Build();
 
 			var changes = first.UpdatedTo(second);
 
@@ -157,8 +158,8 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_method_has_a_generic_argument_removed()
 		{
-			var first = From<int>(customise: x => x.GenericArguments = Generics( Generic("T"), Generic("TVal") ));
-			var second = From<int>(customise: x => x.GenericArguments = Generics( Generic("T") ));
+			var first = Build.Method("").WithGenericArguments(Build.Generic("T"), Build.Generic("TVal")).Build();
+			var second = Build.Method("").WithGenericArguments(Build.Generic("T")).Build();
 
 			var changes = first.UpdatedTo(second);
 
@@ -171,8 +172,8 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_method_has_two_generic_arguments_removed()
 		{
-			var first = From<int>(customise: x => x.GenericArguments = Generics( Generic("T"), Generic("TVal") ));
-			var second = From<int>();
+			var first = Build.Method("").WithGenericArguments(Build.Generic("T"), Build.Generic("TVal")).Build();
+			var second = Build.Method("").Build();
 
 			var changes = first.UpdatedTo(second);
 
@@ -186,8 +187,8 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_methods_generic_arguments_change_order()
 		{
-			var first = From<int>(customise: x => x.GenericArguments = Generics( Generic("T"), Generic("TVal") ));
-			var second = From<int>(customise: x => x.GenericArguments = Generics( Generic("TVal"), Generic("T") ));
+			var first = Build.Method("").WithGenericArguments(Build.Generic("T"), Build.Generic("TVal")).Build();
+			var second = Build.Method("").WithGenericArguments(Build.Generic("TVal"), Build.Generic("T")).Build();
 
 			var changes = first.UpdatedTo(second);
 
@@ -196,60 +197,6 @@ namespace SemVeyor.Tests.AssemblyScanning
 				typeof(GenericArgumentPositionChanged),
 				typeof(GenericArgumentPositionChanged)
 			});
-		}
-
-		private static MethodDetails From<T>(Visibility visibility = Visibility.Public, Action<MethodDetails> customise = null)
-		{
-			var md = new MethodDetails
-			{
-				Name = "SomeMethod",
-				Type = typeof(T),
-				Visibility = visibility,
-				Arguments = Enumerable.Empty<ArgumentDetails>(),
-				GenericArguments = Enumerable.Empty<GenericArgumentDetails>()
-			};
-
-			customise?.Invoke(md);
-
-			return md;
-		}
-
-		private static IEnumerable<ArgumentDetails> Args(params ArgumentDetails[] args)
-		{
-			var position = 0;
-			foreach (var arg in args)
-			{
-				arg.Position = position++;
-				yield return arg;
-			}
-		}
-
-		private static ArgumentDetails Arg<T>(string name)
-		{
-			return new ArgumentDetails
-			{
-				Name = name,
-				Type = typeof(T)
-			};
-		}
-
-		private static IEnumerable<GenericArgumentDetails> Generics(params GenericArgumentDetails[] args)
-		{
-			var position = 0;
-			foreach (var arg in args)
-			{
-				arg.Position = position++;
-				yield return arg;
-			}
-		}
-
-		private static GenericArgumentDetails Generic(string name, params string[] constriants)
-		{
-			return new GenericArgumentDetails
-			{
-				Name = name,
-				Constraints = constriants
-			};
 		}
 	}
 }

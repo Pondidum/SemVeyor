@@ -22,6 +22,16 @@ namespace SemVeyor.Tests.AssemblyScanning
 		{
 			return new GenericArgumentDetailsBuilder(name);
 		}
+
+		public static ArgumentDetailsBuilder Argument<T>(string name)
+		{
+			return new ArgumentDetailsBuilder(name, typeof(T));
+		}
+
+		public static MethodDetailsBuilder Method(string name)
+		{
+			return new MethodDetailsBuilder(name);
+		}
 	}
 
 	public class TypeDetailsBuilder
@@ -120,6 +130,84 @@ namespace SemVeyor.Tests.AssemblyScanning
 		public GenericArgumentDetails Build() => _arg;
 
 		public static implicit operator GenericArgumentDetails(GenericArgumentDetailsBuilder builder) => builder.Build();
+	}
+
+	public class ArgumentDetailsBuilder
+	{
+		private readonly ArgumentDetails _argument;
+
+		public ArgumentDetailsBuilder(string name, Type type)
+		{
+			_argument = new ArgumentDetails
+			{
+				Name = name,
+				Type =  type
+			};
+		}
+
+		public ArgumentDetailsBuilder WithPosition(int position)
+		{
+			_argument.Position = position;
+			return this;
+		}
+
+		public ArgumentDetails Build() => _argument;
+
+		public static implicit operator ArgumentDetails(ArgumentDetailsBuilder builder) => builder.Build();
+	}
+
+	public class MethodDetailsBuilder
+	{
+		private readonly MethodDetails _method;
+
+		public MethodDetailsBuilder(string name)
+		{
+			_method = new MethodDetails
+			{
+				Name = name,
+				Visibility = Visibility.Internal,
+				Arguments = Enumerable.Empty<ArgumentDetails>(),
+				GenericArguments = Enumerable.Empty<GenericArgumentDetails>()
+			};
+		}
+
+		public MethodDetailsBuilder Returning<T>()
+		{
+			_method.Type = typeof(T);
+			return this;
+		}
+
+		public MethodDetailsBuilder WithVisibility(Visibility visibility)
+		{
+			_method.Visibility = visibility;
+			return this;
+		}
+
+		public MethodDetailsBuilder WithArguments(params ArgumentDetails[] argument)
+		{
+			var position = 0;
+			var args = _method.Arguments.ToList();
+			args.AddRange(argument);
+			args.ForEach(x => x.Position = position++);
+
+			_method.Arguments = args;
+			return this;
+		}
+
+		public MethodDetailsBuilder WithGenericArguments(params GenericArgumentDetails[] argument)
+		{
+			var position = 0;
+			var args = _method.GenericArguments.ToList();
+			args.AddRange(argument);
+			args.ForEach(x => x.Position = position++);
+
+			_method.GenericArguments = args;
+			return this;
+		}
+
+		public MethodDetails Build() => _method;
+
+		public static implicit operator MethodDetails(MethodDetailsBuilder builder) => builder.Build();
 	}
 }
 

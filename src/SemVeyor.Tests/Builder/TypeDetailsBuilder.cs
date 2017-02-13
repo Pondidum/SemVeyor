@@ -13,7 +13,8 @@ namespace SemVeyor.Tests.Builder
 			{
 				Name = name,
 				Visibility = Visibility.Internal,
-				Fields = Enumerable.Empty<FieldDetails>()
+				Fields = Enumerable.Empty<FieldDetails>(),
+				Methods = Enumerable.Empty<MethodDetails>()
 			};
 		}
 
@@ -37,6 +38,12 @@ namespace SemVeyor.Tests.Builder
 			args.ForEach(x => x.Position = position++);
 
 			_type.GenericArguments = args;
+			return this;
+		}
+
+		public TypeDetailsBuilder WithMethods(params MethodDetails[] methods)
+		{
+			_type.Methods = _type.Methods.Concat(methods).ToArray();
 			return this;
 		}
 

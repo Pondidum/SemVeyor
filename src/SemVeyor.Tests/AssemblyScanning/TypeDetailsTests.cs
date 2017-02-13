@@ -120,5 +120,61 @@ namespace SemVeyor.Tests.AssemblyScanning
 				typeof(FieldVisibilityIncreased),
 			});
 		}
+
+		[Fact]
+		public void When_a_method_has_been_added()
+		{
+			var first = Build.Type("").Build();
+			var second = Build.Type("").WithMethods(Build.Method("One")).Build();
+
+			var changes = first.UpdatedTo(second);
+
+			changes.Select(c => c.GetType()).ShouldBe(new []
+			{
+				typeof(MethodAdded)
+			});
+		}
+
+		[Fact]
+		public void When_a_method_has_been_removed()
+		{
+			var first = Build.Type("").WithMethods(Build.Method("One")).Build();
+			var second = Build.Type("").Build();
+
+			var changes = first.UpdatedTo(second);
+
+			changes.Select(c => c.GetType()).ShouldBe(new []
+			{
+				typeof(MethodRemoved)
+			});
+		}
+
+		[Fact]
+		public void When_a_method_has_become_more_visible()
+		{
+			var first = Build.Type("").WithMethods(Build.Method("One")).Build();
+			var second = Build.Type("").WithMethods(Build.Method("One").WithVisibility(Visibility.Public)).Build();
+
+			var changes = first.UpdatedTo(second);
+
+			changes.Select(c => c.GetType()).ShouldBe(new []
+			{
+				typeof(MethodVisibilityIncreased)
+			});
+		}
+
+		[Fact]
+		public void When_a_method_has_become_less_visible()
+		{
+			var first = Build.Type("").WithMethods(Build.Method("One").WithVisibility(Visibility.Public)).Build();
+			var second = Build.Type("").WithMethods(Build.Method("One")).Build();
+
+			var changes = first.UpdatedTo(second);
+
+			changes.Select(c => c.GetType()).ShouldBe(new []
+			{
+				typeof(MethodVisibilityDecreased)
+			});
+		}
 	}
 }

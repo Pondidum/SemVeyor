@@ -99,10 +99,10 @@ namespace SemVeyor.AssemblyScanning
 
 		public IEnumerable<object> UpdatedTo(TypeDetails second)
 		{
-			var nameComparer = new LambdaComparer<FieldDetails>(fd => fd.Name);
+			var fieldComparer = new LambdaComparer<FieldDetails>(fd => fd.Name);
 
-			var removedFields = Fields.Except(second.Fields, nameComparer);
-			var addedFields = second.Fields.Except(Fields, nameComparer);
+			var removedFields = Fields.Except(second.Fields, fieldComparer);
+			var addedFields = second.Fields.Except(Fields, fieldComparer);
 			var remainingFields = Fields.Concat(second.Fields).GroupBy(fd => fd.Name);
 
 			foreach (var field in removedFields)
@@ -112,8 +112,24 @@ namespace SemVeyor.AssemblyScanning
 				yield return new FieldAdded();
 
 			foreach (var pair in remainingFields)
-				foreach (var @event in pair.First().UpdatedTo(pair.Last()))
-					yield return @event;
+			foreach (var @event in pair.First().UpdatedTo(pair.Last()))
+				yield return @event;
+
+			var methodComparer = new LambdaComparer<MethodDetails>(md => md.Name);
+
+			var removedMethods = Methods.Except(second.Methods, methodComparer);
+			var addedMethods = second.Methods.Except(Methods, methodComparer);
+			var remainingMethods = Methods.Concat(second.Methods).GroupBy(fd => fd.Name);
+
+			foreach (var method in removedMethods)
+				yield return new MethodRemoved();
+
+			foreach (var method in addedMethods)
+				yield return new MethodAdded();
+
+			foreach (var pair in remainingMethods)
+			foreach (var @event in pair.First().UpdatedTo(pair.Last()))
+				yield return @event;
 		}
 	}
 }

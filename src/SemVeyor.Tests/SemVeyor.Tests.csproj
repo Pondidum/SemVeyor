@@ -55,7 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyScanning\ArgumentDetailsTests.cs" />
-    <Compile Include="AssemblyScanning\Build.cs" />
     <Compile Include="AssemblyScanning\FieldDetailsTests.cs" />
     <Compile Include="AssemblyScanning\GenericArgumentDetailsTests.cs" />
     <Compile Include="AssemblyScanning\MethodDetailsTests.cs" />
@@ -70,6 +69,12 @@
     <Compile Include="AssemblyScanning\TypeDetailsTestBase.cs" />
     <Compile Include="AssemblyScanning\TypeDetailsTests.cs" />
     <Compile Include="AssemblyScanning\VisibilityTests.cs" />
+    <Compile Include="Builder\ArgumentDetailsBuilder.cs" />
+    <Compile Include="Builder\Build.cs" />
+    <Compile Include="Builder\FieldDetailsBuilder.cs" />
+    <Compile Include="Builder\GenericArgumentDetailsBuilder.cs" />
+    <Compile Include="Builder\MethodDetailsBuilder.cs" />
+    <Compile Include="Builder\TypeDetailsBuilder.cs" />
     <Compile Include="CommandLine\CommandLineParserTests.cs" />
     <Compile Include="CommandLine\CommandLineResultFailureTests.cs" />
     <Compile Include="CommandLine\CommandLineResultSuccessTests.cs" />

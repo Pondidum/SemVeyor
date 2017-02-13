@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using SemVeyor.AssemblyScanning;
 using SemVeyor.AssemblyScanning.Events;
+using SemVeyor.Tests.Builder;
 using Shouldly;
 using Xunit;
 

@@ -18,8 +18,8 @@ namespace SemVeyor.AssemblyScanning
 	public class Deltas
 	{
 		public static IEnumerable<object> ForCollections<T>(
-			IEnumerable<T> older,
-			IEnumerable<T> newer,
+			T[] older,
+			T[] newer,
 			IEqualityComparer<T> comparer,
 			Func<T, object> onAdded,
 			Func<T, object> onRemoved)

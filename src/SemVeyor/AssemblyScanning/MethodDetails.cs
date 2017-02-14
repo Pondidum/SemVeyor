@@ -8,7 +8,7 @@ using SemVeyor.Infrastructure;
 
 namespace SemVeyor.AssemblyScanning
 {
-	public class MethodDetails : IMemberDetails
+	public class MethodDetails : IMemberDetails, IDeltaProducer<MethodDetails>
 	{
 		public string Name { get; set; }
 		public Visibility Visibility { get; set; }

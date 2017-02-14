@@ -5,7 +5,7 @@ using SemVeyor.AssemblyScanning.Events;
 
 namespace SemVeyor.AssemblyScanning
 {
-	public class FieldDetails : IMemberDetails
+	public class FieldDetails : IMemberDetails, IDeltaProducer<FieldDetails>
 	{
 		public string Name { get; set; }
 		public Visibility Visibility { get; set;}

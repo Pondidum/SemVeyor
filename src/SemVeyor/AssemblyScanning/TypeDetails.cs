@@ -99,37 +99,26 @@ namespace SemVeyor.AssemblyScanning
 
 		public IEnumerable<object> UpdatedTo(TypeDetails second)
 		{
-			var fieldComparer = new LambdaComparer<FieldDetails>(fd => fd.Name);
+			var fieldChanges = Deltas.ForCollections(
+				Fields,
+				second.Fields,
+				new LambdaComparer<FieldDetails>(fd => fd.Name),
+				f => new FieldAdded(),
+				f => new FieldRemoved());
 
-			var removedFields = Fields.Except(second.Fields, fieldComparer);
-			var addedFields = second.Fields.Except(Fields, fieldComparer);
-			var remainingFields = Fields.Concat(second.Fields).GroupBy(fd => fd.Name);
+			foreach (var change in fieldChanges)
+				yield return change;
 
-			foreach (var field in removedFields)
-				yield return new FieldRemoved();
+			var methodChanges = Deltas.ForCollections(
+				Methods,
+				second.Methods,
+				new LambdaComparer<MethodDetails>(md => md.Name),
+				m => new MethodAdded(),
+				m => new MethodRemoved());
 
-			foreach (var field in addedFields)
-				yield return new FieldAdded();
+			foreach (var change in methodChanges)
+				yield return change;
 
-			foreach (var pair in remainingFields)
-			foreach (var @event in pair.First().UpdatedTo(pair.Last()))
-				yield return @event;
-
-			var methodComparer = new LambdaComparer<MethodDetails>(md => md.Name);
-
-			var removedMethods = Methods.Except(second.Methods, methodComparer);
-			var addedMethods = second.Methods.Except(Methods, methodComparer);
-			var remainingMethods = Methods.Concat(second.Methods).GroupBy(fd => fd.Name);
-
-			foreach (var method in removedMethods)
-				yield return new MethodRemoved();
-
-			foreach (var method in addedMethods)
-				yield return new MethodAdded();
-
-			foreach (var pair in remainingMethods)
-			foreach (var @event in pair.First().UpdatedTo(pair.Last()))
-				yield return @event;
 		}
 	}
 }

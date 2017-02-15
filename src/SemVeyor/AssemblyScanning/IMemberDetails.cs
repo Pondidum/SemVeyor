@@ -26,18 +26,18 @@ namespace SemVeyor.AssemblyScanning
 			Func<T, object> onRemoved)
 			where T : IDeltaProducer<T>
 		{
-			var removedMethods = older.Except(newer, comparer);
-			var addedMethods = newer.Except(older, comparer);
-			var remainingMethods = older.Concat(newer).GroupBy(x => x.Name);
+			var removed = older.Except(newer, comparer);
+			var added = newer.Except(older, comparer);
+			var remaining = older.Concat(newer).GroupBy(x => x.Name);
 
 
-			foreach (var method in removedMethods)
-				yield return onRemoved(method);
+			foreach (var item in removed)
+				yield return onRemoved(item);
 
-			foreach (var method in addedMethods)
-				yield return onAdded(method);
+			foreach (var item in added)
+				yield return onAdded(item);
 
-			foreach (var pair in remainingMethods)
+			foreach (var pair in remaining)
 			foreach (var @event in pair.First().UpdatedTo(pair.Last()))
 				yield return @event;
 		}

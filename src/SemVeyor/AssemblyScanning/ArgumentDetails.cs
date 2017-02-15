@@ -5,7 +5,7 @@ using SemVeyor.AssemblyScanning.Events;
 
 namespace SemVeyor.AssemblyScanning
 {
-	public class ArgumentDetails
+	public class ArgumentDetails : IDeltaProducer<ArgumentDetails>
 	{
 		public int Position { get; set; }
 		public Type Type { get; set; }

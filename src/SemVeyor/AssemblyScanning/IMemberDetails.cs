@@ -12,6 +12,7 @@ namespace SemVeyor.AssemblyScanning
 
 	public interface IDeltaProducer<T>
 	{
+		string Name { get; }
 		IEnumerable<object> UpdatedTo(T newer);
 	}
 
@@ -23,7 +24,7 @@ namespace SemVeyor.AssemblyScanning
 			IEqualityComparer<T> comparer,
 			Func<T, object> onAdded,
 			Func<T, object> onRemoved)
-			where T : IMemberDetails, IDeltaProducer<T>
+			where T : IDeltaProducer<T>
 		{
 			var removedMethods = older.Except(newer, comparer);
 			var addedMethods = newer.Except(older, comparer);

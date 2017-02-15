@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.ExceptionServices;
 using SemVeyor.AssemblyScanning.Events;
 using SemVeyor.Infrastructure;
 
@@ -39,37 +38,24 @@ namespace SemVeyor.AssemblyScanning
 			if (Type != second.Type)
 				yield return new MethodTypeChanged();
 
-			var paramComparer = new LambdaComparer<ArgumentDetails>(x => x.Name);
-			var paramAdded = second.Arguments.Except(Arguments, paramComparer);
-			var paramRemoved = Arguments.Except(second.Arguments, paramComparer);
+			var paramChanges = Deltas.ForCollections(
+				Arguments.ToArray(),
+				second.Arguments.ToArray(),
+				new LambdaComparer<ArgumentDetails>(x => x.Name),
+				x => new MethodArgumentAdded(),
+				x => new MethodArgumentRemoved());
 
-			foreach (var arg in paramAdded)
-				yield return new MethodArgumentAdded();
-
-			foreach (var arg in paramRemoved)
-				yield return new MethodArgumentRemoved();
-
-			var paramMatching = Arguments.Join(second.Arguments, a => a.Name, a => a.Name, (o, n) => new { Older = o, Newer = n });
-
-			foreach (var pair in paramMatching)
-			foreach (var change in pair.Older.UpdatedTo(pair.Newer))
+			foreach (var change in paramChanges)
 				yield return change;
 
+			var genericChanges = Deltas.ForCollections(
+				GenericArguments.ToArray(),
+				second.GenericArguments.ToArray(),
+				new LambdaComparer<GenericArgumentDetails>(ga => ga.Position),
+				x => new MethodGenericArgumentAdded(),
+				x => new MethodGenericArgumentRemoved());
 
-			var genericsComparer = new LambdaComparer<GenericArgumentDetails>(x => x.Position);
-			var genericsAdded = second.GenericArguments.Except(GenericArguments, genericsComparer).ToArray();
-			var genericsRemoved = GenericArguments.Except(second.GenericArguments, genericsComparer).ToArray();
-
-			foreach (var arg in genericsAdded)
-				yield return new MethodGenericArgumentAdded();
-
-			foreach (var arg in genericsRemoved)
-				yield return new MethodGenericArgumentRemoved();
-
-			var genericsMatching = GenericArguments.Join(second.GenericArguments, a => a.Name, a => a.Name, (o, n) => new { Older = o, Newer = n });
-
-			foreach (var pair in genericsMatching)
-			foreach (var change in pair.Older.UpdatedTo(pair.Newer))
+			foreach (var change in genericChanges)
 				yield return change;
 
 		}

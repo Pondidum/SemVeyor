@@ -176,5 +176,45 @@ namespace SemVeyor.Tests.AssemblyScanning
 				typeof(MethodVisibilityDecreased)
 			});
 		}
+
+		[Fact]
+		public void When_a_method_overload_is_added()
+		{
+			var first = Build.Type("")
+				.WithMethods(Build.Method("One"))
+				.Build();
+
+			var second = Build.Type("")
+				.WithMethods(Build.Method("One"))
+				.WithMethods(Build.Method("One").WithArguments(Build.Argument<int>("value")))
+				.Build();
+
+			var changes = first.UpdatedTo(second);
+
+			changes.Select(c => c.GetType()).ShouldBe(new[]
+			{
+				typeof(MethodAdded)
+			});
+		}
+
+		[Fact]
+		public void When_a_method_overload_is_removed()
+		{
+			var first = Build.Type("")
+				.WithMethods(Build.Method("One"))
+				.WithMethods(Build.Method("One").WithArguments(Build.Argument<int>("value")))
+				.Build();
+
+			var second = Build.Type("")
+				.WithMethods(Build.Method("One"))
+				.Build();
+
+			var changes = first.UpdatedTo(second);
+
+			changes.Select(c => c.GetType()).ShouldBe(new[]
+			{
+				typeof(MethodRemoved)
+			});
+		}
 	}
 }

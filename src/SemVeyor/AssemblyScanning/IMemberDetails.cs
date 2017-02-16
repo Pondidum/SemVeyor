@@ -70,17 +70,7 @@ namespace SemVeyor.AssemblyScanning
 
 			foreach (var pair in found.Values)
 			{
-				if (pair.Older.Any() == false)
-				{
-					foreach (var method in pair.Newer)
-						yield return new MethodAdded();
-				}
-				else if (pair.Newer.Any() == false)
-				{
-					foreach (var method in pair.Older)
-						yield return new MethodRemoved();
-				}
-				else if (pair.Older.Count == 1 && pair.Newer.Count == 1)
+				if (pair.Older.Count == 1 && pair.Newer.Count == 1)
 				{
 					var start = pair.Older.Single();
 					var finish = pair.Newer.Single();

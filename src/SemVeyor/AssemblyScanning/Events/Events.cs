@@ -20,6 +20,7 @@
 
 	public class MethodVisibilityIncreased { }
 	public class MethodVisibilityDecreased { }
+	public class MethodNameChanged { }
 	public class MethodTypeChanged { }
 	public class MethodArgumentAdded { }
 	public class MethodArgumentRemoved { }

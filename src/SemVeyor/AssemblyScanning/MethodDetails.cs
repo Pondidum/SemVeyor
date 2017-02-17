@@ -29,6 +29,9 @@ namespace SemVeyor.AssemblyScanning
 
 		public IEnumerable<object> UpdatedTo(MethodDetails second)
 		{
+			if (Name != second.Name)
+				yield return new MethodNameChanged();
+
 			if (Visibility < second.Visibility)
 				yield return new MethodVisibilityIncreased();
 

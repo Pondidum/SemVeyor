@@ -45,23 +45,13 @@ namespace SemVeyor.AssemblyScanning
 		}
 
 		public static IEnumerable<object> ForCollections(
-			MethodDetails[] older,
-			MethodDetails[] newer,
-			IEqualityComparer<MethodDetails> comparer,
-			Func<MethodDetails, object> onAdded,
-			Func<MethodDetails, object> onRemoved)
-		{
-			return ForCollections(older.ToList(), newer.ToList(), comparer, onAdded, onRemoved);
-		}
-
-		public static IEnumerable<object> ForCollections(
 			List<MethodDetails> older,
 			List<MethodDetails> newer,
 			IEqualityComparer<MethodDetails> comparer,
 			Func<MethodDetails, object> onAdded,
 			Func<MethodDetails, object> onRemoved)
 		{
-			var namesInBoth = older.Select(o => o.Name).Intersect(newer.Select(n => n.Name)).ToArray();
+			var namesInBoth = older.Intersect(newer, comparer).Select(md => md.Name).ToArray();
 
 			foreach (var name in namesInBoth)
 			{
@@ -81,20 +71,19 @@ namespace SemVeyor.AssemblyScanning
 					older.Remove(best.Older);
 					newer.Remove(best.Newer);
 				}
-
 			}
 
 			foreach (var om in older)
-				yield return new MethodRemoved();
+				yield return onRemoved(om);
 
 			foreach (var nm in newer)
-				yield return new MethodAdded();
+				yield return onAdded(nm);
 		}
 
 		private class Link
 		{
-			public MethodDetails Older { get; set; }
-			public MethodDetails Newer { get; set; }
+			public MethodDetails Older { get; }
+			public MethodDetails Newer { get; }
 			public IEnumerable<object> Changes { get; }
 
 			public Link(MethodDetails older, MethodDetails newer)

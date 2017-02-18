@@ -110,8 +110,8 @@ namespace SemVeyor.AssemblyScanning
 				yield return change;
 
 			var methodChanges = Deltas.ForCollections(
-				Methods.ToArray(),
-				second.Methods.ToArray(),
+				Methods.ToList(),
+				second.Methods.ToList(),
 				new LambdaComparer<MethodDetails>(md => md.Name),
 				m => new MethodAdded(),
 				m => new MethodRemoved());

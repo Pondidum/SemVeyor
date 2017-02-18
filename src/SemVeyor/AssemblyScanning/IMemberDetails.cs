@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using SemVeyor.AssemblyScanning.Events;
+using SemVeyor.Infrastructure;
 
 namespace SemVeyor.AssemblyScanning
 {
@@ -50,71 +51,58 @@ namespace SemVeyor.AssemblyScanning
 			Func<MethodDetails, object> onAdded,
 			Func<MethodDetails, object> onRemoved)
 		{
-			var found = new Dictionary<string, Pair>();
-
-			foreach (var method in older)
-			{
-				if (found.ContainsKey(method.Name) == false)
-					found[method.Name] = new Pair();
-
-				found[method.Name].Older.Add(method);
-			}
-
-			foreach (var method in newer)
-			{
-				if (found.ContainsKey(method.Name) == false)
-					found[method.Name] = new Pair();
-
-				found[method.Name].Newer.Add(method);
-			}
-
-			foreach (var pair in found.Values)
-			{
-				if (pair.Older.Count == 1 && pair.Newer.Count == 1)
-				{
-					var start = pair.Older.Single();
-					var finish = pair.Newer.Single();
-
-					foreach (var change in start.UpdatedTo(finish))
-						yield return change;
-				}
-				else
-				{
-					for (var i = 0; i < pair.Older.Count; i++)
-					{
-						var o = pair.Older[i];
-
-						for (var j = 0; j < pair.Newer.Count; j++)
-						{
-							var n = pair.Newer[j];
-
-							if (n == null)
-								continue;
-
-							var potentialChanges = o.UpdatedTo(n).ToArray();
-
-							if (potentialChanges.Any() == false)
-							{
-								pair.Older[i] = null;
-								pair.Newer[j] = null;
-								break;
-							}
-						}
-					}
-
-					foreach (var method in pair.Newer.Where(n => n != null))
-						yield return new MethodAdded();
-
-					foreach (var method in pair.Older.Where(o => o != null))
-						yield return new MethodRemoved();
-				}
-			}
+			return ForCollections(older.ToList(), newer.ToList(), comparer, onAdded, onRemoved);
 		}
 
-		private class Pair
+		public static IEnumerable<object> ForCollections(
+			List<MethodDetails> older,
+			List<MethodDetails> newer,
+			IEqualityComparer<MethodDetails> comparer,
+			Func<MethodDetails, object> onAdded,
+			Func<MethodDetails, object> onRemoved)
 		{
-			public List<MethodDetails> Older { get; set; } = new List<MethodDetails>();
-			public List<MethodDetails> Newer { get; set; } = new List<MethodDetails>();
+			var namesInBoth = older.Select(o => o.Name).Intersect(newer.Select(n => n.Name)).ToArray();
+
+			foreach (var name in namesInBoth)
+			{
+				while (older.Count(o => o.Name == name) >= 1 && newer.Count(n => n.Name == name) >= 1)
+				{
+					var olderGroup = older.Where(o => o.Name == name).ToArray();
+					var newerGroup = newer.Where(n => n.Name == name).ToArray();
+
+					var best = olderGroup
+						.SelectMany(o => newerGroup.Select(n => new Link(o, n)))
+						.OrderBy(link => link.Changes.Count())
+						.First();
+
+					foreach (var change in best.Changes)
+						yield return change;
+
+					older.Remove(best.Older);
+					newer.Remove(best.Newer);
+				}
+
+			}
+
+			foreach (var om in older)
+				yield return new MethodRemoved();
+
+			foreach (var nm in newer)
+				yield return new MethodAdded();
+		}
+
+		private class Link
+		{
+			public MethodDetails Older { get; set; }
+			public MethodDetails Newer { get; set; }
+			public IEnumerable<object> Changes { get; }
+
+			public Link(MethodDetails older, MethodDetails newer)
+			{
+				Older = older;
+				Newer = newer;
+				Changes = older.UpdatedTo(Newer).ToArray();
+			}
 		}
 	}
 }

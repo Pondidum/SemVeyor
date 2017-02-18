@@ -21,35 +21,12 @@ namespace SemVeyor.AssemblyScanning
 	public class Deltas
 	{
 		public static IEnumerable<object> ForCollections<T>(
-			T[] older,
-			T[] newer,
+			List<T> older,
+			List<T> newer,
 			IEqualityComparer<T> comparer,
 			Func<T, object> onAdded,
 			Func<T, object> onRemoved)
 			where T : IDeltaProducer<T>
-		{
-			var removed = older.Except(newer, comparer);
-			var added = newer.Except(older, comparer);
-			var remaining = older.Concat(newer).GroupBy(x => x.Name);
-
-
-			foreach (var item in removed)
-				yield return onRemoved(item);
-
-			foreach (var item in added)
-				yield return onAdded(item);
-
-			foreach (var pair in remaining)
-			foreach (var @event in pair.First().UpdatedTo(pair.Last()))
-				yield return @event;
-		}
-
-		public static IEnumerable<object> ForCollections(
-			List<MethodDetails> older,
-			List<MethodDetails> newer,
-			IEqualityComparer<MethodDetails> comparer,
-			Func<MethodDetails, object> onAdded,
-			Func<MethodDetails, object> onRemoved)
 		{
 			var namesInBoth = older.Intersect(newer, comparer).Select(md => md.Name).ToArray();
 
@@ -62,7 +39,7 @@ namespace SemVeyor.AssemblyScanning
 				var newerCount = newerGroup.Count();
 
 				var group = olderGroup
-					.SelectMany(o => newerGroup.Select(n => new Link(o, n)))
+					.SelectMany(o => newerGroup.Select(n => new Link<T>(o, n)))
 					.OrderBy(link => link.Changes.Count())
 					.ToList();
 
@@ -89,13 +66,13 @@ namespace SemVeyor.AssemblyScanning
 				yield return onAdded(nm);
 		}
 
-		private class Link
+		private class Link<T> where T: IDeltaProducer<T>
 		{
-			public MethodDetails Older { get; }
-			public MethodDetails Newer { get; }
+			public T Older { get; }
+			public T Newer { get; }
 			public IEnumerable<object> Changes { get; }
 
-			public Link(MethodDetails older, MethodDetails newer)
+			public Link(T older, T newer)
 			{
 				Older = older;
 				Newer = newer;

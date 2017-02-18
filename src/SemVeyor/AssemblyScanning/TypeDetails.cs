@@ -100,8 +100,8 @@ namespace SemVeyor.AssemblyScanning
 		public IEnumerable<object> UpdatedTo(TypeDetails second)
 		{
 			var fieldChanges = Deltas.ForCollections(
-				Fields.ToArray(),
-				second.Fields.ToArray(),
+				Fields.ToList(),
+				second.Fields.ToList(),
 				new LambdaComparer<FieldDetails>(fd => fd.Name),
 				f => new FieldAdded(),
 				f => new FieldRemoved());

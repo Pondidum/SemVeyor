@@ -42,8 +42,8 @@ namespace SemVeyor.AssemblyScanning
 				yield return new MethodTypeChanged();
 
 			var paramChanges = Deltas.ForCollections(
-				Arguments.ToArray(),
-				second.Arguments.ToArray(),
+				Arguments.ToList(),
+				second.Arguments.ToList(),
 				new LambdaComparer<ArgumentDetails>(x => x.Name),
 				x => new MethodArgumentAdded(),
 				x => new MethodArgumentRemoved());
@@ -52,8 +52,8 @@ namespace SemVeyor.AssemblyScanning
 				yield return change;
 
 			var genericChanges = Deltas.ForCollections(
-				GenericArguments.ToArray(),
-				second.GenericArguments.ToArray(),
+				GenericArguments.ToList(),
+				second.GenericArguments.ToList(),
 				new LambdaComparer<GenericArgumentDetails>(ga => ga.Position),
 				x => new MethodGenericArgumentAdded(),
 				x => new MethodGenericArgumentRemoved());

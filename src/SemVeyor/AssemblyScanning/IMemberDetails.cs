@@ -55,21 +55,30 @@ namespace SemVeyor.AssemblyScanning
 
 			foreach (var name in namesInBoth)
 			{
-				while (older.Count(o => o.Name == name) >= 1 && newer.Count(n => n.Name == name) >= 1)
-				{
-					var olderGroup = older.Where(o => o.Name == name).ToArray();
-					var newerGroup = newer.Where(n => n.Name == name).ToArray();
+				var olderGroup = older.Where(o => o.Name == name).ToArray();
+				var newerGroup = newer.Where(n => n.Name == name).ToArray();
 
-					var best = olderGroup
-						.SelectMany(o => newerGroup.Select(n => new Link(o, n)))
-						.OrderBy(link => link.Changes.Count())
-						.First();
+				var olderCount = olderGroup.Count();
+				var newerCount = newerGroup.Count();
+
+				var group = olderGroup
+					.SelectMany(o => newerGroup.Select(n => new Link(o, n)))
+					.OrderBy(link => link.Changes.Count())
+					.ToList();
+
+				while (olderCount >= 1 && newerCount >= 1)
+				{
+					var best = group.First();
 
 					foreach (var change in best.Changes)
 						yield return change;
 
 					older.Remove(best.Older);
 					newer.Remove(best.Newer);
+
+					group.Remove(best);
+					olderCount--;
+					newerCount--;
 				}
 			}
 

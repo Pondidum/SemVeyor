@@ -26,5 +26,10 @@
 		{
 			return new MethodDetailsBuilder(name);
 		}
+
+		public static PropertyDetailsBuilder Property<T>(string name)
+		{
+			return new PropertyDetailsBuilder(name, typeof(T));
+		}
 	}
 }

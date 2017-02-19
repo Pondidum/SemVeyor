@@ -14,7 +14,8 @@ namespace SemVeyor.Tests.Builder
 				Name = name,
 				Visibility = Visibility.Internal,
 				Fields = Enumerable.Empty<FieldDetails>(),
-				Methods = Enumerable.Empty<MethodDetails>()
+				Methods = Enumerable.Empty<MethodDetails>(),
+				Properties = Enumerable.Empty<PropertyDetails>()
 			};
 		}
 
@@ -44,6 +45,12 @@ namespace SemVeyor.Tests.Builder
 		public TypeDetailsBuilder WithMethods(params MethodDetails[] methods)
 		{
 			_type.Methods = _type.Methods.Concat(methods).ToArray();
+			return this;
+		}
+
+		public TypeDetailsBuilder WithProperties(params PropertyDetails[] properties)
+		{
+			_type.Properties = _type.Properties.Concat(properties).ToArray();
 			return this;
 		}
 

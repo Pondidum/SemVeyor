@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using SemVeyor.AssemblyScanning;
 
 namespace SemVeyor.Tests.Builder
@@ -12,7 +13,8 @@ namespace SemVeyor.Tests.Builder
 			_property = new PropertyDetails
 			{
 				Type = type,
-				Name = name
+				Name = name,
+				Arguments = Enumerable.Empty<ArgumentDetails>()
 			};
 		}
 
@@ -25,6 +27,12 @@ namespace SemVeyor.Tests.Builder
 		public PropertyDetailsBuilder WithSetterVisibility(Visibility visibility)
 		{
 			_property.SetterVisibility = visibility;
+			return this;
+		}
+
+		public PropertyDetailsBuilder WithArguments(params ArgumentDetails[] arguments)
+		{
+			_property.Arguments = _property.Arguments.Concat(arguments).ToArray();
 			return this;
 		}
 

@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace SemVeyor.AssemblyScanning
 {
-	public class PropertyDetails : IMemberDetails
+	public class PropertyDetails : IMemberDetails, IDeltaProducer<PropertyDetails>
 	{
 		public string Name { get; set; }
 		public Visibility Visibility { get; set; }
@@ -25,6 +25,11 @@ namespace SemVeyor.AssemblyScanning
 					? prop.SetMethod.GetVisibility()
 					: (Visibility?)null
 			};
+		}
+
+		public IEnumerable<object> UpdatedTo(PropertyDetails newer)
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

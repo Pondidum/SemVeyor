@@ -30,10 +30,12 @@ namespace SemVeyor.Tests.AssemblyScanning
 
 		[Theory]
 		[InlineData(Visibility.Public, Visibility.Protected, typeof(PropertyVisibilityDecreased))]
+		[InlineData(Visibility.Public, null, typeof(PropertyVisibilityDecreased))]
 		[InlineData(Visibility.Public, Visibility.Internal, typeof(PropertyVisibilityDecreased))]
 		[InlineData(Visibility.Public, Visibility.Private, typeof(PropertyVisibilityDecreased))]
 		[InlineData(Visibility.Protected, Visibility.Public, typeof(PropertyVisibilityIncreased))]
-		public void When_the_setter_visibility_changes(Visibility olderVisibility, Visibility newerVisibility, Type expectedEvent)
+		[InlineData(null, Visibility.Public, typeof(PropertyVisibilityIncreased))]
+		public void When_the_setter_visibility_changes(Visibility? olderVisibility, Visibility? newerVisibility, Type expectedEvent)
 		{
 			var older = Build.Property<int>("prop").WithSetterVisibility(olderVisibility).Build();
 			var newer = Build.Property<int>("prop").WithSetterVisibility(newerVisibility).Build();

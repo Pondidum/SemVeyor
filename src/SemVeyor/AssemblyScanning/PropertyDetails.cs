@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using SemVeyor.AssemblyScanning.Events;
+using SemVeyor.Infrastructure;
 
 namespace SemVeyor.AssemblyScanning
 {
@@ -29,7 +31,31 @@ namespace SemVeyor.AssemblyScanning
 
 		public IEnumerable<object> UpdatedTo(PropertyDetails newer)
 		{
-			throw new NotImplementedException();
+			if (Visibility > newer.Visibility)
+				yield return new PropertyVisibilityDecreased();
+
+			if (Visibility < newer.Visibility)
+				yield return new PropertyVisibilityIncreased();
+
+			if (SetterVisibility > newer.SetterVisibility || (SetterVisibility.HasValue && newer.SetterVisibility.HasValue == false))
+				yield return new PropertyVisibilityDecreased();
+
+			if (SetterVisibility < newer.SetterVisibility || (SetterVisibility.HasValue == false && newer.SetterVisibility.HasValue))
+				yield return new PropertyVisibilityIncreased();
+
+			if (Type != newer.Type)
+				yield return new PropertyTypeChanged();
+
+			var paramChanges = Deltas.ForCollections(
+				Arguments.ToList(),
+				newer.Arguments.ToList(),
+				new LambdaComparer<ArgumentDetails>(x => x.Name),
+				x => new PropertyArgumentAdded(),
+				x => new PropertyArgumentRemoved());
+
+			foreach (var change in paramChanges)
+				yield return change;
+
 		}
 	}
 }

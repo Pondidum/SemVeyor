@@ -24,7 +24,7 @@ namespace SemVeyor.Tests.Builder
 			return this;
 		}
 
-		public PropertyDetailsBuilder WithSetterVisibility(Visibility visibility)
+		public PropertyDetailsBuilder WithSetterVisibility(Visibility? visibility)
 		{
 			_property.SetterVisibility = visibility;
 			return this;

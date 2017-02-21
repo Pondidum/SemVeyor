@@ -119,6 +119,15 @@ namespace SemVeyor.AssemblyScanning
 			foreach (var change in methodChanges)
 				yield return change;
 
+			var propertyChanges = Deltas.ForCollections(
+				Properties.ToList(),
+				second.Properties.ToList(),
+				new LambdaComparer<PropertyDetails>(pd => pd.Name),
+				m => new PropertyAdded(),
+				m => new PropertyRemoved());
+
+			foreach (var change in propertyChanges)
+				yield return change;
 		}
 	}
 }

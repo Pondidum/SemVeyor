@@ -4,6 +4,8 @@
 	public class FieldRemoved { }
 	public class MethodAdded { }
 	public class MethodRemoved { }
+	public class PropertyAdded { }
+	public class PropertyRemoved { }
 
 	public class FieldVisibilityIncreased { }
 	public class FieldVisibilityDecreased { }

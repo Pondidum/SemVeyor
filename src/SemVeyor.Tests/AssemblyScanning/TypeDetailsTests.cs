@@ -216,5 +216,76 @@ namespace SemVeyor.Tests.AssemblyScanning
 				typeof(MethodRemoved)
 			});
 		}
+
+		[Fact]
+		public void When_a_property_has_been_added()
+		{
+			var older = Build.Type("").WithProperties(Build.Property<int>("Prop")).Build();
+			var newer = Build.Type("").WithProperties(Build.Property<int>("Prop"), Build.Property<string>("Other")).Build();
+
+			var changes = older.UpdatedTo(newer);
+
+			changes.Select(c => c.GetType()).ShouldBe(new []
+			{
+				typeof(PropertyAdded)
+			});
+		}
+
+		[Fact]
+		public void When_a_property_has_been_removed()
+		{
+			var older = Build.Type("").WithProperties(Build.Property<int>("Prop"), Build.Property<string>("Other")).Build();
+			var newer = Build.Type("").WithProperties(Build.Property<int>("Prop")).Build();
+
+			var changes = older.UpdatedTo(newer);
+
+			changes.Select(c => c.GetType()).ShouldBe(new []
+			{
+				typeof(PropertyRemoved)
+			});
+		}
+
+		[Fact]
+		public void When_a_property_has_been_renamed()
+		{
+			var older = Build.Type("").WithProperties(Build.Property<int>("Prop")).Build();
+			var newer = Build.Type("").WithProperties(Build.Property<int>("NewProp")).Build();
+
+			var changes = older.UpdatedTo(newer);
+
+			changes.Select(c => c.GetType()).ShouldBe(new []
+			{
+				typeof(PropertyRemoved),
+				typeof(PropertyAdded)
+			});
+		}
+
+		[Fact]
+		public void When_a_property_overload_is_added()
+		{
+			var older = Build.Type("").WithProperties(Build.Property<int>("Prop")).Build();
+			var newer = Build.Type("").WithProperties(Build.Property<int>("Prop"), Build.Property<string>("PropTwo")).Build();
+
+			var changes = older.UpdatedTo(newer);
+
+			changes.Select(c => c.GetType()).ShouldBe(new []
+			{
+				typeof(PropertyAdded)
+			});
+		}
+
+		[Fact]
+		public void When_a_property_overload_is_removed()
+		{
+			var older = Build.Type("").WithProperties(Build.Property<int>("Prop"), Build.Property<string>("PropTwo")).Build();
+			var newer = Build.Type("").WithProperties(Build.Property<int>("Prop")).Build();
+
+			var changes = older.UpdatedTo(newer);
+
+			changes.Select(c => c.GetType()).ShouldBe(new []
+			{
+				typeof(PropertyRemoved)
+			});
+		}
 	}
 }

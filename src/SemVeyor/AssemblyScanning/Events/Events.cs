@@ -29,10 +29,14 @@
 	public class MethodGenericArgumentAdded { }
 	public class MethodGenericArgumentRemoved { }
 
-
 	public class PropertyVisibilityDecreased { }
 	public class PropertyVisibilityIncreased { }
 	public class PropertyTypeChanged { }
 	public class PropertyArgumentAdded { }
 	public class PropertyArgumentRemoved { }
+
+	public class CtorVisibilityDecreased { }
+	public class CtorVisibilityIncreased { }
+	public class CtorArgumentAdded { }
+	public class CtorArgumentRemoved { }
 }

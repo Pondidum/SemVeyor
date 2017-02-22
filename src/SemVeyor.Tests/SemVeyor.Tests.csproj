@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyScanning\ArgumentDetailsTests.cs" />
+    <Compile Include="AssemblyScanning\CtorDetailsTests.cs" />
     <Compile Include="AssemblyScanning\FieldDetailsTests.cs" />
     <Compile Include="AssemblyScanning\GenericArgumentDetailsTests.cs" />
     <Compile Include="AssemblyScanning\MethodDetailsTests.cs" />

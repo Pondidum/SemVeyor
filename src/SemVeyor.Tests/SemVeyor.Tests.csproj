@@ -72,6 +72,7 @@
     <Compile Include="AssemblyScanning\VisibilityTests.cs" />
     <Compile Include="Builder\ArgumentDetailsBuilder.cs" />
     <Compile Include="Builder\Build.cs" />
+    <Compile Include="Builder\CtorDetailsBuilder.cs" />
     <Compile Include="Builder\FieldDetailsBuilder.cs" />
     <Compile Include="Builder\GenericArgumentDetailsBuilder.cs" />
     <Compile Include="Builder\MethodDetailsBuilder.cs" />

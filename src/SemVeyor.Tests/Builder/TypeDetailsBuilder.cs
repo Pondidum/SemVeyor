@@ -15,7 +15,8 @@ namespace SemVeyor.Tests.Builder
 				Visibility = Visibility.Internal,
 				Fields = Enumerable.Empty<FieldDetails>(),
 				Methods = Enumerable.Empty<MethodDetails>(),
-				Properties = Enumerable.Empty<PropertyDetails>()
+				Properties = Enumerable.Empty<PropertyDetails>(),
+				Constructors = Enumerable.Empty<CtorDetails>()
 			};
 		}
 
@@ -51,6 +52,12 @@ namespace SemVeyor.Tests.Builder
 		public TypeDetailsBuilder WithProperties(params PropertyDetails[] properties)
 		{
 			_type.Properties = _type.Properties.Concat(properties).ToArray();
+			return this;
+		}
+
+		public TypeDetailsBuilder WithCtors(params CtorDetails[] ctors)
+		{
+			_type.Constructors = _type.Constructors.Concat(ctors).ToArray();
 			return this;
 		}
 

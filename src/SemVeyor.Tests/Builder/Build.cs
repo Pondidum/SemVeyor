@@ -31,5 +31,10 @@
 		{
 			return new PropertyDetailsBuilder(name, typeof(T));
 		}
+
+		public static CtorDetailsBuilder Ctor()
+		{
+			return new CtorDetailsBuilder();
+		}
 	}
 }

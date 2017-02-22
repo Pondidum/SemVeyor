@@ -128,6 +128,16 @@ namespace SemVeyor.AssemblyScanning
 
 			foreach (var change in propertyChanges)
 				yield return change;
+
+			var ctorChanges = Deltas.ForCollections(
+				Constructors.ToList(),
+				second.Constructors.ToList(),
+				new LambdaComparer<CtorDetails>(pd => pd.Name),
+				m => new CtorAdded(),
+				m => new CtorRemoved());
+
+			foreach (var change in ctorChanges)
+				yield return change;
 		}
 	}
 }

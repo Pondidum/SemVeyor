@@ -11,6 +11,7 @@ namespace SemVeyor.Tests.Builder
 		{
 			_ctor = new CtorDetails
 			{
+				Name = "ctor",
 				Arguments = Enumerable.Empty<ArgumentDetails>()
 			};
 		}

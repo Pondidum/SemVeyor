@@ -6,6 +6,8 @@
 	public class MethodRemoved { }
 	public class PropertyAdded { }
 	public class PropertyRemoved { }
+	public class CtorAdded { }
+	public class CtorRemoved { }
 
 	public class FieldVisibilityIncreased { }
 	public class FieldVisibilityDecreased { }

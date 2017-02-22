@@ -215,5 +215,32 @@ namespace SemVeyor.Tests.AssemblyScanning
 
 			ChangesShouldBe(older, newer, typeof(PropertyRemoved));
 		}
+
+		[Fact]
+		public void When_a_ctor_is_added()
+		{
+			var older = Build.Type("").WithCtors(Build.Ctor()).Build();
+			var newer = Build.Type("").WithCtors(Build.Ctor(), Build.Ctor(), Build.Ctor()).Build();
+
+			ChangesShouldBe(older, newer, typeof(CtorAdded), typeof(CtorAdded));
+		}
+
+		[Fact]
+		public void When_a_ctor_is_removed()
+		{
+			var older = Build.Type("").WithCtors(Build.Ctor(), Build.Ctor(), Build.Ctor()).Build();
+			var newer = Build.Type("").WithCtors(Build.Ctor()).Build();
+
+			ChangesShouldBe(older, newer, typeof(CtorRemoved), typeof(CtorRemoved));
+		}
+
+		[Fact]
+		public void When_a_ctor_is_changed()
+		{
+			var older = Build.Type("").WithCtors(Build.Ctor()).Build();
+			var newer = Build.Type("").WithCtors(Build.Ctor().WithArguments(Build.Argument<int>("one"))).Build();
+
+			ChangesShouldBe(older, newer, typeof(CtorArgumentAdded));
+		}
 	}
 }

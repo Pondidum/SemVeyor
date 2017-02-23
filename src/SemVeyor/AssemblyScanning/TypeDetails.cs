@@ -7,7 +7,7 @@ using SemVeyor.Infrastructure;
 
 namespace SemVeyor.AssemblyScanning
 {
-	public class TypeDetails : IMemberDetails
+	public class TypeDetails : IMemberDetails, IDeltaProducer<TypeDetails>
 	{
 		private const BindingFlags ExternalVisibleFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
 
@@ -99,6 +99,12 @@ namespace SemVeyor.AssemblyScanning
 
 		public IEnumerable<object> UpdatedTo(TypeDetails second)
 		{
+			if (Visibility > second.Visibility)
+				yield return new TypeVisibilityDecreased();
+
+			if (Visibility < second.Visibility)
+				yield return new TypeVisibilityIncreased();
+
 			var fieldChanges = Deltas.ForCollections(
 				Fields.ToList(),
 				second.Fields.ToList(),

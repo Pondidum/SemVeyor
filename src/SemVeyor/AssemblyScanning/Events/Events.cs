@@ -1,5 +1,10 @@
 ﻿namespace SemVeyor.AssemblyScanning.Events
 {
+	public class AssemblyTypeAdded { }
+	public class AssemblyTypeRemoved { }
+
+	public class TypeVisibilityIncreased { }
+	public class TypeVisibilityDecreased { }
 	public class FieldAdded { }
 	public class FieldRemoved { }
 	public class MethodAdded { }

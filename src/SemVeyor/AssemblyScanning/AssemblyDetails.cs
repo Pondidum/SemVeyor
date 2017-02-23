@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using SemVeyor.AssemblyScanning.Events;
+using SemVeyor.Infrastructure;
 
 namespace SemVeyor.AssemblyScanning
 {
@@ -20,7 +22,15 @@ namespace SemVeyor.AssemblyScanning
 
 		public IEnumerable<object> UpdatedTo(AssemblyDetails newer)
 		{
-			throw new System.NotImplementedException();
+			var changes = Deltas.ForCollections(
+				Types.ToList(),
+				newer.Types.ToList(),
+				new LambdaComparer<TypeDetails>(t => t.FullName),
+				x => new AssemblyTypeAdded(),
+				x => new AssemblyTypeRemoved());
+
+			foreach (var change in changes)
+				yield return change;
 		}
 	}
 }

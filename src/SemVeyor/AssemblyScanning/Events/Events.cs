@@ -8,6 +8,8 @@
 	public class PropertyRemoved { }
 	public class CtorAdded { }
 	public class CtorRemoved { }
+	public class GenericArgumentAdded { }
+	public class GenericArgumentRemoved { }
 
 	public class FieldVisibilityIncreased { }
 	public class FieldVisibilityDecreased { }

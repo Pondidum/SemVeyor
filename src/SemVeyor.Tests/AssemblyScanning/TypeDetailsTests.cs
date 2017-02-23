@@ -21,12 +21,12 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_checking_the_log()
 		{
-			var older = Build.Type("first")
-				.WithField(Build.Field<int>("_first"))
+			var older = Build.Type("older")
+				.WithField(Build.Field<int>("_older"))
 				.Build();
 
-			var newer = Build.Type("first")
-				.WithField(Build.Field<int>("_first"))
+			var newer = Build.Type("older")
+				.WithField(Build.Field<int>("_older"))
 				.Build();
 
 			ChangesShouldBe(older, newer);
@@ -35,11 +35,11 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_field_has_been_removed()
 		{
-			var older = Build.Type("first")
-				.WithField(Build.Field<int>("_first"))
+			var older = Build.Type("older")
+				.WithField(Build.Field<int>("_older"))
 				.Build();
 
-			var newer = Build.Type("first")
+			var newer = Build.Type("older")
 				.Build();
 
 			ChangesShouldBe(older, newer, typeof(FieldRemoved));
@@ -48,13 +48,13 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_field_has_been_added()
 		{
-			var older = Build.Type("first")
-				.WithField(Build.Field<int>("_first"))
+			var older = Build.Type("older")
+				.WithField(Build.Field<int>("_older"))
 				.Build();
 
-			var newer = Build.Type("first")
-				.WithField(Build.Field<int>("_first"))
-				.WithField(Build.Field<int>("_second"))
+			var newer = Build.Type("older")
+				.WithField(Build.Field<int>("_older"))
+				.WithField(Build.Field<int>("_newer"))
 				.Build();
 
 			ChangesShouldBe(older, newer, typeof(FieldAdded));
@@ -63,12 +63,12 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_field_has_been_renamed()
 		{
-			var older = Build.Type("first")
-				.WithField(Build.Field<int>("_first"))
+			var older = Build.Type("older")
+				.WithField(Build.Field<int>("_older"))
 				.Build();
 
-			var newer = Build.Type("first")
-				.WithField(Build.Field<int>("_second"))
+			var newer = Build.Type("older")
+				.WithField(Build.Field<int>("_newer"))
 				.Build();
 
 			ChangesShouldBe(older, newer, typeof(FieldRemoved),
@@ -78,12 +78,12 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_field_has_becomes_less_visible()
 		{
-			var older = Build.Type("first")
-				.WithField(Build.Field<int>("_first").WithVisibility(Visibility.Public))
+			var older = Build.Type("older")
+				.WithField(Build.Field<int>("_older").WithVisibility(Visibility.Public))
 				.Build();
 
-			var newer = Build.Type("first")
-				.WithField(Build.Field<int>("_first"))
+			var newer = Build.Type("older")
+				.WithField(Build.Field<int>("_older"))
 				.Build();
 
 			ChangesShouldBe(older, newer, typeof(FieldVisibilityDecreased));
@@ -92,12 +92,12 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_a_field_has_becomes_more_visible()
 		{
-			var older = Build.Type("first")
-				.WithField(Build.Field<int>("_first"))
+			var older = Build.Type("older")
+				.WithField(Build.Field<int>("_older"))
 				.Build();
 
-			var newer = Build.Type("first")
-				.WithField(Build.Field<int>("_first").WithVisibility(Visibility.Public))
+			var newer = Build.Type("older")
+				.WithField(Build.Field<int>("_older").WithVisibility(Visibility.Public))
 				.Build();
 
 			ChangesShouldBe(older, newer, typeof(FieldVisibilityIncreased));
@@ -241,6 +241,51 @@ namespace SemVeyor.Tests.AssemblyScanning
 			var newer = Build.Type("").WithCtors(Build.Ctor().WithArguments(Build.Argument<int>("one"))).Build();
 
 			ChangesShouldBe(older, newer, typeof(CtorArgumentAdded));
+		}
+
+		[Fact]
+		public void When_a_type_has_a_generic_argument_added()
+		{
+			var older = Build.Type("").WithGenericArguments(Build.Generic("T")).Build();
+			var newer = Build.Type("").WithGenericArguments(Build.Generic("T"), Build.Generic("TVal")).Build();
+
+			ChangesShouldBe(older, newer, typeof(GenericArgumentAdded));
+		}
+
+		[Fact]
+		public void When_a_type_has_two_generic_arguments_added()
+		{
+			var older = Build.Type("").Build();
+			var newer = Build.Type("").WithGenericArguments(Build.Generic("T"), Build.Generic("TVal")).Build();
+
+			ChangesShouldBe(older, newer, typeof(GenericArgumentAdded), typeof(GenericArgumentAdded));
+		}
+
+		[Fact]
+		public void When_a_type_has_a_generic_argument_removed()
+		{
+			var older = Build.Type("").WithGenericArguments(Build.Generic("T"), Build.Generic("TVal")).Build();
+			var newer = Build.Type("").WithGenericArguments(Build.Generic("T")).Build();
+
+			ChangesShouldBe(older, newer, typeof(GenericArgumentRemoved));
+		}
+
+		[Fact]
+		public void When_a_type_has_two_generic_arguments_removed()
+		{
+			var older = Build.Type("").WithGenericArguments(Build.Generic("T"), Build.Generic("TVal")).Build();
+			var newer = Build.Type("").Build();
+
+			ChangesShouldBe(older, newer, typeof(GenericArgumentRemoved), typeof(GenericArgumentRemoved));
+		}
+
+		[Fact]
+		public void When_a_types_generic_arguments_change_order()
+		{
+			var older = Build.Type("").WithGenericArguments(Build.Generic("T"), Build.Generic("TVal")).Build();
+			var newer = Build.Type("").WithGenericArguments(Build.Generic("TVal"), Build.Generic("T")).Build();
+
+			ChangesShouldBe(older, newer, typeof(GenericArgumentPositionChanged), typeof(GenericArgumentPositionChanged));
 		}
 	}
 }

@@ -16,7 +16,8 @@ namespace SemVeyor.Tests.Builder
 				Fields = Enumerable.Empty<FieldDetails>(),
 				Methods = Enumerable.Empty<MethodDetails>(),
 				Properties = Enumerable.Empty<PropertyDetails>(),
-				Constructors = Enumerable.Empty<CtorDetails>()
+				Constructors = Enumerable.Empty<CtorDetails>(),
+				GenericArguments = Enumerable.Empty<GenericArgumentDetails>()
 			};
 		}
 
@@ -32,14 +33,16 @@ namespace SemVeyor.Tests.Builder
 			return this;
 		}
 
-		public TypeDetailsBuilder WithGenericArguments(GenericArgumentDetails argument)
+		public TypeDetailsBuilder WithGenericArguments(params GenericArgumentDetails[] arguments)
 		{
-			var position = 0;
-			var args = _type.GenericArguments.ToList();
-			args.Add(argument);
-			args.ForEach(x => x.Position = position++);
+			var replacement = _type.GenericArguments.Concat(arguments).ToArray();
 
-			_type.GenericArguments = args;
+			var position = 0;
+			foreach (var a in replacement)
+				a.Position = position++;
+
+			_type.GenericArguments = replacement;
+
 			return this;
 		}
 

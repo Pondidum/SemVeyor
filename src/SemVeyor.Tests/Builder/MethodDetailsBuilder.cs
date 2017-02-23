@@ -41,14 +41,15 @@ namespace SemVeyor.Tests.Builder
 			return this;
 		}
 
-		public MethodDetailsBuilder WithGenericArguments(params GenericArgumentDetails[] argument)
+		public MethodDetailsBuilder WithGenericArguments(params GenericArgumentDetails[] arguments)
 		{
-			var position = 0;
-			var args = _method.GenericArguments.ToList();
-			args.AddRange(argument);
-			args.ForEach(x => x.Position = position++);
+			var replacement = _method.GenericArguments.Concat(arguments).ToArray();
 
-			_method.GenericArguments = args;
+			var position = 0;
+			foreach (var a in replacement)
+				a.Position = position++;
+
+			_method.GenericArguments = replacement;
 			return this;
 		}
 

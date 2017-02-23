@@ -138,6 +138,16 @@ namespace SemVeyor.AssemblyScanning
 
 			foreach (var change in ctorChanges)
 				yield return change;
+
+			var genericChanges = Deltas.ForCollections(
+				GenericArguments.ToList(),
+				second.GenericArguments.ToList(),
+				new LambdaComparer<GenericArgumentDetails>(ga => ga.Position),
+				m => new GenericArgumentAdded(),
+				m => new GenericArgumentRemoved());
+
+			foreach (var change in genericChanges)
+				yield return change;
 		}
 	}
 }

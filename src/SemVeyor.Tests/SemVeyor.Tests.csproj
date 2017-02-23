@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyScanning\ArgumentDetailsTests.cs" />
+    <Compile Include="AssemblyScanning\AssemblyDetailsTests.cs" />
     <Compile Include="AssemblyScanning\CtorDetailsTests.cs" />
     <Compile Include="AssemblyScanning\FieldDetailsTests.cs" />
     <Compile Include="AssemblyScanning\GenericArgumentDetailsTests.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="AssemblyScanning\TypeDetailsTests.cs" />
     <Compile Include="AssemblyScanning\VisibilityTests.cs" />
     <Compile Include="Builder\ArgumentDetailsBuilder.cs" />
+    <Compile Include="Builder\AssemblyDetailsBuilder.cs" />
     <Compile Include="Builder\Build.cs" />
     <Compile Include="Builder\CtorDetailsBuilder.cs" />
     <Compile Include="Builder\FieldDetailsBuilder.cs" />

@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AssemblyScanning\ArgumentDetails.cs" />
+    <Compile Include="AssemblyScanning\AssemblyDetails.cs" />
     <Compile Include="AssemblyScanning\CtorDetails.cs" />
     <Compile Include="AssemblyScanning\Events\Events.cs" />
     <Compile Include="AssemblyScanning\FieldDetails.cs" />

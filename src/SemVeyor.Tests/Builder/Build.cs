@@ -2,6 +2,11 @@
 {
 	public class Build
 	{
+		public static AssemblyDetailsBuilder Assembly(string name)
+		{
+			return new AssemblyDetailsBuilder(name);
+		}
+
 		public static TypeDetailsBuilder Type(string name)
 		{
 			return new TypeDetailsBuilder(name);

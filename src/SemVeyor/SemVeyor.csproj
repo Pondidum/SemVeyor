@@ -43,7 +43,6 @@
     <Compile Include="AssemblyScanning\Extensions.cs" />
     <Compile Include="AssemblyScanning\MethodDetails.cs" />
     <Compile Include="AssemblyScanning\PropertyDetails.cs" />
-    <Compile Include="AssemblyScanning\Scanner.cs" />
     <Compile Include="AssemblyScanning\TypeDetails.cs" />
     <Compile Include="AssemblyScanning\Visibility.cs" />
     <Compile Include="CommandLine\CommandLineParser.cs" />

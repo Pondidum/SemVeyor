@@ -1,5 +1,5 @@
 using System;
-using SemVeyor.AssemblyScanning;
+using SemVeyor.Domain;
 
 namespace SemVeyor.Tests.Builder
 {

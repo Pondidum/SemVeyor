@@ -27,7 +27,7 @@ namespace SemVeyor.Tests.AssemblyScanning
 		public void The_ctor_name_is_populated() => Details.Constructors.ByVisibility(Visibility.Protected).Name.ShouldBe(".ctor");
 
 		[Fact]
-		public void The_arguments_are_populated() => Details.Constructors.ByVisibility(Visibility.Protected).Arguments.Count().ShouldBe(1);
+		public void The_arguments_are_populated() => Details.Constructors.ByVisibility(Visibility.Protected).Parameters.Count().ShouldBe(1);
 
 		public class TestType
 		{

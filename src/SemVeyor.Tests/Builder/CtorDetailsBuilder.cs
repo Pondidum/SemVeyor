@@ -12,7 +12,7 @@ namespace SemVeyor.Tests.Builder
 			_ctor = new CtorDetails
 			{
 				Name = "ctor",
-				Arguments = Enumerable.Empty<ArgumentDetails>()
+				Parameters = Enumerable.Empty<ParameterDetails>()
 			};
 		}
 
@@ -22,9 +22,9 @@ namespace SemVeyor.Tests.Builder
 			return this;
 		}
 
-		public CtorDetailsBuilder WithArguments(params ArgumentDetails[] arguments)
+		public CtorDetailsBuilder WithArguments(params ParameterDetails[] parameters)
 		{
-			_ctor.Arguments = _ctor.Arguments.Concat(arguments).ToArray();
+			_ctor.Parameters = _ctor.Parameters.Concat(parameters).ToArray();
 			return this;
 		}
 

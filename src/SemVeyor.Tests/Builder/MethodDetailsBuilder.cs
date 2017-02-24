@@ -13,7 +13,7 @@ namespace SemVeyor.Tests.Builder
 			{
 				Name = name,
 				Visibility = Visibility.Internal,
-				Arguments = Enumerable.Empty<ArgumentDetails>(),
+				Parameters = Enumerable.Empty<ParameterDetails>(),
 				GenericArguments = Enumerable.Empty<GenericArgumentDetails>()
 			};
 		}
@@ -30,14 +30,14 @@ namespace SemVeyor.Tests.Builder
 			return this;
 		}
 
-		public MethodDetailsBuilder WithArguments(params ArgumentDetails[] argument)
+		public MethodDetailsBuilder WithArguments(params ParameterDetails[] parameter)
 		{
 			var position = 0;
-			var args = _method.Arguments.ToList();
-			args.AddRange(argument);
+			var args = _method.Parameters.ToList();
+			args.AddRange(parameter);
 			args.ForEach(x => x.Position = position++);
 
-			_method.Arguments = args;
+			_method.Parameters = args;
 			return this;
 		}
 

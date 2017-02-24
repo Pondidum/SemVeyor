@@ -22,9 +22,9 @@
 			return new GenericArgumentDetailsBuilder(name);
 		}
 
-		public static ArgumentDetailsBuilder Argument<T>(string name)
+		public static ParameterDetailsBuilder Parameter<T>(string name)
 		{
-			return new ArgumentDetailsBuilder(name, typeof(T));
+			return new ParameterDetailsBuilder(name, typeof(T));
 		}
 
 		public static MethodDetailsBuilder Method(string name)

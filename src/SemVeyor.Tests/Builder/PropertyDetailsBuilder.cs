@@ -14,7 +14,7 @@ namespace SemVeyor.Tests.Builder
 			{
 				Type = type,
 				Name = name,
-				Arguments = Enumerable.Empty<ArgumentDetails>()
+				Parameters = Enumerable.Empty<ParameterDetails>()
 			};
 		}
 
@@ -30,9 +30,9 @@ namespace SemVeyor.Tests.Builder
 			return this;
 		}
 
-		public PropertyDetailsBuilder WithArguments(params ArgumentDetails[] arguments)
+		public PropertyDetailsBuilder WithArguments(params ParameterDetails[] parameters)
 		{
-			_property.Arguments = _property.Arguments.Concat(arguments).ToArray();
+			_property.Parameters = _property.Parameters.Concat(parameters).ToArray();
 			return this;
 		}
 

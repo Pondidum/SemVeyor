@@ -66,7 +66,7 @@ namespace SemVeyor.Tests.AssemblyScanning
 		public void When_the_property_gains_an_indexer()
 		{
 			var older = Build.Property<int>("one").Build();
-			var newer = Build.Property<int>("one").WithArguments(Build.Argument<string>("index")).Build();
+			var newer = Build.Property<int>("one").WithArguments(Build.Parameter<string>("index")).Build();
 
 			var changes = older.UpdatedTo(newer);
 
@@ -79,7 +79,7 @@ namespace SemVeyor.Tests.AssemblyScanning
 		[Fact]
 		public void When_the_property_looses_an_indexer()
 		{
-			var older = Build.Property<int>("one").WithArguments(Build.Argument<string>("index")).Build();
+			var older = Build.Property<int>("one").WithArguments(Build.Parameter<string>("index")).Build();
 			var newer = Build.Property<int>("one").Build();
 
 			var changes = older.UpdatedTo(newer);

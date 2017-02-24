@@ -8,19 +8,19 @@ using Xunit;
 
 namespace SemVeyor.Tests.AssemblyScanning
 {
-	public class ArgumentDetailsTests
+	public class ParameterDetailsTests
 	{
 		private void OneArgument(string test) {}
 		private void ActionArguments(Action<int> test) {}
 		private void ParamsArgument(int[] test) {}
 		private void TwoArguments(int first, string second) {}
 
-		private static ArgumentDetails For(string methodName)
+		private static ParameterDetails For(string methodName)
 		{
-			return typeof(ArgumentDetailsTests)
+			return typeof(ParameterDetailsTests)
 				.GetMethod(methodName, BindingFlags.Instance | BindingFlags.NonPublic)
 				.GetParameters()
-				.Select(ArgumentDetails.From)
+				.Select(ParameterDetails.From)
 				.Last();
 		}
 
@@ -92,9 +92,9 @@ namespace SemVeyor.Tests.AssemblyScanning
 			});
 		}
 
-		private static ArgumentDetails From<T>(string name, int position = 0)
+		private static ParameterDetails From<T>(string name, int position = 0)
 		{
-			return new ArgumentDetails
+			return new ParameterDetails
 			{
 				Name = name,
 				Type = typeof(T),

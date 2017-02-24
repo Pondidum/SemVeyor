@@ -35,7 +35,7 @@ namespace SemVeyor.Tests.AssemblyScanning
 		public void The_return_type_is_populated() => PublicMethod.Type.ShouldBe(typeof(int));
 
 		[Fact]
-		public void The_arguments_are_populated() => PublicMethod.Arguments.Count().ShouldBe(3);
+		public void The_arguments_are_populated() => PublicMethod.Parameters.Count().ShouldBe(3);
 
 		[Fact]
 		public void The_generic_arguments_are_populated() => GenericMethod.GenericArguments.Count().ShouldBe(1);

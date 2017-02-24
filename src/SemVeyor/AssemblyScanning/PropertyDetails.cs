@@ -13,7 +13,7 @@ namespace SemVeyor.AssemblyScanning
 		public Visibility Visibility { get; set; }
 		public Type Type { get; set; }
 		public Visibility? SetterVisibility { get; set; }
-		public IEnumerable<ArgumentDetails> Arguments { get; set; }
+		public IEnumerable<ParameterDetails> Parameters { get; set; }
 
 		public static PropertyDetails From(PropertyInfo prop)
 		{
@@ -22,7 +22,7 @@ namespace SemVeyor.AssemblyScanning
 				Name = prop.Name,
 				Visibility = prop.GetVisibility(),
 				Type = prop.PropertyType,
-				Arguments = prop.GetIndexParameters().Select(ArgumentDetails.From),
+				Parameters = prop.GetIndexParameters().Select(ParameterDetails.From),
 				SetterVisibility = prop.SetMethod != null
 					? prop.SetMethod.GetVisibility()
 					: (Visibility?)null
@@ -47,9 +47,9 @@ namespace SemVeyor.AssemblyScanning
 				yield return new PropertyTypeChanged();
 
 			var paramChanges = Deltas.ForCollections(
-				Arguments.ToList(),
-				newer.Arguments.ToList(),
-				new LambdaComparer<ArgumentDetails>(x => x.Name),
+				Parameters.ToList(),
+				newer.Parameters.ToList(),
+				new LambdaComparer<ParameterDetails>(x => x.Name),
 				x => new PropertyArgumentAdded(),
 				x => new PropertyArgumentRemoved());
 

@@ -12,7 +12,7 @@ namespace SemVeyor.AssemblyScanning
 		public string Name { get; set; }
 		public Visibility Visibility { get; set; }
 		public Type Type { get; set; }
-		public IEnumerable<ArgumentDetails> Arguments { get; set; }
+		public IEnumerable<ParameterDetails> Parameters { get; set; }
 		public IEnumerable<GenericArgumentDetails> GenericArguments { get; set; }
 
 		public static MethodDetails From(MethodInfo method)
@@ -22,7 +22,7 @@ namespace SemVeyor.AssemblyScanning
 				Name = method.Name,
 				Visibility = method.GetVisibility(),
 				Type = method.ReturnType,
-				Arguments = method.GetParameters().Select(ArgumentDetails.From).ToArray(),
+				Parameters = method.GetParameters().Select(ParameterDetails.From).ToArray(),
 				GenericArguments = method.GetGenericArguments().Select(GenericArgumentDetails.From).ToArray()
 			};
 		}
@@ -42,9 +42,9 @@ namespace SemVeyor.AssemblyScanning
 				yield return new MethodTypeChanged();
 
 			var paramChanges = Deltas.ForCollections(
-				Arguments.ToList(),
-				second.Arguments.ToList(),
-				new LambdaComparer<ArgumentDetails>(x => x.Name),
+				Parameters.ToList(),
+				second.Parameters.ToList(),
+				new LambdaComparer<ParameterDetails>(x => x.Name),
 				x => new MethodArgumentAdded(),
 				x => new MethodArgumentRemoved());
 

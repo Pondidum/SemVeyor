@@ -10,7 +10,7 @@ namespace SemVeyor.AssemblyScanning
 	{
 		public string Name { get; set; }
 		public Visibility Visibility { get; set; }
-		public IEnumerable<ArgumentDetails> Arguments { get; set; }
+		public IEnumerable<ParameterDetails> Parameters { get; set; }
 
 		public static CtorDetails From(ConstructorInfo ctor)
 		{
@@ -18,7 +18,7 @@ namespace SemVeyor.AssemblyScanning
 			{
 				Name = ctor.Name,
 				Visibility = ctor.GetVisibility(),
-				Arguments = ctor.GetParameters().Select(ArgumentDetails.From).ToArray()
+				Parameters = ctor.GetParameters().Select(ParameterDetails.From).ToArray()
 			};
 
 		}
@@ -32,9 +32,9 @@ namespace SemVeyor.AssemblyScanning
 				yield return new CtorVisibilityIncreased();
 
 			var changes = Deltas.ForCollections(
-				Arguments.ToList(),
-				newer.Arguments.ToList(),
-				new LambdaComparer<ArgumentDetails>(ad => ad.Name),
+				Parameters.ToList(),
+				newer.Parameters.ToList(),
+				new LambdaComparer<ParameterDetails>(ad => ad.Name),
 				x => new CtorArgumentAdded(),
 				x => new CtorArgumentRemoved());
 

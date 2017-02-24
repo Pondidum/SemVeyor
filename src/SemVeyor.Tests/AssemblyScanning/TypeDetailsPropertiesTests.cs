@@ -48,7 +48,7 @@ namespace SemVeyor.Tests.AssemblyScanning
 		public void When_there_is_no_setter_its_visibility_is_null() => ReadOnlyProperty.SetterVisibility.ShouldBeNull();
 
 		[Fact]
-		public void An_indexed_property_argument_is_populated() => IndexedProperty.Arguments.Count().ShouldBe(1);
+		public void An_indexed_property_argument_is_populated() => IndexedProperty.Parameters.Count().ShouldBe(1);
 
 		[Fact]
 		public void An_indexed_property_name_is_populated() => IndexedProperty.Name.ShouldBe("Item");

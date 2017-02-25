@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Classification\SemVer.cs" />
     <Compile Include="Domain\ParameterDetails.cs" />
     <Compile Include="Domain\AssemblyDetails.cs" />
     <Compile Include="Domain\CtorDetails.cs" />

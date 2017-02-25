@@ -1,51 +1,54 @@
 ﻿namespace SemVeyor.Domain.Events
 {
-	public class AssemblyTypeAdded { }
-	public class AssemblyTypeRemoved { }
+	public class AssemblyTypeAdded : IMinor { }
+	public class AssemblyTypeRemoved : IMajor { }
 
-	public class TypeVisibilityIncreased { }
-	public class TypeVisibilityDecreased { }
-	public class FieldAdded { }
-	public class FieldRemoved { }
-	public class MethodAdded { }
-	public class MethodRemoved { }
-	public class PropertyAdded { }
-	public class PropertyRemoved { }
-	public class CtorAdded { }
-	public class CtorRemoved { }
-	public class GenericArgumentAdded { }
-	public class GenericArgumentRemoved { }
+	public class TypeVisibilityIncreased : IMinor { }
+	public class TypeVisibilityDecreased : IMajor { }
+	public class FieldAdded : IMinor { }
+	public class FieldRemoved : IMajor { }
+	public class MethodAdded : IMinor { }
+	public class MethodRemoved : IMajor { }
+	public class PropertyAdded : IMinor { }
+	public class PropertyRemoved : IMajor { }
+	public class CtorAdded : IMinor { }
+	public class CtorRemoved : IMajor { }
+	public class GenericArgumentAdded : IMinor { }
+	public class GenericArgumentRemoved : IMajor { }
 
-	public class FieldVisibilityIncreased { }
-	public class FieldVisibilityDecreased { }
-	public class FieldTypeChanged { }
+	public class FieldVisibilityIncreased : IMinor { }
+	public class FieldVisibilityDecreased : IMajor { }
+	public class FieldTypeChanged : IMajor { }
 
-	public class GenericArgumentPositionChanged { }
-	public class GenericArgumentNameChanged { }
-	public class GenericArgumentConstraintAdded { }
-	public class GenericArgumentConstraintRemoved { }
+	public class GenericArgumentPositionChanged : IMajor { }
+	public class GenericArgumentNameChanged : IMajor { }
+	public class GenericArgumentConstraintAdded : IMinor { }
+	public class GenericArgumentConstraintRemoved : IMajor { }
 
-	public class ArgumentNameChanged { }
-	public class ArgumentTypeChanged { }
-	public class ArgumentMoved { }
+	public class ArgumentNameChanged : IMajor  { }
+	public class ArgumentTypeChanged : IMajor { }
+	public class ArgumentMoved : IMajor { }
 
-	public class MethodVisibilityIncreased { }
-	public class MethodVisibilityDecreased { }
-	public class MethodNameChanged { }
-	public class MethodTypeChanged { }
-	public class MethodArgumentAdded { }
-	public class MethodArgumentRemoved { }
-	public class MethodGenericArgumentAdded { }
-	public class MethodGenericArgumentRemoved { }
+	public class MethodVisibilityIncreased : IMinor { }
+	public class MethodVisibilityDecreased : IMajor { }
+	public class MethodNameChanged : IMajor { }
+	public class MethodTypeChanged : IMajor { }
+	public class MethodArgumentAdded : IMinor { }
+	public class MethodArgumentRemoved : IMajor { }
+	public class MethodGenericArgumentAdded : IMinor { }
+	public class MethodGenericArgumentRemoved : IMajor { }
 
-	public class PropertyVisibilityDecreased { }
-	public class PropertyVisibilityIncreased { }
-	public class PropertyTypeChanged { }
-	public class PropertyArgumentAdded { }
-	public class PropertyArgumentRemoved { }
+	public class PropertyVisibilityDecreased : IMajor { }
+	public class PropertyVisibilityIncreased : IMinor { }
+	public class PropertyTypeChanged : IMajor { }
+	public class PropertyArgumentAdded : IMinor { }
+	public class PropertyArgumentRemoved : IMajor { }
 
-	public class CtorVisibilityDecreased { }
-	public class CtorVisibilityIncreased { }
-	public class CtorArgumentAdded { }
-	public class CtorArgumentRemoved { }
+	public class CtorVisibilityDecreased : IMajor { }
+	public class CtorVisibilityIncreased : IMinor { }
+	public class CtorArgumentAdded : IMinor { }
+	public class CtorArgumentRemoved : IMajor { }
+
+	public interface IMajor { }
+	public interface IMinor { }
 }

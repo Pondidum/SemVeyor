@@ -23,5 +23,14 @@ namespace SemVeyor.Tests.Domain.Events
 		{
 			eventType.GetInterfaces().ShouldContain(t => t == typeof(IMajor) || t == typeof(IMinor));
 		}
+
+		[Theory]
+		[MemberData("Events")]
+		public void All_events_override_tostring(Type eventType)
+		{
+			var method = eventType.GetMethod(nameof(eventType.ToString));
+
+			method.GetBaseDefinition().DeclaringType.ShouldNotBe(method.DeclaringType, () => $"{eventType.Name} does not override ToString()");
+		}
 	}
 }

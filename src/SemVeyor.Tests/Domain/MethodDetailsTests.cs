@@ -120,8 +120,8 @@ namespace SemVeyor.Tests.Domain
 
 			changes.Select(c => c.GetType()).ShouldBe(new[]
 			{
-				typeof(ArgumentMoved),
-				typeof(ArgumentMoved)
+				typeof(ParameterMoved),
+				typeof(ParameterMoved)
 			});
 		}
 

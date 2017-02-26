@@ -60,7 +60,7 @@ namespace SemVeyor.Tests.Domain
 
 			changes.Select(c => c.GetType()).ShouldBe(new []
 			{
-				typeof(ArgumentNameChanged)
+				typeof(ParameterNameChanged)
 			});
 		}
 
@@ -74,7 +74,7 @@ namespace SemVeyor.Tests.Domain
 
 			changes.Select(c => c.GetType()).ShouldBe(new []
 			{
-				typeof(ArgumentTypeChanged)
+				typeof(ParameterTypeChanged)
 			});
 		}
 
@@ -88,7 +88,7 @@ namespace SemVeyor.Tests.Domain
 
 			changes.Select(c => c.GetType()).ShouldBe(new []
 			{
-				typeof(ArgumentMoved)
+				typeof(ParameterMoved)
 			});
 		}
 

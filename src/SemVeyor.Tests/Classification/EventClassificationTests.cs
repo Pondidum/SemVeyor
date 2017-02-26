@@ -35,9 +35,9 @@ namespace SemVeyor.Tests.Classification
 		[InlineData(typeof(GenericArgumentConstraintAdded), SemVer.Minor)]
 		[InlineData(typeof(GenericArgumentConstraintRemoved), SemVer.Major)]
 
-		[InlineData(typeof(ArgumentNameChanged), SemVer.Major)]
-		[InlineData(typeof(ArgumentTypeChanged), SemVer.Major)]
-		[InlineData(typeof(ArgumentMoved), SemVer.Major)]
+		[InlineData(typeof(ParameterNameChanged), SemVer.Major)]
+		[InlineData(typeof(ParameterTypeChanged), SemVer.Major)]
+		[InlineData(typeof(ParameterMoved), SemVer.Major)]
 
 		[InlineData(typeof(MethodVisibilityIncreased), SemVer.Minor)]
 		[InlineData(typeof(MethodVisibilityDecreased), SemVer.Major)]

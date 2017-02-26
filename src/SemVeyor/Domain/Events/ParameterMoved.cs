@@ -2,7 +2,7 @@ using System;
 
 namespace SemVeyor.Domain.Events
 {
-	public class ArgumentMoved : IMajor
+	public class ParameterMoved : IMajor
 	{
 		public override string ToString()
 		{

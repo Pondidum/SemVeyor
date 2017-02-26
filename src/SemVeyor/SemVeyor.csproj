@@ -34,9 +34,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Classification\SemVer.cs" />
-    <Compile Include="Domain\Events\ArgumentMoved.cs" />
-    <Compile Include="Domain\Events\ArgumentNameChanged.cs" />
-    <Compile Include="Domain\Events\ArgumentTypeChanged.cs" />
+    <Compile Include="Domain\Events\ParameterMoved.cs" />
+    <Compile Include="Domain\Events\ParameterNameChanged.cs" />
+    <Compile Include="Domain\Events\ParameterTypeChanged.cs" />
     <Compile Include="Domain\Events\AssemblyTypeRemoved.cs" />
     <Compile Include="Domain\Events\CtorAdded.cs" />
     <Compile Include="Domain\Events\CtorArgumentAdded.cs" />

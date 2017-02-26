@@ -42,6 +42,9 @@ namespace SemVeyor.Storage
 
 		public AssemblyDetails Read()
 		{
+			if (File.Exists(_path) == false)
+				return null;
+
 			var json = File.ReadAllLines(_path).Last();
 
 			return JsonConvert.DeserializeObject<AssemblyDetails>(json);

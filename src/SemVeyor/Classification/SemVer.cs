@@ -7,9 +7,9 @@ namespace SemVeyor.Classification
 	public enum SemVer
 	{
 		None,
-		Major,
+		Patch,
 		Minor,
-		Patch
+		Major
 	}
 
 	public class EventClassification

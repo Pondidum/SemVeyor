@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using SemVeyor.Classification;
 using SemVeyor.Domain;
 using SemVeyor.Storage;
 
@@ -16,20 +17,29 @@ namespace SemVeyor
 			var current = AssemblyDetails.From(Assembly.LoadFile(args[0]));
 
 			Console.WriteLine(previous != null
-				? "Previous run found"
+				? "History loaded"
 				: "No History found");
 
 			if (previous != null)
 			{
-				var changes = previous.UpdatedTo(current).ToArray();
+				var changes = previous.UpdatedTo(current);
+				var classifier = new EventClassification();
 
-				Console.WriteLine(changes.Any()
-					? "Changes since previous run:"
-					: "No changes since previous run");
-
-				foreach (var change in changes)
+				var processed = changes.Select(change => new
 				{
-					Console.WriteLine(change);
+					Change = change,
+					Classification = classifier.ClassifyEvent(change)
+				}).ToArray();
+
+				if (processed.Any())
+				{
+					Console.WriteLine("Changes since previous run:");
+
+					foreach (var change in processed)
+						Console.WriteLine(change.Change + " : " + change.Classification);
+
+					Console.WriteLine();
+					Console.WriteLine("SemVer change requried: " + processed.Max(x => x.Classification));
 				}
 			}
 

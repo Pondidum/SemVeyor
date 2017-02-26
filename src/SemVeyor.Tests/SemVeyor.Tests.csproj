@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classification\EventClassificationTests.cs" />
+    <Compile Include="Domain\Events\AllEvents.cs" />
     <Compile Include="Domain\ParameterDetailsTests.cs" />
     <Compile Include="Domain\AssemblyDetailsTests.cs" />
     <Compile Include="Domain\CtorDetailsTests.cs" />

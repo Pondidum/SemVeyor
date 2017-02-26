@@ -1,12 +1,14 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
 	public class FieldRemoved : IMajor
 	{
-		public override string ToString()
+		private readonly FieldDetails _field;
+
+		public FieldRemoved(FieldDetails field)
 		{
-			throw new NotImplementedException();
+			_field = field;
 		}
+
+		public override string ToString() => $"{nameof(FieldRemoved)}: {_field}";
 	}
 }

@@ -109,8 +109,8 @@ namespace SemVeyor.Domain
 				Fields.ToList(),
 				second.Fields.ToList(),
 				new LambdaComparer<FieldDetails>(fd => fd.Name),
-				f => new FieldAdded(),
-				f => new FieldRemoved());
+				f => new FieldAdded(f),
+				f => new FieldRemoved(f));
 
 			foreach (var change in fieldChanges)
 				yield return change;

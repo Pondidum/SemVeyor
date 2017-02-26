@@ -21,16 +21,21 @@ namespace SemVeyor.Domain
 			};
 		}
 
-		public IEnumerable<object> UpdatedTo(FieldDetails second)
+		public IEnumerable<object> UpdatedTo(FieldDetails newer)
 		{
-			if (Type != second.Type)
-				yield return new FieldTypeChanged();
+			if (Type != newer.Type)
+				yield return new FieldTypeChanged(this, newer);
 
-			if (Visibility > second.Visibility)
+			if (Visibility > newer.Visibility)
 				yield return new FieldVisibilityDecreased();
 
-			if (Visibility < second.Visibility)
+			if (Visibility < newer.Visibility)
 				yield return new FieldVisibilityIncreased();
+		}
+
+		public override string ToString()
+		{
+			return $"{Visibility} {Type} {Name}";
 		}
 	}
 }

@@ -1,12 +1,14 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
 	public class FieldAdded : IMinor
 	{
-		public override string ToString()
+		private readonly FieldDetails _field;
+
+		public FieldAdded(FieldDetails field)
 		{
-			throw new NotImplementedException();
+			_field = field;
 		}
+
+		public override string ToString() => $"{nameof(FieldAdded)}: {_field}";
 	}
 }

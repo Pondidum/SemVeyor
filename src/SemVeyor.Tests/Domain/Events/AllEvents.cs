@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Ploeh.AutoFixture;
+using Ploeh.AutoFixture.Kernel;
+using SemVeyor.Domain;
 using SemVeyor.Domain.Events;
 using Shouldly;
 using Xunit;
@@ -31,6 +34,28 @@ namespace SemVeyor.Tests.Domain.Events
 			var method = eventType.GetMethod(nameof(eventType.ToString));
 
 			method.GetBaseDefinition().DeclaringType.ShouldNotBe(method.DeclaringType, () => $"{eventType.Name} does not override ToString()");
+		}
+
+		[Theory]
+		[MemberData("Events")]
+		public void All_events_implement_tostring(Type eventType)
+		{
+			var instance = Build(eventType);
+
+			instance.ToString().ShouldNotBe(eventType.FullName);
+		}
+
+		private object Build(Type type)
+		{
+			var ctor = type.GetConstructors().Single();
+
+			if (ctor.GetParameters().Any() == false)
+				return ctor.Invoke(new object[0]);
+
+			var fixture = new SpecimenContext(new Fixture());
+			var args = ctor.GetParameters().Select(p => fixture.Resolve(p));
+
+			return ctor.Invoke(args.ToArray());
 		}
 	}
 }

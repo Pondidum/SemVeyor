@@ -1,12 +1,16 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
 	public class ParameterMoved : IMajor
 	{
-		public override string ToString()
+		private readonly ParameterDetails _older;
+		private readonly ParameterDetails _newer;
+
+		public ParameterMoved(ParameterDetails older, ParameterDetails newer)
 		{
-			throw new NotImplementedException();
+			_older = older;
+			_newer = newer;
 		}
+
+		public override string ToString() => $"{nameof(ParameterMoved)}: {_older} => {_newer}";
 	}
 }

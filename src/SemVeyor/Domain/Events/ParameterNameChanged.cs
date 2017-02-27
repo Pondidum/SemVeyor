@@ -1,12 +1,16 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
 	public class ParameterNameChanged : IMajor
 	{
-		public override string ToString()
+		private readonly ParameterDetails _older;
+		private readonly ParameterDetails _newer;
+
+		public ParameterNameChanged(ParameterDetails older, ParameterDetails newer)
 		{
-			throw new NotImplementedException();
+			_older = older;
+			_newer = newer;
 		}
+
+		public override string ToString() => $"{nameof(ParameterNameChanged)}: {_older} => {_newer}";
 	}
 }

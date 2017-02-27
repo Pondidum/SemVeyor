@@ -24,13 +24,15 @@ namespace SemVeyor.Domain
 		public IEnumerable<object> UpdatedTo(ParameterDetails newer)
 		{
 			if (Name != newer.Name)
-				yield return new ParameterNameChanged();
+				yield return new ParameterNameChanged(this, newer);
 
 			if (Type != newer.Type)
-				yield return new ParameterTypeChanged();
+				yield return new ParameterTypeChanged(this, newer);
 
 			if (Position != newer.Position)
-				yield return new ParameterMoved();
+				yield return new ParameterMoved(this, newer);
 		}
+
+		public override string ToString() => $"[{Position}] {Type} {Name}";
 	}
 }

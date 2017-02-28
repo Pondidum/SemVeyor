@@ -4,9 +4,15 @@ namespace SemVeyor.Domain.Events
 {
 	public class GenericArgumentPositionChanged : IMajor
 	{
-		public override string ToString()
+		private readonly GenericArgumentDetails _older;
+		private readonly GenericArgumentDetails _newer;
+
+		public GenericArgumentPositionChanged(GenericArgumentDetails older, GenericArgumentDetails newer)
 		{
-			throw new NotImplementedException();
+			_older = older;
+			_newer = newer;
 		}
+
+		public override string ToString() => $"{nameof(GenericArgumentPositionChanged)}: {_older} => {_newer}";
 	}
 }

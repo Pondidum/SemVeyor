@@ -1,12 +1,14 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
 	public class GenericArgumentConstraintRemoved : IMajor
 	{
-		public override string ToString()
+		private readonly string _constraint;
+
+		public GenericArgumentConstraintRemoved(string constraint)
 		{
-			throw new NotImplementedException();
+			_constraint = constraint;
 		}
+
+		public override string ToString() => $"{nameof(GenericArgumentConstraintRemoved)}: {_constraint}";
 	}
 }

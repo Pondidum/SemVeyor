@@ -1,12 +1,14 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
 	public class GenericArgumentConstraintAdded : IMinor
 	{
-		public override string ToString()
+		private readonly string _constraint;
+
+		public GenericArgumentConstraintAdded(string constraint)
 		{
-			throw new NotImplementedException();
+			_constraint = constraint;
 		}
+
+		public override string ToString() => $"{nameof(GenericArgumentConstraintAdded)}: {_constraint}";
 	}
 }

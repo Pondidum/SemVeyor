@@ -21,22 +21,27 @@ namespace SemVeyor.Domain
 			};
 		}
 
-		public IEnumerable<object> UpdatedTo(GenericArgumentDetails second)
+		public IEnumerable<object> UpdatedTo(GenericArgumentDetails newer)
 		{
-			if (Position != second.Position)
-				yield return new GenericArgumentPositionChanged();
+			if (Position != newer.Position)
+				yield return new GenericArgumentPositionChanged(this, newer);
 
-			if (Name != second.Name)
-				yield return new GenericArgumentNameChanged();
+			if (Name != newer.Name)
+				yield return new GenericArgumentNameChanged(this, newer);
 
-			var addedConstraints = second.Constraints.Except(Constraints);
-			var removedConstraints = Constraints.Except(second.Constraints);
+			var addedConstraints = newer.Constraints.Except(Constraints);
+			var removedConstraints = Constraints.Except(newer.Constraints);
 
 			foreach (var constraint in addedConstraints)
-				yield return new GenericArgumentConstraintAdded();
+				yield return new GenericArgumentConstraintAdded(constraint);
 
 			foreach (var constraint in removedConstraints)
-				yield return new GenericArgumentConstraintRemoved();
+				yield return new GenericArgumentConstraintRemoved(constraint);
+		}
+
+		public override string ToString()
+		{
+			return $"[{Position}]{Name}{{{string.Join(", ", Constraints)}}}";
 		}
 	}
 }

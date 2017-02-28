@@ -60,6 +60,7 @@
     <Compile Include="Classification\EventClassificationTests.cs" />
     <Compile Include="Domain\Events\AllEvents.cs" />
     <Compile Include="Domain\Events\FieldEvents.cs" />
+    <Compile Include="Domain\Events\GenericArgumentEvents.cs" />
     <Compile Include="Domain\Events\ParameterEvents.cs" />
     <Compile Include="Domain\ParameterDetailsTests.cs" />
     <Compile Include="Domain\AssemblyDetailsTests.cs" />

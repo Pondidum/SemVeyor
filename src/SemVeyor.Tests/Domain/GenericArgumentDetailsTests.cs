@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
+using Ploeh.AutoFixture;
 using SemVeyor.Domain;
 using SemVeyor.Domain.Events;
 using SemVeyor.Tests.Builder;
@@ -104,6 +105,17 @@ namespace SemVeyor.Tests.Domain
 			var changes = older.UpdatedTo(newer);
 
 			changes.ShouldBeEmpty();
+		}
+
+		[Fact]
+		public void When_converted_to_string()
+		{
+			var details = Build.Generic("TKey")
+				.WithPosition(3)
+				.WithConstraints("IEnumerable", "IConvertable")
+				.Build();
+
+			details.ToString().ShouldBe("[3]TKey{IEnumerable, IConvertable}");
 		}
 
 		public TValue GenericMethod<TKey, TValue>(TValue test, Action<TValue> action)

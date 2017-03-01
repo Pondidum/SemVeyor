@@ -53,5 +53,18 @@ namespace SemVeyor.Tests.Domain
 
 			ChangesShouldBe(older, newer, typeof(CtorArgumentRemoved));
 		}
+
+		[Fact]
+		public void When_calling_tostring()
+		{
+			var ctor = Build.Ctor()
+				.WithVisibility(Visibility.Internal)
+				.WithParameters(
+					Build.Parameter<int>("index"),
+					Build.Parameter<string>("name"))
+				.Build();
+
+			ctor.ToString().ShouldBe("Internal ctor(System.Int32 index, System.String name)");
+		}
 	}
 }

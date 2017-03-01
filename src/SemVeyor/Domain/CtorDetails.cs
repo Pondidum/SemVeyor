@@ -35,11 +35,13 @@ namespace SemVeyor.Domain
 				Parameters.ToList(),
 				newer.Parameters.ToList(),
 				new LambdaComparer<ParameterDetails>(ad => ad.Name),
-				x => new CtorArgumentAdded(),
-				x => new CtorArgumentRemoved());
+				x => new CtorArgumentAdded(this, newer),
+				x => new CtorArgumentRemoved(this, newer));
 
 			foreach (var change in changes)
 				yield return change;
 		}
+
+		public override string ToString() => $"{Visibility} {Name}({string.Join(", ", Parameters)})";
 	}
 }

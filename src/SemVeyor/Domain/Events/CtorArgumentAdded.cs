@@ -1,12 +1,16 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
 	public class CtorArgumentAdded : IMinor
 	{
-		public override string ToString()
+		private readonly CtorDetails _older;
+		private readonly CtorDetails _newer;
+
+		public CtorArgumentAdded(CtorDetails older, CtorDetails newer)
 		{
-			throw new NotImplementedException();
+			_older = older;
+			_newer = newer;
 		}
+
+		public override string ToString() => $"{GetType().Name}: {_older} => {_newer}";
 	}
 }

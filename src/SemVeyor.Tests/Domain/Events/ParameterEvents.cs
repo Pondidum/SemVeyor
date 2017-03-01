@@ -22,7 +22,8 @@ namespace SemVeyor.Tests.Domain.Events
 		[Fact]
 		public void ParameterMoved()
 		{
-			new ParameterMoved(_older, _newer).ToString().ShouldBe("ParameterMoved: " + _older + " => " + _newer);
+			new ParameterMoved(_older, _newer).ToString()
+				.ShouldBe($"ParameterMoved: [{_older.Position}] {_older.Type} {_older.Name} => [{_newer.Position}] {_newer.Type} {_newer.Name}");
 		}
 
 		[Fact]

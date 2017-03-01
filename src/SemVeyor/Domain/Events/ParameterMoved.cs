@@ -11,6 +11,6 @@ namespace SemVeyor.Domain.Events
 			_newer = newer;
 		}
 
-		public override string ToString() => $"{nameof(ParameterMoved)}: {_older} => {_newer}";
+		public override string ToString() => $"{nameof(ParameterMoved)}: [{_older.Position}] {_older} => [{_newer.Position}] {_newer}";
 	}
 }

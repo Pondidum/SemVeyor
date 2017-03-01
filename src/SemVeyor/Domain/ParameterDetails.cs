@@ -33,6 +33,6 @@ namespace SemVeyor.Domain
 				yield return new ParameterMoved(this, newer);
 		}
 
-		public override string ToString() => $"[{Position}] {Type} {Name}";
+		public override string ToString() => $"{Type} {Name}";
 	}
 }

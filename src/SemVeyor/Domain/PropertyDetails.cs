@@ -55,7 +55,23 @@ namespace SemVeyor.Domain
 
 			foreach (var change in paramChanges)
 				yield return change;
+		}
 
+		public override string ToString()
+		{
+			var setter = string.Empty;
+
+			if (SetterVisibility.HasValue)
+				setter = SetterVisibility == Visibility
+					? "set; "
+					: $"{SetterVisibility} set; ";
+
+			var indexer = string.Empty;
+
+			if (Parameters.Any())
+				indexer = "[" + string.Join(", ", Parameters) + "]";
+
+			return $"{Visibility} {Type} {Name}{indexer} {{ get; {setter}}}";
 		}
 	}
 }

@@ -89,5 +89,63 @@ namespace SemVeyor.Tests.Domain
 				typeof(PropertyArgumentRemoved)
 			});
 		}
+
+		[Fact]
+		public void When_calling_tostring_with_no_setter()
+		{
+			var prop = Build.Property<int>("Count").WithVisibility(Visibility.Public).Build();
+
+			prop.ToString().ShouldBe("Public System.Int32 Count { get; }");
+		}
+
+		[Fact]
+		public void When_calling_tostring_with_a_setter_of_same_visibility()
+		{
+			var prop = Build
+				.Property<int>("Count")
+				.WithVisibility(Visibility.Public)
+				.WithSetterVisibility(Visibility.Public)
+				.Build();
+
+			prop.ToString().ShouldBe("Public System.Int32 Count { get; set; }");
+		}
+
+		[Fact]
+		public void When_calling_tostring_with_a_setter_of_different_visibility()
+		{
+			var prop = Build
+				.Property<int>("Count")
+				.WithVisibility(Visibility.Public)
+				.WithSetterVisibility(Visibility.Internal)
+				.Build();
+
+			prop.ToString().ShouldBe("Public System.Int32 Count { get; Internal set; }");
+		}
+
+		[Fact]
+		public void When_calling_tostring_with_an_indexer_argument()
+		{
+			var prop = Build
+				.Property<string>("Ref")
+				.WithVisibility(Visibility.Protected)
+				.WithArguments(Build.Parameter<Guid>("id"))
+				.Build();
+
+			prop.ToString().ShouldBe("Protected System.String Ref[System.Guid id] { get; }");
+		}
+
+		[Fact]
+		public void When_calling_tostring_with_multiple_indexer_arguments()
+		{
+			var prop = Build
+				.Property<string>("Ref")
+				.WithVisibility(Visibility.Protected)
+				.WithArguments(
+					Build.Parameter<int>("x"),
+					Build.Parameter<int>("y"))
+				.Build();
+
+			prop.ToString().ShouldBe("Protected System.String Ref[System.Int32 x, System.Int32 y] { get; }");
+		}
 	}
 }

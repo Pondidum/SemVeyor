@@ -50,8 +50,8 @@ namespace SemVeyor.Domain
 				Parameters.ToList(),
 				newer.Parameters.ToList(),
 				new LambdaComparer<ParameterDetails>(x => x.Name),
-				x => new PropertyArgumentAdded(),
-				x => new PropertyArgumentRemoved());
+				x => new PropertyArgumentAdded(this, newer),
+				x => new PropertyArgumentRemoved(this, newer));
 
 			foreach (var change in paramChanges)
 				yield return change;

@@ -55,8 +55,8 @@ namespace SemVeyor.Tests.Domain
 		public void When_a_methods_has_an_argument_added()
 		{
 
-			var first = Build.Method("").WithArguments(Build.Parameter<int>("one")).Build();
-			var second = Build.Method("").WithArguments(Build.Parameter<int>("one"), Build.Parameter<string>("two")).Build();
+			var first = Build.Method("").WithParameters(Build.Parameter<int>("one")).Build();
+			var second = Build.Method("").WithParameters(Build.Parameter<int>("one"), Build.Parameter<string>("two")).Build();
 
 			var changes = first.UpdatedTo(second);
 
@@ -70,7 +70,7 @@ namespace SemVeyor.Tests.Domain
 		public void When_a_method_has_two_arguments_added()
 		{
 			var first = Build.Method("").Build();
-			var second = Build.Method("").WithArguments(Build.Parameter<int>("one"), Build.Parameter<string>("two")).Build();
+			var second = Build.Method("").WithParameters(Build.Parameter<int>("one"), Build.Parameter<string>("two")).Build();
 
 			var changes = first.UpdatedTo(second);
 
@@ -84,8 +84,8 @@ namespace SemVeyor.Tests.Domain
 		[Fact]
 		public void When_a_method_has_an_argument_removed()
 		{
-			var first = Build.Method("").WithArguments(Build.Parameter<int>("one"), Build.Parameter<string>("two")).Build();
-			var second = Build.Method("").WithArguments(Build.Parameter<int>("one")).Build();
+			var first = Build.Method("").WithParameters(Build.Parameter<int>("one"), Build.Parameter<string>("two")).Build();
+			var second = Build.Method("").WithParameters(Build.Parameter<int>("one")).Build();
 
 			var changes = first.UpdatedTo(second);
 
@@ -98,7 +98,7 @@ namespace SemVeyor.Tests.Domain
 		[Fact]
 		public void When_a_method_has_two_arguments_removed()
 		{
-			var first = Build.Method("").WithArguments(Build.Parameter<int>("one"), Build.Parameter<string>("two")).Build();
+			var first = Build.Method("").WithParameters(Build.Parameter<int>("one"), Build.Parameter<string>("two")).Build();
 			var second = Build.Method("").Build();
 
 			var changes = first.UpdatedTo(second);
@@ -113,8 +113,8 @@ namespace SemVeyor.Tests.Domain
 		[Fact]
 		public void When_a_methods_arguments_change_order()
 		{
-			var first = Build.Method("").WithArguments(Build.Parameter<int>("one"), Build.Parameter<string>("two")).Build();
-			var second = Build.Method("").WithArguments(Build.Parameter<string>("two"), Build.Parameter<int>("one")).Build();
+			var first = Build.Method("").WithParameters(Build.Parameter<int>("one"), Build.Parameter<string>("two")).Build();
+			var second = Build.Method("").WithParameters(Build.Parameter<string>("two"), Build.Parameter<int>("one")).Build();
 
 			var changes = first.UpdatedTo(second);
 

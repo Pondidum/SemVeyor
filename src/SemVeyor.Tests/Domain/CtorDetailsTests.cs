@@ -39,8 +39,8 @@ namespace SemVeyor.Tests.Domain
 		[Fact]
 		public void When_a_ctor_has_an_argument_added()
 		{
-			var older = Build.Ctor().WithArguments(Build.Parameter<int>("one")).Build();
-			var newer = Build.Ctor().WithArguments(Build.Parameter<int>("one"), Build.Parameter<string>("two")).Build();
+			var older = Build.Ctor().WithParameters(Build.Parameter<int>("one")).Build();
+			var newer = Build.Ctor().WithParameters(Build.Parameter<int>("one"), Build.Parameter<string>("two")).Build();
 
 			ChangesShouldBe(older, newer, typeof(CtorArgumentAdded));
 		}
@@ -48,8 +48,8 @@ namespace SemVeyor.Tests.Domain
 		[Fact]
 		public void When_a_ctor_has_an_argument_removed()
 		{
-			var older = Build.Ctor().WithArguments(Build.Parameter<int>("one"), Build.Parameter<string>("two")).Build();
-			var newer = Build.Ctor().WithArguments(Build.Parameter<int>("one")).Build();
+			var older = Build.Ctor().WithParameters(Build.Parameter<int>("one"), Build.Parameter<string>("two")).Build();
+			var newer = Build.Ctor().WithParameters(Build.Parameter<int>("one")).Build();
 
 			ChangesShouldBe(older, newer, typeof(CtorArgumentRemoved));
 		}

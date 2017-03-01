@@ -66,7 +66,7 @@ namespace SemVeyor.Tests.Domain
 		public void When_the_property_gains_an_indexer()
 		{
 			var older = Build.Property<int>("one").Build();
-			var newer = Build.Property<int>("one").WithArguments(Build.Parameter<string>("index")).Build();
+			var newer = Build.Property<int>("one").WithParameters(Build.Parameter<string>("index")).Build();
 
 			var changes = older.UpdatedTo(newer);
 
@@ -79,7 +79,7 @@ namespace SemVeyor.Tests.Domain
 		[Fact]
 		public void When_the_property_looses_an_indexer()
 		{
-			var older = Build.Property<int>("one").WithArguments(Build.Parameter<string>("index")).Build();
+			var older = Build.Property<int>("one").WithParameters(Build.Parameter<string>("index")).Build();
 			var newer = Build.Property<int>("one").Build();
 
 			var changes = older.UpdatedTo(newer);
@@ -128,7 +128,7 @@ namespace SemVeyor.Tests.Domain
 			var prop = Build
 				.Property<string>("Ref")
 				.WithVisibility(Visibility.Protected)
-				.WithArguments(Build.Parameter<Guid>("id"))
+				.WithParameters(Build.Parameter<Guid>("id"))
 				.Build();
 
 			prop.ToString().ShouldBe("Protected System.String Ref[System.Guid id] { get; }");
@@ -140,7 +140,7 @@ namespace SemVeyor.Tests.Domain
 			var prop = Build
 				.Property<string>("Ref")
 				.WithVisibility(Visibility.Protected)
-				.WithArguments(
+				.WithParameters(
 					Build.Parameter<int>("x"),
 					Build.Parameter<int>("y"))
 				.Build();

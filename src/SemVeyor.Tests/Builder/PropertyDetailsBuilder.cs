@@ -30,7 +30,7 @@ namespace SemVeyor.Tests.Builder
 			return this;
 		}
 
-		public PropertyDetailsBuilder WithArguments(params ParameterDetails[] parameters)
+		public PropertyDetailsBuilder WithParameters(params ParameterDetails[] parameters)
 		{
 			_property.Parameters = _property.Parameters.Concat(parameters).ToArray();
 			return this;

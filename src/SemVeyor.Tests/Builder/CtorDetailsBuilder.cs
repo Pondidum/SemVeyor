@@ -22,7 +22,7 @@ namespace SemVeyor.Tests.Builder
 			return this;
 		}
 
-		public CtorDetailsBuilder WithArguments(params ParameterDetails[] parameters)
+		public CtorDetailsBuilder WithParameters(params ParameterDetails[] parameters)
 		{
 			_ctor.Parameters = _ctor.Parameters.Concat(parameters).ToArray();
 			return this;

@@ -148,7 +148,7 @@ namespace SemVeyor.Tests.Domain
 
 			var newer = Build.Type("")
 				.WithMethods(Build.Method("One"))
-				.WithMethods(Build.Method("One").WithArguments(Build.Parameter<int>("value")))
+				.WithMethods(Build.Method("One").WithParameters(Build.Parameter<int>("value")))
 				.Build();
 
 			ChangesShouldBe(older, newer, typeof(MethodAdded));
@@ -159,7 +159,7 @@ namespace SemVeyor.Tests.Domain
 		{
 			var older = Build.Type("")
 				.WithMethods(Build.Method("One"))
-				.WithMethods(Build.Method("One").WithArguments(Build.Parameter<int>("value")))
+				.WithMethods(Build.Method("One").WithParameters(Build.Parameter<int>("value")))
 				.Build();
 
 			var newer = Build.Type("")
@@ -238,7 +238,7 @@ namespace SemVeyor.Tests.Domain
 		public void When_a_ctor_is_changed()
 		{
 			var older = Build.Type("").WithCtors(Build.Ctor()).Build();
-			var newer = Build.Type("").WithCtors(Build.Ctor().WithArguments(Build.Parameter<int>("one"))).Build();
+			var newer = Build.Type("").WithCtors(Build.Ctor().WithParameters(Build.Parameter<int>("one"))).Build();
 
 			ChangesShouldBe(older, newer, typeof(CtorArgumentAdded));
 		}

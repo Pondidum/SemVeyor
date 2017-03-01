@@ -30,7 +30,7 @@ namespace SemVeyor.Tests.Builder
 			return this;
 		}
 
-		public MethodDetailsBuilder WithArguments(params ParameterDetails[] parameter)
+		public MethodDetailsBuilder WithParameters(params ParameterDetails[] parameter)
 		{
 			var position = 0;
 			var args = _method.Parameters.ToList();

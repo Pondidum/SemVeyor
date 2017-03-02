@@ -1,12 +1,9 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
-	public class PropertyVisibilityIncreased : IMinor
+	public class PropertyVisibilityIncreased : PropertyEvent, IMinor
 	{
-		public override string ToString()
+		public PropertyVisibilityIncreased(PropertyDetails older, PropertyDetails newer) : base(older, newer)
 		{
-			throw new NotImplementedException();
 		}
 	}
 }

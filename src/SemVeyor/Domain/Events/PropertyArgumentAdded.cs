@@ -1,16 +1,9 @@
 namespace SemVeyor.Domain.Events
 {
-	public class PropertyArgumentAdded : IMinor
+	public class PropertyArgumentAdded : PropertyEvent, IMinor
 	{
-		private readonly PropertyDetails _older;
-		private readonly PropertyDetails _newer;
-
-		public PropertyArgumentAdded(PropertyDetails older, PropertyDetails newer)
+		public PropertyArgumentAdded(PropertyDetails older, PropertyDetails newer) : base(older, newer)
 		{
-			_older = older;
-			_newer = newer;
 		}
-
-		public override string ToString() => $"{GetType().Name}: {_older} => {_newer}";
 	}
 }

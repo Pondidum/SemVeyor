@@ -32,19 +32,19 @@ namespace SemVeyor.Domain
 		public IEnumerable<object> UpdatedTo(PropertyDetails newer)
 		{
 			if (Visibility > newer.Visibility)
-				yield return new PropertyVisibilityDecreased();
+				yield return new PropertyVisibilityDecreased(this, newer);
 
 			if (Visibility < newer.Visibility)
-				yield return new PropertyVisibilityIncreased();
+				yield return new PropertyVisibilityIncreased(this, newer);
 
 			if (SetterVisibility > newer.SetterVisibility || (SetterVisibility.HasValue && newer.SetterVisibility.HasValue == false))
-				yield return new PropertyVisibilityDecreased();
+				yield return new PropertyVisibilityDecreased(this, newer);
 
 			if (SetterVisibility < newer.SetterVisibility || (SetterVisibility.HasValue == false && newer.SetterVisibility.HasValue))
-				yield return new PropertyVisibilityIncreased();
+				yield return new PropertyVisibilityIncreased(this, newer);
 
 			if (Type != newer.Type)
-				yield return new PropertyTypeChanged();
+				yield return new PropertyTypeChanged(this, newer);
 
 			var paramChanges = Deltas.ForCollections(
 				Parameters.ToList(),

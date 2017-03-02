@@ -1,12 +1,9 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
-	public class PropertyTypeChanged : IMajor
+	public class PropertyTypeChanged : PropertyEvent, IMajor
 	{
-		public override string ToString()
+		public PropertyTypeChanged(PropertyDetails older, PropertyDetails newer) : base(older, newer)
 		{
-			throw new NotImplementedException();
 		}
 	}
 }

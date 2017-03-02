@@ -72,6 +72,7 @@
     <Compile Include="Domain\Events\PropertyAdded.cs" />
     <Compile Include="Domain\Events\PropertyArgumentAdded.cs" />
     <Compile Include="Domain\Events\PropertyArgumentRemoved.cs" />
+    <Compile Include="Domain\Events\PropertyEvent.cs" />
     <Compile Include="Domain\Events\PropertyRemoved.cs" />
     <Compile Include="Domain\Events\PropertyTypeChanged.cs" />
     <Compile Include="Domain\Events\PropertyVisibilityDecreased.cs" />

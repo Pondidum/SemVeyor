@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using SemVeyor.Domain;
 using SemVeyor.Domain.Events;
 using SemVeyor.Tests.Builder;
@@ -196,6 +197,35 @@ namespace SemVeyor.Tests.Domain
 				typeof(GenericArgumentPositionChanged),
 				typeof(GenericArgumentPositionChanged)
 			});
+		}
+
+		[Fact]
+		public void When_calling_tostring_on_a_void_method()
+		{
+			var method = Build.Method("Execute")
+				.WithVisibility(Visibility.Protected)
+				.Build();
+
+			method.ToString().ShouldBe("Protected void Execute()");
+		}
+
+		[Fact]
+		public void When_calling_tostring()
+		{
+			var method = Build.Method("Execute")
+				.WithVisibility(Visibility.Internal)
+				.Returning<string>()
+				.WithGenericArguments(
+					Build.Generic("TKey").WithConstraints("Event", "IBase", "class"),
+					Build.Generic("TValue").WithConstraints("IEnumerable<TKey>"))
+				.WithParameters(
+					Build.Parameter<Guid>("id"),
+					Build.Parameter<int>("offset"))
+				.Build();
+
+			method.ToString().ShouldBe("Internal System.String Execute<TKey, TValue>(System.Guid id, System.Int32 offset) " +
+			                           "where TKey : Event, IBase, class " +
+			                           "where TValue : IEnumerable<TKey>");
 		}
 	}
 }

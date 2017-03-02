@@ -62,5 +62,27 @@ namespace SemVeyor.Domain
 				yield return change;
 
 		}
+
+		public override string ToString()
+		{
+			var type = Type?.ToString() ?? "void";
+			var parameters = string.Join(", ", Parameters);
+
+			var generics = string.Empty;
+			var constraints = string.Empty;
+
+			if (GenericArguments.Any())
+			{
+				generics = "<" + string.Join(", ", GenericArguments.Select(a => a.Name)) + ">";
+
+				constraints =  GenericArguments
+					.Where(g => g.Constraints.Any())
+					.Select(g => $" where {g.Name} : {string.Join(", ", g.Constraints)}")
+					.Aggregate("", (a, cs) => a + cs);
+			}
+
+
+			return $"{Visibility} {type} {Name}{generics}({parameters}){constraints}";
+		}
 	}
 }

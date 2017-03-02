@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
-using SemVeyor.Domain;
 using SemVeyor.Domain.Events;
 using Shouldly;
 using Xunit;
@@ -21,14 +20,14 @@ namespace SemVeyor.Tests.Domain.Events
 			.Select(t => new object[] { t });
 
 		[Theory]
-		[MemberData("Events")]
+		[MemberData(nameof(Events))]
 		public void All_events_implement_either_IMajor_or_IMinor(Type eventType)
 		{
 			eventType.GetInterfaces().ShouldContain(t => t == typeof(IMajor) || t == typeof(IMinor));
 		}
 
 		[Theory]
-		[MemberData("Events")]
+		[MemberData(nameof(Events))]
 		public void All_events_override_tostring(Type eventType)
 		{
 			var method = eventType.GetMethod(nameof(eventType.ToString));
@@ -37,7 +36,7 @@ namespace SemVeyor.Tests.Domain.Events
 		}
 
 		[Theory]
-		[MemberData("Events")]
+		[MemberData(nameof(Events))]
 		public void All_events_implement_tostring(Type eventType)
 		{
 			var instance = Build(eventType);

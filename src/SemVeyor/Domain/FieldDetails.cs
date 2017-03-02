@@ -27,10 +27,10 @@ namespace SemVeyor.Domain
 				yield return new FieldTypeChanged(this, newer);
 
 			if (Visibility > newer.Visibility)
-				yield return new FieldVisibilityDecreased();
+				yield return new FieldVisibilityDecreased(this, newer);
 
 			if (Visibility < newer.Visibility)
-				yield return new FieldVisibilityIncreased();
+				yield return new FieldVisibilityIncreased(this, newer);
 		}
 
 		public override string ToString()

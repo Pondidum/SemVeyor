@@ -1,12 +1,9 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
-	public class FieldVisibilityIncreased : IMinor
+	public class FieldVisibilityIncreased : FieldEvent, IMinor
 	{
-		public override string ToString()
+		public FieldVisibilityIncreased(FieldDetails older, FieldDetails newer) : base(older, newer)
 		{
-			throw new NotImplementedException();
 		}
 	}
 }

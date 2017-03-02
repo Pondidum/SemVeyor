@@ -1,12 +1,9 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
-	public class MethodArgumentRemoved : IMajor
+	public class MethodArgumentRemoved : MethodEvent, IMajor
 	{
-		public override string ToString()
+		public MethodArgumentRemoved(MethodDetails older, MethodDetails newer) : base(older, newer)
 		{
-			throw new NotImplementedException();
 		}
 	}
 }

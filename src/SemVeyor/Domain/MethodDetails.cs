@@ -27,36 +27,36 @@ namespace SemVeyor.Domain
 			};
 		}
 
-		public IEnumerable<object> UpdatedTo(MethodDetails second)
+		public IEnumerable<object> UpdatedTo(MethodDetails newer)
 		{
-			if (Name != second.Name)
-				yield return new MethodNameChanged();
+			if (Name != newer.Name)
+				yield return new MethodNameChanged(this, newer);
 
-			if (Visibility < second.Visibility)
-				yield return new MethodVisibilityIncreased();
+			if (Visibility < newer.Visibility)
+				yield return new MethodVisibilityIncreased(this, newer);
 
-			if (Visibility > second.Visibility)
-				yield return new MethodVisibilityDecreased();
+			if (Visibility > newer.Visibility)
+				yield return new MethodVisibilityDecreased(this, newer);
 
-			if (Type != second.Type)
-				yield return new MethodTypeChanged();
+			if (Type != newer.Type)
+				yield return new MethodTypeChanged(this, newer);
 
 			var paramChanges = Deltas.ForCollections(
 				Parameters.ToList(),
-				second.Parameters.ToList(),
+				newer.Parameters.ToList(),
 				new LambdaComparer<ParameterDetails>(x => x.Name),
-				x => new MethodArgumentAdded(),
-				x => new MethodArgumentRemoved());
+				x => new MethodArgumentAdded(this, newer),
+				x => new MethodArgumentRemoved(this, newer));
 
 			foreach (var change in paramChanges)
 				yield return change;
 
 			var genericChanges = Deltas.ForCollections(
 				GenericArguments.ToList(),
-				second.GenericArguments.ToList(),
+				newer.GenericArguments.ToList(),
 				new LambdaComparer<GenericArgumentDetails>(ga => ga.Position),
-				x => new MethodGenericArgumentAdded(),
-				x => new MethodGenericArgumentRemoved());
+				x => new MethodGenericArgumentAdded(this, newer),
+				x => new MethodGenericArgumentRemoved(this, newer));
 
 			foreach (var change in genericChanges)
 				yield return change;

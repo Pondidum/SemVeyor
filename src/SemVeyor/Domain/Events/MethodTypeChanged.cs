@@ -1,12 +1,9 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
-	public class MethodTypeChanged : IMajor
+	public class MethodTypeChanged : MethodEvent, IMajor
 	{
-		public override string ToString()
+		public MethodTypeChanged(MethodDetails older, MethodDetails newer) : base(older, newer)
 		{
-			throw new NotImplementedException();
 		}
 	}
 }

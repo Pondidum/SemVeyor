@@ -1,12 +1,9 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
-	public class MethodArgumentAdded : IMinor
+	public class MethodArgumentAdded : MethodEvent, IMinor
 	{
-		public override string ToString()
+		public MethodArgumentAdded(MethodDetails older, MethodDetails newer) : base(older, newer)
 		{
-			throw new NotImplementedException();
 		}
 	}
 }

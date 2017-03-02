@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Classification\SemVer.cs" />
+    <Compile Include="Domain\Events\MethodEvent.cs" />
     <Compile Include="Domain\Events\ParameterMoved.cs" />
     <Compile Include="Domain\Events\ParameterNameChanged.cs" />
     <Compile Include="Domain\Events\ParameterTypeChanged.cs" />

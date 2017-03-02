@@ -1,12 +1,9 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
-	public class MethodVisibilityIncreased : IMinor
+	public class MethodVisibilityIncreased : MethodEvent, IMinor
 	{
-		public override string ToString()
+		public MethodVisibilityIncreased(MethodDetails older, MethodDetails newer) : base(older, newer)
 		{
-			throw new NotImplementedException();
 		}
 	}
 }

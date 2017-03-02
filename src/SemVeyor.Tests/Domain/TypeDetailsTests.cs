@@ -42,7 +42,7 @@ namespace SemVeyor.Tests.Domain
 			var newer = Build.Type("older")
 				.Build();
 
-			ChangesShouldBe(older, newer, typeof(FieldRemoved));
+			ChangesShouldBe(older, newer, typeof(TypeFieldRemoved));
 		}
 
 		[Fact]
@@ -57,7 +57,7 @@ namespace SemVeyor.Tests.Domain
 				.WithField(Build.Field<int>("_newer"))
 				.Build();
 
-			ChangesShouldBe(older, newer, typeof(FieldAdded));
+			ChangesShouldBe(older, newer, typeof(TypeFieldAdded));
 		}
 
 		[Fact]
@@ -71,8 +71,8 @@ namespace SemVeyor.Tests.Domain
 				.WithField(Build.Field<int>("_newer"))
 				.Build();
 
-			ChangesShouldBe(older, newer, typeof(FieldRemoved),
-				typeof(FieldAdded));
+			ChangesShouldBe(older, newer, typeof(TypeFieldRemoved),
+				typeof(TypeFieldAdded));
 		}
 
 		[Fact]
@@ -109,7 +109,7 @@ namespace SemVeyor.Tests.Domain
 			var older = Build.Type("").Build();
 			var newer = Build.Type("").WithMethods(Build.Method("One")).Build();
 
-			ChangesShouldBe(older, newer, typeof(MethodAdded));
+			ChangesShouldBe(older, newer, typeof(TypeMethodAdded));
 		}
 
 		[Fact]
@@ -118,7 +118,7 @@ namespace SemVeyor.Tests.Domain
 			var older = Build.Type("").WithMethods(Build.Method("One")).Build();
 			var newer = Build.Type("").Build();
 
-			ChangesShouldBe(older, newer, typeof(MethodRemoved));
+			ChangesShouldBe(older, newer, typeof(TypeMethodRemoved));
 		}
 
 		[Fact]
@@ -151,7 +151,7 @@ namespace SemVeyor.Tests.Domain
 				.WithMethods(Build.Method("One").WithParameters(Build.Parameter<int>("value")))
 				.Build();
 
-			ChangesShouldBe(older, newer, typeof(MethodAdded));
+			ChangesShouldBe(older, newer, typeof(TypeMethodAdded));
 		}
 
 		[Fact]
@@ -166,7 +166,7 @@ namespace SemVeyor.Tests.Domain
 				.WithMethods(Build.Method("One"))
 				.Build();
 
-			ChangesShouldBe(older, newer, typeof(MethodRemoved));
+			ChangesShouldBe(older, newer, typeof(TypeMethodRemoved));
 		}
 
 		[Fact]
@@ -177,7 +177,7 @@ namespace SemVeyor.Tests.Domain
 
 			var changes = older.UpdatedTo(newer);
 
-			ChangesShouldBe(older, newer, typeof(PropertyAdded));
+			ChangesShouldBe(older, newer, typeof(TypePropertyAdded));
 		}
 
 		[Fact]
@@ -186,7 +186,7 @@ namespace SemVeyor.Tests.Domain
 			var older = Build.Type("").WithProperties(Build.Property<int>("Prop"), Build.Property<string>("Other")).Build();
 			var newer = Build.Type("").WithProperties(Build.Property<int>("Prop")).Build();
 
-			ChangesShouldBe(older, newer, typeof(PropertyRemoved));
+			ChangesShouldBe(older, newer, typeof(TypePropertyRemoved));
 		}
 
 		[Fact]
@@ -195,7 +195,7 @@ namespace SemVeyor.Tests.Domain
 			var older = Build.Type("").WithProperties(Build.Property<int>("Prop")).Build();
 			var newer = Build.Type("").WithProperties(Build.Property<int>("NewProp")).Build();
 
-			ChangesShouldBe(older, newer, typeof(PropertyRemoved), typeof(PropertyAdded));
+			ChangesShouldBe(older, newer, typeof(TypePropertyRemoved), typeof(TypePropertyAdded));
 		}
 
 		[Fact]
@@ -204,7 +204,7 @@ namespace SemVeyor.Tests.Domain
 			var older = Build.Type("").WithProperties(Build.Property<int>("Prop")).Build();
 			var newer = Build.Type("").WithProperties(Build.Property<int>("Prop"), Build.Property<string>("PropTwo")).Build();
 
-			ChangesShouldBe(older, newer, typeof(PropertyAdded));
+			ChangesShouldBe(older, newer, typeof(TypePropertyAdded));
 		}
 
 		[Fact]
@@ -213,7 +213,7 @@ namespace SemVeyor.Tests.Domain
 			var older = Build.Type("").WithProperties(Build.Property<int>("Prop"), Build.Property<string>("PropTwo")).Build();
 			var newer = Build.Type("").WithProperties(Build.Property<int>("Prop")).Build();
 
-			ChangesShouldBe(older, newer, typeof(PropertyRemoved));
+			ChangesShouldBe(older, newer, typeof(TypePropertyRemoved));
 		}
 
 		[Fact]
@@ -222,7 +222,7 @@ namespace SemVeyor.Tests.Domain
 			var older = Build.Type("").WithCtors(Build.Ctor()).Build();
 			var newer = Build.Type("").WithCtors(Build.Ctor(), Build.Ctor(), Build.Ctor()).Build();
 
-			ChangesShouldBe(older, newer, typeof(CtorAdded), typeof(CtorAdded));
+			ChangesShouldBe(older, newer, typeof(TypeCtorAdded), typeof(TypeCtorAdded));
 		}
 
 		[Fact]
@@ -231,7 +231,7 @@ namespace SemVeyor.Tests.Domain
 			var older = Build.Type("").WithCtors(Build.Ctor(), Build.Ctor(), Build.Ctor()).Build();
 			var newer = Build.Type("").WithCtors(Build.Ctor()).Build();
 
-			ChangesShouldBe(older, newer, typeof(CtorRemoved), typeof(CtorRemoved));
+			ChangesShouldBe(older, newer, typeof(TypeCtorRemoved), typeof(TypeCtorRemoved));
 		}
 
 		[Fact]
@@ -249,7 +249,7 @@ namespace SemVeyor.Tests.Domain
 			var older = Build.Type("").WithGenericArguments(Build.Generic("T")).Build();
 			var newer = Build.Type("").WithGenericArguments(Build.Generic("T"), Build.Generic("TVal")).Build();
 
-			ChangesShouldBe(older, newer, typeof(GenericArgumentAdded));
+			ChangesShouldBe(older, newer, typeof(TypeGenericArgumentAdded));
 		}
 
 		[Fact]
@@ -258,7 +258,7 @@ namespace SemVeyor.Tests.Domain
 			var older = Build.Type("").Build();
 			var newer = Build.Type("").WithGenericArguments(Build.Generic("T"), Build.Generic("TVal")).Build();
 
-			ChangesShouldBe(older, newer, typeof(GenericArgumentAdded), typeof(GenericArgumentAdded));
+			ChangesShouldBe(older, newer, typeof(TypeGenericArgumentAdded), typeof(TypeGenericArgumentAdded));
 		}
 
 		[Fact]
@@ -267,7 +267,7 @@ namespace SemVeyor.Tests.Domain
 			var older = Build.Type("").WithGenericArguments(Build.Generic("T"), Build.Generic("TVal")).Build();
 			var newer = Build.Type("").WithGenericArguments(Build.Generic("T")).Build();
 
-			ChangesShouldBe(older, newer, typeof(GenericArgumentRemoved));
+			ChangesShouldBe(older, newer, typeof(TypeGenericArgumentRemoved));
 		}
 
 		[Fact]
@@ -276,7 +276,7 @@ namespace SemVeyor.Tests.Domain
 			var older = Build.Type("").WithGenericArguments(Build.Generic("T"), Build.Generic("TVal")).Build();
 			var newer = Build.Type("").Build();
 
-			ChangesShouldBe(older, newer, typeof(GenericArgumentRemoved), typeof(GenericArgumentRemoved));
+			ChangesShouldBe(older, newer, typeof(TypeGenericArgumentRemoved), typeof(TypeGenericArgumentRemoved));
 		}
 
 		[Fact]

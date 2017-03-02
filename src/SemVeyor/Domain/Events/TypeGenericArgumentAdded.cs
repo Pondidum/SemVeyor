@@ -2,7 +2,7 @@ using System;
 
 namespace SemVeyor.Domain.Events
 {
-	public class CtorAdded : IMinor
+	public class TypeGenericArgumentAdded : IMinor
 	{
 		public override string ToString()
 		{

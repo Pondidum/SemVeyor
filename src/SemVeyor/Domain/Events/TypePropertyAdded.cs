@@ -2,7 +2,7 @@ using System;
 
 namespace SemVeyor.Domain.Events
 {
-	public class PropertyAdded : IMinor
+	public class TypePropertyAdded : IMinor
 	{
 		public override string ToString()
 		{

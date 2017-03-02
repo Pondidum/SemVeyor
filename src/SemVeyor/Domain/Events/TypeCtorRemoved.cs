@@ -2,7 +2,7 @@ using System;
 
 namespace SemVeyor.Domain.Events
 {
-	public class CtorRemoved : IMajor
+	public class TypeCtorRemoved : IMajor
 	{
 		public override string ToString()
 		{

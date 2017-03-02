@@ -2,7 +2,7 @@ using System;
 
 namespace SemVeyor.Domain.Events
 {
-	public class GenericArgumentRemoved : IMajor
+	public class TypeMethodAdded : IMinor
 	{
 		public override string ToString()
 		{

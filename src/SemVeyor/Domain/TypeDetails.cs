@@ -109,8 +109,8 @@ namespace SemVeyor.Domain
 				Fields.ToList(),
 				second.Fields.ToList(),
 				new LambdaComparer<FieldDetails>(fd => fd.Name),
-				f => new FieldAdded(f),
-				f => new FieldRemoved(f));
+				f => new TypeFieldAdded(f),
+				f => new TypeFieldRemoved(f));
 
 			foreach (var change in fieldChanges)
 				yield return change;
@@ -119,8 +119,8 @@ namespace SemVeyor.Domain
 				Methods.ToList(),
 				second.Methods.ToList(),
 				new LambdaComparer<MethodDetails>(md => md.Name),
-				m => new MethodAdded(),
-				m => new MethodRemoved());
+				m => new TypeMethodAdded(),
+				m => new TypeMethodRemoved());
 
 			foreach (var change in methodChanges)
 				yield return change;
@@ -129,8 +129,8 @@ namespace SemVeyor.Domain
 				Properties.ToList(),
 				second.Properties.ToList(),
 				new LambdaComparer<PropertyDetails>(pd => pd.Name),
-				m => new PropertyAdded(),
-				m => new PropertyRemoved());
+				m => new TypePropertyAdded(),
+				m => new TypePropertyRemoved());
 
 			foreach (var change in propertyChanges)
 				yield return change;
@@ -139,8 +139,8 @@ namespace SemVeyor.Domain
 				Constructors.ToList(),
 				second.Constructors.ToList(),
 				new LambdaComparer<CtorDetails>(pd => pd.Name),
-				m => new CtorAdded(),
-				m => new CtorRemoved());
+				m => new TypeCtorAdded(),
+				m => new TypeCtorRemoved());
 
 			foreach (var change in ctorChanges)
 				yield return change;
@@ -149,8 +149,8 @@ namespace SemVeyor.Domain
 				GenericArguments.ToList(),
 				second.GenericArguments.ToList(),
 				new LambdaComparer<GenericArgumentDetails>(ga => ga.Position),
-				m => new GenericArgumentAdded(),
-				m => new GenericArgumentRemoved());
+				m => new TypeGenericArgumentAdded(),
+				m => new TypeGenericArgumentRemoved());
 
 			foreach (var change in genericChanges)
 				yield return change;

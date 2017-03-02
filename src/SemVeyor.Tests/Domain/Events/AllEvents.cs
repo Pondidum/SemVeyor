@@ -39,9 +39,12 @@ namespace SemVeyor.Tests.Domain.Events
 		[MemberData(nameof(Events))]
 		public void All_events_implement_tostring(Type eventType)
 		{
-			var instance = Build(eventType);
+			var instance = Build(eventType).ToString();
 
-			instance.ToString().ShouldNotBe(eventType.FullName);
+			instance.ShouldSatisfyAllConditions(
+				() => instance.ShouldNotBe(eventType.FullName),
+				() => instance.ShouldStartWith(eventType.Name)
+			);
 		}
 
 		private object Build(Type type)

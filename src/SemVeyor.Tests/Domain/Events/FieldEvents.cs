@@ -22,13 +22,13 @@ namespace SemVeyor.Tests.Domain.Events
 		[Fact]
 		public void FieldAdded()
 		{
-			new FieldAdded(_newer).ToString().ShouldBe("FieldAdded: " + _newer);
+			new TypeFieldAdded(_newer).ToString().ShouldBe("TypeFieldAdded: " + _newer);
 		}
 
 		[Fact]
 		public void FieldRemoved()
 		{
-			new FieldRemoved(_newer).ToString().ShouldBe("FieldRemoved: " + _newer);
+			new TypeFieldRemoved(_newer).ToString().ShouldBe("TypeFieldRemoved: " + _newer);
 		}
 
 		[Fact]

@@ -1,12 +1,9 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
-	public class CtorVisibilityIncreased : IMinor
+	public class CtorVisibilityIncreased : CtorEvent, IMinor
 	{
-		public override string ToString()
+		public CtorVisibilityIncreased(CtorDetails older, CtorDetails newer) : base(older, newer)
 		{
-			throw new NotImplementedException();
 		}
 	}
 }

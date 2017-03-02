@@ -26,10 +26,10 @@ namespace SemVeyor.Domain
 		public IEnumerable<object> UpdatedTo(CtorDetails newer)
 		{
 			if (Visibility > newer.Visibility)
-				yield return new CtorVisibilityDecreased();
+				yield return new CtorVisibilityDecreased(this, newer);
 
 			if (Visibility < newer.Visibility)
-				yield return new CtorVisibilityIncreased();
+				yield return new CtorVisibilityIncreased(this, newer);
 
 			var changes = Deltas.ForCollections(
 				Parameters.ToList(),

@@ -1,16 +1,9 @@
 namespace SemVeyor.Domain.Events
 {
-	public class CtorArgumentAdded : IMinor
+	public class CtorArgumentAdded : CtorEvent, IMinor
 	{
-		private readonly CtorDetails _older;
-		private readonly CtorDetails _newer;
-
-		public CtorArgumentAdded(CtorDetails older, CtorDetails newer)
+		public CtorArgumentAdded(CtorDetails older, CtorDetails newer) : base(older, newer)
 		{
-			_older = older;
-			_newer = newer;
 		}
-
-		public override string ToString() => $"{GetType().Name}: {_older} => {_newer}";
 	}
 }

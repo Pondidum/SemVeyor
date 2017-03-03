@@ -58,3 +58,24 @@
 * Type had a visible ctor removed => major++
 * Type had a ctor more visible => minor++
 * Type had a ctor less visible => major++
+
+
+
+## Test Cases
+
+### Adding a generic argument to one overloaded method
+```
+public class PublicEmptyClass
+{
+	public void Execute() {}
+	public void Execute(string name) {}
+}
+```
+to
+```
+public class PublicEmptyClass
+{
+	public void Execute() {}
+	public void Execute<T>(string name) {}
+}
+```

@@ -70,13 +70,8 @@
     <Compile Include="Domain\MethodDetailsTests.cs" />
     <Compile Include="Domain\PropertyDetailsTests.cs" />
     <Compile Include="Domain\TypeDetailsCtorTests.cs" />
-    <Compile Include="Domain\TypeDetailsFieldTests.cs" />
     <Compile Include="Domain\TypeContentGenericsTests.cs" />
-    <Compile Include="Domain\TypeDetailsInheritanceTests.cs" />
-    <Compile Include="Domain\TypeDetailsMethodsTests.cs" />
-    <Compile Include="Domain\TypeDetailsPropertiesTests.cs" />
     <Compile Include="Domain\MemberDetailsExtensions.cs" />
-    <Compile Include="Domain\TypeDetailsTestBase.cs" />
     <Compile Include="Domain\TypeDetailsTests.cs" />
     <Compile Include="Domain\VisibilityTests.cs" />
     <Compile Include="Builder\ParameterDetailsBuilder.cs" />

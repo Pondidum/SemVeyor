@@ -64,11 +64,13 @@ namespace SemVeyor.Domain
 		{
 			var methods = type
 				.GetMethods(ExternalVisibleFlags)
+				.Where(m => m.IsSpecialName == false)
 				.Select(MethodDetails.From);
 
 			var objectProtectedMethods = new HashSet<string>(typeof(object)
 				.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
 				.Where(c => c.IsFamily)
+				.Where(m => m.IsSpecialName == false)
 				.Select(met => met.Name));
 
 			return methods

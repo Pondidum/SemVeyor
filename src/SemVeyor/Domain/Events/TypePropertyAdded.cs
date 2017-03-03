@@ -1,12 +1,14 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
 	public class TypePropertyAdded : IMinor
 	{
-		public override string ToString()
+		private readonly PropertyDetails _newer;
+
+		public TypePropertyAdded(PropertyDetails newer)
 		{
-			throw new NotImplementedException();
+			_newer = newer;
 		}
+
+		public override string ToString() => $"{GetType().Name}: {_newer}";
 	}
 }

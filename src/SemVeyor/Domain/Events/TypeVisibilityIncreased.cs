@@ -1,12 +1,16 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
 	public class TypeVisibilityIncreased : IMinor
 	{
-		public override string ToString()
+		private readonly Visibility _older;
+		private readonly Visibility _newer;
+
+		public TypeVisibilityIncreased(Visibility older, Visibility newer)
 		{
-			throw new NotImplementedException();
+			_older = older;
+			_newer = newer;
 		}
+
+		public override string ToString() => $"{GetType().Name}: {_older} => {_newer}";
 	}
 }

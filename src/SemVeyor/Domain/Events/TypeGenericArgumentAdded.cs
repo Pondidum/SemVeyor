@@ -1,12 +1,14 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
 	public class TypeGenericArgumentAdded : IMinor
 	{
-		public override string ToString()
+		private readonly GenericArgumentDetails _newer;
+
+		public TypeGenericArgumentAdded(GenericArgumentDetails newer)
 		{
-			throw new NotImplementedException();
+			_newer = newer;
 		}
+
+		public override string ToString() => $"{GetType().Name}: {_newer}";
 	}
 }

@@ -1,12 +1,14 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
 	public class TypeGenericArgumentRemoved : IMajor
 	{
-		public override string ToString()
+		private readonly GenericArgumentDetails _newer;
+
+		public TypeGenericArgumentRemoved(GenericArgumentDetails newer)
 		{
-			throw new NotImplementedException();
+			_newer = newer;
 		}
+
+		public override string ToString() => $"{GetType().Name}: {_newer}";
 	}
 }

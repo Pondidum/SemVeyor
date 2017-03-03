@@ -1,12 +1,14 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
 	public class TypeCtorRemoved : IMajor
 	{
-		public override string ToString()
+		private readonly CtorDetails _newer;
+
+		public TypeCtorRemoved(CtorDetails newer)
 		{
-			throw new NotImplementedException();
+			_newer = newer;
 		}
+
+		public override string ToString() => $"{GetType().Name}: {_newer}";
 	}
 }

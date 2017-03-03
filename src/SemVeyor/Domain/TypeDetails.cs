@@ -100,10 +100,10 @@ namespace SemVeyor.Domain
 		public IEnumerable<object> UpdatedTo(TypeDetails second)
 		{
 			if (Visibility > second.Visibility)
-				yield return new TypeVisibilityDecreased();
+				yield return new TypeVisibilityDecreased(Visibility, second.Visibility);
 
 			if (Visibility < second.Visibility)
-				yield return new TypeVisibilityIncreased();
+				yield return new TypeVisibilityIncreased(Visibility, second.Visibility);
 
 			var fieldChanges = Deltas.ForCollections(
 				Fields.ToList(),
@@ -119,8 +119,8 @@ namespace SemVeyor.Domain
 				Methods.ToList(),
 				second.Methods.ToList(),
 				new LambdaComparer<MethodDetails>(md => md.Name),
-				m => new TypeMethodAdded(),
-				m => new TypeMethodRemoved());
+				m => new TypeMethodAdded(m),
+				m => new TypeMethodRemoved(m));
 
 			foreach (var change in methodChanges)
 				yield return change;
@@ -129,8 +129,8 @@ namespace SemVeyor.Domain
 				Properties.ToList(),
 				second.Properties.ToList(),
 				new LambdaComparer<PropertyDetails>(pd => pd.Name),
-				m => new TypePropertyAdded(),
-				m => new TypePropertyRemoved());
+				p => new TypePropertyAdded(p),
+				p => new TypePropertyRemoved(p));
 
 			foreach (var change in propertyChanges)
 				yield return change;
@@ -139,8 +139,8 @@ namespace SemVeyor.Domain
 				Constructors.ToList(),
 				second.Constructors.ToList(),
 				new LambdaComparer<CtorDetails>(pd => pd.Name),
-				m => new TypeCtorAdded(),
-				m => new TypeCtorRemoved());
+				c => new TypeCtorAdded(c),
+				c => new TypeCtorRemoved(c));
 
 			foreach (var change in ctorChanges)
 				yield return change;
@@ -149,8 +149,8 @@ namespace SemVeyor.Domain
 				GenericArguments.ToList(),
 				second.GenericArguments.ToList(),
 				new LambdaComparer<GenericArgumentDetails>(ga => ga.Position),
-				m => new TypeGenericArgumentAdded(),
-				m => new TypeGenericArgumentRemoved());
+				g => new TypeGenericArgumentAdded(g),
+				g => new TypeGenericArgumentRemoved(g));
 
 			foreach (var change in genericChanges)
 				yield return change;

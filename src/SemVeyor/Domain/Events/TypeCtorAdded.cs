@@ -1,12 +1,14 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
 	public class TypeCtorAdded : IMinor
 	{
-		public override string ToString()
+		private readonly CtorDetails _newer;
+
+		public TypeCtorAdded(CtorDetails newer)
 		{
-			throw new NotImplementedException();
+			_newer = newer;
 		}
+
+		public override string ToString() => $"{GetType().Name}: {_newer}";
 	}
 }

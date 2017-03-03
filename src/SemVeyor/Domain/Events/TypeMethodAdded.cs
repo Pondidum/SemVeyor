@@ -1,12 +1,14 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
 	public class TypeMethodAdded : IMinor
 	{
-		public override string ToString()
+		private readonly MethodDetails _newer;
+
+		public TypeMethodAdded(MethodDetails newer)
 		{
-			throw new NotImplementedException();
+			_newer = newer;
 		}
+
+		public override string ToString() => $"{GetType().Name}: {_newer}";
 	}
 }

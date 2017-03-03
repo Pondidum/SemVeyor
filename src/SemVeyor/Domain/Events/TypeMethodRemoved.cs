@@ -1,12 +1,14 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
 	public class TypeMethodRemoved : IMajor
 	{
-		public override string ToString()
+		private readonly MethodDetails _newer;
+
+		public TypeMethodRemoved(MethodDetails newer)
 		{
-			throw new NotImplementedException();
+			_newer = newer;
 		}
+
+		public override string ToString() => $"{GetType().Name}: {_newer}";
 	}
 }

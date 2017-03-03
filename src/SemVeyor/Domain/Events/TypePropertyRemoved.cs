@@ -1,12 +1,14 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
 	public class TypePropertyRemoved : IMajor
 	{
-		public override string ToString()
+		private readonly PropertyDetails _newer;
+
+		public TypePropertyRemoved(PropertyDetails newer)
 		{
-			throw new NotImplementedException();
+			_newer = newer;
 		}
+
+		public override string ToString() => $"{GetType().Name}: {_newer}";
 	}
 }

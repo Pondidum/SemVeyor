@@ -33,24 +33,6 @@ namespace SemVeyor.Tests.Domain
 		[Fact]
 		public void There_are_2_fields() => Details.Fields.Count().ShouldBe(2);
 
-		[Fact]
-		public void The_public_field_is_listed() => Details.Fields.ShouldContain(x => x.Visibility == Visibility.Public);
-
-		[Fact]
-		public void The_protected_field_is_listed() => Details.Fields.ShouldContain(x => x.Visibility == Visibility.Protected);
-
-		[Fact]
-		public void The_internal_field_is_not_listed() => Details.Fields.ShouldNotContain(x => x.Visibility == Visibility.Internal);
-
-		[Fact]
-		public void The_private_field_is_not_listed() => Details.Fields.ShouldNotContain(x => x.Visibility == Visibility.Private);
-
-		[Fact]
-		public void The_field_name_is_populated() => PublicField.Name.ShouldBe(nameof(TestType.PublicField));
-
-		[Fact]
-		public void The_field_type_is_populated() => PublicField.Type.ShouldBe(typeof(int));
-
 
 
 		[Fact]
@@ -141,7 +123,7 @@ namespace SemVeyor.Tests.Domain
 
 
 
-		private FieldDetails PublicField => Details.Fields.ByVisibility(Visibility.Public);
+		
 		private MethodDetails PublicMethod => Details.Methods.ByVisibility(Visibility.Public);
 		private PropertyDetails Property => Details.Properties.FirstOrDefault(p => p.Name == nameof(TestType.InternalSetProperty));
 		private PropertyDetails ReadOnlyProperty => Details.Properties.FirstOrDefault(p => p.Name == nameof(TestType.ReadonlyProperty));

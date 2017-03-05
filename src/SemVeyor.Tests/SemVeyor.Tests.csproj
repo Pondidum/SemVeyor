@@ -70,6 +70,7 @@
     <Compile Include="Domain\MethodDetailsTests.cs" />
     <Compile Include="Domain\PropertyDetailsTests.cs" />
     <Compile Include="Domain\Queries\GetAllCtorsQueryTests.cs" />
+    <Compile Include="Domain\Queries\GetAllFieldsQueryTests.cs" />
     <Compile Include="Domain\TypeDetailsCtorTests.cs" />
     <Compile Include="Domain\TypeContentGenericsTests.cs" />
     <Compile Include="Domain\MemberDetailsExtensions.cs" />

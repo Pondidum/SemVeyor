@@ -7,10 +7,10 @@ using SemVeyor.Infrastructure;
 
 namespace SemVeyor.Domain
 {
-	public class PropertyDetails : IMemberDetails, IDeltaProducer<PropertyDetails>
+	public class PropertyDetails : MemberDetails, IDeltaProducer<PropertyDetails>
 	{
-		public string Name { get; set; }
-		public Visibility Visibility { get; set; }
+		public override string Name { get; set; }
+		public override Visibility Visibility { get; set; }
 		public Type Type { get; set; }
 		public Visibility? SetterVisibility { get; set; }
 		public IEnumerable<ParameterDetails> Parameters { get; set; }

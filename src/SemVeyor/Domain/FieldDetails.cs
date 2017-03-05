@@ -5,10 +5,10 @@ using SemVeyor.Domain.Events;
 
 namespace SemVeyor.Domain
 {
-	public class FieldDetails : IMemberDetails, IDeltaProducer<FieldDetails>
+	public class FieldDetails : MemberDetails, IDeltaProducer<FieldDetails>
 	{
-		public string Name { get; set; }
-		public Visibility Visibility { get; set;}
+		public override string Name { get; set; }
+		public override Visibility Visibility { get; set;}
 		public Type Type { get; set;}
 
 		public static FieldDetails From(FieldInfo info)

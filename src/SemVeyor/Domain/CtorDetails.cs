@@ -6,10 +6,10 @@ using SemVeyor.Infrastructure;
 
 namespace SemVeyor.Domain
 {
-	public class CtorDetails : IMemberDetails, IDeltaProducer<CtorDetails>
+	public class CtorDetails : MemberDetails, IDeltaProducer<CtorDetails>
 	{
-		public string Name { get; set; }
-		public Visibility Visibility { get; set; }
+		public override string Name { get; set; }
+		public override Visibility Visibility { get; set; }
 		public IEnumerable<ParameterDetails> Parameters { get; set; }
 
 		public static CtorDetails From(ConstructorInfo ctor)

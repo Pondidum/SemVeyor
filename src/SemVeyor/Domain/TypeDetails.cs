@@ -7,18 +7,16 @@ using SemVeyor.Infrastructure;
 
 namespace SemVeyor.Domain
 {
-	public class TypeDetails : IMemberDetails, IDeltaProducer<TypeDetails>
+	public class TypeDetails : MemberDetails, IDeltaProducer<TypeDetails>
 	{
-		private const BindingFlags ExternalVisibleFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
-
 		public IEnumerable<GenericArgumentDetails> GenericArguments { get; set; }
 		public IEnumerable<PropertyDetails> Properties { get; set; }
 		public IEnumerable<MethodDetails> Methods { get; set; }
 		public IEnumerable<FieldDetails> Fields { get; set; }
 		public IEnumerable<CtorDetails> Constructors { get; set; }
 
-		public Visibility Visibility { get; set; }
-		public string Name { get; set; }
+		public override Visibility Visibility { get; set; }
+		public override string Name { get; set; }
 		public string Namespace { get; set; }
 		public string FullName => $"{Namespace}.{Name}";
 
@@ -94,10 +92,7 @@ namespace SemVeyor.Domain
 				.Where(IsExternal);
 		}
 
-		private static bool IsExternal(IMemberDetails info)
-		{
-			return info.Visibility > Visibility.Internal;
-		}
+
 
 		public IEnumerable<object> UpdatedTo(TypeDetails second)
 		{

@@ -90,6 +90,11 @@
     <Compile Include="Domain\Extensions.cs" />
     <Compile Include="Domain\MethodDetails.cs" />
     <Compile Include="Domain\PropertyDetails.cs" />
+    <Compile Include="Domain\Queries\GetAllCtorsQuery.cs" />
+    <Compile Include="Domain\Queries\GetAllFieldsQuery.cs" />
+    <Compile Include="Domain\Queries\GetAllGenericArgumentsQuery.cs" />
+    <Compile Include="Domain\Queries\GetAllMethodsQuery.cs" />
+    <Compile Include="Domain\Queries\GetAllPropertiesQuery.cs" />
     <Compile Include="Domain\TypeDetails.cs" />
     <Compile Include="Domain\Visibility.cs" />
     <Compile Include="CommandLine\CommandLineParser.cs" />

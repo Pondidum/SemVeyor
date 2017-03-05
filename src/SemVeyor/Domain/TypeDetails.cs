@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using SemVeyor.Domain.Events;
+using SemVeyor.Domain.Queries;
 using SemVeyor.Infrastructure;
 
 namespace SemVeyor.Domain
@@ -34,64 +34,13 @@ namespace SemVeyor.Domain
 				BaseType = type.BaseType?.Name,
 				Interfaces = type.GetInterfaces().Select(i => i.Name),
 
-				GenericArguments = GenericArgumentsFor(type),
-				Constructors = ConstructorsFor(type),
-				Properties = PropertiesFor(type),
-				Methods = MethodsFor(type),
-				Fields = FieldsFor(type)
+				GenericArguments = new GetAllGenericArgumentsQuery().Execute(type),
+				Constructors = new GetAllCtorsQuery().Execute(type),
+				Properties = new GetAllPropertiesQuery().Execute(type),
+				Methods = new GetAllMethodsQuery().Execute(type),
+				Fields = new GetAllFieldsQuery().Execute(type)
 			};
 		}
-
-		private static IEnumerable<GenericArgumentDetails> GenericArgumentsFor(Type type)
-		{
-			return type
-				.GetGenericArguments()
-				.Select(GenericArgumentDetails.From)
-				.ToArray();
-		}
-
-		private static IEnumerable<PropertyDetails> PropertiesFor(IReflect type)
-		{
-			return type
-				.GetProperties(ExternalVisibleFlags)
-				.Select(PropertyDetails.From)
-				.Where(IsExternal);
-		}
-
-		private static IEnumerable<MethodDetails> MethodsFor(IReflect type)
-		{
-			var methods = type
-				.GetMethods(ExternalVisibleFlags)
-				.Where(m => m.IsSpecialName == false)
-				.Select(MethodDetails.From);
-
-			var objectProtectedMethods = new HashSet<string>(typeof(object)
-				.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance)
-				.Where(c => c.IsFamily)
-				.Where(m => m.IsSpecialName == false)
-				.Select(met => met.Name));
-
-			return methods
-				.Where(met => objectProtectedMethods.Contains(met.Name) == false)
-				.Where(IsExternal);
-		}
-
-		private static IEnumerable<CtorDetails> ConstructorsFor(Type type)
-		{
-			return type
-				.GetConstructors(ExternalVisibleFlags)
-				.Select(ctor => CtorDetails.From(ctor))
-				.Where(IsExternal);
-		}
-
-		private static IEnumerable<FieldDetails> FieldsFor(Type type)
-		{
-			return type
-				.GetFields(ExternalVisibleFlags)
-				.Select(FieldDetails.From)
-				.Where(IsExternal);
-		}
-
 
 
 		public IEnumerable<object> UpdatedTo(TypeDetails second)

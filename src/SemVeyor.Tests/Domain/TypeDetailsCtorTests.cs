@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using SemVeyor.Domain;
+using SemVeyor.Domain.Queries;
 using SemVeyor.Tests.TestUtils;
 using Shouldly;
 using Xunit;
@@ -16,7 +17,7 @@ namespace SemVeyor.Tests.Domain
 		public TypeDetailsCtorTests()
 		{
 			InputType = typeof(TestType);
-			Details = TypeDetails.From(typeof(TestType));
+			Details = new GetTypeQuery().Execute(typeof(TestType));
 		}
 
 		[Fact]

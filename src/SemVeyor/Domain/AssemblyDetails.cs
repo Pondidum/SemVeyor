@@ -14,10 +14,12 @@ namespace SemVeyor.Domain
 
 		public static AssemblyDetails From(Assembly assembly)
 		{
+			var getAllTypesQuery = new GetAllTypesQuery(new GetTypeQuery());
+
 			return new AssemblyDetails
 			{
 				Name = assembly.FullName,
-				Types = new GetAllTypesQuery().Execute(assembly).ToArray()
+				Types = getAllTypesQuery.Execute(assembly).ToArray()
 			};
 		}
 

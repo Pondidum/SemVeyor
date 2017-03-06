@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using SemVeyor.Domain.Events;
-using SemVeyor.Domain.Queries;
 using SemVeyor.Infrastructure;
 
 namespace SemVeyor.Domain
@@ -22,26 +20,6 @@ namespace SemVeyor.Domain
 
 		public string BaseType { get; set; }
 		public IEnumerable<string> Interfaces { get; set; }
-
-		public static TypeDetails From(Type type)
-		{
-			return new TypeDetails
-			{
-				Name = type.Name,
-				Visibility = type.GetVisibility(),
-				Namespace = type.Namespace,
-
-				BaseType = type.BaseType?.Name,
-				Interfaces = type.GetInterfaces().Select(i => i.Name),
-
-				GenericArguments = new GetAllGenericArgumentsQuery().Execute(type),
-				Constructors = new GetAllCtorsQuery().Execute(type),
-				Properties = new GetAllPropertiesQuery().Execute(type),
-				Methods = new GetAllMethodsQuery().Execute(type),
-				Fields = new GetAllFieldsQuery().Execute(type)
-			};
-		}
-
 
 		public IEnumerable<object> UpdatedTo(TypeDetails second)
 		{

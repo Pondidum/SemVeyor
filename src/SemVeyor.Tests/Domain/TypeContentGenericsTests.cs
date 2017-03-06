@@ -1,5 +1,6 @@
 using System.Linq;
 using SemVeyor.Domain;
+using SemVeyor.Domain.Queries;
 using Shouldly;
 using Xunit;
 
@@ -11,7 +12,7 @@ namespace SemVeyor.Tests.Domain
 
 		public TypeContentGenericsTests()
 		{
-			Details = TypeDetails.From(typeof(TestType<,>));
+			Details = new GetTypeQuery().Execute(typeof(TestType<,>));
 		}
 
 		[Fact]

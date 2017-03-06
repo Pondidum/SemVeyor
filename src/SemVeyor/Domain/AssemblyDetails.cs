@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using SemVeyor.Domain.Events;
+using SemVeyor.Domain.Queries;
 using SemVeyor.Infrastructure;
 
 namespace SemVeyor.Domain
@@ -16,7 +17,7 @@ namespace SemVeyor.Domain
 			return new AssemblyDetails
 			{
 				Name = assembly.FullName,
-				Types = assembly.GetExportedTypes().Select(TypeDetails.From).ToArray()
+				Types = new GetAllTypesQuery().Execute(assembly).ToArray()
 			};
 		}
 

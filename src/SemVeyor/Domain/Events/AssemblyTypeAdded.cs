@@ -1,12 +1,14 @@
-﻿using System;
-
-namespace SemVeyor.Domain.Events
+﻿namespace SemVeyor.Domain.Events
 {
 	public class AssemblyTypeAdded : IMinor
 	{
-		public override string ToString()
+		private readonly TypeDetails _type;
+
+		public AssemblyTypeAdded(TypeDetails type)
 		{
-			throw new NotImplementedException();
+			_type = type;
 		}
+
+		public override string ToString() => $"{GetType().Name} :{_type.FullName}";
 	}
 }

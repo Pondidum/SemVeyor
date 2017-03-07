@@ -29,8 +29,8 @@ namespace SemVeyor.Domain
 				Types.ToList(),
 				newer.Types.ToList(),
 				new LambdaComparer<TypeDetails>(t => t.FullName),
-				x => new AssemblyTypeAdded(),
-				x => new AssemblyTypeRemoved());
+				x => new AssemblyTypeAdded(x),
+				x => new AssemblyTypeRemoved(x));
 
 			foreach (var change in changes)
 				yield return change;

@@ -1,12 +1,14 @@
-using System;
-
 namespace SemVeyor.Domain.Events
 {
 	public class AssemblyTypeRemoved : IMajor
 	{
-		public override string ToString()
+		private readonly TypeDetails _type;
+
+		public AssemblyTypeRemoved(TypeDetails type)
 		{
-			throw new NotImplementedException();
+			_type = type;
 		}
+
+		public override string ToString() => $"{GetType().Name} :{_type.FullName}";
 	}
 }

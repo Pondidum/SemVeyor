@@ -57,6 +57,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Acceptance\Scenarios.cs" />
     <Compile Include="Classification\EventClassificationTests.cs" />
     <Compile Include="Domain\Events\AllEvents.cs" />
     <Compile Include="Domain\Events\FieldEvents.cs" />

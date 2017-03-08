@@ -32,7 +32,7 @@ namespace SemVeyor.Domain
 			IEqualityComparer<T> comparer,
 			Func<T, object> onAdded,
 			Func<T, object> onRemoved)
-			where T : IDeltaProducer<T>
+			where T : class, IDeltaProducer<T>
 		{
 			var namesInBoth = older.Intersect(newer, comparer).Select(md => md.Name).ToArray();
 
@@ -59,7 +59,7 @@ namespace SemVeyor.Domain
 					older.Remove(best.Older);
 					newer.Remove(best.Newer);
 
-					group.Remove(best);
+					group.RemoveAll(link => link.Older == best.Older || link.Newer == best.Newer);
 					olderCount--;
 					newerCount--;
 				}

@@ -73,7 +73,7 @@
     <Compile Include="Domain\Queries\GetAllFieldsQueryTests.cs" />
     <Compile Include="Domain\Queries\GetAllMethodsQueryTests.cs" />
     <Compile Include="Domain\Queries\GetAllPropertiesQueryTests.cs" />
-    <Compile Include="Domain\TypeDetailsCtorTests.cs" />
+    <Compile Include="Domain\Queries\GetTypeQueryTests.cs" />
     <Compile Include="Domain\TypeContentGenericsTests.cs" />
     <Compile Include="Domain\MemberDetailsExtensions.cs" />
     <Compile Include="Domain\TypeDetailsTests.cs" />

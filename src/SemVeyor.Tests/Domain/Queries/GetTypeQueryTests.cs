@@ -9,12 +9,12 @@ using Xunit;
 
 namespace SemVeyor.Tests.Domain
 {
-	public class TypeDetailsCtorTests
+	public class GetTypeQueryTests
 	{
 		protected Type InputType { get; }
 		protected TypeDetails Details { get; }
 
-		public TypeDetailsCtorTests()
+		public GetTypeQueryTests()
 		{
 			InputType = typeof(TestType);
 			Details = new GetTypeQuery().Execute(typeof(TestType));

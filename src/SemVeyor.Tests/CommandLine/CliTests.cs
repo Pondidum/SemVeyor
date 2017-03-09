@@ -47,10 +47,19 @@ namespace SemVeyor.Tests.CommandLine
 		public void Prefix_should_be_populated()
 		{
 			_cli.ForPrefix("storage").ShouldBe(new Dictionary<string, string>
-				{
-					{ "accesskey", "123456" },
-					{ "secretkey", "something with spaces" }
-				});
+			{
+				{ "accesskey", "123456" },
+				{ "secretkey", "something with spaces" }
+			});
+		}
+
+		[Fact]
+		public void All_prefixes_should_be_listed()
+		{
+			_cli.Prefixes.ShouldBe(new[]
+			{
+				"storage"
+			});
 		}
 	}
 }

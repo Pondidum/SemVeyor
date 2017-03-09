@@ -37,6 +37,7 @@ namespace SemVeyor.CommandLine
 
 		public Dictionary<string, string> Arguments => _arguments;
 		public IEnumerable<string> Paths => _paths;
+		public IEnumerable<string> Prefixes => _prefixes.Keys;
 
 		public Dictionary<string, string> ForPrefix(string prefix)
 		{

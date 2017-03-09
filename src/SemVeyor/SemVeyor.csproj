@@ -34,6 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Classification\SemVer.cs" />
+    <Compile Include="CommandLine\Cli.cs" />
     <Compile Include="Domain\Events\CtorEvent.cs" />
     <Compile Include="Domain\Events\FieldEvent.cs" />
     <Compile Include="Domain\Events\MethodEvent.cs" />
@@ -99,9 +100,6 @@
     <Compile Include="Domain\Queries\GetTypeQuery.cs" />
     <Compile Include="Domain\TypeDetails.cs" />
     <Compile Include="Domain\Visibility.cs" />
-    <Compile Include="CommandLine\CommandLineParser.cs" />
-    <Compile Include="CommandLine\CommandLineResult.cs" />
-    <Compile Include="CommandLine\Options.cs" />
     <Compile Include="Infrastructure\LambdaComparer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Storage\IStorage.cs" />
@@ -110,6 +108,7 @@
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
       <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

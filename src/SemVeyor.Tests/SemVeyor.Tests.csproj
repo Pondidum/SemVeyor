@@ -60,7 +60,7 @@
   <ItemGroup>
     <Compile Include="Acceptance\Scenarios.cs" />
     <Compile Include="Classification\EventClassificationTests.cs" />
-    <Compile Include="CommandLine\Scratch.cs" />
+    <Compile Include="CommandLine\CliTests.cs" />
     <Compile Include="Domain\Events\AllEvents.cs" />
     <Compile Include="Domain\Events\FieldEvents.cs" />
     <Compile Include="Domain\Events\GenericArgumentEvents.cs" />
@@ -90,9 +90,6 @@
     <Compile Include="Builder\MethodDetailsBuilder.cs" />
     <Compile Include="Builder\PropertyDetailsBuilder.cs" />
     <Compile Include="Builder\TypeDetailsBuilder.cs" />
-    <Compile Include="CommandLine\CommandLineParserTests.cs" />
-    <Compile Include="CommandLine\CommandLineResultFailureTests.cs" />
-    <Compile Include="CommandLine\CommandLineResultSuccessTests.cs" />
     <Compile Include="Infrastructure\LambdaComparerTests.cs" />
     <Compile Include="Scratchpad.cs" />
     <Compile Include="TestUtils\TestType.cs" />

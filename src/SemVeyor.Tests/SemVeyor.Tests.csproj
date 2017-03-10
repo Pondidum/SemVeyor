@@ -61,6 +61,7 @@
     <Compile Include="Acceptance\Scenarios.cs" />
     <Compile Include="Classification\EventClassificationTests.cs" />
     <Compile Include="CommandLine\CliTests.cs" />
+    <Compile Include="CommandLine\OptionsTests.cs" />
     <Compile Include="Domain\Events\AllEvents.cs" />
     <Compile Include="Domain\Events\FieldEvents.cs" />
     <Compile Include="Domain\Events\GenericArgumentEvents.cs" />

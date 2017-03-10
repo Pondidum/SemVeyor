@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using SemVeyor.Classification;
+using SemVeyor.CommandLine;
 using SemVeyor.Domain;
 using SemVeyor.Storage;
 
@@ -11,10 +12,13 @@ namespace SemVeyor
 	{
 		public static void Main(string[] args)
 		{
+			var cli = new Cli(args);
+			var options = Options.From(cli);
+
 			var store = new FileStore("history.lsj");
 
 			var previous = store.Read();
-			var current = AssemblyDetails.From(Assembly.LoadFile(args[0]));
+			var current = AssemblyDetails.From(Assembly.LoadFile(options.Assemblies.First()));
 
 			Console.WriteLine(previous != null
 				? "History loaded"

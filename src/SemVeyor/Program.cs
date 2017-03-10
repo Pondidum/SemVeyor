@@ -15,7 +15,7 @@ namespace SemVeyor
 			var cli = new Cli(args);
 			var options = Options.From(cli);
 
-			var store = new FileStore("history.lsj");
+			var store = new StorageFactory().CreateStore(options);
 
 			var previous = store.Read();
 			var current = AssemblyDetails.From(Assembly.LoadFile(options.Assemblies.First()));

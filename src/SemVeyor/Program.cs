@@ -12,7 +12,7 @@ namespace SemVeyor
 	{
 		public static void Main(string[] args)
 		{
-			var cli = new Cli(args);
+			var cli = new Cli().Parse(args);
 			var options = Options.From(cli);
 
 			var store = new StorageFactory().CreateStore(options);

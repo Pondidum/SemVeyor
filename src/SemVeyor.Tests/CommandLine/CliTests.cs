@@ -7,7 +7,7 @@ namespace SemVeyor.Tests.CommandLine
 {
 	public class CliTests
 	{
-		private readonly Cli _cli;
+		private readonly CliArgs _cli;
 
 		public CliTests()
 		{
@@ -22,7 +22,7 @@ namespace SemVeyor.Tests.CommandLine
 				"/path/to/assembly.dll",
 			};
 
-			_cli = new Cli(args);
+			_cli = new Cli().Parse(args);
 		}
 
 		[Fact]

@@ -10,12 +10,15 @@ namespace SemVeyor.CommandLine
 		private readonly Dictionary<string, Dictionary<string, string>> _prefixes;
 		private readonly List<string> _paths;
 
-		public Cli(string[] args)
+		public Cli()
 		{
 			_arguments = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 			_prefixes = new Dictionary<string, Dictionary<string, string>>(StringComparer.OrdinalIgnoreCase);
 			_paths = new List<string>();
+		}
 
+		public CliArgs Parse(string[] args)
+		{
 			var handlers = new Func<string, Queue<string>, bool>[]
 			{
 				HandleArgument,
@@ -27,23 +30,13 @@ namespace SemVeyor.CommandLine
 			while (queue.Any())
 			{
 				var current = queue.Dequeue();
-
 				var handler = handlers.FirstOrDefault(h => h(current, queue));
 
 				if (handler == null)
 					throw new NotSupportedException(current);
 			}
-		}
 
-		public Dictionary<string, string> Arguments => _arguments;
-		public IEnumerable<string> Paths => _paths;
-		public IEnumerable<string> Prefixes => _prefixes.Keys;
-
-		public Dictionary<string, string> ForPrefix(string prefix)
-		{
-			return _prefixes.ContainsKey(prefix)
-				? _prefixes[prefix]
-				: new Dictionary<string, string>();
+			return new CliArgs(_arguments, _prefixes, _paths);
 		}
 
 		private bool HandlePath(string name, Queue<string> tokens)

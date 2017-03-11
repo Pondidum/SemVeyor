@@ -35,6 +35,7 @@
   <ItemGroup>
     <Compile Include="Classification\SemVer.cs" />
     <Compile Include="CommandLine\Cli.cs" />
+    <Compile Include="CommandLine\CliArgs.cs" />
     <Compile Include="CommandLine\Options.cs" />
     <Compile Include="Domain\Events\CtorEvent.cs" />
     <Compile Include="Domain\Events\FieldEvent.cs" />

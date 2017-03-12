@@ -19,6 +19,9 @@ namespace SemVeyor.Tests.CommandLine
 				"123456",
 				"-storage:secretkey",
 				"something with spaces",
+				"-storage:enable",
+				"-runnable",
+				"--",
 				"/path/to/assembly.dll",
 			};
 
@@ -60,6 +63,16 @@ namespace SemVeyor.Tests.CommandLine
 			{
 				"storage"
 			});
+		}
+
+		[Fact]
+		public void Flags_are_populated()
+		{
+			_cli.AllFlags.ShouldBe(new[]
+			{
+				"runnable",
+				"storage:enable"
+			}, ignoreOrder: true);
 		}
 	}
 }

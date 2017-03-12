@@ -1,49 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security;
 
 namespace SemVeyor.CommandLine
 {
 	public class Cli
 	{
-		private readonly Dictionary<string, HashSet<string>> _flags;
-		private readonly Dictionary<string, string> _arguments;
-		private readonly Dictionary<string, Dictionary<string, string>> _prefixes;
-		private readonly List<string> _paths;
-
-		public Cli()
+		public CliArgs Parse(IEnumerable<string> args)
 		{
-			_flags = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
-			_arguments = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-			_prefixes = new Dictionary<string, Dictionary<string, string>>(StringComparer.OrdinalIgnoreCase);
-			_paths = new List<string>();
-		}
-
-		public CliArgs Parse(string[] args)
-		{
-			var handlers = new Func<string, Queue<string>, bool>[]
+			var handlers = new Func<CliArgs, string, Queue<string>, bool>[]
 			{
 				HandleArgument,
 				HandleFlag,
 				HandlePath
 			};
 
+			var dto = new CliArgs();
 			var queue = new Queue<string>(args);
 
 			while (queue.Any())
 			{
 				var current = queue.Dequeue();
-				var handler = handlers.FirstOrDefault(h => h(current, queue));
+				var handler = handlers.FirstOrDefault(h => h(dto, current, queue));
 
 				if (handler == null)
 					throw new NotSupportedException(current);
 			}
 
-			return new CliArgs(_arguments, _prefixes, _flags, _paths);
+			return dto;
 		}
 
-		private bool HandleFlag(string name, Queue<string> tokens)
+		private bool HandleFlag(CliArgs dto, string name, Queue<string> tokens)
 		{
 			if (name.StartsWith("-") == false)
 				return false;
@@ -57,32 +44,33 @@ namespace SemVeyor.CommandLine
 			var prefix = index >= 0 ? name.Substring(0, index) : string.Empty;
 			var suffix = index >= 0 ? name.Substring(index + 1) : name;
 
-			if (_flags.ContainsKey(prefix) == false)
-				_flags[prefix] = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+			if (dto.Flags.ContainsKey(prefix) == false)
+				dto.Flags[prefix] = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
-			_flags[prefix].Add(suffix);
+			dto.Flags[prefix].Add(suffix);
 
 			return true;
 		}
 
-		private bool HandlePath(string name, Queue<string> tokens)
+		private bool HandlePath(CliArgs dto, string name, Queue<string> tokens)
 		{
 			if (name == "--")
 			{
 				while (tokens.Any())
-					_paths.Add(tokens.Dequeue());
+					dto.Paths.Add(tokens.Dequeue());
+
 				return true;
 			}
 
 			if (name.StartsWith("-"))
 				return false;
 
-			_paths.Add(name);
+			dto.Paths.Add(name);
 
 			return true;
 		}
 
-		private bool HandleArgument(string name, Queue<string> tokens)
+		private bool HandleArgument(CliArgs dto, string name, Queue<string> tokens)
 		{
 			if (name.StartsWith("-") == false)
 				return false;
@@ -97,18 +85,15 @@ namespace SemVeyor.CommandLine
 
 			var value = tokens.Dequeue();
 
-			if (name.Contains(":"))
-			{
-				var prefix = name.Substring(0, name.IndexOf(":"));
-				var suffix = name.Substring(name.IndexOf(":") + 1);
+			var index = name.IndexOf(":");
 
-				if (_prefixes.ContainsKey(prefix) == false)
-					_prefixes[prefix] = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+			var prefix = index >= 0 ? name.Substring(0, index) : string.Empty;
+			var suffix = index >= 0 ? name.Substring(index + 1) : name;
 
-				_prefixes[prefix][suffix] = value;
-			}
-			else
-				_arguments.Add(name, value);
+			if (dto.Arguments.ContainsKey(prefix) == false)
+				dto.Arguments[prefix] = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+			dto.Arguments[prefix][suffix] = value;
 
 			return true;
 		}

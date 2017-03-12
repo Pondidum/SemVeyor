@@ -17,6 +17,6 @@ namespace SemVeyor.CommandLine
 			Assemblies = paths.ToArray();
 		}
 
-		public static Options From(CliArgs cli) => new Options(cli.Arguments, cli.Paths);
+		public static Options From(CliArgs cli) => new Options(cli.Arguments[""], cli.Paths);
 	}
 }

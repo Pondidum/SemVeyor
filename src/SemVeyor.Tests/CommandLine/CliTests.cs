@@ -7,7 +7,7 @@ namespace SemVeyor.Tests.CommandLine
 {
 	public class CliTests
 	{
-		private readonly CliArgs _cli;
+		private readonly CliParameters _cli;
 
 		public CliTests()
 		{

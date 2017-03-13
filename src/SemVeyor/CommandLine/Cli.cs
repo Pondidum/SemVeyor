@@ -6,16 +6,16 @@ namespace SemVeyor.CommandLine
 {
 	public class Cli
 	{
-		public CliArgs Parse(IEnumerable<string> args)
+		public CliParameters Parse(IEnumerable<string> args)
 		{
-			var handlers = new Func<CliArgs, string, Queue<string>, bool>[]
+			var handlers = new Func<CliParameters, string, Queue<string>, bool>[]
 			{
 				HandleArgument,
 				HandleFlag,
 				HandlePath
 			};
 
-			var dto = new CliArgs();
+			var dto = new CliParameters();
 			var queue = new Queue<string>(args);
 
 			while (queue.Any())
@@ -30,7 +30,7 @@ namespace SemVeyor.CommandLine
 			return dto;
 		}
 
-		private bool HandleFlag(CliArgs dto, string name, Queue<string> tokens)
+		private bool HandleFlag(CliParameters dto, string name, Queue<string> tokens)
 		{
 			if (name.StartsWith("-") == false)
 				return false;
@@ -52,7 +52,7 @@ namespace SemVeyor.CommandLine
 			return true;
 		}
 
-		private bool HandlePath(CliArgs dto, string name, Queue<string> tokens)
+		private bool HandlePath(CliParameters dto, string name, Queue<string> tokens)
 		{
 			if (name == "--")
 			{
@@ -70,7 +70,7 @@ namespace SemVeyor.CommandLine
 			return true;
 		}
 
-		private bool HandleArgument(CliArgs dto, string name, Queue<string> tokens)
+		private bool HandleArgument(CliParameters dto, string name, Queue<string> tokens)
 		{
 			if (name.StartsWith("-") == false)
 				return false;

@@ -11,7 +11,7 @@ namespace SemVeyor.Tests.CommandLine
 		[Fact]
 		public void When_nothing_is_specified()
 		{
-			var options = new Options(new CliParameterSet());
+			var options = new Options(new CliParameterSet(Enumerable.Empty<string>()));
 
 			options.ShouldSatisfyAllConditions(
 				() => options.Storage.ShouldBe(Options.DefaultStorage),
@@ -22,7 +22,7 @@ namespace SemVeyor.Tests.CommandLine
 		[Fact]
 		public void When_storage_is_specified()
 		{
-			var options = new Options(new CliParameterSet
+			var options = new Options(new CliParameterSet(Enumerable.Empty<string>())
 			{
 				Arguments = new Dictionary<string, string> { { "storage", "aws:s3" } }
 			});
@@ -33,7 +33,7 @@ namespace SemVeyor.Tests.CommandLine
 		[Fact]
 		public void When_a_path_is_specified()
 		{
-			var options = new Options(new CliParameterSet
+			var options = new Options(new CliParameterSet(Enumerable.Empty<string>())
 			{
 				Paths = new[] { "some/path.json" }
 			});

@@ -5,21 +5,28 @@ namespace SemVeyor.CommandLine
 {
 	public class CliParameters
 	{
-		public Dictionary<string, CliParameterSet> Sets { get; }
+		public IEnumerable<CliParameterSet> Sets => _sets.Values;
 		public List<string> Paths { get; }
+
+		private readonly Dictionary<string, CliParameterSet> _sets;
 
 		public CliParameters()
 		{
-			Sets = new Dictionary<string, CliParameterSet>(StringComparer.OrdinalIgnoreCase);
+			_sets = new Dictionary<string, CliParameterSet>(StringComparer.OrdinalIgnoreCase);
 			Paths = new List<string>();
 		}
 
 		public CliParameterSet ForPrefix(string prefix)
 		{
-			if (Sets.ContainsKey(prefix) == false)
-				Sets[prefix] = new CliParameterSet();
+			if (_sets.ContainsKey(prefix) == false)
+				_sets[prefix] = new CliParameterSet(Paths);
 
-			return Sets[prefix];
+			return _sets[prefix];
+		}
+
+		public void CreateSet(string prefix, Action<CliParameterSet> customise)
+		{
+			customise(ForPrefix(prefix));
 		}
 	}
 }

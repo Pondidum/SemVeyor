@@ -9,11 +9,11 @@ namespace SemVeyor.CommandLine
 		public ISet<string> Flags { get; set; }
 		public IEnumerable<string> Paths { get; set; }
 
-		public CliParameterSet()
+		public CliParameterSet(IEnumerable<string> paths)
 		{
 			Arguments = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 			Flags = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-			Paths = new List<string>();
+			Paths = paths;
 		}
 	}
 }

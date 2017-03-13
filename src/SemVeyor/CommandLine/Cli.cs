@@ -44,10 +44,7 @@ namespace SemVeyor.CommandLine
 			var prefix = index >= 0 ? name.Substring(0, index) : string.Empty;
 			var suffix = index >= 0 ? name.Substring(index + 1) : name;
 
-			if (dto.Flags.ContainsKey(prefix) == false)
-				dto.Flags[prefix] = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-
-			dto.Flags[prefix].Add(suffix);
+			dto.ForPrefix(prefix).Flags.Add(suffix);
 
 			return true;
 		}
@@ -90,10 +87,7 @@ namespace SemVeyor.CommandLine
 			var prefix = index >= 0 ? name.Substring(0, index) : string.Empty;
 			var suffix = index >= 0 ? name.Substring(index + 1) : name;
 
-			if (dto.Arguments.ContainsKey(prefix) == false)
-				dto.Arguments[prefix] = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-
-			dto.Arguments[prefix][suffix] = value;
+			dto.ForPrefix(prefix).Arguments[suffix] = value;
 
 			return true;
 		}

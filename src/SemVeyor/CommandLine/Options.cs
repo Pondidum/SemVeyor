@@ -11,12 +11,12 @@ namespace SemVeyor.CommandLine
 		public string Storage { get; }
 		public IEnumerable<string> Assemblies { get; }
 
-		public Options(IDictionary<string, string> arguments, IEnumerable<string> paths)
+		public Options(CliParameterSet parameterSet)
 		{
-			Storage = arguments.GetOrDefault("storage", "file");
-			Assemblies = paths.ToArray();
+			Storage = parameterSet.Arguments.GetOrDefault("storage", "file");
+			Assemblies = parameterSet.Paths.ToArray();
 		}
 
-		public static Options From(CliParameters cli) => new Options(cli.Arguments[""], cli.Paths);
+		public static Options From(CliParameters cli) => new Options(cli.ForPrefix(""));
 	}
 }

@@ -31,12 +31,12 @@ namespace SemVeyor.Tests.CommandLine
 		[Fact]
 		public void Arguments_should_be_populated()
 		{
-			_cli.Arguments[""].ShouldBe(new Dictionary<string, string>
+			_cli.ForPrefix("").Arguments.ShouldBe(new Dictionary<string, string>
 			{
 				{ "storage", "aws:s3" }
 			});
 
-			_cli.Arguments["storage"].ShouldBe(new Dictionary<string, string>
+			_cli.ForPrefix("storage").Arguments.ShouldBe(new Dictionary<string, string>
 			{
 				{ "accesskey", "123456" },
 				{ "secretkey", "something with spaces" }
@@ -55,8 +55,8 @@ namespace SemVeyor.Tests.CommandLine
 		[Fact]
 		public void Flags_are_populated()
 		{
-			_cli.Flags[""].ShouldBe(new HashSet<string> { "runnable" });
-			_cli.Flags["storage"].ShouldBe(new HashSet<string> { "enable" });
+			_cli.ForPrefix("").Flags.ShouldBe(new HashSet<string> { "runnable" });
+			_cli.ForPrefix("storage").Flags.ShouldBe(new HashSet<string> { "enable" });
 		}
 	}
 }

@@ -15,5 +15,15 @@ namespace SemVeyor.CommandLine
 			Flags = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 			Paths = paths;
 		}
+
+		public T Build<T>()
+		{
+			return (T)Build((typeof(T)));
+		}
+
+		public object Build(Type type)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

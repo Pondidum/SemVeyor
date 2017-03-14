@@ -7,7 +7,7 @@ namespace SemVeyor.CommandLine
 	{
 		public IDictionary<string, string> Arguments { get; set; }
 		public ISet<string> Flags { get; set; }
-		public IEnumerable<string> Paths { get; set; }
+		public IEnumerable<string> Paths { get; }
 
 		public CliParameterSet(IEnumerable<string> paths)
 		{

@@ -33,10 +33,7 @@ namespace SemVeyor.Tests.CommandLine
 		[Fact]
 		public void When_a_path_is_specified()
 		{
-			var options = new Options(new CliParameterSet(Enumerable.Empty<string>())
-			{
-				Paths = new[] { "some/path.json" }
-			});
+			var options = new Options(new CliParameterSet(new[] { "some/path.json" }));
 
 			options.Assemblies.ShouldBe(new[] { "some/path.json" });
 		}

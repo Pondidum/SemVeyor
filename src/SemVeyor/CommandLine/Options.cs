@@ -8,15 +8,15 @@ namespace SemVeyor.CommandLine
 	{
 		public const string DefaultStorage = "file";
 
-		public string Storage { get; }
-		public IEnumerable<string> Assemblies { get; }
+		public string Storage { get; private set;  }
+		public IEnumerable<string> Paths { get; private set; }
 
-		public Options(CliParameterSet parameterSet)
+		public Options()
 		{
-			Storage = parameterSet.Arguments.GetOrDefault("storage", "file");
-			Assemblies = parameterSet.Paths.ToArray();
+			Storage = "file";
+			Paths = Enumerable.Empty<string>();
 		}
 
-		public static Options From(CliParameters cli) => new Options(cli.ForPrefix(""));
+		public static Options From(CliParameters parameters) => parameters.ForPrefix("").Build<Options>();
 	}
 }

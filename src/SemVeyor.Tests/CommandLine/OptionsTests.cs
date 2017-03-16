@@ -11,21 +11,27 @@ namespace SemVeyor.Tests.CommandLine
 		[Fact]
 		public void When_nothing_is_specified()
 		{
-			var options = new Options(new CliParameterSet(Enumerable.Empty<string>()));
+			var parameters = new CliParameters();
+			parameters.CreateSet("", p => { });
+
+			var options = Options.From(parameters);
 
 			options.ShouldSatisfyAllConditions(
 				() => options.Storage.ShouldBe(Options.DefaultStorage),
-				() => options.Assemblies.ShouldBeEmpty()
+				() => options.Paths.ShouldBeEmpty()
 			);
 		}
 
 		[Fact]
 		public void When_storage_is_specified()
 		{
-			var options = new Options(new CliParameterSet(Enumerable.Empty<string>())
+			var parameters = new CliParameters();
+			parameters.CreateSet("", p =>
 			{
-				Arguments = new Dictionary<string, string> { { "storage", "aws:s3" } }
+				p.Arguments = new Dictionary<string, string> { { "storage", "aws:s3" } };
 			});
+
+			var options = Options.From(parameters);
 
 			options.Storage.ShouldBe("aws:s3");
 		}
@@ -33,9 +39,12 @@ namespace SemVeyor.Tests.CommandLine
 		[Fact]
 		public void When_a_path_is_specified()
 		{
-			var options = new Options(new CliParameterSet(new[] { "some/path.json" }));
+			var parameters = new CliParameters();
+			parameters.Paths.Add("some/path.json");
 
-			options.Assemblies.ShouldBe(new[] { "some/path.json" });
+			var options = Options.From(parameters);
+
+			options.Paths.ShouldBe(new[] { "some/path.json" });
 		}
 
 	}

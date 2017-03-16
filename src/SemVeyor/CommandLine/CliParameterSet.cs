@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
+using System.Linq;
 using Stronk;
 using Stronk.Policies;
 
@@ -58,7 +59,8 @@ namespace SemVeyor.CommandLine
 				foreach (var flag in parameters.Flags)
 					AppSettings.Add(flag, "true");
 
-				AppSettings.Add("Paths", string.Join(",", parameters.Paths));
+				if (parameters.Paths.Any())
+					AppSettings.Add("Paths", string.Join(",", parameters.Paths));
 			}
 		}
 	}

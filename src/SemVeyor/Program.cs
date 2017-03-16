@@ -18,7 +18,7 @@ namespace SemVeyor
 			var store = new StorageFactory().CreateStore(options);
 
 			var previous = store.Read();
-			var current = AssemblyDetails.From(Assembly.LoadFile(options.Assemblies.First()));
+			var current = AssemblyDetails.From(Assembly.LoadFile(options.Paths.First()));
 
 			Console.WriteLine(previous != null
 				? "History loaded"

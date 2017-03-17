@@ -106,6 +106,8 @@
     <Compile Include="Infrastructure\Extensions.cs" />
     <Compile Include="Infrastructure\LambdaComparer.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Storage\FileStore.cs" />
+    <Compile Include="Storage\FileStoreOptions.cs" />
     <Compile Include="Storage\IStorage.cs" />
     <Compile Include="Storage\StorageFactory.cs" />
   </ItemGroup>

@@ -1,12 +1,16 @@
-﻿using SemVeyor.CommandLine;
+﻿using System;
+using SemVeyor.CommandLine;
 
 namespace SemVeyor.Storage
 {
 	public class StorageFactory
 	{
-		public IStorage CreateStore(Options options)
+		public IStorage CreateStore(CliParameters cli, Options options)
 		{
-			return new FileStore("history.lsj");
+			if (options.Storage != "file")
+				throw new NotImplementedException(options.Storage);
+
+			return new FileStore(cli.ForPrefix("file").Build<FileStoreOptions>());
 		}
 	}
 }

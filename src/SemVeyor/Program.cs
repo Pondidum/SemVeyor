@@ -15,7 +15,7 @@ namespace SemVeyor
 			var cli = new Cli().Parse(args);
 			var options = Options.From(cli);
 
-			var store = new StorageFactory().CreateStore(options);
+			var store = new StorageFactory().CreateStore(cli, options);
 
 			var previous = store.Read();
 			var current = AssemblyDetails.From(Assembly.LoadFile(options.Paths.First()));

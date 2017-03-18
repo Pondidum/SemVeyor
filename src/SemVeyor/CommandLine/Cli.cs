@@ -39,7 +39,7 @@ namespace SemVeyor.CommandLine
 				return false;
 
 			name = name.TrimStart('-');
-			var index = name.IndexOf(":");
+			var index = name.LastIndexOf(":");
 
 			var prefix = index >= 0 ? name.Substring(0, index) : string.Empty;
 			var suffix = index >= 0 ? name.Substring(index + 1) : name;
@@ -82,7 +82,7 @@ namespace SemVeyor.CommandLine
 
 			var value = tokens.Dequeue();
 
-			var index = name.IndexOf(":");
+			var index = name.LastIndexOf(":");
 
 			var prefix = index >= 0 ? name.Substring(0, index) : string.Empty;
 			var suffix = index >= 0 ? name.Substring(index + 1) : name;

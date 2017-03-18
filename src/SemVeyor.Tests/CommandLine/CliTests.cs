@@ -15,11 +15,11 @@ namespace SemVeyor.Tests.CommandLine
 			{
 				"-storage",
 				"aws:s3",
-				"-storage:accesskey",
+				"-aws:s3:accesskey",
 				"123456",
-				"-storage:secretkey",
+				"-aws:s3:secretkey",
 				"something with spaces",
-				"-storage:enable",
+				"-aws:s3:enable",
 				"-runnable",
 				"--",
 				"/path/to/assembly.dll",
@@ -36,7 +36,7 @@ namespace SemVeyor.Tests.CommandLine
 				{ "storage", "aws:s3" }
 			});
 
-			_cli.ForPrefix("storage").Arguments.ShouldBe(new Dictionary<string, string>
+			_cli.ForPrefix("aws:s3").Arguments.ShouldBe(new Dictionary<string, string>
 			{
 				{ "accesskey", "123456" },
 				{ "secretkey", "something with spaces" }
@@ -56,7 +56,7 @@ namespace SemVeyor.Tests.CommandLine
 		public void Flags_are_populated()
 		{
 			_cli.ForPrefix("").Flags.ShouldBe(new HashSet<string> { "runnable" });
-			_cli.ForPrefix("storage").Flags.ShouldBe(new HashSet<string> { "enable" });
+			_cli.ForPrefix("aws:s3").Flags.ShouldBe(new HashSet<string> { "enable" });
 		}
 	}
 }

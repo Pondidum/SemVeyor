@@ -33,6 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Classification\Classification.cs" />
+    <Compile Include="Classification\EventClassification.cs" />
     <Compile Include="Classification\SemVer.cs" />
     <Compile Include="CommandLine\Cli.cs" />
     <Compile Include="CommandLine\CliParameters.cs" />

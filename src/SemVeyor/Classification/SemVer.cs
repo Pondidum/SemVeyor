@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using SemVeyor.Domain.Events;
-
-namespace SemVeyor.Classification
+﻿namespace SemVeyor.Classification
 {
 	public enum SemVer
 	{
@@ -11,40 +6,5 @@ namespace SemVeyor.Classification
 		Patch,
 		Minor,
 		Major
-	}
-
-	public class EventClassification
-	{
-		private static readonly Type Major = typeof(IMajor);
-		private static readonly Type Minor = typeof(IMinor);
-
-		public SemVer ClassifyEvent(object @event)
-		{
-			var eventType = @event as Type ?? @event.GetType();
-			var interfaces = eventType.GetInterfaces();
-
-			if (interfaces.Contains(Major))
-				return SemVer.Major;
-
-			if (interfaces.Contains(Minor))
-				return SemVer.Minor;
-
-			return SemVer.None;
-		}
-
-		public IEnumerable<Classification> ClassifyAll(IEnumerable<object> events)
-		{
-			return events.Select(@event => new Classification
-			{
-				Change = @event,
-				ChangeRequired = ClassifyEvent(@event)
-			});
-		}
-	}
-
-	public class Classification
-	{
-		public SemVer ChangeRequired { get; set; }
-		public object Change { get; set; }
 	}
 }

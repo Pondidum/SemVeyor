@@ -4,6 +4,7 @@ using System.Reflection;
 using SemVeyor.Classification;
 using SemVeyor.CommandLine;
 using SemVeyor.Domain;
+using SemVeyor.Reporting;
 using SemVeyor.Storage;
 
 namespace SemVeyor
@@ -30,17 +31,9 @@ namespace SemVeyor
 				var classifier = new EventClassification();
 
 				var processed = classifier.ClassifyAll(changes).ToArray();
+				var reporter = new SimpleReporter();
 
-				if (processed.Any())
-				{
-					Console.WriteLine("Changes since previous run:");
-
-					foreach (var change in processed)
-						Console.WriteLine(change.Change + " : " + change.ChangeRequired);
-
-					Console.WriteLine();
-					Console.WriteLine("SemVer change requried: " + processed.Max(x => x.ChangeRequired));
-				}
+				reporter.Write(processed);
 			}
 
 			store.Write(current);

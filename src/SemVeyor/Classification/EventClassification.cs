@@ -24,12 +24,12 @@ namespace SemVeyor.Classification
 			return SemVer.None;
 		}
 
-		public IEnumerable<Classification> ClassifyAll(IEnumerable<object> events)
+		public IEnumerable<ChangeClassification> ClassifyAll(IEnumerable<object> events)
 		{
-			return events.Select(@event => new Classification
+			return events.Select(@event => new ChangeClassification
 			{
 				Change = @event,
-				ChangeRequired = ClassifyEvent(@event)
+				Classification = ClassifyEvent(@event)
 			});
 		}
 	}

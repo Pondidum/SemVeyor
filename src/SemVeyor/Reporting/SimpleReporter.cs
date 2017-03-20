@@ -3,8 +3,10 @@ using System.Linq;
 
 namespace SemVeyor.Reporting
 {
-	public class SimpleReporter
+	public class SimpleReporter : IReporter
 	{
+		public string Name => nameof(SimpleReporter);
+
 		public void Write(ReportArgs e)
 		{
 			if (e.Changes.Any() == false)

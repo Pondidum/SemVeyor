@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Linq;
-using SemVeyor.Classification;
 
 namespace SemVeyor.Reporting
 {
 	public class SimpleReporter
 	{
-		public void Write(ChangeClassification[] changes)
+		public void Write(ReportArgs e)
 		{
-			if (changes.Any() == false)
+			if (e.Changes.Any() == false)
 			{
 				Console.WriteLine("No changes since previous run.");
 				return;
@@ -16,11 +15,11 @@ namespace SemVeyor.Reporting
 
 			Console.WriteLine("Changes since previous run:");
 
-			foreach (var change in changes)
+			foreach (var change in e.Changes)
 				Console.WriteLine(change.Change + " : " + change.Classification);
 
 			Console.WriteLine();
-			Console.WriteLine("SemVer change requried: " + changes.Max(x => x.Classification));
+			Console.WriteLine("SemVer change requried: " + e.Changes.Max(x => x.Classification));
 		}
 	}
 }

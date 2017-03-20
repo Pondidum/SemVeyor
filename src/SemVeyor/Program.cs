@@ -33,7 +33,10 @@ namespace SemVeyor
 				var processed = classifier.ClassifyAll(changes).ToArray();
 				var reporter = new SimpleReporter();
 
-				reporter.Write(processed);
+				reporter.Write(new ReportArgs
+				{
+					Changes = processed
+				});
 			}
 
 			store.Write(current);

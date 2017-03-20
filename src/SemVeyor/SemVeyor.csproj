@@ -108,6 +108,7 @@
     <Compile Include="Infrastructure\Extensions.cs" />
     <Compile Include="Infrastructure\LambdaComparer.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Reporting\ReportArgs.cs" />
     <Compile Include="Reporting\SimpleReporter.cs" />
     <Compile Include="Storage\FileStore.cs" />
     <Compile Include="Storage\FileStoreOptions.cs" />

@@ -96,6 +96,7 @@
     <Compile Include="Infrastructure\ExtensionsTests.cs" />
     <Compile Include="Infrastructure\LambdaComparerTests.cs" />
     <Compile Include="Scratchpad.cs" />
+    <Compile Include="Storage\StorageFactoryTests.cs" />
     <Compile Include="TestUtils\TestType.cs" />
   </ItemGroup>
   <ItemGroup>

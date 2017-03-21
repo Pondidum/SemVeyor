@@ -8,9 +8,9 @@ namespace SemVeyor.CommandLine
 	{
 		public const string DefaultStorage = "file";
 
-		public string Storage { get; private set;  }
-		public IEnumerable<string> Paths { get; private set; }
-		public string Reporter { get; private set; }
+		public string Storage { get; set;  }
+		public IEnumerable<string> Paths { get; set; }
+		public string Reporter { get; set; }
 
 		public Options()
 		{

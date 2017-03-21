@@ -1,0 +1,49 @@
+﻿using System;
+using System.Collections.Generic;
+using SemVeyor.CommandLine;
+using SemVeyor.Storage;
+using Shouldly;
+using Xunit;
+
+namespace SemVeyor.Tests.Storage
+{
+	public class StorageFactoryTests
+	{
+		private readonly StorageFactory _factory;
+
+		public StorageFactoryTests()
+		{
+			_factory = new StorageFactory();
+		}
+
+		[Fact]
+		public void When_the_storage_option_is_unknown()
+		{
+			var options = new Options { Storage = "weofinwf" };
+
+			Should.Throw<NotSupportedException>(() => _factory.CreateStore(new CliParameters(), options));
+		}
+
+		[Fact]
+		public void When_the_storage_option_is_file()
+		{
+			var cli = new CliParameters();
+			var options = new Options { Storage = "file" };
+
+			var store = _factory.CreateStore(cli, options);
+
+			store.ShouldBeOfType<FileStore>();
+		}
+
+		[Fact]
+		public void When_the_storage_option_is_a_different_case()
+		{
+			var cli = new CliParameters();
+			var options = new Options { Storage = "FiLE" };
+
+			var store = _factory.CreateStore(cli, options);
+
+			store.ShouldBeOfType<FileStore>();
+		}
+	}
+}

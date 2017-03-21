@@ -7,8 +7,8 @@ namespace SemVeyor.Storage
 	{
 		public IStorage CreateStore(CliParameters cli, Options options)
 		{
-			if (options.Storage != "file")
-				throw new NotImplementedException(options.Storage);
+			if (options.Storage.Equals("file", StringComparison.OrdinalIgnoreCase) == false)
+				throw new NotSupportedException(options.Storage);
 
 			return new FileStore(cli.ForPrefix(options.Storage).Build<FileStoreOptions>());
 		}

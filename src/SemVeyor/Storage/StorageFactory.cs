@@ -10,7 +10,7 @@ namespace SemVeyor.Storage
 			if (options.Storage != "file")
 				throw new NotImplementedException(options.Storage);
 
-			return new FileStore(cli.ForPrefix("file").Build<FileStoreOptions>());
+			return new FileStore(cli.ForPrefix(options.Storage).Build<FileStoreOptions>());
 		}
 	}
 }

@@ -31,7 +31,7 @@ namespace SemVeyor
 				var classifier = new EventClassification();
 
 				var processed = classifier.ClassifyAll(changes).ToArray();
-				var reporter = new SimpleReporter();
+				var reporter = new ReportingFactory().CreateReporter(cli, options);
 
 				reporter.Write(new ReportArgs
 				{

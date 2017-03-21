@@ -10,6 +10,7 @@ namespace SemVeyor.CommandLine
 
 		public string Storage { get; private set;  }
 		public IEnumerable<string> Paths { get; private set; }
+		public string Reporter { get; private set; }
 
 		public Options()
 		{

@@ -110,7 +110,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Reporting\IReporter.cs" />
     <Compile Include="Reporting\ReportArgs.cs" />
+    <Compile Include="Reporting\ReportingFactory.cs" />
     <Compile Include="Reporting\SimpleReporter.cs" />
+    <Compile Include="Reporting\SimpleReporterOptions.cs" />
     <Compile Include="Storage\FileStore.cs" />
     <Compile Include="Storage\FileStoreOptions.cs" />
     <Compile Include="Storage\IStorage.cs" />

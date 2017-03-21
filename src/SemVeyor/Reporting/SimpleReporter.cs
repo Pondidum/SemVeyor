@@ -5,6 +5,13 @@ namespace SemVeyor.Reporting
 {
 	public class SimpleReporter : IReporter
 	{
+		private readonly SimpleReporterOptions _options;
+
+		public SimpleReporter(SimpleReporterOptions options)
+		{
+			_options = options;
+		}
+
 		public string Name => nameof(SimpleReporter);
 
 		public void Write(ReportArgs e)

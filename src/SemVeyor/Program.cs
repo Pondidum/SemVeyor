@@ -35,6 +35,8 @@ namespace SemVeyor
 
 				reporter.Write(new ReportArgs
 				{
+					PreviousAssembly = previous,
+					CurrentAssembly = current,
 					Changes = processed
 				});
 			}

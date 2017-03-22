@@ -106,6 +106,7 @@
     <Compile Include="Domain\TypeDetails.cs" />
     <Compile Include="Domain\Visibility.cs" />
     <Compile Include="Infrastructure\Extensions.cs" />
+    <Compile Include="Infrastructure\IFileSystem.cs" />
     <Compile Include="Infrastructure\LambdaComparer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Reporting\IReporter.cs" />

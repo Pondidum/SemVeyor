@@ -42,7 +42,7 @@ namespace SemVeyor.Storage
 			if (File.Exists(_path) == false)
 				return null;
 
-			var lines = _fs.ReadAllLines(_path).Result;
+			var lines = _fs.ReadAllLines(_path);
 
 			return JsonConvert.DeserializeObject<AssemblyDetails>(lines.Last());
 		}

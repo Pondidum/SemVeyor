@@ -24,13 +24,13 @@ namespace SemVeyor.Tests.Infrastructure
 		private void CreateDirectory() => Directory.CreateDirectory(_directory);
 
 		[Fact]
-		public async Task When_appending_to_non_existing_file()
+		public void When_appending_to_non_existing_file()
 		{
 			CreateDirectory();
 
-			await _fs.AppendLine(_path, "test line!");
+			_fs.AppendLine(_path, "test line!");
 
-			var lines = await _fs.ReadAllLines(_path);
+			var lines = _fs.ReadAllLines(_path);
 
 			lines.ShouldBe(new[]
 			{
@@ -39,14 +39,14 @@ namespace SemVeyor.Tests.Infrastructure
 		}
 
 		[Fact]
-		public async Task When_appending_to_existing_file()
+		public void When_appending_to_existing_file()
 		{
 			CreateDirectory();
 			File.WriteAllText(_path, "line one\r\nline two\r\n");
 
-			await _fs.AppendLine(_path, "test line!");
+			_fs.AppendLine(_path, "test line!");
 
-			var lines = await _fs.ReadAllLines(_path);
+			var lines = _fs.ReadAllLines(_path);
 
 			lines.ShouldBe(new[]
 			{
@@ -57,14 +57,14 @@ namespace SemVeyor.Tests.Infrastructure
 		}
 
 		[Fact]
-		public async Task When_appending_multiple_times()
+		public void When_appending_multiple_times()
 		{
 			CreateDirectory();
 
-			await _fs.AppendLine(_path, "test line!");
-			await _fs.AppendLine(_path, "another?");
+			_fs.AppendLine(_path, "test line!");
+			_fs.AppendLine(_path, "another?");
 
-			var lines = await _fs.ReadAllLines(_path);
+			var lines = _fs.ReadAllLines(_path);
 
 			lines.ShouldBe(new[]
 			{

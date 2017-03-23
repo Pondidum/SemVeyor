@@ -1,5 +1,6 @@
 ﻿using System;
 using SemVeyor.CommandLine;
+using SemVeyor.Infrastructure;
 
 namespace SemVeyor.Storage
 {
@@ -10,7 +11,9 @@ namespace SemVeyor.Storage
 			if (options.Storage.Equals("file", StringComparison.OrdinalIgnoreCase) == false)
 				throw new NotSupportedException(options.Storage);
 
-			return new FileStore(cli.ForPrefix(options.Storage).Build<FileStoreOptions>());
+			return new FileStore(
+				new PhysicalFileSystem(),
+				cli.ForPrefix(options.Storage).Build<FileStoreOptions>());
 		}
 	}
 }

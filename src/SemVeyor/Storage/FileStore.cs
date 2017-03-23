@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using SemVeyor.Domain;
+using SemVeyor.Infrastructure;
 
 namespace SemVeyor.Storage
 {
@@ -20,10 +21,12 @@ namespace SemVeyor.Storage
 			Formatting = Formatting.None
 		};
 
+		private readonly IFileSystem _fs;
 		private readonly string _path;
 
-		public FileStore(FileStoreOptions options)
+		public FileStore(IFileSystem fs, FileStoreOptions options)
 		{
+			_fs = fs;
 			_path = options.Path;
 		}
 
@@ -31,7 +34,7 @@ namespace SemVeyor.Storage
 		{
 			var json = JsonConvert.SerializeObject(details, Settings);
 
-			File.AppendAllLines(_path, new [] { json });
+			_fs.AppendLine(_path, json);
 		}
 
 		public AssemblyDetails Read()
@@ -39,9 +42,9 @@ namespace SemVeyor.Storage
 			if (File.Exists(_path) == false)
 				return null;
 
-			var json = File.ReadAllLines(_path).Last();
+			var lines = _fs.ReadAllLines(_path).Result;
 
-			return JsonConvert.DeserializeObject<AssemblyDetails>(json);
+			return JsonConvert.DeserializeObject<AssemblyDetails>(lines.Last());
 		}
 	}
 }

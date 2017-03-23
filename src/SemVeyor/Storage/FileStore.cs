@@ -39,12 +39,11 @@ namespace SemVeyor.Storage
 
 		public AssemblyDetails Read()
 		{
-			if (File.Exists(_path) == false)
-				return null;
+			var json = _fs.ReadAllLines(_path).LastOrDefault();
 
-			var lines = _fs.ReadAllLines(_path);
-
-			return JsonConvert.DeserializeObject<AssemblyDetails>(lines.Last());
+			return json != null
+				? JsonConvert.DeserializeObject<AssemblyDetails>(json)
+				: null;
 		}
 	}
 }

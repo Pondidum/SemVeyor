@@ -9,6 +9,6 @@
 			_type = type;
 		}
 
-		public override string ToString() => $"{GetType().Name} :{_type.FullName}";
+		public override string ToString() => $"{GetType().Name}: {_type.FullName}";
 	}
 }

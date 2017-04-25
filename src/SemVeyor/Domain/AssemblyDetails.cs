@@ -12,6 +12,11 @@ namespace SemVeyor.Domain
 		public string Name { get; set; }
 		public IEnumerable<TypeDetails> Types { get; set; }
 
+		public AssemblyDetails()
+		{
+			Types = Enumerable.Empty<TypeDetails>();
+		}
+
 		public static AssemblyDetails From(Assembly assembly)
 		{
 			var getAllTypesQuery = new GetAllTypesQuery(new GetTypeQuery());

@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FileSystem, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\FileSystem.0.2.2\lib\net451\FileSystem.dll</HintPath>
+    </Reference>
     <Reference Include="Ploeh.AutoFixture, Version=3.50.2.0, Culture=neutral, PublicKeyToken=b24654c590009d4f">
       <HintPath>..\..\packages\AutoFixture.3.50.2\lib\net40\Ploeh.AutoFixture.dll</HintPath>
     </Reference>
@@ -95,7 +98,6 @@
     <Compile Include="Builder\TypeDetailsBuilder.cs" />
     <Compile Include="Infrastructure\ExtensionsTests.cs" />
     <Compile Include="Infrastructure\LambdaComparerTests.cs" />
-    <Compile Include="Infrastructure\PhysicalFileSystemTests.cs" />
     <Compile Include="Scratchpad.cs" />
     <Compile Include="Storage\FileStoreTests.cs" />
     <Compile Include="Storage\StorageFactoryTests.cs" />
@@ -110,6 +112,9 @@
       <Project>{7DAC462B-49F1-4649-BF7B-576F88EE00A6}</Project>
       <Name>StandardLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

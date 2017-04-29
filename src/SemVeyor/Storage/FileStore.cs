@@ -1,10 +1,9 @@
-﻿using System.IO;
-using System.Linq;
+﻿using System.Linq;
+using FileSystem;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using SemVeyor.Domain;
-using SemVeyor.Infrastructure;
 
 namespace SemVeyor.Storage
 {
@@ -34,12 +33,15 @@ namespace SemVeyor.Storage
 		{
 			var json = JsonConvert.SerializeObject(details, Settings);
 
-			_fs.AppendLine(_path, json);
+			_fs.AppendFileLines(_path, json).Wait();
 		}
 
 		public AssemblyDetails Read()
 		{
-			var json = _fs.ReadAllLines(_path).LastOrDefault();
+			if (_fs.FileExists(_path).Result == false)
+				return null;
+
+			var json = _fs.ReadFileLines(_path).Result.LastOrDefault();
 
 			return json != null
 				? JsonConvert.DeserializeObject<AssemblyDetails>(json)

@@ -1,6 +1,6 @@
 ﻿using System;
+using FileSystem;
 using SemVeyor.CommandLine;
-using SemVeyor.Infrastructure;
 
 namespace SemVeyor.Storage
 {

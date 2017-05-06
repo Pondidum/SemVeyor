@@ -28,7 +28,7 @@ namespace SemVeyor.Reporting
 				Console.WriteLine(change.Change + " : " + change.Classification);
 
 			Console.WriteLine();
-			Console.WriteLine("SemVer change requried: " + e.Changes.Max(x => x.Classification));
+			Console.WriteLine("SemVer change requried: " + e.SemVerChange);
 		}
 	}
 }

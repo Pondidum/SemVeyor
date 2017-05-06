@@ -10,5 +10,6 @@ namespace SemVeyor.Reporting
 		public AssemblyDetails CurrentAssembly { get; set; }
 
 		public IEnumerable<ChangeClassification> Changes { get; set; }
+		public SemVer SemVerChange { get; set; }
 	}
 }

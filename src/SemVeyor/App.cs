@@ -30,7 +30,8 @@ namespace SemVeyor
 				{
 					PreviousAssembly = previous,
 					CurrentAssembly = current,
-					Changes = processed
+					Changes = processed,
+					SemVerChange = processed.Max(c => c.Classification)
 				});
 			}
 

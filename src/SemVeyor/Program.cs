@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using SemVeyor.Classification;
 using SemVeyor.CommandLine;
 using SemVeyor.Domain;
 using SemVeyor.Reporting;
@@ -17,31 +16,18 @@ namespace SemVeyor
 			var options = Options.From(cli);
 
 			var store = new StorageFactory().CreateStore(cli, options);
+			var reporter = new ReportingFactory().CreateReporter(cli, options);
 
 			var previous = store.Read();
 			var current = AssemblyDetails.From(Assembly.LoadFile(options.Paths.First()));
+
+			var app = new App(store, reporter);
 
 			Console.WriteLine(previous != null
 				? "History loaded"
 				: "No History found");
 
-			if (previous != null)
-			{
-				var changes = previous.UpdatedTo(current);
-				var classifier = new EventClassification();
-
-				var processed = classifier.ClassifyAll(changes).ToArray();
-				var reporter = new ReportingFactory().CreateReporter(cli, options);
-
-				reporter.Write(new ReportArgs
-				{
-					PreviousAssembly = previous,
-					CurrentAssembly = current,
-					Changes = processed
-				});
-			}
-
-			store.Write(current);
+			app.Execute(previous, current);
 
 			Console.WriteLine("Done.");
 		}

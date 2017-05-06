@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using SemVeyor.Domain;
 
@@ -6,6 +7,12 @@ namespace SemVeyor.Tests.Builder
 	public class MethodDetailsBuilder
 	{
 		private readonly MethodDetails _method;
+
+		public MethodDetailsBuilder(string name, Type type)
+			: this(name)
+		{
+			_method.Type = type;
+		}
 
 		public MethodDetailsBuilder(string name)
 		{

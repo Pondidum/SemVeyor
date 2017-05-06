@@ -37,6 +37,11 @@
 			return new MethodDetailsBuilder(name);
 		}
 
+		public static MethodDetailsBuilder Method<T>(string name)
+		{
+			return new MethodDetailsBuilder(name, typeof(T));
+		}
+
 		public static PropertyDetailsBuilder Property<T>(string name)
 		{
 			return new PropertyDetailsBuilder(name, typeof(T));

@@ -61,7 +61,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Acceptance\Scenarios.cs" />
+    <Compile Include="Acceptance\Changes\Scenarios.cs" />
     <Compile Include="Classification\EventClassificationTests.cs" />
     <Compile Include="CommandLine\CliParamerterSetTests.cs" />
     <Compile Include="CommandLine\CliParametersTests.cs" />

@@ -5,7 +5,7 @@ using SemVeyor.Tests.Builder;
 using Shouldly;
 using Xunit;
 
-namespace SemVeyor.Tests.Acceptance
+namespace SemVeyor.Tests.Acceptance.Changes
 {
 	public class Scenarios
 	{

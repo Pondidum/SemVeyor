@@ -7,10 +7,11 @@ namespace SemVeyor.Tests.Builder
 	{
 		private readonly TypeDetails _type;
 
-		public TypeDetailsBuilder(string name)
+		public TypeDetailsBuilder(string ns, string name)
 		{
 			_type = new TypeDetails
 			{
+				Namespace = ns,
 				Name = name,
 				Visibility = Visibility.Internal,
 				Fields = Enumerable.Empty<FieldDetails>(),

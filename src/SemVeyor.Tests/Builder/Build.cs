@@ -9,7 +9,12 @@
 
 		public static TypeDetailsBuilder Type(string name)
 		{
-			return new TypeDetailsBuilder(name);
+			return Type(string.Empty, name);
+		}
+
+		public static TypeDetailsBuilder Type(string ns, string name)
+		{
+			return new TypeDetailsBuilder(ns, name);
 		}
 
 		public static FieldDetailsBuilder Field<T>(string name)

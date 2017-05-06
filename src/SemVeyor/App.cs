@@ -25,13 +25,16 @@ namespace SemVeyor
 				var classifier = new EventClassification();
 
 				var processed = classifier.ClassifyAll(changes).ToArray();
+				var semVerChange = processed
+					.DefaultIfEmpty(new ChangeClassification { Classification = SemVer.None })
+					.Max(c => c.Classification);
 
 				_reporter.Write(new ReportArgs
 				{
 					PreviousAssembly = previous,
 					CurrentAssembly = current,
 					Changes = processed,
-					SemVerChange = processed.Max(c => c.Classification)
+					SemVerChange = semVerChange
 				});
 			}
 

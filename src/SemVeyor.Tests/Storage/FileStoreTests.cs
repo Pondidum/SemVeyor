@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FileSystem;
 using Ploeh.AutoFixture;
+using SemVeyor.CommandLine;
 using SemVeyor.Domain;
 using SemVeyor.Infrastructure;
 using SemVeyor.Storage;
@@ -15,12 +16,26 @@ namespace SemVeyor.Tests.Storage
 	public class FileStoreTests
 	{
 		private readonly FileStore _store;
+		private Options _options;
 
 		public FileStoreTests()
 		{
+			_options = new Options();
 			_store = new FileStore(
 				new InMemoryFileSystem(),
+				_options,
 				new FileStoreOptions());
+		}
+
+		[Fact]
+		public void When_readonly_nothing_is_written()
+		{
+			_options.ReadOnly = true;
+
+			var input = new Fixture().Create<AssemblyDetails>();
+			_store.Write(input);
+
+			_store.Read().ShouldBeNull();
 		}
 
 		[Fact]
@@ -49,31 +64,5 @@ namespace SemVeyor.Tests.Storage
 
 			input.UpdatedTo(loaded).ShouldBeEmpty();
 		}
-
-//		private class MemoryFileSystem : IFileSystem
-//		{
-//			private readonly Dictionary<string, string> _store;
-//
-//			public MemoryFileSystem()
-//			{
-//				_store = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-//			}
-//
-//			public void AppendLine(string path, string line)
-//			{
-//				var existing = _store.ContainsKey(path)
-//					? _store[path]
-//					: string.Empty;
-//
-//				_store[path] = existing + line + Environment.NewLine;
-//			}
-//
-//			public IEnumerable<string> ReadAllLines(string path)
-//			{
-//				return _store.ContainsKey(path)
-//					? _store[path].Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries)
-//					: Enumerable.Empty<string>();
-//			}
-//		}
 	}
 }

@@ -13,6 +13,7 @@ namespace SemVeyor.Storage
 
 			return new FileStore(
 				new PhysicalFileSystem(),
+				options,
 				cli.ForPrefix(options.Storage).Build<FileStoreOptions>());
 		}
 	}

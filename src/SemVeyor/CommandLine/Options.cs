@@ -7,6 +7,7 @@ namespace SemVeyor.CommandLine
 	public class Options
 	{
 		public const string DefaultStorage = "file";
+		public const string DefaultReporter = "simple";
 
 		public string Storage { get; set;  }
 		public IEnumerable<string> Paths { get; set; }
@@ -14,7 +15,8 @@ namespace SemVeyor.CommandLine
 
 		public Options()
 		{
-			Storage = "file";
+			Storage = DefaultStorage;
+			Reporter = DefaultReporter;
 			Paths = Enumerable.Empty<string>();
 		}
 

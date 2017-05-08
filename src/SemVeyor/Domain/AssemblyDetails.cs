@@ -17,17 +17,6 @@ namespace SemVeyor.Domain
 			Types = Enumerable.Empty<TypeDetails>();
 		}
 
-		public static AssemblyDetails From(Assembly assembly)
-		{
-			var getAllTypesQuery = new GetAllTypesQuery(new GetTypeQuery());
-
-			return new AssemblyDetails
-			{
-				Name = assembly.FullName,
-				Types = getAllTypesQuery.Execute(assembly).ToArray()
-			};
-		}
-
 		public IEnumerable<object> UpdatedTo(AssemblyDetails newer)
 		{
 			var changes = Deltas.ForCollections(

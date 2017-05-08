@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using SemVeyor.CommandLine;
 using SemVeyor.Domain;
+using SemVeyor.Domain.Queries;
 using SemVeyor.Reporting;
 using SemVeyor.Storage;
 
@@ -19,7 +20,7 @@ namespace SemVeyor
 			var reporter = new ReportingFactory().CreateReporter(cli, options);
 
 			var previous = store.Read();
-			var current = AssemblyDetails.From(Assembly.LoadFile(options.Paths.First()));
+			var current = new GetAssemblyQuery().Execute(Assembly.LoadFile(options.Paths.First()));
 
 			var app = new App(store, reporter);
 

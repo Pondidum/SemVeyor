@@ -24,12 +24,6 @@ namespace SemVeyor.Tests
 		[Fact]
 		public void When_testing_something()
 		{
-			var current = AssemblyDetails.From(Assembly.LoadFile(@"D:\dev\projects\SemVeyor\packages\Stronk.2.0.0\lib\net452\stronk.dll"));
-
-			foreach (var e in new AssemblyDetails().UpdatedTo(current))
-			{
-				_output.WriteLine(e.ToString());
-			}
 		}
 	}
 }

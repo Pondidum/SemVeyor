@@ -102,6 +102,7 @@
     <Compile Include="Builder\TypeDetailsBuilder.cs" />
     <Compile Include="Infrastructure\ExtensionsTests.cs" />
     <Compile Include="Infrastructure\LambdaComparerTests.cs" />
+    <Compile Include="Scanning\ScannerFactoryTests.cs" />
     <Compile Include="Scratchpad.cs" />
     <Compile Include="Storage\FileStoreTests.cs" />
     <Compile Include="Storage\StorageFactoryTests.cs" />

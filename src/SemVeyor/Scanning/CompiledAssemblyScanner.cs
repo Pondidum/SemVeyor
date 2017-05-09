@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Reflection;
 using SemVeyor.Domain;
 using SemVeyor.Domain.Queries;
@@ -8,7 +9,13 @@ namespace SemVeyor.Scanning
 	{
 		public AssemblyDetails Execute(AssemblyScannerArgs args)
 		{
-			return new GetAssemblyQuery().Execute(Assembly.LoadFile(args.Path));
+			var assembly = Assembly.LoadFile(args.Path);
+			var getAllTypesQuery = new GetAllTypesQuery(new GetTypeQuery());
+			return new AssemblyDetails
+			{
+				Name = assembly.FullName,
+				Types = getAllTypesQuery.Execute(assembly).ToArray()
+			};
 		}
 	}
 }

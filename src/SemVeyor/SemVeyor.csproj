@@ -103,7 +103,6 @@
     <Compile Include="Domain\Queries\GetAllMethodsQuery.cs" />
     <Compile Include="Domain\Queries\GetAllPropertiesQuery.cs" />
     <Compile Include="Domain\Queries\GetAllTypesQuery.cs" />
-    <Compile Include="Domain\Queries\GetAssemblyQuery.cs" />
     <Compile Include="Domain\Queries\GetTypeQuery.cs" />
     <Compile Include="Domain\TypeDetails.cs" />
     <Compile Include="Domain\Visibility.cs" />

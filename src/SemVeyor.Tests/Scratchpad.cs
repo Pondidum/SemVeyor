@@ -3,8 +3,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using SemVeyor.Domain;
 using SemVeyor.Infrastructure;
+using SemVeyor.Scanning;
 using SemVeyor.Storage;
 using Shouldly;
 using Xunit;
@@ -22,8 +24,21 @@ namespace SemVeyor.Tests
 		}
 
 		[Fact]
-		public void When_testing_something()
+		public async Task When_testing_something()
 		{
+			var scanner = new CodeScanner();
+			var assemblyDetails = await scanner.Execute(new AssemblyScannerArgs
+			{
+				Path = @"D:\dev\projects\SemVeyor\src\TestAssemblies\StandardLibrary\StandardLibrary.csproj"
+			});
+
+			_output.WriteLine(assemblyDetails.Name);
+
+			foreach (var type in assemblyDetails.Types)
+			{
+				_output.WriteLine(type.Name);
+			}
+
 		}
 	}
 }

@@ -22,7 +22,7 @@ namespace SemVeyor
 			var scanner = new ScannerFactory().CreateScanner(cli, options);
 
 			var previous = store.Read();
-			var current = scanner.Execute(new AssemblyScannerArgs { Path = options.Paths.First() });
+			var current = scanner.Execute(new AssemblyScannerArgs { Path = options.Paths.First() }).Result;
 			//var current = new GetAssemblyQuery().Execute(Assembly.LoadFile(options.Paths.First()));
 
 			var app = new App(store, reporter);

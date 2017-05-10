@@ -1,10 +1,11 @@
-﻿using SemVeyor.Domain;
+﻿using System.Threading.Tasks;
+using SemVeyor.Domain;
 
 namespace SemVeyor.Scanning
 {
 	public interface IAssemblyScanner
 	{
-		AssemblyDetails Execute(AssemblyScannerArgs args);
+		Task<AssemblyDetails> Execute(AssemblyScannerArgs args);
 	}
 
 	public class AssemblyScannerArgs

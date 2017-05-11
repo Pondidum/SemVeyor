@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SemVeyor.CommandLine;
 using SemVeyor.Scanning;
+using SemVeyor.Scanning.CompiledAssembly;
 using Shouldly;
 using Xunit;
 

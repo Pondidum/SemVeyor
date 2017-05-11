@@ -2,9 +2,9 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using SemVeyor.Domain;
-using SemVeyor.Domain.Queries;
+using SemVeyor.Scanning.CompiledAssembly.Queries;
 
-namespace SemVeyor.Scanning
+namespace SemVeyor.Scanning.CompiledAssembly
 {
 	public class CompiledAssemblyScanner : IAssemblyScanner
 	{

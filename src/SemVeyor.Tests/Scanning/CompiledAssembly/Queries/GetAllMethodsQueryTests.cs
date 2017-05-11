@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
-using System.Reflection;
 using System.Linq;
+using System.Reflection;
 using SemVeyor.Domain;
-using SemVeyor.Domain.Queries;
+using SemVeyor.Scanning.CompiledAssembly.Queries;
+using SemVeyor.Tests.Domain;
 using SemVeyor.Tests.TestUtils;
 using Shouldly;
 using Xunit;
 
-namespace SemVeyor.Tests.Domain.Queries
+namespace SemVeyor.Tests.Scanning.CompiledAssembly.Queries
 {
 	public class GetAllMethodsQueryTests
 	{

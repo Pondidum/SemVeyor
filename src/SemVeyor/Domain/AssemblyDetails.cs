@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Reflection;
 using SemVeyor.Domain.Events;
-using SemVeyor.Domain.Queries;
 using SemVeyor.Infrastructure;
 
 namespace SemVeyor.Domain

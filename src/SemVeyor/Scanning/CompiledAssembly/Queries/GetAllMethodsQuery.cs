@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using SemVeyor.Domain;
 
-namespace SemVeyor.Domain.Queries
+namespace SemVeyor.Scanning.CompiledAssembly.Queries
 {
 	public class GetAllMethodsQuery
 	{

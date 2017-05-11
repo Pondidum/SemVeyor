@@ -1,6 +1,6 @@
 using System.Linq;
 using SemVeyor.Domain;
-using SemVeyor.Domain.Queries;
+using SemVeyor.Scanning.CompiledAssembly.Queries;
 using Shouldly;
 using Xunit;
 

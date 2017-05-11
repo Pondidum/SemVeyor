@@ -3,7 +3,6 @@ using System.Linq;
 using System.Reflection;
 using SemVeyor.CommandLine;
 using SemVeyor.Domain;
-using SemVeyor.Domain.Queries;
 using SemVeyor.Reporting;
 using SemVeyor.Scanning;
 using SemVeyor.Storage;

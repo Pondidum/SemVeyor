@@ -183,11 +183,6 @@
     <Compile Include="Domain\GenericArgumentDetailsTests.cs" />
     <Compile Include="Domain\MethodDetailsTests.cs" />
     <Compile Include="Domain\PropertyDetailsTests.cs" />
-    <Compile Include="Domain\Queries\GetAllCtorsQueryTests.cs" />
-    <Compile Include="Domain\Queries\GetAllFieldsQueryTests.cs" />
-    <Compile Include="Domain\Queries\GetAllMethodsQueryTests.cs" />
-    <Compile Include="Domain\Queries\GetAllPropertiesQueryTests.cs" />
-    <Compile Include="Domain\Queries\GetTypeQueryTests.cs" />
     <Compile Include="Domain\TypeContentGenericsTests.cs" />
     <Compile Include="Domain\MemberDetailsExtensions.cs" />
     <Compile Include="Domain\TypeDetailsTests.cs" />
@@ -203,6 +198,11 @@
     <Compile Include="Builder\TypeDetailsBuilder.cs" />
     <Compile Include="Infrastructure\ExtensionsTests.cs" />
     <Compile Include="Infrastructure\LambdaComparerTests.cs" />
+    <Compile Include="Scanning\CompiledAssembly\Queries\GetAllCtorsQueryTests.cs" />
+    <Compile Include="Scanning\CompiledAssembly\Queries\GetAllFieldsQueryTests.cs" />
+    <Compile Include="Scanning\CompiledAssembly\Queries\GetAllMethodsQueryTests.cs" />
+    <Compile Include="Scanning\CompiledAssembly\Queries\GetAllPropertiesQueryTests.cs" />
+    <Compile Include="Scanning\CompiledAssembly\Queries\GetTypeQueryTests.cs" />
     <Compile Include="Scanning\ScannerFactoryTests.cs" />
     <Compile Include="Scratchpad.cs" />
     <Compile Include="Storage\FileStoreTests.cs" />
@@ -226,6 +226,9 @@
   <ItemGroup>
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.Analyzers.dll" />
     <Analyzer Include="..\..\packages\Microsoft.CodeAnalysis.Analyzers.1.1.0\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Scanning\CompiledAssembly" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

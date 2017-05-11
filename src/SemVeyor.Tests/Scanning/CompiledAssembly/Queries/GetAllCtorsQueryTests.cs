@@ -1,12 +1,13 @@
-﻿using SemVeyor.Domain;
-using SemVeyor.Domain.Queries;
+﻿using System.Collections.Generic;
+using System.Linq;
+using SemVeyor.Domain;
+using SemVeyor.Scanning.CompiledAssembly.Queries;
+using SemVeyor.Tests.Domain;
 using SemVeyor.Tests.TestUtils;
 using Shouldly;
-using System.Collections.Generic;
-using System.Linq;
 using Xunit;
 
-namespace SemVeyor.Tests.Domain.Queries
+namespace SemVeyor.Tests.Scanning.CompiledAssembly.Queries
 {
 	public class GetAllCtorsQueryTests
 	{

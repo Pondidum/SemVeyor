@@ -108,7 +108,7 @@
     <Compile Include="Reporting\SimpleReporter.cs" />
     <Compile Include="Reporting\SimpleReporterOptions.cs" />
     <Compile Include="Reporting\TreeReporter.cs" />
-    <Compile Include="Scanning\CodeScanner.cs" />
+    <Compile Include="Scanning\SourceCodeScanner.cs" />
     <Compile Include="Scanning\CompiledAssembly\CompiledAssemblyScanner.cs" />
     <Compile Include="Scanning\CompiledAssembly\Queries\GetAllCtorsQuery.cs" />
     <Compile Include="Scanning\CompiledAssembly\Queries\GetAllFieldsQuery.cs" />

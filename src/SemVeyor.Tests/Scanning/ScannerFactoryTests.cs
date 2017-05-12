@@ -45,7 +45,7 @@ namespace SemVeyor.Tests.Scanning
 		[Fact]
 		public void When_the_path_is_a_csproj()
 		{
-			CreateFor("Wat.csproj").ShouldBeOfType<CodeScanner>();
+			CreateFor("Wat.csproj").ShouldBeOfType<SourceCodeScanner>();
 		}
 
 		[Fact]

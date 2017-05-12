@@ -16,7 +16,7 @@ namespace SemVeyor.Scanning
 				return new CompiledAssemblyScanner();
 
 			if (IsProject(path))
-				return new CodeScanner();
+				return new SourceCodeScanner();
 
 			throw new NotSupportedException();
 		}

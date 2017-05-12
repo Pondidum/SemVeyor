@@ -26,7 +26,7 @@ namespace SemVeyor.Tests
 		[Fact]
 		public async Task When_testing_something()
 		{
-			var scanner = new CodeScanner();
+			var scanner = new SourceCodeScanner();
 			var assemblyDetails = await scanner.Execute(new AssemblyScannerArgs
 			{
 				Path = @"D:\dev\projects\SemVeyor\src\TestAssemblies\StandardLibrary\StandardLibrary.csproj"

@@ -8,7 +8,7 @@ using SemVeyor.Domain;
 
 namespace SemVeyor.Scanning
 {
-	public class CodeScanner : IAssemblyScanner
+	public class SourceCodeScanner : IAssemblyScanner
 	{
 		public async Task<AssemblyDetails> Execute(AssemblyScannerArgs args)
 		{

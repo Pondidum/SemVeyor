@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using SemVeyor.CommandLine;
 using SemVeyor.Scanning.CompiledAssembly;
+using SemVeyor.Scanning.SourceCode;
 
 namespace SemVeyor.Scanning
 {

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using SemVeyor.Domain;
 using SemVeyor.Infrastructure;
 using SemVeyor.Scanning;
+using SemVeyor.Scanning.SourceCode;
 using SemVeyor.Storage;
 using Shouldly;
 using Xunit;

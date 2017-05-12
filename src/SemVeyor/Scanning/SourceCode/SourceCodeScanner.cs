@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.MSBuild;
 using SemVeyor.Domain;
 
-namespace SemVeyor.Scanning
+namespace SemVeyor.Scanning.SourceCode
 {
 	public class SourceCodeScanner : IAssemblyScanner
 	{

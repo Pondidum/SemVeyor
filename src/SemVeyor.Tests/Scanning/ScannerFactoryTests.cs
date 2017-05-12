@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using SemVeyor.CommandLine;
 using SemVeyor.Scanning;
 using SemVeyor.Scanning.CompiledAssembly;
+using SemVeyor.Scanning.SourceCode;
 using Shouldly;
 using Xunit;
 

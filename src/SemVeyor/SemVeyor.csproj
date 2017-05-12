@@ -108,7 +108,6 @@
     <Compile Include="Reporting\SimpleReporter.cs" />
     <Compile Include="Reporting\SimpleReporterOptions.cs" />
     <Compile Include="Reporting\TreeReporter.cs" />
-    <Compile Include="Scanning\SourceCodeScanner.cs" />
     <Compile Include="Scanning\CompiledAssembly\CompiledAssemblyScanner.cs" />
     <Compile Include="Scanning\CompiledAssembly\Queries\GetAllCtorsQuery.cs" />
     <Compile Include="Scanning\CompiledAssembly\Queries\GetAllFieldsQuery.cs" />
@@ -119,6 +118,7 @@
     <Compile Include="Scanning\CompiledAssembly\Queries\GetTypeQuery.cs" />
     <Compile Include="Scanning\IAssemblyScanner.cs" />
     <Compile Include="Scanning\ScannerFactory.cs" />
+    <Compile Include="Scanning\SourceCode\SourceCodeScanner.cs" />
     <Compile Include="Storage\FileStore.cs" />
     <Compile Include="Storage\FileStoreOptions.cs" />
     <Compile Include="Storage\IStorage.cs" />

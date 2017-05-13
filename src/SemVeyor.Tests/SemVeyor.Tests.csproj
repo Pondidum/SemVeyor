@@ -204,6 +204,7 @@
     <Compile Include="Scanning\CompiledAssembly\Queries\GetAllPropertiesQueryTests.cs" />
     <Compile Include="Scanning\CompiledAssembly\Queries\GetTypeQueryTests.cs" />
     <Compile Include="Scanning\ScannerFactoryTests.cs" />
+    <Compile Include="Scanning\SourceCode\Queries\GetTypeQueryTests.cs" />
     <Compile Include="Scratchpad.cs" />
     <Compile Include="Storage\FileStoreTests.cs" />
     <Compile Include="Storage\StorageFactoryTests.cs" />

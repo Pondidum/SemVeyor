@@ -1,10 +1,7 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+﻿using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.MSBuild;
 using SemVeyor.Domain;
+using SemVeyor.Scanning.SourceCode.Queries;
 
 namespace SemVeyor.Scanning.SourceCode
 {
@@ -16,20 +13,12 @@ namespace SemVeyor.Scanning.SourceCode
 			var project = await ws.OpenProjectAsync(args.Path);
 			var compilation = await project.GetCompilationAsync();
 
-
-			var classes = compilation
-				.SyntaxTrees
-				.SelectMany(tree => tree.GetRoot().DescendantNodesAndSelf().Where(t => t.IsKind(SyntaxKind.ClassDeclaration)))
-				.Cast<ClassDeclarationSyntax>()
-				.Select(c => new TypeDetails
-				{
-					Name = c.Identifier.ValueText
-				});
+			var query = new GetAllTypesQuery(new GetTypeQuery());
 
 			return new AssemblyDetails
 			{
 				Name = compilation.AssemblyName,
-				Types = classes
+				Types = query.Execute(compilation)
 			};
 		}
 	}

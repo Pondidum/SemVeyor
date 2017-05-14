@@ -48,8 +48,6 @@ namespace SemVeyor.Tests.Scanning.CompiledAssembly.Queries
 			nameof(ITestInterfaceTwo)
 		});
 
-
-
 		private static int MethodsOnObject() => typeof(object)
 			.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
 			.Count();

@@ -1,9 +1,7 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis;
 using SemVeyor.Domain;
 
 namespace SemVeyor.Scanning.SourceCode.Queries
@@ -61,22 +59,6 @@ namespace SemVeyor.Scanning.SourceCode.Queries
 				return Visibility.Internal;
 
 			return Visibility.Private;
-		}
-	}
-
-	public class GetAllFieldsQuery
-	{
-		public IEnumerable<FieldDetails> Execute(INamedTypeSymbol typeSymbol)
-		{
-			return typeSymbol
-				.GetMembers()
-				.OfType<IFieldSymbol>()
-				.Where(fs => fs.IsImplicitlyDeclared == false)
-				.Select(fs => new FieldDetails
-				{
-					Visibility = Helpers.VisibilityFrom(fs.DeclaredAccessibility)
-				})
-				.Where(MemberDetails.IsExternal);
 		}
 	}
 }

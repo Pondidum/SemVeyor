@@ -118,6 +118,7 @@
     <Compile Include="Scanning\CompiledAssembly\Queries\GetTypeQuery.cs" />
     <Compile Include="Scanning\IAssemblyScanner.cs" />
     <Compile Include="Scanning\ScannerFactory.cs" />
+    <Compile Include="Scanning\SourceCode\Queries\GetAllFieldsQuery.cs" />
     <Compile Include="Scanning\SourceCode\Queries\GetAllTypesQuery.cs" />
     <Compile Include="Scanning\SourceCode\Queries\GetTypeQuery.cs" />
     <Compile Include="Scanning\SourceCode\SourceCodeScanner.cs" />

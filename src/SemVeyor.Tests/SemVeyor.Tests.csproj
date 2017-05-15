@@ -203,8 +203,10 @@
     <Compile Include="Scanning\CompiledAssembly\Queries\GetAllMethodsQueryTests.cs" />
     <Compile Include="Scanning\CompiledAssembly\Queries\GetAllPropertiesQueryTests.cs" />
     <Compile Include="Scanning\CompiledAssembly\Queries\GetTypeQueryTests.cs" />
+    <Compile Include="Scanning\GetAllFieldsQueryTestBase.cs" />
     <Compile Include="Scanning\GetTypeQueryTestBase.cs" />
     <Compile Include="Scanning\ScannerFactoryTests.cs" />
+    <Compile Include="Scanning\SourceCode\Queries\GetAllFieldsQueryTests.cs" />
     <Compile Include="Scanning\SourceCode\Queries\GetTypeQueryTests.cs" />
     <Compile Include="Scanning\SourceCode\Queries\TestCompilationLoader.cs" />
     <Compile Include="Scratchpad.cs" />

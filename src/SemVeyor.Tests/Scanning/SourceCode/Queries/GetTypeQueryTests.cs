@@ -21,8 +21,9 @@ namespace SemVeyor.Tests.Scanning.SourceCode.Queries
 
 		public GetTypeQueryTests()
 		{
-			var classes = TestCompilationLoader
-				.Get()
+			var compilation = TestCompilationLoader.Get();
+
+			var classes = compilation
 				.SyntaxTrees
 				.SelectMany(tree => tree
 					.GetRoot()
@@ -33,7 +34,9 @@ namespace SemVeyor.Tests.Scanning.SourceCode.Queries
 				.Where(cd => cd.TypeParameterList == null)
 				.ToArray();
 
-			_type = new GetTypeQuery().Execute(classes.Single());
+			var model = compilation.GetSemanticModel(classes.Single().SyntaxTree);
+
+			_type = new GetTypeQuery().Execute(model, classes.Single());
 		}
 
 		[Fact]

@@ -22,7 +22,7 @@ namespace SemVeyor.Scanning.SourceCode.Queries
 				.SyntaxTrees
 				.SelectMany(tree => tree.GetRoot().DescendantNodesAndSelf().Where(t => t.IsKind(SyntaxKind.ClassDeclaration)))
 				.Cast<ClassDeclarationSyntax>()
-				.Select(_getTypeQuery.Execute)
+				.Select(classDeclaration => _getTypeQuery.Execute(compilation.GetSemanticModel(classDeclaration.SyntaxTree), classDeclaration))
 				.Where(MemberDetails.IsExternal)
 				.ToArray();
 		}

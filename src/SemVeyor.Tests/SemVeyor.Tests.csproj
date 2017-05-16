@@ -186,6 +186,7 @@
     <Compile Include="Domain\TypeContentGenericsTests.cs" />
     <Compile Include="Domain\MemberDetailsExtensions.cs" />
     <Compile Include="Domain\TypeDetailsTests.cs" />
+    <Compile Include="Domain\TypeNameTests.cs" />
     <Compile Include="Domain\VisibilityTests.cs" />
     <Compile Include="Builder\ParameterDetailsBuilder.cs" />
     <Compile Include="Builder\AssemblyDetailsBuilder.cs" />

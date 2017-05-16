@@ -98,6 +98,7 @@
     <Compile Include="Domain\MethodDetails.cs" />
     <Compile Include="Domain\PropertyDetails.cs" />
     <Compile Include="Domain\TypeDetails.cs" />
+    <Compile Include="Domain\TypeName.cs" />
     <Compile Include="Domain\Visibility.cs" />
     <Compile Include="Infrastructure\Extensions.cs" />
     <Compile Include="Infrastructure\LambdaComparer.cs" />

@@ -8,7 +8,7 @@ namespace SemVeyor.Domain
 	public class ParameterDetails : IDeltaProducer<ParameterDetails>
 	{
 		public int Position { get; set; }
-		public Type Type { get; set; }
+		public TypeName Type { get; set; }
 		public string Name { get; set; }
 
 		public static ParameterDetails From(ParameterInfo parameter)

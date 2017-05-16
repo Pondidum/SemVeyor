@@ -9,7 +9,7 @@ namespace SemVeyor.Domain
 	{
 		public override string Name { get; set; }
 		public override Visibility Visibility { get; set;}
-		public Type Type { get; set;}
+		public TypeName Type { get; set;}
 
 		public static FieldDetails From(FieldInfo info)
 		{

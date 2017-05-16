@@ -11,7 +11,7 @@ namespace SemVeyor.Domain
 	{
 		public override string Name { get; set; }
 		public override Visibility Visibility { get; set; }
-		public Type Type { get; set; }
+		public TypeName Type { get; set; }
 		public IEnumerable<ParameterDetails> Parameters { get; set; }
 		public IEnumerable<GenericArgumentDetails> GenericArguments { get; set; }
 
@@ -65,7 +65,7 @@ namespace SemVeyor.Domain
 
 		public override string ToString()
 		{
-			var type = Type?.ToString() ?? "void";
+			var type = Type.ToString();
 			var parameters = string.Join(", ", Parameters);
 
 			var generics = string.Empty;

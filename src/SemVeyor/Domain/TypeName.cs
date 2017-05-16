@@ -8,10 +8,12 @@ namespace SemVeyor.Domain
 
 		public TypeName(string fullname)
 		{
-			if (string.IsNullOrWhiteSpace(fullname))
-				throw new ArgumentNullException(nameof(fullname));
-
 			_fullname = fullname;
+		}
+
+		public override string ToString()
+		{
+			return _fullname ?? "void";
 		}
 
 		public bool Equals(TypeName other)
@@ -27,7 +29,7 @@ namespace SemVeyor.Domain
 
 		public override int GetHashCode()
 		{
-			return _fullname.GetHashCode();
+			return (_fullname != null ? _fullname.GetHashCode() : 0);
 		}
 
 		public static bool operator ==(TypeName left, TypeName right)
@@ -38,6 +40,11 @@ namespace SemVeyor.Domain
 		public static bool operator !=(TypeName left, TypeName right)
 		{
 			return !left.Equals(right);
+		}
+
+		public static implicit operator TypeName (Type type)
+		{
+			return new TypeName(type.FullName);
 		}
 	}
 }

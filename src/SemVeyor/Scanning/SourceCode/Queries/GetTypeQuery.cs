@@ -30,35 +30,4 @@ namespace SemVeyor.Scanning.SourceCode.Queries
 			};
 		}
 	}
-
-	public class Helpers
-	{
-		public static Visibility VisibilityFrom(SyntaxTokenList modifiers)
-		{
-			if (modifiers.Any(SyntaxKind.PublicKeyword))
-				return Visibility.Public;
-
-			if (modifiers.Any(SyntaxKind.ProtectedKeyword))
-				return Visibility.Protected;
-
-			if (modifiers.Any(SyntaxKind.InternalKeyword))
-				return Visibility.Internal;
-
-			return Visibility.Private;
-		}
-
-		public static Visibility VisibilityFrom(Accessibility accessibility)
-		{
-			if (accessibility == Accessibility.Public)
-				return Visibility.Public;
-
-			if (accessibility == Accessibility.Protected)
-				return Visibility.Protected;
-
-			if (accessibility == Accessibility.Internal)
-				return Visibility.Internal;
-
-			return Visibility.Private;
-		}
-	}
 }

@@ -17,7 +17,7 @@ namespace SemVeyor.Scanning.SourceCode.Queries
 				{
 					Name = fs.Name,
 					Visibility = Helpers.VisibilityFrom(fs.DeclaredAccessibility),
-					Type = new TypeName(fs.Type.Name)
+					Type = new TypeName(fs.Type.GetFullMetadataName())
 				})
 				.Where(MemberDetails.IsExternal);
 		}

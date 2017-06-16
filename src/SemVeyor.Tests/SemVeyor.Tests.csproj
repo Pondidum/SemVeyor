@@ -208,6 +208,7 @@
     <Compile Include="Scanning\GetAllFieldsQueryTestBase.cs" />
     <Compile Include="Scanning\GetTypeQueryTestBase.cs" />
     <Compile Include="Scanning\ScannerFactoryTests.cs" />
+    <Compile Include="Scanning\SourceCode\Queries\GetAllCtorsQueryTests.cs" />
     <Compile Include="Scanning\SourceCode\Queries\GetAllFieldsQueryTests.cs" />
     <Compile Include="Scanning\SourceCode\Queries\GetTypeQueryTests.cs" />
     <Compile Include="Scanning\SourceCode\Queries\TestCompilationLoader.cs" />

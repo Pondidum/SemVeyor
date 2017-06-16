@@ -14,8 +14,13 @@ namespace SemVeyor.Scanning.SourceCode.Queries
 				.Select(c => new CtorDetails
 				{
 					Name = c.Name,
-					Visibility = Helpers.VisibilityFrom((Accessibility)c.DeclaredAccessibility),
-					Parameters = c.Parameters.Select(p => new ParameterDetails())
+					Visibility = Helpers.VisibilityFrom(c.DeclaredAccessibility),
+					Parameters = c.Parameters.Select((p, index) => new ParameterDetails
+					{
+						Name = p.Name,
+						Position = index,
+						Type = new TypeName(p.Type.GetFullMetadataName())
+					})
 				})
 				.Where(MemberDetails.IsExternal);
 		}

@@ -38,6 +38,16 @@ namespace SemVeyor.Tests.Scanning
 
 		[Fact]
 		public void The_ctor_arguments_are_populated() => _constructors.ByVisibility(Visibility.Protected).Parameters.Count().ShouldBe(1);
-		
+
+		[Fact]
+		public void The_ctor_argument_names_are_populated() => GetParameter().Name.ShouldBe("arg");
+
+		[Fact]
+		public void The_ctor_argument_types_are_populated() => GetParameter().Type.ShouldBe(new TypeName("System.String"));
+
+		[Fact]
+		public void The_ctor_argument_positions_are_populated() => GetParameter().Position.ShouldBe(0);
+
+		private ParameterDetails GetParameter() => _constructors.ByVisibility(Visibility.Protected).Parameters.Single();
 	}
 }

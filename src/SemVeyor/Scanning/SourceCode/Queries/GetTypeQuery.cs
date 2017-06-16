@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -33,14 +32,6 @@ namespace SemVeyor.Scanning.SourceCode.Queries
 				Fields = _getFields.Execute(typeSymbol),
 				Constructors = _getConstructors.Execute(typeSymbol)
 			};
-		}
-	}
-
-	public class GetAllCtorsQuery
-	{
-		public IEnumerable<CtorDetails> Execute(ITypeSymbol type)
-		{
-			throw new NotImplementedException();
 		}
 	}
 }

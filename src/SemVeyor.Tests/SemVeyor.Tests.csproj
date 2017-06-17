@@ -206,6 +206,7 @@
     <Compile Include="Scanning\CompiledAssembly\Queries\GetTypeQueryTests.cs" />
     <Compile Include="Scanning\GetAllCtorsQueryTestBase.cs" />
     <Compile Include="Scanning\GetAllFieldsQueryTestBase.cs" />
+    <Compile Include="Scanning\GetAllMethodsQueryTestBase.cs" />
     <Compile Include="Scanning\GetAllPropertiesQueryTestBase.cs" />
     <Compile Include="Scanning\GetTypeQueryTestBase.cs" />
     <Compile Include="Scanning\ScannerFactoryTests.cs" />

@@ -17,16 +17,16 @@ namespace SemVeyor.Tests.Scanning.SourceCode.Queries
 			return Path.Combine(projectDirectory, "SemVeyor.Tests.csproj");
 		}
 
-		private static async Task<Compilation> Load()
+		private static Compilation Load()
 		{
 			var ws = MSBuildWorkspace.Create();
-			var project = await ws.OpenProjectAsync(GetPath());
-			var compilation = await project.GetCompilationAsync();
+			var project = ws.OpenProjectAsync(GetPath()).Result;
+			var compilation = project.GetCompilationAsync().Result;
 
 			return compilation;
 		}
 
-		private static readonly Lazy<Compilation> Compilation = new Lazy<Compilation>(() => Load().Result);
+		private static readonly Lazy<Compilation> Compilation = new Lazy<Compilation>(Load);
 
 		public static Compilation Get() => Compilation.Value;
 	}

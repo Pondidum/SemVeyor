@@ -11,11 +11,13 @@ namespace SemVeyor.Scanning.SourceCode.Queries
 	{
 		private readonly GetAllFieldsQuery _getFields;
 		private readonly GetAllCtorsQuery _getConstructors;
+		private readonly GetAllMethodsQuery _getMethods;
 
 		public GetTypeQuery()
 		{
 			_getFields = new GetAllFieldsQuery();
 			_getConstructors = new GetAllCtorsQuery();
+			_getMethods = new GetAllMethodsQuery();
 		}
 
 		public TypeDetails Execute(SemanticModel model, ClassDeclarationSyntax classDeclaration)
@@ -30,7 +32,8 @@ namespace SemVeyor.Scanning.SourceCode.Queries
 				BaseType = typeSymbol.BaseType.Name,
 				Interfaces = typeSymbol.Interfaces.Select(i => i.Name),
 				Fields = _getFields.Execute(typeSymbol),
-				Constructors = _getConstructors.Execute(typeSymbol)
+				Constructors = _getConstructors.Execute(typeSymbol),
+				Methods = _getMethods.Execute(typeSymbol)
 			};
 		}
 	}

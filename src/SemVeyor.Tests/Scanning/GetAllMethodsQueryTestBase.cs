@@ -21,7 +21,17 @@ namespace SemVeyor.Tests.Scanning
 		protected abstract IEnumerable<MethodDetails> BuildMethods();
 		
 		[Fact]
-		public void There_are_3_methods() => _methods.Count().ShouldBe(MethodsOnObject() + 3);
+		public void There_are_3_methods()
+		{
+			var expectedMethods = MethodsOnObject().Concat(new[]
+			{
+				nameof(TestType.Method),
+				TestType.GenericMethodName,
+				"ProtectedMethod"
+			}).OrderBy(s => s);
+
+			_methods.Select(m => m.Name).OrderBy(s => s).ShouldBe(expectedMethods, ignoreOrder: true);
+		}
 
 		[Fact]
 		public void The_public_method_is_listed() => _methods.ShouldContain(x => x.Visibility == Visibility.Public);
@@ -50,8 +60,8 @@ namespace SemVeyor.Tests.Scanning
 		private MethodDetails PublicMethod => _methods.ByVisibility(Visibility.Public);
 		private MethodDetails GenericMethod => _methods.Single(m => m.Name == TestType.GenericMethodName);
 
-		private static int MethodsOnObject() => typeof(object)
+		private static IEnumerable<string> MethodsOnObject() => typeof(object)
 			.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
-			.Count();
+			.Select(m => m.Name);
 	}
 }

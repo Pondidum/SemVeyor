@@ -213,6 +213,7 @@
     <Compile Include="Scanning\SourceCode\Queries\GetAllCtorsQueryTests.cs" />
     <Compile Include="Scanning\SourceCode\Queries\GetAllFieldsQueryTests.cs" />
     <Compile Include="Scanning\SourceCode\Queries\GetAllMethodsQueryTests.cs" />
+    <Compile Include="Scanning\SourceCode\Queries\GetAllPropertiesQueryTests.cs" />
     <Compile Include="Scanning\SourceCode\Queries\GetTypeQueryTests.cs" />
     <Compile Include="Scanning\SourceCode\Queries\TestCompilationLoader.cs" />
     <Compile Include="Scratchpad.cs" />

@@ -15,12 +15,7 @@ namespace SemVeyor.Scanning.SourceCode.Queries
 				{
 					Name = c.Name,
 					Visibility = Helpers.VisibilityFrom(c.DeclaredAccessibility),
-					Parameters = c.Parameters.Select((p, index) => new ParameterDetails
-					{
-						Name = p.Name,
-						Position = index,
-						Type = new TypeName(p.Type.GetFullMetadataName())
-					})
+					Parameters = c.Parameters.Select(ParameterDetailsBuilder.Build)
 				})
 				.Where(MemberDetails.IsExternal);
 		}

@@ -126,6 +126,7 @@
     <Compile Include="Scanning\SourceCode\Queries\GetAllTypesQuery.cs" />
     <Compile Include="Scanning\SourceCode\Queries\GetTypeQuery.cs" />
     <Compile Include="Scanning\SourceCode\Queries\Helpers.cs" />
+    <Compile Include="Scanning\SourceCode\Queries\ParameterDetailsBuilder.cs" />
     <Compile Include="Scanning\SourceCode\SourceCodeScanner.cs" />
     <Compile Include="Storage\FileStore.cs" />
     <Compile Include="Storage\FileStoreOptions.cs" />

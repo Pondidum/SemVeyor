@@ -17,7 +17,7 @@ namespace SemVeyor.Scanning.SourceCode.Queries
 				{
 					Name = pd.MetadataName,
 					Type = new TypeName(pd.Type.GetFullMetadataName()),
-					Parameters = pd.Parameters.Select(p => new ParameterDetails()),
+					Parameters = pd.Parameters.Select(ParameterDetailsBuilder.Build),
 					Visibility = Helpers.VisibilityFrom(pd.DeclaredAccessibility),
 					SetterVisibility = pd.SetMethod != null
 						? Helpers.VisibilityFrom(pd.SetMethod.DeclaredAccessibility)

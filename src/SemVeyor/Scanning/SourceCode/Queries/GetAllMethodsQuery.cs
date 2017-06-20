@@ -24,7 +24,7 @@ namespace SemVeyor.Scanning.SourceCode.Queries
 					Name = ms.Name,
 					Type = new TypeName(ms.ReturnType.GetFullMetadataName()),
 					Visibility = Helpers.VisibilityFrom(ms.DeclaredAccessibility),
-					Parameters = ms.Parameters.Select(p => new ParameterDetails()),
+					Parameters = ms.Parameters.Select(ParameterDetailsBuilder.Build),
 					GenericArguments = ms.TypeParameters.Select(tp => new GenericArgumentDetails())
 				})
 				.Where(MemberDetails.IsExternal);

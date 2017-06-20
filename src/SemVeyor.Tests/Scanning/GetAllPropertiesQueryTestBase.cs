@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SemVeyor.Domain;
 using SemVeyor.Tests.TestUtils;
@@ -19,7 +20,7 @@ namespace SemVeyor.Tests.Scanning
 		protected abstract IEnumerable<PropertyDetails> BuildProperties();
 
 		[Fact]
-		public void There_are_7_properties() => _properties.Count().ShouldBe(7);
+		public void There_are_8_properties() => _properties.Count().ShouldBe(8);
 
 		[Fact]
 		public void The_public_property_is_listed() => _properties.ShouldContain( x => x.Name == nameof(TestType.Property));
@@ -61,11 +62,28 @@ namespace SemVeyor.Tests.Scanning
 		public void An_indexed_property_argument_is_populated() => IndexedProperty.Parameters.Count().ShouldBe(1);
 
 		[Fact]
+		public void A_multi_indexed_property_arguments_are_populated()
+		{
+			var parameters = MultiIndexedProperty.Parameters.ToArray();
+			
+			parameters.ShouldSatisfyAllConditions(
+				() => parameters.Length.ShouldBe(2),
+				() => parameters[0].Name.ShouldBe("x"),
+				() => parameters[0].Type.ShouldBe(new TypeName(typeof(int).FullName)),
+				() => parameters[0].Position.ShouldBe(0),
+				() => parameters[1].Name.ShouldBe("y"),
+				() => parameters[1].Type.ShouldBe(new TypeName(typeof(int).FullName)),
+				() => parameters[1].Position.ShouldBe(1)
+			);
+		}
+
+		[Fact]
 		public void An_indexed_property_name_is_populated() => IndexedProperty.Name.ShouldBe("Item");
 
 		private PropertyDetails Property => _properties.FirstOrDefault(p => p.Name == nameof(TestType.InternalSetProperty));
 		private PropertyDetails ReadOnlyProperty => _properties.FirstOrDefault(p => p.Name == nameof(TestType.ReadonlyProperty));
-		private PropertyDetails IndexedProperty => _properties.FirstOrDefault(p => p.Type== typeof(string));
-
+		private PropertyDetails IndexedProperty => _properties.FirstOrDefault(p => p.Type == typeof(string));
+		private PropertyDetails MultiIndexedProperty => _properties.FirstOrDefault(p => p.Type == typeof(Guid));
+		
 	}
 }

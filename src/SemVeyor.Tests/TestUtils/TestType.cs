@@ -33,6 +33,12 @@ namespace SemVeyor.Tests.TestUtils
 			set { throw new Exception(); }
 		}
 
+		public Guid this[int x, int y]
+		{
+			get { throw new Exception(); }
+			set { throw new Exception(); }
+		}
+
 		public int Method(string first, int second, Action<int> third) { throw new NotSupportedException(); }
 		internal int InternalMethod() { throw new NotSupportedException(); }
 		protected int ProtectedMethod() { throw new NotSupportedException(); }

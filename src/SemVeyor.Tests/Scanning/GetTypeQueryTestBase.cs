@@ -31,7 +31,7 @@ namespace SemVeyor.Tests.Scanning
 		public void There_are_2_fields() => _type.Fields.Count().ShouldBe(2);
 
 		[Fact]
-		public void There_are_7_properties() => _type.Properties.Count().ShouldBe(7);
+		public void There_are_8_properties() => _type.Properties.Count().ShouldBe(8);
 
 		[Fact]
 		public void There_are_3_methods() => _type.Methods.Count().ShouldBe(MethodsOnObject() + 3);

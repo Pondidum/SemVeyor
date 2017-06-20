@@ -19,7 +19,7 @@ namespace SemVeyor.Tests.Scanning
 		}
 
 		protected abstract IEnumerable<MethodDetails> BuildMethods();
-		
+
 		[Fact]
 		public void There_are_3_methods()
 		{
@@ -52,10 +52,22 @@ namespace SemVeyor.Tests.Scanning
 		public void The_return_type_is_populated() => PublicMethod.Type.ShouldBe(typeof(int));
 
 		[Fact]
-		public void The_method_arguments_are_populated() => PublicMethod.Parameters.Count().ShouldBe(3);
+		public void The_method_arguments_are_populated()
+		{
+			var parameters = PublicMethod.Parameters.ToArray();
+			
+			parameters.ShouldSatisfyAllConditions(
+				() => parameters.Length.ShouldBe(3),
+				() => parameters[1].Name.ShouldBe("second"),
+				() => parameters[1].Type.ShouldBe(new TypeName(typeof(int).FullName)),
+				() => parameters[1].Position.ShouldBe(1)
+			);
+		}
 
 		[Fact]
 		public void The_method_generic_arguments_are_populated() => GenericMethod.GenericArguments.Count().ShouldBe(1);
+
+
 
 		private MethodDetails PublicMethod => _methods.ByVisibility(Visibility.Public);
 		private MethodDetails GenericMethod => _methods.Single(m => m.Name == TestType.GenericMethodName);

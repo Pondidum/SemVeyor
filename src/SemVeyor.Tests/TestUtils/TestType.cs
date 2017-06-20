@@ -12,7 +12,7 @@ namespace SemVeyor.Tests.TestUtils
 
 		public TestType() {}
 		internal TestType(int arg) {}
-		protected TestType(string arg) {}
+		protected TestType(string first, int second, Guid third) {}
 		private TestType(Guid arg) {}
 
 

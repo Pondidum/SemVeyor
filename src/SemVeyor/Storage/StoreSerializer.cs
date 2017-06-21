@@ -11,8 +11,8 @@ namespace SemVeyor.Storage
 			ContractResolver = new CamelCasePropertyNamesContractResolver(),
 			Converters =
 			{
-				new StringEnumConverter()
-
+				new StringEnumConverter(),
+				new TypeNameConverter()
 			},
 			Formatting = Formatting.None
 		};

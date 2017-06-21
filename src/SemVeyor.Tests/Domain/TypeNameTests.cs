@@ -1,4 +1,6 @@
-﻿using SemVeyor.Domain;
+﻿using System.Net.Mail;
+using SemVeyor.Domain;
+using SemVeyor.Storage;
 using Shouldly;
 using Xunit;
 

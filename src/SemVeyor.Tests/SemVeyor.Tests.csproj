@@ -219,6 +219,7 @@
     <Compile Include="Scratchpad.cs" />
     <Compile Include="Storage\FileStoreTests.cs" />
     <Compile Include="Storage\StorageFactoryTests.cs" />
+    <Compile Include="Storage\StoreSerializerTests.cs" />
     <Compile Include="TestUtils\TestType.cs" />
   </ItemGroup>
   <ItemGroup>

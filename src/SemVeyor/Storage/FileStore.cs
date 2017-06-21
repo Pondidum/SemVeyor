@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using FileSystem;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Serialization;
 using SemVeyor.CommandLine;
 using SemVeyor.Domain;
 
@@ -10,24 +8,15 @@ namespace SemVeyor.Storage
 {
 	public class FileStore : IStorage
 	{
-		private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
-		{
-			ContractResolver = new CamelCasePropertyNamesContractResolver(),
-			Converters =
-			{
-				new StringEnumConverter()
-
-			},
-			Formatting = Formatting.None
-		};
-
 		private readonly IFileSystem _fs;
+		private readonly StoreSerializer _serializer;
 		private readonly Options _options;
 		private readonly FileStoreOptions _storeOptions;
 
-		public FileStore(IFileSystem fs, Options options,  FileStoreOptions storeOptions)
+		public FileStore(IFileSystem fs, StoreSerializer serializer, Options options,  FileStoreOptions storeOptions)
 		{
 			_fs = fs;
+			_serializer = serializer;
 			_options = options;
 			_storeOptions = storeOptions;
 		}
@@ -37,7 +26,7 @@ namespace SemVeyor.Storage
 			if (_options.ReadOnly)
 				return;
 
-			var json = JsonConvert.SerializeObject(details, Settings);
+			var json = _serializer.Serialize(details);
 
 			_fs.AppendFileLines(_storeOptions.Path, json).Wait();
 		}
@@ -50,7 +39,7 @@ namespace SemVeyor.Storage
 			var json = _fs.ReadFileLines(_storeOptions.Path).Result.LastOrDefault();
 
 			return json != null
-				? JsonConvert.DeserializeObject<AssemblyDetails>(json)
+				? _serializer.Deserialize<AssemblyDetails>(json)
 				: null;
 		}
 	}

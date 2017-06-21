@@ -132,6 +132,7 @@
     <Compile Include="Storage\FileStoreOptions.cs" />
     <Compile Include="Storage\IStorage.cs" />
     <Compile Include="Storage\StorageFactory.cs" />
+    <Compile Include="Storage\StoreSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Esent.Interop, Version=1.9.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">

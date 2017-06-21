@@ -23,6 +23,7 @@ namespace SemVeyor.Tests.Storage
 			_options = new Options();
 			_store = new FileStore(
 				new InMemoryFileSystem(),
+				new StoreSerializer(),
 				_options,
 				new FileStoreOptions());
 		}

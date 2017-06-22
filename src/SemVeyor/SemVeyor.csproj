@@ -102,6 +102,7 @@
     <Compile Include="Domain\Visibility.cs" />
     <Compile Include="Infrastructure\Extensions.cs" />
     <Compile Include="Infrastructure\LambdaComparer.cs" />
+    <Compile Include="Infrastructure\PluginSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Reporting\IReporter.cs" />
     <Compile Include="Reporting\ReportArgs.cs" />

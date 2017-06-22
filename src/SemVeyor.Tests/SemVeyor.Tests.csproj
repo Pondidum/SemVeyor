@@ -199,6 +199,7 @@
     <Compile Include="Builder\TypeDetailsBuilder.cs" />
     <Compile Include="Infrastructure\ExtensionsTests.cs" />
     <Compile Include="Infrastructure\LambdaComparerTests.cs" />
+    <Compile Include="Infrastructure\PluginSystemTests.cs" />
     <Compile Include="Scanning\CompiledAssembly\Queries\GetAllCtorsQueryTests.cs" />
     <Compile Include="Scanning\CompiledAssembly\Queries\GetAllFieldsQueryTests.cs" />
     <Compile Include="Scanning\CompiledAssembly\Queries\GetAllMethodsQueryTests.cs" />

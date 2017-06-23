@@ -17,7 +17,13 @@ namespace SemVeyor.Infrastructure
 				.Where(t => t.GetInterfaces().Contains(typeof(T)));
 		}
 
-		public T Build<T>(Type type, Options options)
+		public Type ForKey<T>(string key)
+		{
+			return DiscoverImplementations<T>()
+				.Single(t => string.Equals(t.Name, key + BuildName<T>(), StringComparison.OrdinalIgnoreCase));
+		}
+		
+		public T Build<T>(Type type, Options options, Func<Type, object> buildParameter)
 		{
 			if (typeof(T).IsAssignableFrom(type) == false)
 				throw new ArgumentException($"{type.FullName} cannot be cast to {typeof(T).FullName}", nameof(type));
@@ -38,7 +44,23 @@ namespace SemVeyor.Infrastructure
 			if (optionsOnly != null)
 				return (T)optionsOnly.Invoke(new object[] { options });
 
-			throw new NotImplementedException();
+			var ctor = constructors.First();
+			
+			var parameters = ctor
+				.GetParameters()
+				.Select(pi => pi.ParameterType == typeof(Options) ? options : buildParameter(pi.ParameterType))
+				.ToArray();
+
+			return (T)ctor.Invoke(parameters);
+		}
+
+		private static string BuildName<T>()
+		{
+			var type = typeof(T);
+
+			return type.IsInterface
+				? type.Name.Substring(1)
+				: type.Name;
 		}
 	}
 }

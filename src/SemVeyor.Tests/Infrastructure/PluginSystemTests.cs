@@ -28,20 +28,20 @@ namespace SemVeyor.Tests.Infrastructure
 		[Fact]
 		public void When_building_a_type_not_castable()
 		{
-			Should.Throw<ArgumentException>(() => _plugins.Build<IStorage>(typeof(Guid), null));
+			Should.Throw<ArgumentException>(() => _plugins.Build<IStorage>(typeof(Guid), null, null));
 		}
 
 		[Fact]
 		public void When_building_a_type_with_no_visible_constructors()
 		{
-			Should.Throw<MissingMethodException>(() => _plugins.Build<NoVisibleCtor>(typeof(NoVisibleCtor), null));
+			Should.Throw<MissingMethodException>(() => _plugins.Build<NoVisibleCtor>(typeof(NoVisibleCtor), null, null));
 		}
 
 		[Fact]
 		public void When_building_a_type_with_a_parameterless_constructor()
 		{
 			_plugins
-				.Build<ParameterlessCtor>(typeof(ParameterlessCtor), null)
+				.Build<ParameterlessCtor>(typeof(ParameterlessCtor), null, null)
 				.ShouldBeOfType<ParameterlessCtor>();
 		}
 
@@ -51,7 +51,7 @@ namespace SemVeyor.Tests.Infrastructure
 			var options = new Options();
 
 			_plugins
-				.Build<OptionsParameter>(typeof(OptionsParameter), options)
+				.Build<OptionsParameter>(typeof(OptionsParameter), options, null)
 				.Options
 				.ShouldBe(options);
 		}
@@ -59,6 +59,9 @@ namespace SemVeyor.Tests.Infrastructure
 		[Fact]
 		public void When_building_a_type_with_a_poco()
 		{
+			_plugins
+				.Build<PocoParameter>(typeof(PocoParameter), null, t => new ParameterlessCtor())
+				.Parameter.ShouldBeOfType<ParameterlessCtor>();
 		}
 
 		public class NoVisibleCtor
@@ -76,6 +79,15 @@ namespace SemVeyor.Tests.Infrastructure
 			public OptionsParameter(Options options)
 			{
 				Options = options;
+			}
+		}
+
+		public class PocoParameter
+		{
+			public object Parameter { get; }
+			public PocoParameter(ParameterlessCtor poco)
+			{
+				Parameter = poco;
 			}
 		}
 	}

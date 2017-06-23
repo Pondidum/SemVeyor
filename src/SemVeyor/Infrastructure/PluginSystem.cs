@@ -38,12 +38,6 @@ namespace SemVeyor.Infrastructure
 			if (blank != null)
 				return (T)blank.Invoke(new object[0] { });
 
-			var optionsOnly = constructors
-				.FirstOrDefault(c => c.GetParameters().Length == 1 && c.GetParameters().Single().ParameterType == typeof(Options));
-
-			if (optionsOnly != null)
-				return (T)optionsOnly.Invoke(new object[] { options });
-
 			var ctor = constructors.First();
 			
 			var parameters = ctor

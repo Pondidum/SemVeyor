@@ -8,10 +8,10 @@ namespace SemVeyor
 {
 	public class App
 	{
-		private readonly IStorage _store;
+		private readonly IStore _store;
 		private readonly IReporter _reporter;
 
-		public App(IStorage store, IReporter reporter)
+		public App(IStore store, IReporter reporter)
 		{
 			_store = store;
 			_reporter = reporter;

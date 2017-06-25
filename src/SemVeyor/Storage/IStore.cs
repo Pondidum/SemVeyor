@@ -2,7 +2,7 @@
 
 namespace SemVeyor.Storage
 {
-	public interface IStorage
+	public interface IStore
 	{
 		void Write(AssemblyDetails details);
 		AssemblyDetails Read();

@@ -20,7 +20,7 @@ namespace SemVeyor.Tests.Infrastructure
 		public void When_discovering_types()
 		{
 			_plugins
-				.DiscoverImplementations<IStorage>()
+				.DiscoverImplementations<IStore>()
 				.ShouldHaveSingleItem()
 				.ShouldBe(typeof(FileStore));
 		}
@@ -28,7 +28,7 @@ namespace SemVeyor.Tests.Infrastructure
 		[Fact]
 		public void When_building_a_type_not_castable()
 		{
-			Should.Throw<ArgumentException>(() => _plugins.Build<IStorage>(typeof(Guid), null, null));
+			Should.Throw<ArgumentException>(() => _plugins.Build<IStore>(typeof(Guid), null, null));
 		}
 
 		[Fact]

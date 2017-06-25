@@ -6,7 +6,7 @@ namespace SemVeyor.Storage
 {
 	public class StorageFactory
 	{
-		public IStorage CreateStore(CliParameters cli, Options options)
+		public IStore CreateStore(CliParameters cli, Options options)
 		{
 			if (options.Storage.Equals("file", StringComparison.OrdinalIgnoreCase) == false)
 				throw new NotSupportedException(options.Storage);

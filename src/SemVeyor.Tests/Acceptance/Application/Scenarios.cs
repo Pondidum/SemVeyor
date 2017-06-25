@@ -9,15 +9,15 @@ namespace SemVeyor.Tests.Acceptance.Application
 {
 	public class Scenarios
 	{
-		private readonly IStorage _storage;
+		private readonly IStore _store;
 		private readonly IReporter _reporter;
 		private readonly App _app;
 
 		public Scenarios()
 		{
-			_storage = Substitute.For<IStorage>();
+			_store = Substitute.For<IStore>();
 			_reporter = Substitute.For<IReporter>();
-			_app = new App(_storage, _reporter);
+			_app = new App(_store, _reporter);
 		}
 
 		[Fact]

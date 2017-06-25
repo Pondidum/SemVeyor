@@ -6,7 +6,7 @@ using SemVeyor.Domain;
 
 namespace SemVeyor.Storage
 {
-	public class FileStore : IStorage
+	public class FileStore : IStore
 	{
 		private readonly IFileSystem _fs;
 		private readonly StoreSerializer _serializer;

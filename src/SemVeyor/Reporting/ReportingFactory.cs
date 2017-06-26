@@ -1,5 +1,6 @@
 ﻿using System;
 using SemVeyor.CommandLine;
+using SemVeyor.Config;
 
 namespace SemVeyor.Reporting
 {

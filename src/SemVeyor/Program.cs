@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using SemVeyor.CommandLine;
+using SemVeyor.Config;
 using SemVeyor.Domain;
 using SemVeyor.Reporting;
 using SemVeyor.Scanning;

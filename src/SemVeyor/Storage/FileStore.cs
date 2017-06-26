@@ -2,6 +2,7 @@
 using FileSystem;
 using Newtonsoft.Json;
 using SemVeyor.CommandLine;
+using SemVeyor.Config;
 using SemVeyor.Domain;
 
 namespace SemVeyor.Storage

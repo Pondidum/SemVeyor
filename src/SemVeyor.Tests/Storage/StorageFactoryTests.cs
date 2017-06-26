@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using SemVeyor.CommandLine;
+using SemVeyor.Config;
 using SemVeyor.Storage;
 using Shouldly;
 using Xunit;

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using SemVeyor.Infrastructure;
+using SemVeyor.CommandLine;
 
-namespace SemVeyor.CommandLine
+namespace SemVeyor.Config
 {
 	public class Options
 	{
@@ -21,7 +21,5 @@ namespace SemVeyor.CommandLine
 			Reporter = DefaultReporter;
 			Paths = Enumerable.Empty<string>();
 		}
-
-		public static Options From(CliParameters parameters) => parameters.ForPrefix("").Build<Options>();
 	}
 }

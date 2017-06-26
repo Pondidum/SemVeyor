@@ -40,7 +40,7 @@
     <Compile Include="CommandLine\Cli.cs" />
     <Compile Include="CommandLine\CliParameters.cs" />
     <Compile Include="CommandLine\CliParameterSet.cs" />
-    <Compile Include="CommandLine\Options.cs" />
+    <Compile Include="Config\Options.cs" />
     <Compile Include="Domain\Events\CtorEvent.cs" />
     <Compile Include="Domain\Events\FieldEvent.cs" />
     <Compile Include="Domain\Events\MethodEvent.cs" />

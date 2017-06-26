@@ -15,14 +15,14 @@ namespace SemVeyor
 		public static void Main(string[] args)
 		{
 			var cli = new Cli().Parse(args);
-			var options = Options.From(cli);
+			var configuration = new CliConfigurationBuilder().Build(cli);
 
-			var store = new StorageFactory().CreateStore(cli, options);
-			var reporter = new ReportingFactory().CreateReporter(cli, options);
-			var scanner = new ScannerFactory().CreateScanner(cli, options);
+			var store = new StorageFactory().CreateStore(cli, configuration.GlobalOptions);
+			var reporter = new ReportingFactory().CreateReporter(cli, configuration.GlobalOptions);
+			var scanner = new ScannerFactory().CreateScanner(cli, configuration.GlobalOptions);
 
 			var previous = store.Read();
-			var current = scanner.Execute(new AssemblyScannerArgs { Path = options.Paths.First() }).Result;
+			var current = scanner.Execute(new AssemblyScannerArgs { Path = configuration.GlobalOptions.Paths.First() }).Result;
 			//var current = new GetAssemblyQuery().Execute(Assembly.LoadFile(options.Paths.First()));
 
 			var app = new App(store, reporter);

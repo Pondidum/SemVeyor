@@ -9,13 +9,18 @@ namespace SemVeyor.Tests.CommandLine
 {
 	public class OptionsTests
 	{
+		private static Options Build(CliParameters cli)
+		{
+			return new CliConfigurationBuilder().Build(cli).GlobalOptions;
+		}
+
 		[Fact]
 		public void When_nothing_is_specified()
 		{
 			var parameters = new CliParameters();
 			parameters.CreateSet("", p => { });
 
-			var options = Options.From(parameters);
+			var options = Build(parameters);
 
 			options.ShouldSatisfyAllConditions(
 				() => options.Storage.ShouldBe(Options.DefaultStorage),
@@ -32,7 +37,7 @@ namespace SemVeyor.Tests.CommandLine
 				p.Arguments = new Dictionary<string, string> { { "storage", "aws:s3" } };
 			});
 
-			var options = Options.From(parameters);
+			var options = Build(parameters);
 
 			options.Storage.ShouldBe("aws:s3");
 		}
@@ -43,7 +48,7 @@ namespace SemVeyor.Tests.CommandLine
 			var parameters = new CliParameters();
 			parameters.Paths.Add("some/path.json");
 
-			var options = Options.From(parameters);
+			var options = Build(parameters);
 
 			options.Paths.ShouldBe(new[] { "some/path.json" });
 		}

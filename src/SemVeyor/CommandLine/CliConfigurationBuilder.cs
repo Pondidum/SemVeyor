@@ -1,4 +1,5 @@
-﻿using SemVeyor.Config;
+﻿using System.Collections.Generic;
+using SemVeyor.Config;
 
 namespace SemVeyor.CommandLine
 {
@@ -6,10 +7,17 @@ namespace SemVeyor.CommandLine
 	{
 		public Configuration Build(CliParameters cli)
 		{
-			var options = cli.ForPrefix("").Build<Options>();
-			
+			var parameterSet = cli.ForPrefix("");
+			var options = parameterSet.Build<Options>();
+
+			var storage = new Dictionary<string, IDictionary<string, string>>();
+
+			if (parameterSet.Arguments.ContainsKey("storage"))
+				storage.Add(parameterSet.Arguments["storage"], new Dictionary<string, string>());
+
 			return new Configuration(
-				options
+				options,
+				storage
 			);
 		}
 	}

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FileSystem;
 using SemVeyor.CommandLine;
 using SemVeyor.Config;
@@ -7,16 +8,16 @@ namespace SemVeyor.Storage
 {
 	public class StorageFactory
 	{
-		public IStore CreateStore(CliParameters cli, Options options)
+		public IStore CreateStore(CliParameters cli, Configuration config)
 		{
-			if (options.Storage.Equals("file", StringComparison.OrdinalIgnoreCase) == false)
-				throw new NotSupportedException(options.Storage);
+			if (config.StorageTypes.Contains("file") == false)
+				throw new NotSupportedException($"You must specify 'file' storage. Actually got {string.Join(",", config.StorageTypes)}");
 
 			return new FileStore(
 				new PhysicalFileSystem(),
 				new StoreSerializer(),
-				options,
-				cli.ForPrefix(options.Storage).Build<FileStoreOptions>());
+				config.GlobalOptions,
+				config.StorageOptions<FileStoreOptions>("file"));
 		}
 	}
 }

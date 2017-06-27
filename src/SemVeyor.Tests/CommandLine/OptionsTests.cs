@@ -9,9 +9,9 @@ namespace SemVeyor.Tests.CommandLine
 {
 	public class OptionsTests
 	{
-		private static Options Build(CliParameters cli)
+		private static Configuration Build(CliParameters cli)
 		{
-			return new CliConfigurationBuilder().Build(cli).GlobalOptions;
+			return new CliConfigurationBuilder().Build(cli);
 		}
 
 		[Fact]
@@ -20,11 +20,11 @@ namespace SemVeyor.Tests.CommandLine
 			var parameters = new CliParameters();
 			parameters.CreateSet("", p => { });
 
-			var options = Build(parameters);
+			var config = Build(parameters);
 
-			options.ShouldSatisfyAllConditions(
-				() => options.Storage.ShouldBe(Options.DefaultStorage),
-				() => options.Paths.ShouldBeEmpty()
+			config.ShouldSatisfyAllConditions(
+				() => config.StorageTypes.ShouldContain(Options.DefaultStorage),
+				() => config.GlobalOptions.Paths.ShouldBeEmpty()
 			);
 		}
 
@@ -37,9 +37,9 @@ namespace SemVeyor.Tests.CommandLine
 				p.Arguments = new Dictionary<string, string> { { "storage", "aws:s3" } };
 			});
 
-			var options = Build(parameters);
+			var config = Build(parameters);
 
-			options.Storage.ShouldBe("aws:s3");
+			config.StorageTypes.ShouldBe(new [] {"aws:s3"});
 		}
 
 		[Fact]
@@ -48,9 +48,9 @@ namespace SemVeyor.Tests.CommandLine
 			var parameters = new CliParameters();
 			parameters.Paths.Add("some/path.json");
 
-			var options = Build(parameters);
+			var config = Build(parameters);
 
-			options.Paths.ShouldBe(new[] { "some/path.json" });
+			config.GlobalOptions.Paths.ShouldBe(new[] { "some/path.json" });
 		}
 
 	}

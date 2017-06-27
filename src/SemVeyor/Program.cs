@@ -17,7 +17,7 @@ namespace SemVeyor
 			var cli = new Cli().Parse(args);
 			var configuration = new CliConfigurationBuilder().Build(cli);
 
-			var store = new StorageFactory().CreateStore(cli, configuration.GlobalOptions);
+			var store = new StorageFactory().CreateStore(cli, configuration);
 			var reporter = new ReportingFactory().CreateReporter(cli, configuration.GlobalOptions);
 			var scanner = new ScannerFactory().CreateScanner(cli, configuration.GlobalOptions);
 

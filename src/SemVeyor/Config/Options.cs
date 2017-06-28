@@ -12,13 +12,13 @@ namespace SemVeyor.Config
 		public bool ReadOnly { get; set; }
 //		public string Storage { get; set;  }
 		public IEnumerable<string> Paths { get; set; }
-		public string Reporter { get; set; }
+//		public string Reporter { get; set; }
 
 		public Options()
 		{
 			ReadOnly = false;
 //			Storage = DefaultStorage;
-			Reporter = DefaultReporter;
+//			Reporter = DefaultReporter;
 			Paths = Enumerable.Empty<string>();
 		}
 	}

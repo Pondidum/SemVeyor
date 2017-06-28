@@ -11,25 +11,35 @@ namespace SemVeyor.Config
 {
 	public class Configuration
 	{
+		public HashSet<string> ReporterTypes { get; }
 		public HashSet<string> StorageTypes { get; }
 		public Options GlobalOptions { get; }
 
+		private readonly IDictionary<string, IDictionary<string, string>> _reporters;
 		private readonly IDictionary<string, IDictionary<string, string>> _stores;
 
-		public Configuration(Options options, IDictionary<string, IDictionary<string, string>> storage)
+		public Configuration(Options options, IDictionary<string, IDictionary<string, string>> storage, IDictionary<string, IDictionary<string, string>> reporters)
 		{
 			GlobalOptions = options;
 
-			ApplyDefaultsTo(storage);
+			ApplyStorageDefaults(storage);
+			ApplyReportingDefaults(reporters);
 
 			StorageTypes = new HashSet<string>(storage.Keys, StringComparer.OrdinalIgnoreCase);
+			ReporterTypes = new HashSet<string>(reporters.Keys, StringComparer.OrdinalIgnoreCase);
+
 			_stores = storage;
+			_reporters = reporters;
 		}
 
-		private static void ApplyDefaultsTo(IDictionary<string, IDictionary<string, string>> storage)
+		private static void ApplyStorageDefaults(IDictionary<string, IDictionary<string, string>> storage)
 		{
 			if (storage.Any() == false)
 				storage.Add(Options.DefaultStorage, new Dictionary<string, string>());
+		}
+
+		private static void ApplyReportingDefaults(IDictionary<string, IDictionary<string, string>> reporting)
+		{
 		}
 
 		public T StorageOptions<T>(string key)
@@ -40,6 +50,22 @@ namespace SemVeyor.Config
 				options = new Dictionary<string, string>();
 
 
+			return PopulateOptions<T>(options);
+		}
+
+		public T ReporterOptions<T>(string key)
+		{
+			IDictionary<string, string> options;
+
+			if (_reporters.TryGetValue(key, out options) == false)
+				options = new Dictionary<string, string>();
+
+
+			return PopulateOptions<T>(options);
+		}
+
+		private static T PopulateOptions<T>(IDictionary<string, string> options)
+		{
 			var builder = new ConfigBuilder(new StronkOptions
 			{
 				ErrorPolicy = new ErrorPolicy
@@ -50,7 +76,6 @@ namespace SemVeyor.Config
 
 			var target = Activator.CreateInstance<T>();
 			builder.Populate(target, new CliConfigurationSource(options));
-
 			return target;
 		}
 

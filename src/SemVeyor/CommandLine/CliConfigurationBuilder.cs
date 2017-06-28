@@ -15,9 +15,12 @@ namespace SemVeyor.CommandLine
 			if (parameterSet.Arguments.ContainsKey("storage"))
 				storage.Add(parameterSet.Arguments["storage"], new Dictionary<string, string>());
 
+			var reporters = new Dictionary<string, IDictionary<string, string>>();
+
 			return new Configuration(
 				options,
-				storage
+				storage,
+				reporters
 			);
 		}
 	}

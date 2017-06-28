@@ -32,7 +32,7 @@ namespace SemVeyor.Tests.Storage
 			var options = new Configuration(new Options(), new Dictionary<string, IDictionary<string, string>>
 			{
 				{ Options.DefaultStorage, new Dictionary<string, string>() }
-			});
+			}, new Dictionary<string, IDictionary<string, string>>());
 
 			var store = _factory.CreateStore(cli, options);
 
@@ -46,7 +46,7 @@ namespace SemVeyor.Tests.Storage
 			var options = new Configuration(new Options(), new Dictionary<string, IDictionary<string, string>>
 			{
 				{ Options.DefaultStorage.ToUpper(), new Dictionary<string, string>() }
-			});
+			}, new Dictionary<string, IDictionary<string, string>>());
 
 			var store = _factory.CreateStore(cli, options);
 

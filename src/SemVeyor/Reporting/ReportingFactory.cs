@@ -9,7 +9,7 @@ namespace SemVeyor.Reporting
 		public IReporter CreateReporter(CliParameters cli, Configuration config)
 		{
 			if (config.StorageTypes.Contains("simple") == false)
-				throw new NotSupportedException($"You must specify 'file' storage. Actually got {string.Join(",", config.StorageTypes)}");
+				throw new NotSupportedException($"You must specify 'simple' reporting at this time. Actually got {string.Join(",", config.StorageTypes)}");
 
 			return new SimpleReporter(
 				config.ReporterOptions<SimpleReporterOptions>("simple"));

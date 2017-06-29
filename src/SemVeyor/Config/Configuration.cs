@@ -40,6 +40,8 @@ namespace SemVeyor.Config
 
 		private static void ApplyReportingDefaults(IDictionary<string, IDictionary<string, string>> reporting)
 		{
+			if (reporting.Any() == false)
+				reporting.Add(Options.DefaultReporter, new Dictionary<string, string>());
 		}
 
 		public T StorageOptions<T>(string key)

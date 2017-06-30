@@ -21,13 +21,11 @@ namespace SemVeyor.Tests.Scanning
 
 		public IAssemblyScanner CreateFor(string path = null)
 		{
-			var cli = new CliParameters();
+			var options = new Options();
 			if (path != null)
-				cli.Paths.Add(path);
-
-			return new ScannerFactory().CreateScanner(
-				cli,
-				new Options());
+				options.Paths = new[] { path };
+			
+			return new ScannerFactory().CreateScanner(options);
 		}
 
 		[Fact]

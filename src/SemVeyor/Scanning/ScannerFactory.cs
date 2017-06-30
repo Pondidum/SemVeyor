@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using SemVeyor.CommandLine;
 using SemVeyor.Config;
 using SemVeyor.Scanning.CompiledAssembly;
 using SemVeyor.Scanning.SourceCode;
@@ -10,9 +9,9 @@ namespace SemVeyor.Scanning
 {
 	public class ScannerFactory
 	{
-		public IAssemblyScanner CreateScanner(CliParameters cli, Options options)
+		public IAssemblyScanner CreateScanner(Options options)
 		{
-			var path = cli.Paths.SingleOrDefault();
+			var path = options.Paths.SingleOrDefault();
 
 			if (IsAssembly(path))
 				return new CompiledAssemblyScanner();

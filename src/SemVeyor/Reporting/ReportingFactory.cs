@@ -1,12 +1,11 @@
 ﻿using System;
-using SemVeyor.CommandLine;
 using SemVeyor.Config;
 
 namespace SemVeyor.Reporting
 {
 	public class ReportingFactory
 	{
-		public IReporter CreateReporter(CliParameters cli, Configuration config)
+		public IReporter CreateReporter(Configuration config)
 		{
 			if (config.StorageTypes.Contains("simple") == false)
 				throw new NotSupportedException($"You must specify 'simple' reporting at this time. Actually got {string.Join(",", config.StorageTypes)}");

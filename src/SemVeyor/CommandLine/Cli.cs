@@ -44,7 +44,7 @@ namespace SemVeyor.CommandLine
 			var prefix = index >= 0 ? name.Substring(0, index) : string.Empty;
 			var suffix = index >= 0 ? name.Substring(index + 1) : name;
 
-			dto.ForPrefix(prefix).Flags.Add(suffix);
+			dto.ForPrefix(prefix).Arguments[suffix] = "true";
 
 			return true;
 		}

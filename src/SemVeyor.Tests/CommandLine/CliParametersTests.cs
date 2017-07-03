@@ -18,10 +18,9 @@ namespace SemVeyor.Tests.CommandLine
 			{
 				set.Arguments = new Dictionary<string, string>
 				{
-					{ "storage", "s3" }
+					{ "storage", "s3" },
+					{ "readonly", "true"}
 				};
-
-				set.Flags = new HashSet<string> { "readonly" };
 			});
 
 			_all.CreateSet("s3", set =>
@@ -29,10 +28,9 @@ namespace SemVeyor.Tests.CommandLine
 				set.Arguments = new Dictionary<string, string>
 				{
 					{ "access_key", "123456" },
-					{ "secret_key", "987654" }
+					{ "secret_key", "987654" },
+					{ "enable-mfa", "true"}
 				};
-
-				set.Flags = new HashSet<string> { "enable-mfa" };
 			});
 		}
 
@@ -40,12 +38,6 @@ namespace SemVeyor.Tests.CommandLine
 		public void An_ivalid_prefix_arguments_are_populated()
 		{
 			_all.ForPrefix("Wat").Arguments.ShouldBeEmpty();
-		}
-
-		[Fact]
-		public void An_ivalid_prefix_flags_are_populated()
-		{
-			_all.ForPrefix("Wat").Flags.ShouldBeEmpty();
 		}
 
 		[Fact]
@@ -57,13 +49,17 @@ namespace SemVeyor.Tests.CommandLine
 		[Fact]
 		public void A_valid_prefix_arguments_are_populated()
 		{
-			_all.ForPrefix("").Arguments.ShouldBe(new Dictionary<string, string> { { "storage", "s3"} });
+			_all.ForPrefix("").Arguments.ShouldBe(new Dictionary<string, string>
+			{
+				{ "storage", "s3"},
+				{ "readonly", "true"}
+			});
 		}
 
 		[Fact]
 		public void A_valid_prefix_flags_are_populated()
 		{
-			_all.ForPrefix("").Flags.ShouldBe(new[] { "readonly" });
+			_all.ForPrefix("").Arguments.ShouldContainKey("readonly");
 		}
 
 		[Fact]

@@ -33,13 +33,15 @@ namespace SemVeyor.Tests.CommandLine
 		{
 			_cli.ForPrefix("").Arguments.ShouldBe(new Dictionary<string, string>
 			{
-				{ "storage", "aws:s3" }
+				{ "storage", "aws:s3" },
+				{ "runnable", "true" }
 			});
 
 			_cli.ForPrefix("aws:s3").Arguments.ShouldBe(new Dictionary<string, string>
 			{
 				{ "accesskey", "123456" },
-				{ "secretkey", "something with spaces" }
+				{ "secretkey", "something with spaces" },
+				{ "enable", "true" }
 			});
 		}
 
@@ -55,8 +57,8 @@ namespace SemVeyor.Tests.CommandLine
 		[Fact]
 		public void Flags_are_populated()
 		{
-			_cli.ForPrefix("").Flags.ShouldBe(new HashSet<string> { "runnable" });
-			_cli.ForPrefix("aws:s3").Flags.ShouldBe(new HashSet<string> { "enable" });
+			_cli.ForPrefix("").Arguments.ShouldContainKey("runnable");
+			_cli.ForPrefix("aws:s3").Arguments.ShouldContainKey("enable");
 		}
 	}
 }

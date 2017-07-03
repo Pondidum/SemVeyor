@@ -168,7 +168,6 @@
     <Compile Include="Acceptance\Application\Scenarios.cs" />
     <Compile Include="Acceptance\Changes\Scenarios.cs" />
     <Compile Include="Classification\EventClassificationTests.cs" />
-    <Compile Include="CommandLine\CliParamerterSetTests.cs" />
     <Compile Include="CommandLine\CliParametersTests.cs" />
     <Compile Include="CommandLine\CliTests.cs" />
     <Compile Include="CommandLine\OptionsTests.cs" />

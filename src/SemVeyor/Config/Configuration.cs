@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Configuration;
 using System.Linq;
-using SemVeyor.CommandLine;
 using Stronk;
+using Stronk.ConfigurationSourcing;
 using Stronk.Policies;
 
 namespace SemVeyor.Config
@@ -83,16 +83,13 @@ namespace SemVeyor.Config
 
 		private class CliConfigurationSource : IConfigurationSource
 		{
-			public NameValueCollection AppSettings { get; }
-			public ConnectionStringSettingsCollection ConnectionStrings { get; }
+			public IDictionary<string, string> AppSettings { get; }
+			public IDictionary<string, ConnectionStringSettings> ConnectionStrings { get; }
 
 			public CliConfigurationSource(IDictionary<string, string> options)
 			{
-				ConnectionStrings = new ConnectionStringSettingsCollection();
-				AppSettings = new NameValueCollection();
-
-				foreach (var pair in options)
-					AppSettings.Add(pair.Key, pair.Value);
+				ConnectionStrings = new Dictionary<string, ConnectionStringSettings>();
+				AppSettings = options;
 			}
 		}
 	}

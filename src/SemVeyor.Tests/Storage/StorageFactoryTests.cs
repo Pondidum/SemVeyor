@@ -28,7 +28,7 @@ namespace SemVeyor.Tests.Storage
 		[Fact]
 		public void When_the_storage_option_is_file()
 		{
-			var options = new Configuration.Config(new Options(), new Dictionary<string, IDictionary<string, string>>
+			var options = new Config(new Options(), new Dictionary<string, IDictionary<string, string>>
 			{
 				{ Options.DefaultStorage, new Dictionary<string, string>() }
 			}, new Dictionary<string, IDictionary<string, string>>());
@@ -41,7 +41,7 @@ namespace SemVeyor.Tests.Storage
 		[Fact]
 		public void When_the_storage_option_is_a_different_case()
 		{
-			var options = new Configuration.Config(new Options(), new Dictionary<string, IDictionary<string, string>>
+			var options = new Config(new Options(), new Dictionary<string, IDictionary<string, string>>
 			{
 				{ Options.DefaultStorage.ToUpper(), new Dictionary<string, string>() }
 			}, new Dictionary<string, IDictionary<string, string>>());

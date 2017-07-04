@@ -42,6 +42,7 @@
     <Compile Include="CommandLine\CliParameters.cs" />
     <Compile Include="CommandLine\CliParameterSet.cs" />
     <Compile Include="Configuration\Config.cs" />
+    <Compile Include="Configuration\ConfigFileReader.cs" />
     <Compile Include="Configuration\Options.cs" />
     <Compile Include="Domain\Events\CtorEvent.cs" />
     <Compile Include="Domain\Events\FieldEvent.cs" />

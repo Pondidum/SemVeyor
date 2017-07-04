@@ -172,6 +172,7 @@
     <Compile Include="CommandLine\CliParametersTests.cs" />
     <Compile Include="CommandLine\CliTests.cs" />
     <Compile Include="CommandLine\OptionsTests.cs" />
+    <Compile Include="Configuration\ConfigFileReaderTests.cs" />
     <Compile Include="Domain\Events\AllEvents.cs" />
     <Compile Include="Domain\Events\FieldEvents.cs" />
     <Compile Include="Domain\Events\GenericArgumentEvents.cs" />

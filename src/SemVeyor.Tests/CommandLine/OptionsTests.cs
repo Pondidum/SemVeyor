@@ -9,7 +9,7 @@ namespace SemVeyor.Tests.CommandLine
 {
 	public class OptionsTests
 	{
-		private static Configuration.Config Build(CliParameters cli) => new CliConfigurationBuilder().Build(cli);
+		private static Config Build(CliParameters cli) => new CliConfigurationBuilder().Build(cli);
 		private static void CreateSet(CliParameters parameters, string prefix, Action<CliParameterSet> customise) => customise(parameters.ForPrefix(prefix));
 
 

@@ -17,6 +17,11 @@ namespace SemVeyor.Configuration
 		private readonly IDictionary<string, IDictionary<string, string>> _reporters;
 		private readonly IDictionary<string, IDictionary<string, string>> _stores;
 
+		public Config()
+			: this(new Options(), new Dictionary<string, IDictionary<string, string>>(), new Dictionary<string, IDictionary<string, string>>() )
+		{
+		}
+
 		public Config(Options options, IDictionary<string, IDictionary<string, string>> storage, IDictionary<string, IDictionary<string, string>> reporters)
 		{
 			GlobalOptions = options;

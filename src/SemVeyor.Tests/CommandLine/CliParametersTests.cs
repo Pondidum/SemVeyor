@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SemVeyor.CommandLine;
 using Shouldly;
 using Xunit;
@@ -9,12 +10,14 @@ namespace SemVeyor.Tests.CommandLine
 	{
 		private readonly CliParameters _all;
 
+		private void CreateSet(string prefix, Action<CliParameterSet> customise) => customise(_all.ForPrefix(prefix));
+
 		public CliParametersTests()
 		{
 			_all = new CliParameters();
 			_all.Paths.AddRange(new[] { "/the/first/assembly.dll", "/the/second/executable.exe" });
 
-			_all.CreateSet("", set =>
+			CreateSet("", set =>
 			{
 				set.Arguments = new Dictionary<string, string>
 				{
@@ -23,7 +26,7 @@ namespace SemVeyor.Tests.CommandLine
 				};
 			});
 
-			_all.CreateSet("s3", set =>
+			CreateSet("s3", set =>
 			{
 				set.Arguments = new Dictionary<string, string>
 				{

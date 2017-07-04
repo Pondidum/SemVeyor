@@ -23,10 +23,5 @@ namespace SemVeyor.CommandLine
 
 			return _sets[prefix];
 		}
-
-		public void CreateSet(string prefix, Action<CliParameterSet> customise)
-		{
-			customise(ForPrefix(prefix));
-		}
 	}
 }

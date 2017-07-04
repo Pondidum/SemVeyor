@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 using SemVeyor.CommandLine;
 using SemVeyor.Config;
 using Shouldly;
@@ -9,16 +9,15 @@ namespace SemVeyor.Tests.CommandLine
 {
 	public class OptionsTests
 	{
-		private static Configuration Build(CliParameters cli)
-		{
-			return new CliConfigurationBuilder().Build(cli);
-		}
+		private static Configuration Build(CliParameters cli) => new CliConfigurationBuilder().Build(cli);
+		private static void CreateSet(CliParameters parameters, string prefix, Action<CliParameterSet> customise) => customise(parameters.ForPrefix(prefix));
+
 
 		[Fact]
 		public void When_nothing_is_specified()
 		{
 			var parameters = new CliParameters();
-			parameters.CreateSet("", p => { });
+			CreateSet(parameters, "", p => { });
 
 			var config = Build(parameters);
 
@@ -32,7 +31,7 @@ namespace SemVeyor.Tests.CommandLine
 		public void When_storage_is_specified()
 		{
 			var parameters = new CliParameters();
-			parameters.CreateSet("", p =>
+			CreateSet(parameters, "", p =>
 			{
 				p.Arguments = new Dictionary<string, string> { { "storage", "aws:s3" } };
 			});

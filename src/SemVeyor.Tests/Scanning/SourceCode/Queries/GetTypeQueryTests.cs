@@ -1,14 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Shouldly;
-using Xunit;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SemVeyor.Domain;
 using SemVeyor.Scanning.SourceCode.Queries;
 using SemVeyor.Tests.TestUtils;

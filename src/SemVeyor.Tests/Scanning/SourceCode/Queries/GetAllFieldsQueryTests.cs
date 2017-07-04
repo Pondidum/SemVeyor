@@ -1,14 +1,8 @@
 ﻿using System.Linq;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Shouldly;
-using Xunit;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using SemVeyor.Domain;
 using SemVeyor.Scanning.SourceCode.Queries;
 using SemVeyor.Tests.TestUtils;
@@ -29,8 +23,7 @@ namespace SemVeyor.Tests.Scanning.SourceCode.Queries
 					.Where(t => t.IsKind(SyntaxKind.ClassDeclaration)))
 				.Cast<ClassDeclarationSyntax>()
 				.Where(cd => cd.Identifier.ValueText == nameof(TestType))
-				.Where(cd => cd.TypeParameterList == null)
-				.Single();
+				.Single(cd => cd.TypeParameterList == null);
 
 			var model = compilation.GetSemanticModel(classDeclaration.SyntaxTree);
 

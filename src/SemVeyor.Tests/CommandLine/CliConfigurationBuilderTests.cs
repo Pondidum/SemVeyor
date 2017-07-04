@@ -1,5 +1,5 @@
 ﻿using SemVeyor.CommandLine;
-using SemVeyor.Config;
+using SemVeyor.Configuration;
 using Shouldly;
 using Xunit;
 
@@ -7,7 +7,7 @@ namespace SemVeyor.Tests.CommandLine
 {
 	public class CliConfigurationBuilderTests
 	{
-		private readonly Configuration _config;
+		private readonly Config _config;
 
 		public CliConfigurationBuilderTests()
 		{

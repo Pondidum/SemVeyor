@@ -1,6 +1,6 @@
 ﻿using System;
 using SemVeyor.CommandLine;
-using SemVeyor.Config;
+using SemVeyor.Configuration;
 using SemVeyor.Infrastructure;
 using SemVeyor.Storage;
 using Shouldly;

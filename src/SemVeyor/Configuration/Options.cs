@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace SemVeyor.Config
+namespace SemVeyor.Configuration
 {
 	public class Options
 	{

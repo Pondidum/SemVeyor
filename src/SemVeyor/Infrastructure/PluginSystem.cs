@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using SemVeyor.CommandLine;
-using SemVeyor.Config;
+using SemVeyor.Configuration;
 
 namespace SemVeyor.Infrastructure
 {

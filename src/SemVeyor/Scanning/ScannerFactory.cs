@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using SemVeyor.Config;
+using SemVeyor.Configuration;
 using SemVeyor.Scanning.CompiledAssembly;
 using SemVeyor.Scanning.SourceCode;
 

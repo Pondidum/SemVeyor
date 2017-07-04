@@ -1,12 +1,11 @@
 ﻿using System;
 using FileSystem;
-using SemVeyor.Config;
 
 namespace SemVeyor.Storage
 {
 	public class StorageFactory
 	{
-		public IStore CreateStore(Configuration config)
+		public IStore CreateStore(Configuration.Config config)
 		{
 			if (config.StorageTypes.Contains("file") == false)
 				throw new NotSupportedException($"You must specify 'file' storage. Actually got {string.Join(",", config.StorageTypes)}");

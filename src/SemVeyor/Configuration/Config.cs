@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Configuration;
 using System.Linq;
 using Stronk;
 using Stronk.ConfigurationSourcing;
 using Stronk.Policies;
 
-namespace SemVeyor.Config
+namespace SemVeyor.Configuration
 {
-	public class Configuration
+	public class Config
 	{
 		public HashSet<string> ReporterTypes { get; }
 		public HashSet<string> StorageTypes { get; }
@@ -18,7 +17,7 @@ namespace SemVeyor.Config
 		private readonly IDictionary<string, IDictionary<string, string>> _reporters;
 		private readonly IDictionary<string, IDictionary<string, string>> _stores;
 
-		public Configuration(Options options, IDictionary<string, IDictionary<string, string>> storage, IDictionary<string, IDictionary<string, string>> reporters)
+		public Config(Options options, IDictionary<string, IDictionary<string, string>> storage, IDictionary<string, IDictionary<string, string>> reporters)
 		{
 			GlobalOptions = options;
 

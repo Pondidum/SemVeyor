@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using SemVeyor.Config;
+using SemVeyor.Configuration;
 
 namespace SemVeyor.CommandLine
 {
 	public class CliConfigurationBuilder
 	{
-		public Configuration Build(CliParameters cli)
+		public Configuration.Config Build(CliParameters cli)
 		{
 			var parameterSet = cli.ForPrefix("");
 
@@ -31,7 +31,7 @@ namespace SemVeyor.CommandLine
 				reporters.Add(key, cli.ForPrefix(key).Arguments);
 			}
 
-			return new Configuration(
+			return new Configuration.Config(
 				options,
 				storage,
 				reporters

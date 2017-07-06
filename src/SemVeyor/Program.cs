@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
-using SemVeyor.CommandLine;
-using SemVeyor.Domain;
+using FileSystem;
+using SemVeyor.Configuration;
 using SemVeyor.Reporting;
 using SemVeyor.Scanning;
 using SemVeyor.Storage;
@@ -13,8 +12,8 @@ namespace SemVeyor
 	{
 		public static void Main(string[] args)
 		{
-			var cli = new Cli().Parse(args);
-			var configuration = new CliConfigurationBuilder().Build(cli);
+			var reader = new ConfigFileReader(new PhysicalFileSystem());
+			var configuration = reader.Read();
 
 			var store = new StorageFactory().CreateStore(configuration);
 			var reporter = new ReportingFactory().CreateReporter(configuration);

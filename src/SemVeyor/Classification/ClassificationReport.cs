@@ -6,17 +6,10 @@ namespace SemVeyor.Classification
 {
 	public class ClassificationReport
 	{
-		private readonly IReporter _reporter;
-
-		public ClassificationReport(IReporter reporter)
-		{
-			_reporter = reporter;
-		}
-
-		public void Execute(AssemblyDetails previous, AssemblyDetails current)
+		public ReportArgs Execute(AssemblyDetails previous, AssemblyDetails current)
 		{
 			if (previous == null)
-				return;
+				return null;
 
 			var changes = previous.UpdatedTo(current);
 			var classifier = new EventClassification();
@@ -26,13 +19,13 @@ namespace SemVeyor.Classification
 				.DefaultIfEmpty(new ChangeClassification { Classification = SemVer.None })
 				.Max(c => c.Classification);
 
-			_reporter.Write(new ReportArgs
+			return new ReportArgs
 			{
 				PreviousAssembly = previous,
 				CurrentAssembly = current,
 				Changes = processed,
 				SemVerChange = semVerChange
-			});
+			};
 		}
 	}
 }

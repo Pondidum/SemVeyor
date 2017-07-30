@@ -23,21 +23,23 @@ namespace SemVeyor.Commands.Scan
 			var reader = new ConfigFileReader(new PhysicalFileSystem());
 			var configuration = reader.Read().OverrideWith(input.AsOptions());
 
-			var store = new StorageFactory().CreateStore(configuration);
+			var storage = new StorageFactory().CreateStore(configuration);
 			var reporter = new ReportingFactory().CreateReporter(configuration);
 			var scanner = new ScannerFactory().CreateScanner(configuration.GlobalOptions);
 
-			var previous = store.Read();
+			var previous = storage.Read();
 			var current = scanner.Execute(new AssemblyScannerArgs { Path = configuration.GlobalOptions.Paths.First() }).Result;
 
-			var app = new ClassificationReport(reporter);
+			var classification = new ClassificationReport();
 
 			Console.WriteLine(previous != null
 				? "History loaded"
 				: "No History found");
 
-			app.Execute(previous, current);
-			store.Write(current);
+			var report = classification.Execute(previous, current);
+
+			reporter.Write(report);
+			storage.Write(current);
 
 			Console.WriteLine("Done.");
 			return true;

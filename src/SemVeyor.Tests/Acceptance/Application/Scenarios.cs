@@ -1,20 +1,17 @@
-﻿using NSubstitute;
-using SemVeyor.Classification;
-using SemVeyor.Reporting;
+﻿using SemVeyor.Classification;
 using SemVeyor.Tests.Builder;
+using Shouldly;
 using Xunit;
 
 namespace SemVeyor.Tests.Acceptance.Application
 {
 	public class Scenarios
 	{
-		private readonly IReporter _reporter;
 		private readonly ClassificationReport _classificationReport;
 
 		public Scenarios()
 		{
-			_reporter = Substitute.For<IReporter>();
-			_classificationReport = new ClassificationReport(_reporter);
+			_classificationReport = new ClassificationReport();
 		}
 
 		[Fact]
@@ -38,9 +35,9 @@ namespace SemVeyor.Tests.Acceptance.Application
 						.WithProperties(Build.Property<int>("Rate"))
 				);
 
-			_classificationReport.Execute(previous, current);
+			var report = _classificationReport.Execute(previous, current);
 
-			_reporter.Received().Write(Arg.Is<ReportArgs>(ra => ra.SemVerChange == SemVer.None));
+			report.SemVerChange.ShouldBe(SemVer.None);
 		}
 	}
 }

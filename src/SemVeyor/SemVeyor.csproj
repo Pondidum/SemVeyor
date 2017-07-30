@@ -37,10 +37,6 @@
     <Compile Include="Classification\ChangeClassification.cs" />
     <Compile Include="Classification\EventClassification.cs" />
     <Compile Include="Classification\SemVer.cs" />
-    <Compile Include="CommandLine\Cli.cs" />
-    <Compile Include="CommandLine\CliConfigurationBuilder.cs" />
-    <Compile Include="CommandLine\CliParameters.cs" />
-    <Compile Include="CommandLine\CliParameterSet.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\ConfigFileReader.cs" />
     <Compile Include="Configuration\Options.cs" />

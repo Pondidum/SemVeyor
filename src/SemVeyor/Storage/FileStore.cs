@@ -1,7 +1,5 @@
 ﻿using System.Linq;
 using FileSystem;
-using Newtonsoft.Json;
-using SemVeyor.CommandLine;
 using SemVeyor.Configuration;
 using SemVeyor.Domain;
 

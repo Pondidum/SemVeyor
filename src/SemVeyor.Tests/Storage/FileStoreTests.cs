@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using FileSystem;
 using Ploeh.AutoFixture;
-using SemVeyor.CommandLine;
 using SemVeyor.Configuration;
 using SemVeyor.Domain;
 using SemVeyor.Infrastructure;

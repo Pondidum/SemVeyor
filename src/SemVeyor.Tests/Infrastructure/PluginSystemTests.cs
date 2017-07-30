@@ -1,5 +1,4 @@
 ﻿using System;
-using SemVeyor.CommandLine;
 using SemVeyor.Configuration;
 using SemVeyor.Infrastructure;
 using SemVeyor.Storage;

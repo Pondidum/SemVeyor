@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using SemVeyor.CommandLine;
 using SemVeyor.Configuration;
 using SemVeyor.Scanning;
 using SemVeyor.Scanning.CompiledAssembly;

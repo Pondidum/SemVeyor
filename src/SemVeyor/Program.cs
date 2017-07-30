@@ -21,7 +21,6 @@ namespace SemVeyor
 
 			var previous = store.Read();
 			var current = scanner.Execute(new AssemblyScannerArgs { Path = configuration.GlobalOptions.Paths.First() }).Result;
-			//var current = new GetAssemblyQuery().Execute(Assembly.LoadFile(options.Paths.First()));
 
 			var app = new App(store, reporter);
 

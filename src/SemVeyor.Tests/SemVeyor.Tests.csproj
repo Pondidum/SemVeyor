@@ -168,10 +168,6 @@
     <Compile Include="Acceptance\Application\Scenarios.cs" />
     <Compile Include="Acceptance\Changes\Scenarios.cs" />
     <Compile Include="Classification\EventClassificationTests.cs" />
-    <Compile Include="CommandLine\CliConfigurationBuilderTests.cs" />
-    <Compile Include="CommandLine\CliParametersTests.cs" />
-    <Compile Include="CommandLine\CliTests.cs" />
-    <Compile Include="CommandLine\OptionsTests.cs" />
     <Compile Include="Configuration\ConfigFileReaderTests.cs" />
     <Compile Include="Domain\Events\AllEvents.cs" />
     <Compile Include="Domain\Events\FieldEvents.cs" />

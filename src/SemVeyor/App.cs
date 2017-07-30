@@ -8,37 +8,33 @@ namespace SemVeyor
 {
 	public class App
 	{
-		private readonly IStore _store;
 		private readonly IReporter _reporter;
 
-		public App(IStore store, IReporter reporter)
+		public App(IReporter reporter)
 		{
-			_store = store;
 			_reporter = reporter;
 		}
 
 		public void Execute(AssemblyDetails previous, AssemblyDetails current)
 		{
-			if (previous != null)
+			if (previous == null)
+				return;
+
+			var changes = previous.UpdatedTo(current);
+			var classifier = new EventClassification();
+
+			var processed = classifier.ClassifyAll(changes).ToArray();
+			var semVerChange = processed
+				.DefaultIfEmpty(new ChangeClassification { Classification = SemVer.None })
+				.Max(c => c.Classification);
+
+			_reporter.Write(new ReportArgs
 			{
-				var changes = previous.UpdatedTo(current);
-				var classifier = new EventClassification();
-
-				var processed = classifier.ClassifyAll(changes).ToArray();
-				var semVerChange = processed
-					.DefaultIfEmpty(new ChangeClassification { Classification = SemVer.None })
-					.Max(c => c.Classification);
-
-				_reporter.Write(new ReportArgs
-				{
-					PreviousAssembly = previous,
-					CurrentAssembly = current,
-					Changes = processed,
-					SemVerChange = semVerChange
-				});
-			}
-
-			_store.Write(current);
+				PreviousAssembly = previous,
+				CurrentAssembly = current,
+				Changes = processed,
+				SemVerChange = semVerChange
+			});
 		}
 	}
 }

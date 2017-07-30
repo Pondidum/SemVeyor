@@ -1,10 +1,8 @@
 ﻿using System.Linq;
-using SemVeyor.Classification;
 using SemVeyor.Domain;
 using SemVeyor.Reporting;
-using SemVeyor.Storage;
 
-namespace SemVeyor
+namespace SemVeyor.Classification
 {
 	public class ClassificationReport
 	{

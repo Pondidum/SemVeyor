@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using FileSystem;
 using Oakton;
+using SemVeyor.Classification;
 using SemVeyor.Configuration;
 using SemVeyor.Reporting;
 using SemVeyor.Scanning;

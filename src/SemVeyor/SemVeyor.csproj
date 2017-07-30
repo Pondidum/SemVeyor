@@ -33,8 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ClassificationReport.cs" />
     <Compile Include="Classification\ChangeClassification.cs" />
+    <Compile Include="Classification\ClassificationReport.cs" />
     <Compile Include="Classification\EventClassification.cs" />
     <Compile Include="Classification\SemVer.cs" />
     <Compile Include="Commands\Scan\ScanCommand.cs" />

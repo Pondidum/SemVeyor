@@ -9,7 +9,12 @@ namespace SemVeyor.Classification
 		public ReportArgs Execute(AssemblyDetails previous, AssemblyDetails current)
 		{
 			if (previous == null)
-				return null;
+				return new ReportArgs
+				{
+					CurrentAssembly = current,
+					Changes = Enumerable.Empty<ChangeClassification>(),
+					SemVerChange = SemVer.None
+				};
 
 			var changes = previous.UpdatedTo(current);
 			var classifier = new EventClassification();

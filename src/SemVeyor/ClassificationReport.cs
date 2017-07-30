@@ -6,11 +6,11 @@ using SemVeyor.Storage;
 
 namespace SemVeyor
 {
-	public class App
+	public class ClassificationReport
 	{
 		private readonly IReporter _reporter;
 
-		public App(IReporter reporter)
+		public ClassificationReport(IReporter reporter)
 		{
 			_reporter = reporter;
 		}

@@ -9,12 +9,12 @@ namespace SemVeyor.Tests.Acceptance.Application
 	public class Scenarios
 	{
 		private readonly IReporter _reporter;
-		private readonly App _app;
+		private readonly ClassificationReport _classificationReport;
 
 		public Scenarios()
 		{
 			_reporter = Substitute.For<IReporter>();
-			_app = new App(_reporter);
+			_classificationReport = new ClassificationReport(_reporter);
 		}
 
 		[Fact]
@@ -38,7 +38,7 @@ namespace SemVeyor.Tests.Acceptance.Application
 						.WithProperties(Build.Property<int>("Rate"))
 				);
 
-			_app.Execute(previous, current);
+			_classificationReport.Execute(previous, current);
 
 			_reporter.Received().Write(Arg.Is<ReportArgs>(ra => ra.SemVerChange == SemVer.None));
 		}

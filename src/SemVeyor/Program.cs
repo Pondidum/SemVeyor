@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using FileSystem;
+using Oakton;
 using SemVeyor.Configuration;
 using SemVeyor.Reporting;
 using SemVeyor.Scanning;
@@ -10,10 +11,37 @@ namespace SemVeyor
 {
 	public static class Program
 	{
-		public static void Main(string[] args)
+		public static int Main(string[] args)
+		{
+			var executor = CommandExecutor.For(_ =>
+			{
+				_.RegisterCommand<ScanCommand>();
+				_.DefaultCommand = typeof(ScanCommand);
+			});
+
+			return executor.Execute(args);
+		}
+	}
+
+	public class ScanInput
+	{
+		public string ConfigFlag { get; set; }
+		public string Path { get; set; }
+	}
+
+	public class ScanCommand : OaktonCommand<ScanInput>
+	{
+		public ScanCommand()
+		{
+			Usage("Scans an assembly for changes which affect SemVer.")
+				.Arguments(x => x.ConfigFlag, x => x.Path);
+		}
+
+		public override bool Execute(ScanInput input)
 		{
 			var reader = new ConfigFileReader(new PhysicalFileSystem());
 			var configuration = reader.Read();
+			configuration.GlobalOptions.Paths = new[] { input.Path };
 
 			var store = new StorageFactory().CreateStore(configuration);
 			var reporter = new ReportingFactory().CreateReporter(configuration);
@@ -31,6 +59,7 @@ namespace SemVeyor
 			app.Execute(previous, current);
 
 			Console.WriteLine("Done.");
+			return true;
 		}
 	}
 }

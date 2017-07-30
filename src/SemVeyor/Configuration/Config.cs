@@ -18,7 +18,7 @@ namespace SemVeyor.Configuration
 		private readonly IDictionary<string, IDictionary<string, string>> _stores;
 
 		public Config()
-			: this(new Options(), new Dictionary<string, IDictionary<string, string>>(), new Dictionary<string, IDictionary<string, string>>() )
+			: this(new Options(), new Dictionary<string, IDictionary<string, string>>(), new Dictionary<string, IDictionary<string, string>>())
 		{
 		}
 
@@ -36,17 +36,7 @@ namespace SemVeyor.Configuration
 			_reporters = reporters;
 		}
 
-		private static void ApplyStorageDefaults(IDictionary<string, IDictionary<string, string>> storage)
-		{
-			if (storage.Any() == false)
-				storage.Add(Options.DefaultStorage, new Dictionary<string, string>());
-		}
-
-		private static void ApplyReportingDefaults(IDictionary<string, IDictionary<string, string>> reporting)
-		{
-			if (reporting.Any() == false)
-				reporting.Add(Options.DefaultReporter, new Dictionary<string, string>());
-		}
+		public Config OverrideWith(Options options) => new Config(options, _stores, _reporters);
 
 		public T StorageOptions<T>(string key)
 		{
@@ -84,6 +74,19 @@ namespace SemVeyor.Configuration
 			builder.Populate(target, new CliConfigurationSource(options));
 			return target;
 		}
+
+		private static void ApplyStorageDefaults(IDictionary<string, IDictionary<string, string>> storage)
+		{
+			if (storage.Any() == false)
+				storage.Add(Options.DefaultStorage, new Dictionary<string, string>());
+		}
+
+		private static void ApplyReportingDefaults(IDictionary<string, IDictionary<string, string>> reporting)
+		{
+			if (reporting.Any() == false)
+				reporting.Add(Options.DefaultReporter, new Dictionary<string, string>());
+		}
+
 
 		private class CliConfigurationSource : IConfigurationSource
 		{

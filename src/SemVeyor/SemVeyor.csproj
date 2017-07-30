@@ -37,6 +37,8 @@
     <Compile Include="Classification\ChangeClassification.cs" />
     <Compile Include="Classification\EventClassification.cs" />
     <Compile Include="Classification\SemVer.cs" />
+    <Compile Include="Commands\Scan\ScanCommand.cs" />
+    <Compile Include="Commands\Scan\ScanInput.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\ConfigFileReader.cs" />
     <Compile Include="Configuration\Options.cs" />

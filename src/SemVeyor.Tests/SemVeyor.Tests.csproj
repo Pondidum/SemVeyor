@@ -169,6 +169,7 @@
     <Compile Include="Acceptance\Changes\Scenarios.cs" />
     <Compile Include="Classification\EventClassificationTests.cs" />
     <Compile Include="Configuration\ConfigFileReaderTests.cs" />
+    <Compile Include="Configuration\ConfigTests.cs" />
     <Compile Include="Domain\Events\AllEvents.cs" />
     <Compile Include="Domain\Events\FieldEvents.cs" />
     <Compile Include="Domain\Events\GenericArgumentEvents.cs" />

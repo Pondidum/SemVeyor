@@ -136,6 +136,9 @@
     <Compile Include="Storage\TypeNameConverter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Baseline, Version=1.4.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\Baseline.1.4.0\lib\net46\Baseline.dll</HintPath>
+    </Reference>
     <Reference Include="Esent.Interop, Version=1.9.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\ManagedEsent.1.9.4\lib\net40\Esent.Interop.dll</HintPath>
     </Reference>
@@ -162,6 +165,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
       <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Oakton, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\..\packages\Oakton.1.2.0.6\lib\net451\Oakton.dll</HintPath>
     </Reference>
     <Reference Include="Stronk, Version=3.0.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\..\packages\Stronk.3.0.0\lib\net452\Stronk.dll</HintPath>

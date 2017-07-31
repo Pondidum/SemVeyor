@@ -20,8 +20,7 @@ namespace SemVeyor.Commands.Scan
 
 		public override bool Execute(ScanInput input)
 		{
-			var reader = new ConfigFileReader(new PhysicalFileSystem());
-			var configuration = reader.Read().OverrideWith(input.AsOptions());
+			var configuration = new ConfigurationBuilder(new PhysicalFileSystem()).Build(input);
 
 			var storage = new StorageFactory().CreateStore(configuration);
 			var reporter = new ReportingFactory().CreateReporter(configuration);

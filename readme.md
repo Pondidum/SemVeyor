@@ -48,3 +48,23 @@
     }
 }
 ```
+
+
+
+## Todo
+
+* [ ] combine cli and options file
+* [ ] tests for cli options
+* [ ] support readonly flag on cli
+
+
+
+
+# Config paths
+
+* `semveyor.exe` & `semveyor.json` doesnt exist
+  * no `asm path` => throw
+  * with `asm path` => default config
+* `semveyor.exe` & `semveyor.json` exists => use `semveyor.json`
+* `semveyor.exe --config blah.json` doesnt exists => `throw new FileNotFoundException`
+* `semveyor.exe --config blah.json` exists => use `blah.json`

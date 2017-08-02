@@ -20,12 +20,16 @@ namespace SemVeyor.Configuration
 			_fs = fs;
 		}
 
-		public Config Read()
+		public Config Read(string path)
 		{
-			if (_fs.FileExists(FilePaths.First()).Result == false)
-				return new Config();
+//			var configPath = string.IsNullOrWhiteSpace(path)
+//				? FilePaths.First()
+//				: path;
 
-			using (var stream = _fs.ReadFile("SemVeyor.json").Result)
+//			if (_fs.FileExists(configPath).Result == false)
+//				return new Config();
+
+			using (var stream = _fs.ReadFile(path).Result)
 			using (var reader = new StreamReader(stream))
 			{
 				var json = reader.ReadToEnd();

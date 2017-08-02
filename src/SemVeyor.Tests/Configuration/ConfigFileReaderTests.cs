@@ -46,21 +46,21 @@ namespace SemVeyor.Tests.Configuration
 		{
 			_filesystem.FileExists(_path).Returns(false);
 
-			ShouldBeDefault(_reader.Read());
+			ShouldBeDefault(_reader.Read(null));
 		}
 
 		[Fact]
 		public void When_a_config_file_is_blank()
 		{
 			FileContents("");
-			ShouldBeDefault(_reader.Read());
+			ShouldBeDefault(_reader.Read(null));
 		}
 
 		[Fact]
 		public void When_a_config_hasnt_got_any_keys()
 		{
 			FileContents("{}");
-			ShouldBeDefault(_reader.Read());
+			ShouldBeDefault(_reader.Read(null));
 		}
 
 		[Fact]
@@ -71,7 +71,7 @@ namespace SemVeyor.Tests.Configuration
 	""readonly"": true,
 	""paths"": [ ""some\\file\\path.dll"" ]
 }");
-			var config = _reader.Read();
+			var config = _reader.Read(null);
 
 			config.ShouldSatisfyAllConditions(
 				() => config.GlobalOptions.ReadOnly.ShouldBeTrue(),
@@ -91,7 +91,7 @@ namespace SemVeyor.Tests.Configuration
 		""aws:s3"": { ""accesskey"": ""1234"", ""secretkey"": ""wat"" }
 	}
 }");
-			var config = _reader.Read();
+			var config = _reader.Read(null);
 
 			config.ShouldSatisfyAllConditions(
 				() => config.GlobalOptions.ReadOnly.ShouldBeTrue(),

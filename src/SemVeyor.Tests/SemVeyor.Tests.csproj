@@ -170,6 +170,7 @@
     <Compile Include="Classification\EventClassificationTests.cs" />
     <Compile Include="Configuration\ConfigFileReaderTests.cs" />
     <Compile Include="Configuration\ConfigTests.cs" />
+    <Compile Include="Configuration\ConfigurationBuilderTests.cs" />
     <Compile Include="Domain\Events\AllEvents.cs" />
     <Compile Include="Domain\Events\FieldEvents.cs" />
     <Compile Include="Domain\Events\GenericArgumentEvents.cs" />

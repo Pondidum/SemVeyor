@@ -5,14 +5,14 @@ using SemVeyor.Commands.Scan;
 
 namespace SemVeyor.Configuration
 {
-	public class ConfigurationBuilder
+	public class ConfigBuilder
 	{
 		private static readonly string DefaultConfigFile = ConfigFileReader.FilePaths.First();
 
 		private readonly IFileSystem _fileSystem;
 		private readonly ConfigFileReader _configReader;
 
-		public ConfigurationBuilder(IFileSystem fileSystem)
+		public ConfigBuilder(IFileSystem fileSystem)
 		{
 			_fileSystem = fileSystem;
 			_configReader = new ConfigFileReader(_fileSystem);

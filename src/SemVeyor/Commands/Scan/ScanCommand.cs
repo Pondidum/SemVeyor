@@ -20,7 +20,7 @@ namespace SemVeyor.Commands.Scan
 
 		public override bool Execute(ScanInput input)
 		{
-			var configuration = new ConfigurationBuilder(new PhysicalFileSystem()).Build(input);
+			var configuration = new ConfigBuilder(new PhysicalFileSystem()).Build(input);
 
 			var storage = new StorageFactory().CreateStore(configuration);
 			var reporter = new ReportingFactory().CreateReporter(configuration);

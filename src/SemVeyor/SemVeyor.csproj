@@ -40,7 +40,7 @@
     <Compile Include="Commands\Scan\ScanCommand.cs" />
     <Compile Include="Commands\Scan\ScanInput.cs" />
     <Compile Include="Configuration\Config.cs" />
-    <Compile Include="Configuration\ConfigurationBuilder.cs" />
+    <Compile Include="Configuration\ConfigBuilder.cs" />
     <Compile Include="Configuration\ConfigFileReader.cs" />
     <Compile Include="Configuration\Options.cs" />
     <Compile Include="Domain\Events\CtorEvent.cs" />

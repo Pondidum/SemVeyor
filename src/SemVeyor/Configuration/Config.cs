@@ -62,7 +62,7 @@ namespace SemVeyor.Configuration
 
 		private static T PopulateOptions<T>(IDictionary<string, string> options)
 		{
-			var builder = new ConfigBuilder(new StronkOptions
+			var builder = new Stronk.ConfigBuilder(new StronkOptions
 			{
 				ErrorPolicy = new ErrorPolicy
 				{

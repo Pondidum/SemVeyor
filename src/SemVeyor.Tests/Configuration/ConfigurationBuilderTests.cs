@@ -15,12 +15,12 @@ namespace SemVeyor.Tests.Configuration
 		private static readonly string DefaultConfigFile = ConfigFileReader.FilePaths.First();
 
 		private readonly IFileSystem _fileSystem;
-		private readonly ConfigurationBuilder _builder;
+		private readonly ConfigBuilder _builder;
 
 		public ConfigurationBuilderTests()
 		{
 			_fileSystem = Substitute.For<IFileSystem>();
-			_builder = new ConfigurationBuilder(_fileSystem);
+			_builder = new ConfigBuilder(_fileSystem);
 		}
 
 		private void SetupFile(string path, string content = "{}")

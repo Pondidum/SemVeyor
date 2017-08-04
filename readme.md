@@ -56,7 +56,8 @@
 * [ ] combine cli and options file
 * [ ] tests for cli options
 * [ ] support readonly flag on cli
-
+* [ ] differences between roslyn model and reflection
+  * [ ] interfaces specified on an inherited type
 
 
 

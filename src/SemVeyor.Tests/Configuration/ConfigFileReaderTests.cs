@@ -3,6 +3,7 @@ using System.Linq;
 using System.Text;
 using FileSystem;
 using NSubstitute;
+using NSubstitute.ExceptionExtensions;
 using SemVeyor.Configuration;
 using Shouldly;
 using Xunit;
@@ -44,23 +45,23 @@ namespace SemVeyor.Tests.Configuration
 		[Fact]
 		public void When_a_config_file_does_not_exist()
 		{
-			_filesystem.FileExists(_path).Returns(false);
+			_filesystem.ReadFile(_path).Throws(new FileNotFoundException());
 
-			ShouldBeDefault(_reader.Read(null));
+			Should.Throw<FileNotFoundException>(() => _reader.Read(_path));
 		}
 
 		[Fact]
 		public void When_a_config_file_is_blank()
 		{
 			FileContents("");
-			ShouldBeDefault(_reader.Read(null));
+			ShouldBeDefault(_reader.Read(_path));
 		}
 
 		[Fact]
 		public void When_a_config_hasnt_got_any_keys()
 		{
 			FileContents("{}");
-			ShouldBeDefault(_reader.Read(null));
+			ShouldBeDefault(_reader.Read(_path));
 		}
 
 		[Fact]
@@ -71,7 +72,7 @@ namespace SemVeyor.Tests.Configuration
 	""readonly"": true,
 	""paths"": [ ""some\\file\\path.dll"" ]
 }");
-			var config = _reader.Read(null);
+			var config = _reader.Read(_path);
 
 			config.ShouldSatisfyAllConditions(
 				() => config.GlobalOptions.ReadOnly.ShouldBeTrue(),
@@ -91,7 +92,7 @@ namespace SemVeyor.Tests.Configuration
 		""aws:s3"": { ""accesskey"": ""1234"", ""secretkey"": ""wat"" }
 	}
 }");
-			var config = _reader.Read(null);
+			var config = _reader.Read(_path);
 
 			config.ShouldSatisfyAllConditions(
 				() => config.GlobalOptions.ReadOnly.ShouldBeTrue(),

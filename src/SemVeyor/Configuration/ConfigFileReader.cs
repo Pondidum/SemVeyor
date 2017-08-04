@@ -22,13 +22,6 @@ namespace SemVeyor.Configuration
 
 		public Config Read(string path)
 		{
-//			var configPath = string.IsNullOrWhiteSpace(path)
-//				? FilePaths.First()
-//				: path;
-
-//			if (_fs.FileExists(configPath).Result == false)
-//				return new Config();
-
 			using (var stream = _fs.ReadFile(path).Result)
 			using (var reader = new StreamReader(stream))
 			{

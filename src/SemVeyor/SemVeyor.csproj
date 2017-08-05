@@ -124,6 +124,7 @@
     <Compile Include="Scanning\ScannerFactory.cs" />
     <Compile Include="Scanning\SourceCode\Queries\GetAllCtorsQuery.cs" />
     <Compile Include="Scanning\SourceCode\Queries\GetAllFieldsQuery.cs" />
+    <Compile Include="Scanning\SourceCode\Queries\GetAllGenericArgumentsQuery.cs" />
     <Compile Include="Scanning\SourceCode\Queries\GetAllMethodsQuery.cs" />
     <Compile Include="Scanning\SourceCode\Queries\GetAllPropertiesQuery.cs" />
     <Compile Include="Scanning\SourceCode\Queries\GetAllTypesQuery.cs" />

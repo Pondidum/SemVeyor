@@ -13,6 +13,7 @@ namespace SemVeyor.Scanning.SourceCode.Queries
 		private readonly GetAllCtorsQuery _getConstructors;
 		private readonly GetAllMethodsQuery _getMethods;
 		private readonly GetAllPropertiesQuery _getProperties;
+		private readonly GetAllGenericArgumentsQuery _getGenerics;
 
 		public GetTypeQuery()
 		{
@@ -20,6 +21,7 @@ namespace SemVeyor.Scanning.SourceCode.Queries
 			_getConstructors = new GetAllCtorsQuery();
 			_getMethods = new GetAllMethodsQuery();
 			_getProperties = new GetAllPropertiesQuery();
+			_getGenerics = new GetAllGenericArgumentsQuery();
 		}
 
 		public TypeDetails Execute(SemanticModel model, ClassDeclarationSyntax classDeclaration)
@@ -32,6 +34,7 @@ namespace SemVeyor.Scanning.SourceCode.Queries
 				Name = typeSymbol.Name + (typeSymbol.TypeParameters.Any() ? "`" + typeSymbol.TypeArguments.Count() : ""),
 				Visibility = Helpers.VisibilityFrom(classDeclaration.Modifiers),
 				BaseType = typeSymbol.BaseType.Name,
+				GenericArguments = _getGenerics.Execute(typeSymbol),
 				Interfaces = typeSymbol.Interfaces.Select(i => i.Name),
 				Fields = _getFields.Execute(typeSymbol),
 				Constructors = _getConstructors.Execute(typeSymbol),

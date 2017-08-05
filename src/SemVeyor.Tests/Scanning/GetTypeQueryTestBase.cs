@@ -33,5 +33,11 @@ namespace SemVeyor.Tests.Scanning
 			nameof(ITestInterfaceOne),
 			nameof(ITestInterfaceTwo)
 		});
+
+		[Fact]
+		public void The_generic_arguments_are_populated() => _type.GenericArguments.Count().ShouldBe(2);
+
+		[Fact]
+		public void The_generic_type_constraint_is_populated() => _type.GenericArguments.First().Constraints.ShouldHaveSingleItem("Exception");
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis;
@@ -21,8 +22,7 @@ namespace SemVeyor.Tests.Scanning.SourceCode.Queries
 					.DescendantNodesAndSelf()
 					.Where(t => t.IsKind(SyntaxKind.ClassDeclaration)))
 				.Cast<ClassDeclarationSyntax>()
-				.Where(cd => cd.Identifier.ValueText == nameof(TestType))
-				.Where(cd => cd.TypeParameterList == null)
+				.Where(cd => cd.Identifier.ValueText == nameof(GenericType<Exception, int>))
 				.ToArray();
 
 			var model = compilation.GetSemanticModel(classes.Single().SyntaxTree);

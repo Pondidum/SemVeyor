@@ -3,6 +3,10 @@
 
 namespace SemVeyor.Tests.TestUtils
 {
+	public class GenericType<TKey, TValue> : ParentType, ITestInterfaceOne, ITestInterfaceTwo where TKey : Exception
+	{
+	}
+
 	public class TestType: ParentType, ITestInterfaceOne, ITestInterfaceTwo
 	{
 		public int PublicField;

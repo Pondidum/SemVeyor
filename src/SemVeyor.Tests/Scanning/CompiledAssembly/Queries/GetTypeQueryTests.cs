@@ -13,7 +13,7 @@ namespace SemVeyor.Tests.Scanning.CompiledAssembly.Queries
 	{
 		protected override TypeDetails BuildDetails()
 		{
-			return new GetTypeQuery().Execute(typeof(TestType));
+			return new GetTypeQuery().Execute(typeof(GenericType<,>));
 		}
 	}
 }

@@ -19,22 +19,10 @@ namespace SemVeyor.Tests.Scanning
 		}
 
 		[Fact]
-		public void The_name_is_populated() => _type.Name.ShouldBe(nameof(TestType));
+		public void The_name_is_populated() => _type.Name.ShouldBe(typeof(GenericType<,>).Name);
 
 		[Fact]
-		public void The_namespace_is_populated() => _type.Namespace.ShouldBe(typeof(TestType).Namespace);
-
-		[Fact]
-		public void There_are_2_constructors() => _type.Constructors.Count().ShouldBe(2);
-
-		[Fact]
-		public void There_are_2_fields() => _type.Fields.Count().ShouldBe(2);
-
-		[Fact]
-		public void There_are_8_properties() => _type.Properties.Count().ShouldBe(8);
-
-		[Fact]
-		public void There_are_3_methods() => _type.Methods.Count().ShouldBe(MethodsOnObject() + 3);
+		public void The_namespace_is_populated() => _type.Namespace.ShouldBe(typeof(GenericType<,>).Namespace);
 
 		[Fact]
 		public void The_base_type_is_populated() => _type.BaseType.ShouldBe(nameof(ParentType));
@@ -45,9 +33,5 @@ namespace SemVeyor.Tests.Scanning
 			nameof(ITestInterfaceOne),
 			nameof(ITestInterfaceTwo)
 		});
-
-		private static int MethodsOnObject() => typeof(object)
-			.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
-			.Count();
 	}
 }

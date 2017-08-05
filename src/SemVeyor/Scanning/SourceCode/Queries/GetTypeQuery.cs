@@ -29,7 +29,7 @@ namespace SemVeyor.Scanning.SourceCode.Queries
 			return new TypeDetails
 			{
 				Namespace = typeSymbol.ContainingNamespace.ToDisplayString(),
-				Name = typeSymbol.Name,
+				Name = typeSymbol.Name + (typeSymbol.TypeParameters.Any() ? "`" + typeSymbol.TypeArguments.Count() : ""),
 				Visibility = Helpers.VisibilityFrom(classDeclaration.Modifiers),
 				BaseType = typeSymbol.BaseType.Name,
 				Interfaces = typeSymbol.Interfaces.Select(i => i.Name),

@@ -43,6 +43,7 @@
     <Compile Include="Configuration\ConfigBuilder.cs" />
     <Compile Include="Configuration\ConfigFileReader.cs" />
     <Compile Include="Configuration\Options.cs" />
+    <Compile Include="Domain\Deltas.cs" />
     <Compile Include="Domain\Events\CtorEvent.cs" />
     <Compile Include="Domain\Events\FieldEvent.cs" />
     <Compile Include="Domain\Events\MethodEvent.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Domain\Events\PropertyVisibilityIncreased.cs" />
     <Compile Include="Domain\Events\TypeVisibilityDecreased.cs" />
     <Compile Include="Domain\Events\TypeVisibilityIncreased.cs" />
+    <Compile Include="Domain\IDeltaProducer.cs" />
     <Compile Include="Domain\ParameterDetails.cs" />
     <Compile Include="Domain\AssemblyDetails.cs" />
     <Compile Include="Domain\CtorDetails.cs" />

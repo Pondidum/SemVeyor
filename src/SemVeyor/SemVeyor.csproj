@@ -67,8 +67,6 @@
     <Compile Include="Domain\Events\GenericArgumentNameChanged.cs" />
     <Compile Include="Domain\Events\GenericArgumentPositionChanged.cs" />
     <Compile Include="Domain\Events\TypeGenericArgumentRemoved.cs" />
-    <Compile Include="Domain\Events\IMajor.cs" />
-    <Compile Include="Domain\Events\IMinor.cs" />
     <Compile Include="Domain\Events\TypeMethodAdded.cs" />
     <Compile Include="Domain\Events\MethodArgumentAdded.cs" />
     <Compile Include="Domain\Events\MethodArgumentRemoved.cs" />

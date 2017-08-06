@@ -1,6 +1,6 @@
 namespace SemVeyor.Domain.Events
 {
-	public class TypeCtorRemoved : IMajor
+	public class TypeCtorRemoved
 	{
 		private readonly CtorDetails _newer;
 

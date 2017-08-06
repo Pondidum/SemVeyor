@@ -11,20 +11,13 @@ namespace SemVeyor.Tests.Domain.Events
 {
 	public class AllEvents
 	{
-		private static readonly Type EventBase = typeof(IMajor);
+		private static readonly Type EventBase = typeof(AssemblyTypeAdded);
 		public static IEnumerable<object[]> Events => EventBase
 			.Assembly
 			.GetExportedTypes()
 			.Where(t => t.Namespace == EventBase.Namespace)
 			.Where(t => t.IsClass && t.IsAbstract == false)
 			.Select(t => new object[] { t });
-
-		[Theory]
-		[MemberData(nameof(Events))]
-		public void All_events_implement_either_IMajor_or_IMinor(Type eventType)
-		{
-			eventType.GetInterfaces().ShouldContain(t => t == typeof(IMajor) || t == typeof(IMinor));
-		}
 
 		[Theory]
 		[MemberData(nameof(Events))]

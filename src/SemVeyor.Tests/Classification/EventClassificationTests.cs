@@ -2,6 +2,8 @@
 using SemVeyor.Domain.Events;
 using Shouldly;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace SemVeyor.Tests.Classification
@@ -58,11 +60,28 @@ namespace SemVeyor.Tests.Classification
 		[InlineData(typeof(CtorVisibilityIncreased), SemVer.Minor)]
 		[InlineData(typeof(CtorArgumentAdded), SemVer.Minor)]
 		[InlineData(typeof(CtorArgumentRemoved), SemVer.Major)]
-		public void All_events_are_classified(Type eventType, SemVer version)
+		public void All_events_are_classified_correctly(Type eventType, SemVer version)
 		{
 			new EventClassification()
 				.ClassifyEvent(eventType)
 				.ShouldBe(version, () => $"{eventType.Name} should be {version}");
 		}
+
+		[Theory]
+		[MemberData(nameof(Events))]
+		public void All_events_have_a_classification(object @event)
+		{
+			new EventClassification()
+				.ClassifyEvent(@event)
+				.ShouldNotBe(SemVer.None);
+		}
+
+		private static readonly Type EventBase = typeof(AssemblyTypeAdded);
+		public static IEnumerable<object[]> Events => EventBase
+			.Assembly
+			.GetExportedTypes()
+			.Where(t => t.Namespace == EventBase.Namespace)
+			.Where(t => t.IsClass && t.IsAbstract == false)
+			.Select(t => new object[] { t });
 	}
 }

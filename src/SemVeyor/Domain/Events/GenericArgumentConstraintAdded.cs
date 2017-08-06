@@ -1,6 +1,6 @@
 namespace SemVeyor.Domain.Events
 {
-	public class GenericArgumentConstraintAdded : IMinor
+	public class GenericArgumentConstraintAdded
 	{
 		private readonly string _constraint;
 

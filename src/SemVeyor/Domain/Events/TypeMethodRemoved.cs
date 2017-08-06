@@ -1,6 +1,6 @@
 namespace SemVeyor.Domain.Events
 {
-	public class TypeMethodRemoved : IMajor
+	public class TypeMethodRemoved
 	{
 		private readonly MethodDetails _newer;
 

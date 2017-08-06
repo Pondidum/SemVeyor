@@ -1,6 +1,6 @@
 namespace SemVeyor.Domain.Events
 {
-	public class TypeFieldAdded : IMinor
+	public class TypeFieldAdded
 	{
 		private readonly FieldDetails _field;
 

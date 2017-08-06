@@ -1,6 +1,6 @@
 namespace SemVeyor.Domain.Events
 {
-	public class TypePropertyRemoved : IMajor
+	public class TypePropertyRemoved
 	{
 		private readonly PropertyDetails _newer;
 

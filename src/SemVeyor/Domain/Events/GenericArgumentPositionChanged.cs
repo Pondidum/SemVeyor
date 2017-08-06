@@ -2,7 +2,7 @@ using System;
 
 namespace SemVeyor.Domain.Events
 {
-	public class GenericArgumentPositionChanged : IMajor
+	public class GenericArgumentPositionChanged
 	{
 		private readonly GenericArgumentDetails _older;
 		private readonly GenericArgumentDetails _newer;

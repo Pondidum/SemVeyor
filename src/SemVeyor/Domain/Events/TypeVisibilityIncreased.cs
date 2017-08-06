@@ -1,6 +1,6 @@
 namespace SemVeyor.Domain.Events
 {
-	public class TypeVisibilityIncreased : IMinor
+	public class TypeVisibilityIncreased
 	{
 		private readonly Visibility _older;
 		private readonly Visibility _newer;

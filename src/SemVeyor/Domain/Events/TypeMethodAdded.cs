@@ -1,6 +1,6 @@
 namespace SemVeyor.Domain.Events
 {
-	public class TypeMethodAdded : IMinor
+	public class TypeMethodAdded
 	{
 		private readonly MethodDetails _newer;
 

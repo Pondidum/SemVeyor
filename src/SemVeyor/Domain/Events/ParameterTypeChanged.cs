@@ -1,6 +1,6 @@
 namespace SemVeyor.Domain.Events
 {
-	public class ParameterTypeChanged : IMajor
+	public class ParameterTypeChanged
 	{
 		private readonly ParameterDetails _older;
 		private readonly ParameterDetails _newer;

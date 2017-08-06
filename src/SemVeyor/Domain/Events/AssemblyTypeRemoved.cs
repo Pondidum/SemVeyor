@@ -1,6 +1,6 @@
 namespace SemVeyor.Domain.Events
 {
-	public class AssemblyTypeRemoved : IMajor
+	public class AssemblyTypeRemoved
 	{
 		private readonly TypeDetails _type;
 

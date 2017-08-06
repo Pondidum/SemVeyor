@@ -1,6 +1,6 @@
 namespace SemVeyor.Domain.Events
 {
-	public class TypeGenericArgumentAdded : IMinor
+	public class TypeGenericArgumentAdded
 	{
 		private readonly GenericArgumentDetails _newer;
 

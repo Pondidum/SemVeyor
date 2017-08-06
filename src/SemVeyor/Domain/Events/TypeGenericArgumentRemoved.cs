@@ -1,6 +1,6 @@
 namespace SemVeyor.Domain.Events
 {
-	public class TypeGenericArgumentRemoved : IMajor
+	public class TypeGenericArgumentRemoved
 	{
 		private readonly GenericArgumentDetails _newer;
 

@@ -1,6 +1,6 @@
 ﻿namespace SemVeyor.Domain.Events
 {
-	public class AssemblyTypeAdded : IMinor
+	public class AssemblyTypeAdded
 	{
 		private readonly TypeDetails _type;
 

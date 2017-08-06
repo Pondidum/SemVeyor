@@ -1,6 +1,6 @@
 namespace SemVeyor.Domain.Events
 {
-	public class TypeCtorAdded : IMinor
+	public class TypeCtorAdded
 	{
 		private readonly CtorDetails _newer;
 

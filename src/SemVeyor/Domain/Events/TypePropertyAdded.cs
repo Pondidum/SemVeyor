@@ -1,6 +1,6 @@
 namespace SemVeyor.Domain.Events
 {
-	public class TypePropertyAdded : IMinor
+	public class TypePropertyAdded
 	{
 		private readonly PropertyDetails _newer;
 

@@ -1,6 +1,6 @@
 namespace SemVeyor.Domain.Events
 {
-	public class GenericArgumentConstraintRemoved : IMajor
+	public class GenericArgumentConstraintRemoved
 	{
 		private readonly string _constraint;
 

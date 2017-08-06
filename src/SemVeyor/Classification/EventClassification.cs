@@ -7,9 +7,6 @@ namespace SemVeyor.Classification
 {
 	public class EventClassification
 	{
-		private static readonly Type Major = typeof(IMajor);
-		private static readonly Type Minor = typeof(IMinor);
-
 		public SemVer ClassifyEvent(object @event)
 		{
 			var eventType = @event as Type ?? @event.GetType();

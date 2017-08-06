@@ -1,6 +1,6 @@
 namespace SemVeyor.Domain.Events
 {
-	public class TypeFieldRemoved : IMajor
+	public class TypeFieldRemoved
 	{
 		private readonly FieldDetails _field;
 

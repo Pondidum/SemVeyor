@@ -1,10 +1,13 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using FileSystem;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
+using SemVeyor.Classification;
 using SemVeyor.Configuration;
+using SemVeyor.Domain.Events;
 using Shouldly;
 using Xunit;
 
@@ -98,6 +101,51 @@ namespace SemVeyor.Tests.Configuration
 				() => config.GlobalOptions.ReadOnly.ShouldBeTrue(),
 				() => config.GlobalOptions.Paths.ShouldBe(new[] {"some\\file\\path.dll"}),
 				() => config.StorageTypes.ShouldBe(new[] {"aws:s3"})
+			);
+		}
+
+		[Fact]
+		public void When_the_config_has_no_classification_map()
+		{
+			FileContents("{}");
+
+			var config = _reader.Read(_path);
+
+			config
+				.GlobalOptions
+				.Classifications
+				.ShouldBe(EventClassification.DefaultClassificationMap);
+		}
+
+		[Fact]
+		public void When_the_config_has_an_empty_classification_map()
+		{
+			FileContents(@"{ ""classifications"": {} }");
+
+			var config = _reader.Read(_path);
+
+			config
+				.GlobalOptions
+				.Classifications
+				.ShouldBe(EventClassification.DefaultClassificationMap);
+		}
+
+		[Fact]
+		public void When_the_config_has_a_specified_classification()
+		{
+			FileContents($@"
+{{
+	""classifications"": {{
+		""{nameof(TypeCtorAdded)}"": ""Major""
+	}}
+}}");
+			var classifications = _reader.Read(_path)
+				.GlobalOptions
+				.Classifications;
+
+			classifications.ShouldSatisfyAllConditions(
+				() => classifications.ShouldContainKeyAndValue(nameof(TypeCtorAdded), SemVer.Major),
+				() => classifications.Count.ShouldBeGreaterThan(1)
 			);
 		}
 	}

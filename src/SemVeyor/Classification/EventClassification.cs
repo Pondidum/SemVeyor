@@ -7,12 +7,19 @@ namespace SemVeyor.Classification
 {
 	public class EventClassification
 	{
+		private readonly IDictionary<string, SemVer> _classificationMap;
+
+		public EventClassification(IDictionary<string, SemVer> classificationMap)
+		{
+			_classificationMap = classificationMap;
+		}
+
 		public SemVer ClassifyEvent(object @event)
 		{
 			var eventType = @event as Type ?? @event.GetType();
 
 			SemVer version;
-			return VersionMap.TryGetValue(eventType.Name, out version)
+			return _classificationMap.TryGetValue(eventType.Name, out version)
 				? version
 				: SemVer.None;
 		}
@@ -26,7 +33,7 @@ namespace SemVeyor.Classification
 			});
 		}
 
-		private static readonly Dictionary<string, SemVer> VersionMap = new Dictionary<string, SemVer>
+		public static readonly Dictionary<string, SemVer> DefaultClassificationMap = new Dictionary<string, SemVer>
 		{
 			{ nameof(AssemblyTypeAdded), SemVer.Minor },
 			{ nameof(AssemblyTypeRemoved), SemVer.Major },

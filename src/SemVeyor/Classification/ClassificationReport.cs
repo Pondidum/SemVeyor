@@ -6,6 +6,13 @@ namespace SemVeyor.Classification
 {
 	public class ClassificationReport
 	{
+		private readonly EventClassification _classifier;
+
+		public ClassificationReport(EventClassification classifier)
+		{
+			_classifier = classifier;
+		}
+
 		public ReportArgs Execute(AssemblyDetails previous, AssemblyDetails current)
 		{
 			if (previous == null)
@@ -17,9 +24,8 @@ namespace SemVeyor.Classification
 				};
 
 			var changes = previous.UpdatedTo(current);
-			var classifier = new EventClassification();
 
-			var processed = classifier.ClassifyAll(changes).ToArray();
+			var processed = _classifier.ClassifyAll(changes).ToArray();
 			var semVerChange = processed
 				.DefaultIfEmpty(new ChangeClassification { Classification = SemVer.None })
 				.Max(c => c.Classification);

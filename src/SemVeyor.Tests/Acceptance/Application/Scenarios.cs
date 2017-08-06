@@ -11,7 +11,7 @@ namespace SemVeyor.Tests.Acceptance.Application
 
 		public Scenarios()
 		{
-			_classificationReport = new ClassificationReport();
+			_classificationReport = new ClassificationReport(new EventClassification(EventClassification.DefaultClassificationMap));
 		}
 
 		[Fact]

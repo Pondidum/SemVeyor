@@ -62,7 +62,7 @@ namespace SemVeyor.Tests.Classification
 		[InlineData(typeof(CtorArgumentRemoved), SemVer.Major)]
 		public void All_events_are_classified_correctly(Type eventType, SemVer version)
 		{
-			new EventClassification()
+			new EventClassification(EventClassification.DefaultClassificationMap)
 				.ClassifyEvent(eventType)
 				.ShouldBe(version, () => $"{eventType.Name} should be {version}");
 		}
@@ -71,7 +71,7 @@ namespace SemVeyor.Tests.Classification
 		[MemberData(nameof(Events))]
 		public void All_events_have_a_classification(object @event)
 		{
-			new EventClassification()
+			new EventClassification(EventClassification.DefaultClassificationMap)
 				.ClassifyEvent(@event)
 				.ShouldNotBe(SemVer.None);
 		}

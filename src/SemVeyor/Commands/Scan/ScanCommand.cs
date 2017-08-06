@@ -29,7 +29,7 @@ namespace SemVeyor.Commands.Scan
 			var previous = storage.Read();
 			var current = scanner.Execute(new AssemblyScannerArgs { Path = configuration.GlobalOptions.Paths.First() }).Result;
 
-			var classification = new ClassificationReport(new EventClassification(EventClassification.DefaultClassificationMap));
+			var classification = new ClassificationReport(new EventClassification(configuration.GlobalOptions.Classifications));
 
 			Console.WriteLine(previous != null
 				? "History loaded"

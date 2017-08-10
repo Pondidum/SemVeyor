@@ -4,6 +4,7 @@ using Shouldly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using SemVeyor.Configuration;
 using Xunit;
 
 namespace SemVeyor.Tests.Classification
@@ -62,7 +63,7 @@ namespace SemVeyor.Tests.Classification
 		[InlineData(typeof(CtorArgumentRemoved), SemVer.Major)]
 		public void All_events_are_classified_correctly(Type eventType, SemVer version)
 		{
-			new EventClassification(EventClassification.DefaultClassificationMap)
+			new EventClassification(Options.DefaultClassificationMap)
 				.ClassifyEvent(eventType)
 				.ShouldBe(version, () => $"{eventType.Name} should be {version}");
 		}
@@ -71,7 +72,7 @@ namespace SemVeyor.Tests.Classification
 		[MemberData(nameof(Events))]
 		public void All_events_have_a_classification(object @event)
 		{
-			new EventClassification(EventClassification.DefaultClassificationMap)
+			new EventClassification(Options.DefaultClassificationMap)
 				.ClassifyEvent(@event)
 				.ShouldNotBe(SemVer.None);
 		}

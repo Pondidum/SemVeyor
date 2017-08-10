@@ -114,7 +114,7 @@ namespace SemVeyor.Tests.Configuration
 			config
 				.GlobalOptions
 				.Classifications
-				.ShouldBe(EventClassification.DefaultClassificationMap);
+				.ShouldBe(Options.DefaultClassificationMap);
 		}
 
 		[Fact]
@@ -127,7 +127,7 @@ namespace SemVeyor.Tests.Configuration
 			config
 				.GlobalOptions
 				.Classifications
-				.ShouldBe(EventClassification.DefaultClassificationMap);
+				.ShouldBe(Options.DefaultClassificationMap);
 		}
 
 		[Fact]

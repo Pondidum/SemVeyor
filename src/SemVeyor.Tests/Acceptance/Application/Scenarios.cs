@@ -1,4 +1,5 @@
 ﻿using SemVeyor.Classification;
+using SemVeyor.Configuration;
 using SemVeyor.Tests.Builder;
 using Shouldly;
 using Xunit;
@@ -11,7 +12,7 @@ namespace SemVeyor.Tests.Acceptance.Application
 
 		public Scenarios()
 		{
-			_classificationReport = new ClassificationReport(new EventClassification(EventClassification.DefaultClassificationMap));
+			_classificationReport = new ClassificationReport(new EventClassification(Options.DefaultClassificationMap));
 		}
 
 		[Fact]
